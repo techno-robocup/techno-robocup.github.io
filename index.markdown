@@ -5,5 +5,5 @@
 layout: home
 ---
 {: align="center"}
-![png](assets/img/robot.jpg)<br>
+![png](../image/robot.jpg)<br>
 現在のロボットの様子
