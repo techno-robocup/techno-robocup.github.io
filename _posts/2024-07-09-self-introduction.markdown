@@ -2,8 +2,8 @@
 layout: post
 title:  "ブログを始めました"
 date:   2024-07-08 07:00:00 +0900
-categories: Free Talk
-thumbnail-img: "../image/thumb.png"
+tag: free-talk
+thumbnail-img: "/assets/images/thumb.png"
 author: "rotarymars"
 ---
 こんにちは。TECHNOの rotarymars です。<br>
