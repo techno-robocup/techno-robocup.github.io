@@ -104,3 +104,4 @@ exclude:
   - README.md
   - screenshot.png
   - docs/
+  - setup.md
