@@ -1,0 +1,78 @@
+---
+layout: post
+title: "SSHでEV3"
+date: 2024-07-23 12:00:00 +0900
+tag: [robot, EV3]
+thumbnail-img: "/assets/images/ssh.png"
+author: "rotarymars"
+---
+# この記事の概要
+スペックの遅いパソコンでもサクサクEV3のコーディングしよう！
+
+# 前提
+
+- EV3にmicropythonのイメージをSDCardにインストールされていて、SDCardがEV3に刺さっている。
+
+- bluetoothまたは有線でEV3とつながっている
+
+# 実際にやってみよう
+
+各OSのシェルを開いて、
+
+```bash
+ssh username@IPADDRESS
+```
+
+で入れます。
+
+デフォルトでは、
+
+```bash
+ssh robot@IPADDRESS
+```
+
+でできます。
+
+IPADDRESSは下の写真のように左上に表示されます。
+
+![ev3](/assets/images/ev3dev.png)
+
+この場合、
+
+```bash
+ssh robot@169.254.80.244
+```
+です。すると、下のようになって、パスワードを聞かれるので、makerと入力しましょう(デフォルトの場合)。
+
+```bash
+ssh robot@169.254.80.244
+Password:
+Linux hexagon 4.14.117-ev3dev-2.3.5-ev3 #1 PREEMPT Sat Mar 7 12:54:39 CST 2020 armv5tejl
+             _____     _
+   _____   _|___ /  __| | _____   __
+  / _ \ \ / / |_ \ / _` |/ _ \ \ / /
+ |  __/\ V / ___) | (_| |  __/\ V /
+  \___| \_/ |____/ \__,_|\___| \_/
+
+Debian stretch on LEGO MINDSTORMS EV3!
+Last login: Wed Apr 15 10:24:02 2020 from 169.254.68.188
+robot@hexagon:~$
+
+```
+これでつながります。
+
+ここで、viなどで、pythonファイルを作ります。
+
+# 実行方法
+
+```bash
+brickrun /usr/bin/pybricks-micropython /path/to/main.py
+```
+
+これで実行できます。
+
+# 結論
+
+これでvscodeが使えない状況でも実行できるので、試してみてください。
+
+※サムネイルの著作権はFreepikにあります。
