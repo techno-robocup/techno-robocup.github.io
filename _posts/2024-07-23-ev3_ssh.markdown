@@ -13,7 +13,14 @@ author: "rotarymars"
 
 - EV3にmicropythonのイメージをSDCardにインストールされていて、SDCardがEV3に刺さっている。
 
-- bluetoothまたは有線でEV3とつながっている
+- bluetoothまたは有線でEV3とつながっている。
+
+- sshで通信するためのコマンドがインストールされている。
+
+
+# SSHとは？
+[wikipedia](https://ja.wikipedia.org/wiki/Secure_Shell)によると、とにかく、相手側のShellに安全に通信して操作できる仕組みのことのようです。
+
 
 # 実際にやってみよう
 
