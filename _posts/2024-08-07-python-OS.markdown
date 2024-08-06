@@ -87,7 +87,7 @@ root.mainloop()
 の命令でウィンドウを表示します。rootとは、今回設定したこのウィンドウの名前です。
 
 ### 出力結果
-![tkinterのウィンドウ](/assets/images/tkinter_window.png)
+![tkinterのウィンドウ](/assets/images/tkinter_window_practice.png)
 
 # コマンドの実装
 
