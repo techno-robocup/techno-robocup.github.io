@@ -1,0 +1,324 @@
+---
+layout: post
+title: "Pythonでコマンドライン"
+date: 2024-08-07 12:00:00 +0900
+tag: [python, free-talk]
+thumbnail-img: "/assets/images/PythonOS.png"
+author: "nishikazu"
+---
+# この記事の概要
+__今回は雑談回です。__
+
+Pythonでコマンドプロンプトもどきを作ったので、それを紹介していきたいと思います。
+
+(__コマンドラインについては、[こちら](https://qiita.com/momo1010/items/adcef12d0c631785499f)をお読みください。__
+)
+# 使用環境
+* * *
+<dl>
+<dt>-Windows11</dt>
+<dd>(Windows10でも動きます。)</dd>
+<dt>-Python3.12.4</dt>
+<dd>最新版</dd>
+</dl>
+
+* * *
+
+
+上記の環境ではテストしています。
+
+
+
+# 使っていくモジュール
+今回のコマンドラインを作っていく上で必要なモジュールです。
+
+__tkinterについては、[こちら](https://ja.wikipedia.org/wiki/Tkinter)をお読みください。__
+
+__Windowsの場合、tkinterはデフォルトでインストールされますが、例えばDebian系で動かしたい場合は次のコマンドでPythonとは別にインストールして下さい。__ 
+
+```
+apt install python3-tk
+```  
+<br>
+
+|　  |__モジュール名__|__使う目的__|
+|:--:|:-------------:|:---------:|
+|  1 |  tkinter      | pythonでウィンドウを作り、テキストボックスを挿入するため。|
+|  2 |     OS        |    コマンドラインに必要なディレクトリの移動などをできるようにするため。|
+|  3 |  sys          | パソコンの実行環境についての情報を扱うため。|
+|  4 | shutil        | ファイルをコピーするときに使うため。|
+|  5 | webbrowser    | URLを開けるようにするため。|
+
+
+# ウィンドウの設定
+### tkinterでウィンドウを作る
+まずは、コマンドを入力するところと出力するところを作ります。
+
+```python
+import tkinter as tk
+from tkinter import scrolledtext, messagebox
+
+root = tk.Tk()
+root.title("Simple Python OS")
+root.geometry("600x400")
+root.resizable(False, False)
+
+frame = tk.Frame(root)
+frame.pack(pady=10)
+
+entry = tk.Entry(frame, width=70)
+entry.pack(side=tk.LEFT, padx=10)
+
+output_text = scrolledtext.ScrolledText(root, width=80, height=20, fg = "black",wrap=tk.WORD, bg='white',insertbackground='black')
+output_text.pack(pady=10)
+
+root.mainloop()
+
+```
+tkinterに付随してscrolledtextとmessageboxをインポートして使っています。
+
+
+そして、__root = tk.Tk()__　を使って```root```という名前のウィンドウを作り、
+
+```frame = tk.Frame(root)```でフレームを作っています。
+
+entryはコマンド入力欄、output_textはコマンド出力欄のためのスクロールバー付きのテキストボックスです。
+
+### ポイント
+tkinterでは、最後の行の
+```
+root.mainloop()
+```
+の命令でウィンドウを表示します。rootとは、今回設定したこのウィンドウの名前です。
+
+### 出力結果
+<img width="300" src="/assets/images/tkinter_window_practice.png">
+
+# コマンドの実装
+
+## 実装するコマンド一覧
+
+今回実装していくコマンドは次の通りです。
+
+* ls               - ディレクトリの中のファイルを表示するfrom tkinter import scrolledtext, messagebox
+* cd <path>        - ディレクトリを変更する
+* cat <filename>   - コンテンツをコマンドライン上に表示する
+* touch <filename> - 新しいファイルを作る
+* rm <filename>    - ファイルを削除する
+* mkdir <dirname>  - 新しいフォルダを作る
+* cp <src> <dest>  - ファイルをコピーする
+* openurl <url>    - URLをブラウザで開く
+* shutdown [--now] - パソコンをシャットダウンする
+* help             - ヘルプを表示する
+* exit             - コマンドラインを終了する
+* clear            - コマンドラインの中身をクリアする
+
+また、コマンドの送信はEnterキーと、Executeボタンでも行えるようにします。
+
+## コマンドを受け付ける仕組み
+まず最初に、各コマンドが使われたときに実行する関数を作っておきます。
+
+**def list_files():、def change_directory(path):**
+などです。
+
+コマンドは、コマンドを受け付ける関数
+**execute_command()**
+に引数として入力欄の文字列を渡し、If文でどの関数を呼び出すかプログラムしています。
+
+# 実際のプログラム
+
+それでは、こちらが実際にコマンドを組み込んだプログラムになります。
+
+```python
+import os
+import sys
+import shutil
+import tkinter as tk
+from tkinter import scrolledtext, messagebox
+import webbrowser
+def list_files():
+    files = "\n".join(os.listdir('.'))
+    output_text.insert(tk.END, f"{os.getcwd()} >>> ls\n{files}\n\n", "command")
+def change_directory(path):
+    try:
+        os.chdir(path)
+        output_text.insert(tk.END, f"{os.getcwd()} >>> cd {path}\nChanged directory to {os.getcwd()}\n\n", "command")
+    except Exception as e:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> cd {path}\nError: {e}\n\n", "error")
+def read_file(filename):
+    try:
+        with open(filename, 'r') as file:
+            output_text.insert(tk.END, f"{os.getcwd()} >>> cat {filename}\n" + file.read() + "\n\n", "command")
+    except Exception as e:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> cat {filename}\nError: {e}\n\n", "error")
+def create_file(filename):
+    try:
+        with open(filename, 'w') as file:
+            file.write('')
+        output_text.insert(tk.END, f"{os.getcwd()} >>> touch {filename}\nFile '{filename}' created.\n\n", "command")
+    except Exception as e:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> touch {filename}\nError: {e}\n\n", "error")
+def delete_file(filename):
+    if messagebox.askyesno("Confirm Delete", f"Are you sure you want to delete '{filename}'?"):
+        try:
+            os.remove(filename)
+            output_text.insert(tk.END, f"{os.getcwd()} >>> rm {filename}\nFile '{filename}' deleted.\n\n", "command")
+        except Exception as e:
+            output_text.insert(tk.END, f"{os.getcwd()} >>> rm {filename}\nError: {e}\n\n", "error")
+    else:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> rm {filename}\nDelete cancelled.\n\n", "command")
+def create_directory(dirname):
+    try:
+        os.mkdir(dirname)
+        output_text.insert(tk.END, f"{os.getcwd()} >>> mkdir {dirname}\nDirectory '{dirname}' created.\n\n", "command")
+    except Exception as e:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> mkdir {dirname}\nError: {e}\n\n", "error")
+def copy_file(src, dest):
+    try:
+        shutil.copy(src, dest)
+        output_text.insert(tk.END, f"{os.getcwd()} >>> cp {src} {dest}\nFile '{src}' copied to '{dest}'.\n\n", "command")
+    except Exception as e:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> cp {src} {dest}\nError: {e}\n\n", "error")
+def shutdown(now=False):
+    if now:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> shutdown --now\nShutting down immediately...\n\n", "command")
+        root.quit()
+        os.system("shutdown -s -f -t 0")
+    else:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> shutdown\nShutting down...\n\n", "command")
+        root.quit()
+        os.system("shutdown -s")
+def open_browser(url):
+    try:
+        webbrowser.open(url)
+        output_text.insert(tk.END, f"{os.getcwd()} >>> open {url}\nOpening {url} in browser...\n\n", "command")
+    except Exception as e:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> open {url}\nError: {e}\n\n", "error")
+def clear_command():
+    output_text.delete(1.0, tk.END)
+    output_text.insert(tk.END, "Welcome to Simple Python OS! Type 'help' to see available commands.\n\n")
+def python():
+    pythontext = """
+ ######   ##  ##   ######   ##   ##   #####   ##   ##
+  ##  ##  ##  ##   # ## #   ##   ##  ##   ##  ###  ##
+  ##  ##  ##  ##     ##     ##   ##  ##   ##  #### ##
+  #####    ####      ##     #######  ##   ##  ## ####
+  ##        ##       ##     ##   ##  ##   ##  ##  ###
+  ##        ##       ##     ##   ##  ##   ##  ##   ##
+ ####      ####     ####    ##   ##   #####   ##   ##
+
+"""
+    output_text.insert(tk.END,pythontext)
+def show_help():
+    help_text = """
+Available commands:
+ls               - List files in the current directory
+cd <path>        - Change directory
+cat <filename>   - Display file content
+touch <filename> - Create a new file
+rm <filename>    - Delete a file
+mkdir <dirname>  - Create a new directory
+cp <src> <dest>  - Copy a file
+openurl <url>    - Open URL in web browser
+shutdown [--now] - Shutdown the system
+help             - Show this help message
+exit             - Exit the program
+clear            - Clear the commandline
+"""
+    output_text.insert(tk.END, f"{os.getcwd()} >>> help\n{help_text}\n\n", "command")
+def execute_command(event=None):
+    command = entry.get().strip().split()
+    entry.delete(0, tk.END)
+    if not command:
+        return
+    cmd = command[0].lower()
+    options = command[1:]
+    if cmd == 'exit':
+        output_text.insert(tk.END, f"{os.getcwd()} >>> exit\nExiting...\n\n", "command")
+        root.quit()
+    elif cmd == 'ls':
+        list_files()
+    elif cmd == 'cd':
+        if options:
+            change_directory(options[0])
+        else:
+            output_text.insert(tk.END, f"{os.getcwd()} >>> cd\nUsage: cd <path>\n\n", "error")
+    elif cmd == 'cat':
+        if options:
+            read_file(options[0])
+        else:
+            output_text.insert(tk.END, f"{os.getcwd()} >>> cat\nUsage: cat <filename>\n\n", "error")
+    elif cmd == 'touch':
+        if options:
+            create_file(options[0])
+        else:
+            output_text.insert(tk.END, f"{os.getcwd()} >>> touch\nUsage: touch <filename>\n\n", "error")
+    elif cmd == 'rm':
+        if options:
+            delete_file(options[0])
+        else:
+            output_text.insert(tk.END, f"{os.getcwd()} >>> rm\nUsage: rm <filename>\n\n", "error")
+    elif cmd == 'mkdir':
+        if options:
+            create_directory(options[0])
+        else:
+            output_text.insert(tk.END, f"{os.getcwd()} >>> mkdir\nUsage: mkdir <dirname>\n\n", "error")
+    elif cmd == 'cp':
+        if len(options) > 1:
+            copy_file(options[0], options[1])
+        else:
+            output_text.insert(tk.END, f"{os.getcwd()} >>> cp\nUsage: cp <src> <dest>\n\n", "error")
+    elif cmd == 'openurl':
+        if options:
+            open_browser(options[0])
+        else:
+            output_text.insert(tk.END, f"{os.getcwd()} >>> open\nUsage: open <url>\n\n", "error")
+    elif cmd == 'shutdown':
+        if '--now' in options:
+            shutdown(now=True)
+        else:
+            shutdown()
+    elif cmd == 'help':
+        show_help()
+    elif cmd == 'clear':
+        clear_command()
+    elif cmd == 'python':
+        python()
+    else:
+        output_text.insert(tk.END, f"{os.getcwd()} >>> {cmd}\nUnknown command: {cmd}\n\n", "error")
+root = tk.Tk()
+root.title("Simple Python OS")
+root.geometry("600x400")
+root.resizable(False, False)
+frame = tk.Frame(root)
+frame.pack(pady=10)
+entry = tk.Entry(frame, width=70)
+entry.pack(side=tk.LEFT, padx=10)
+entry.bind("<Return>", execute_command)
+execute_button = tk.Button(frame, text="Execute", command=execute_command)
+execute_button.pack(side=tk.LEFT)
+output_text = scrolledtext.ScrolledText(root, width=80, height=20, fg = "black",wrap=tk.WORD, bg='white',insertbackground='black')
+output_text.pack(pady=10)
+output_text.insert(tk.END, "Welcome to Simple Python OS! Type 'help' to see available commands.\n\n")
+output_text.insert(tk.END, f"{os.getcwd()} >>>\n\n")
+output_text.tag_config('command', foreground='black')
+output_text.tag_config('error', foreground='red')
+root.mainloop()
+```
+
+少し長いプログラムになっていますが、
+* コマンドの実行時に今いるフォルダのパスを表示する
+* エラーメッセージは赤色で表示する
+* シャットダウンのプログラムに即座に行うかどうかのオプションを追加する
+* 隠しコマンドとして"python"と打つとアスキーアートが出てくるようにする
+
+などの要素を加えています。
+
+最後にこのプログラムを、
+**C:\Users\<ユーザーネーム>**
+のフォルダに保存して、デスクトップにショートカットを作れば、プログラムの起動時にコマンドプロンプトと同じディレクトリから始められます。
+
+# 結論
+pythonでも意外とシステムに直結した部分をいじることができました。また、ファイルのパスを指定できたり、ディレクトリの移動ができることには正直驚きました。
+
+PythonOS、ぜひ使ってみてください。
