@@ -34,8 +34,12 @@ Pythonでコマンドプロンプトもどきを作ったので、それを紹�
 
 __tkinterについては、[こちら](https://ja.wikipedia.org/wiki/Tkinter)をお読みください。__
 
-デフォルト環境の場合、これらはすべてインストール済みです。
-pipなどでのインストールは必要ありません。
+__Windowsの場合、tkinterはデフォルトでインストールされますが、例えばDebian系で動かしたい場合は次のコマンドでPythonとは別にインストールして下さい。__ 
+
+```
+apt install python3-tk
+```  
+<br>
 
 |　  |__モジュール名__|__使う目的__|
 |:--:|:-------------:|:---------:|
@@ -45,11 +49,12 @@ pipなどでのインストールは必要ありません。
 |  4 | shutil        | ファイルをコピーするときに使うため。|
 |  5 | webbrowser    | URLを開けるようにするため。|
 
+
 # ウィンドウの設定
 ### tkinterでウィンドウを作る
 まずは、コマンドを入力するところと出力するところを作ります。
 
-```python:command_window.py
+```python
 import tkinter as tk
 from tkinter import scrolledtext, messagebox
 
@@ -73,9 +78,9 @@ root.mainloop()
 tkinterに付随してscrolledtextとmessageboxをインポートして使っています。
 
 
-そして、__root = tk.Tk()__　を使って__rootという名前のウィンドウ__を作り、
+そして、__root = tk.Tk()__　を使って```root```という名前のウィンドウを作り、
 
-__frame = tk.Frame(root)__でフレームを作っています。
+```frame = tk.Frame(root)```でフレームを作っています。
 
 entryはコマンド入力欄、output_textはコマンド出力欄のためのスクロールバー付きのテキストボックスです。
 
@@ -124,7 +129,6 @@ root.mainloop()
 
 それでは、こちらが実際にコマンドを組み込んだプログラムになります。
 
-**<details><summary>MiniPythonOS.py</summary>**
 ```python
 import os
 import sys
@@ -301,7 +305,6 @@ output_text.tag_config('command', foreground='black')
 output_text.tag_config('error', foreground='red')
 root.mainloop()
 ```
-</details>
 
 少し長いプログラムになっていますが、
 * コマンドの実行時に今いるフォルダのパスを表示する
