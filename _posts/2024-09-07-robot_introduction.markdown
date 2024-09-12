@@ -3,20 +3,20 @@ layout: post
 title: "文化祭でロボット展示"
 date: 2024-09-07 12:00:00 +0900
 tag: [robot,EV3]
-thumbnail-img: "/assets/images/robot.jpg"
+thumbnail-img: "/assets/images/linetrace.jpg"
 author: "nishikazu"
 ---
 
 # 記事の概要
 
 このたび、私たちのロボットが学校の文化祭で展示されることになりました。
-
+***
 そこで、改めて私たちのロボットの機能の紹介などをしていきたいと思います。
 
 # 改めて自己紹介
 私たちは3人とも、**物理研究会**に所属しています。
 **ロボット班**所属で、普段からロボットを作っています。
-
+***
 そして、ロボカップという大きなロボット大会にに出るためにライントレースのできるロボットを作っています。
 
 [ロボカップレスキュー](https://drive.google.com/file/d/1REmoiyymxDDJaxguL8DYB3JC_gSHJxsU/view)についてはこちらをお読みください。
@@ -111,3 +111,4 @@ R、G、Bのうち、最も大きな値をMAX、最も小さな値をMINとす�
 
 
 読んでいただきありがとうございました。
+
