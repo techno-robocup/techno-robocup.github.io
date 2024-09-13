@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "文化祭でロボット展示"
-date: 2024-09-07 12:00:00 +0900
-tag: [robot,EV3]
+title: "文化祭の実演時間について"
+date: 2024-09-13 22:00:00 +0900
+tag: [robot, school]
 thumbnail-img: "/assets/images/robot.jpg"
-author: "nishikazu"
+author: "ALPAKA"
 ---
 
 こんにちは。ALPAKAです。
@@ -20,37 +20,34 @@ author: "nishikazu"
 
 | 時間 | 人 |
 | --- | --- |
-| 9時～10時 | rotarymarsとALPAKA
-| 10時30分～11時30分 | rotarymarsとnishikazu
-| 13時～14時 | rotarymarsとALPAKA
-| 14時～16時 | ALPAKAとnishikazu
+| 8時45分～10時5分 | rotarymarsとALPAKA
+| 12時30分～13時50分 | rotarymarsとALPAKA
+| 13時50分～15時20分 | ALPAKAとnishikazu
 
 ### 9/15(日)
 
 | 時間 | 人 |
 | --- | --- |
-| 9時～10時 | nishikazuとALPAKA
-| 10時～11時 | rotarymarsとnishikazu
-| 11時～12時 | rotarymarsとnishikazu
-| 14時～16時 | rotarymarsとnishikazu
+| 8時45分～10時5分 | nishikazuとrotarymars
+| 10時5分～11時35分 | ALPAKAとnishikazu
+| 13時50分～15時20分 | rotarymarsとnishikazu
 
-上記の時間帯でメンバーの人がいます。
+上記の時間帯でメンバーの人がいる予定です。
 
 ## 実演時間
 
 以下の時間帯で、ロボットを実際に動かそうと思います。
 
 ### 9/14(土)
-- 9時30分
-- 11時
-- 13時30分
-- 15時30分
+
+- 9時5分~
+- 12時50分~
+- 14時20分~
 
 ### 9/15(日)
-- 9時30分
-- 10時30分
-- 11時30分
-- 15時
+- 9時5分~
+- 10時35分~
+- 14時20分~
 
 この時間で実演をしたいと思います。
 
