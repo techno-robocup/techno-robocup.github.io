@@ -2,7 +2,7 @@
 layout: post
 title: "tensorflowで簡単に機械学習"
 date: 2024-08-28 10:00:00 +0900
-tag: [machine-learning]
+tag: [machine learning, rotarymars's article]
 thumbnail-img: "https://upload.wikimedia.org/wikipedia/commons/a/ab/TensorFlow_logo.svg"
 author: "rotarymars"
 ---
