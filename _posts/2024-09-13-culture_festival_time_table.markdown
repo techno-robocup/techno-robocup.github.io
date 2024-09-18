@@ -2,7 +2,7 @@
 layout: post
 title: "文化祭の実演時間について"
 date: 2024-09-13 22:00:00 +0900
-tag: [robot, school]
+tag: [robot, school, ALPAKA's article]
 thumbnail-img: "/assets/images/robot.jpg"
 author: "ALPAKA"
 ---
