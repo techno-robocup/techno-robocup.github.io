@@ -41,7 +41,7 @@ avatar: "/assets/images/avatar-icon.jpg"
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
 round-avatar: true
 
-remove-ads: true
+remove-ads: false
 
 site-css:
   - "/assets/css/custom-styles.css"
@@ -56,7 +56,7 @@ navbar-links:
   Tags: /tags
   About us: "aboutus"
 
-# Excerpt character length
+# Except character length
 excerpt_length: 150
 
 # Whether or not to show an excerpt for every blog post in the feed page
@@ -68,7 +68,7 @@ feed_show_tags: true
 # Add a search button to the navbar
 post_search: true
 
-keywords: "robocup junior,robot,line trace,ロボカップ,ロボット,ライントレース"
+keywords: "robocup junior,robot,line trace,rescue line,rcjj,ロボカップ,ロボット,ライントレース,レスキューライン"
 
 # Output options (more information on Jekyll's site)
 timezone: "Asia/Tokyo"
