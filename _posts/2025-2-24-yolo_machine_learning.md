@@ -124,7 +124,7 @@ importボタンを押して、操作を終えます。
 
 いよいよラベリングの時間です。
 
-画面上部にある"labe all tasks"という青いボタンを押します。
+画面上部にある"label all tasks"という青いボタンを押します。
 
 以下の動画のようにラベリングしましょう。
 
@@ -259,9 +259,9 @@ mkdir -p data/{train,valid}/{images,labels}
 次に、学習に使用するモデルをdata/にダウンロードします。
 
 ```bash
-curl -L -o {{model_name}}.pt "https://github.com/ultralytics/assets/releases/download/v8.3.0/{{model_name}}.pt"
+curl -L -o {model_name}.pt "https://github.com/ultralytics/assets/releases/download/v8.3.0/{model_name}.pt"
 ```
-model_nameの部分は(こちら)[https://github.com/ultralytics/ultralytics?tab=readme-ov-file]参照の上で選んでください。
+model_nameの部分は[こちら](https://github.com/ultralytics/ultralytics?tab=readme-ov-file)参照の上で選んでください。
 
 今回は、yolo11nを使用します
 ```bash
