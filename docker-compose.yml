@@ -1,0 +1,11 @@
+version: '3'
+services:
+  jekyll:
+    image: rotarymars/techno-robocup_jekyll_server
+    container_name: jekyll_server
+    volumes:
+      - .:/srv/jekyll
+    ports:
+      - "4000:4000"
+    command: jekyll serve --host 0.0.0.0
+    restart: unless-stopped
