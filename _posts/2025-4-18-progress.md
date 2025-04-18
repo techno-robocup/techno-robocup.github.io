@@ -31,7 +31,7 @@ author: "K10-K10"
 
 ライントレース、レスキューに関しては引き続きカメラです。
 機械学習も引き続き"YOLO"を使用します、がカメラの高さなどもあるのでそこもやらないと...
-[YOLOについてはこちら](https://techno-robocup.github.io/2025/02/24/yolo_machine_learning.html){:target="_blank"}
+[YOLOについてはこちら](/2025/02/24/yolo_machine_learning.html){:target="_blank"}
 
 ### その他
 
