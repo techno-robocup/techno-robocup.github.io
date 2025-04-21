@@ -55,7 +55,7 @@ function animateColor(timestamp) {
 
         const elements = document.querySelectorAll('.post-content-wrapper');
         elements.forEach(element => {
-            element.style.borderLeftColor = interpolatedColor;
+            element.style.borderColor = interpolatedColor;
         });
 
         animationFrame = requestAnimationFrame(animateColor);
