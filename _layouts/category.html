@@ -1,0 +1,62 @@
+---
+layout: page
+---
+
+{{ content }}
+
+<div class="category-header">
+  <h1 class="category-title">{{ page.title }}</h1>
+  {% if page.description %}
+    <p class="category-description">{{ page.description }}</p>
+  {% endif %}
+</div>
+
+<div class="category-posts">
+  {% assign category = page.category | default: page.title %}
+  {% assign posts = site.categories[category] %}
+  
+  {% if posts.size > 0 %}
+    <div class="posts-grid">
+      {% for post in posts %}
+        <article class="category-post-card">
+          {% if post.thumbnail-img %}
+            <div class="category-post-image">
+              <a href="{{ post.url | relative_url }}">
+                <img src="{{ post.thumbnail-img | relative_url }}" alt="{{ post.title }}">
+              </a>
+            </div>
+          {% endif %}
+          
+          <div class="category-post-content">
+            <h2 class="category-post-title">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h2>
+            
+            <div class="category-post-meta">
+              <span class="post-date">{{ post.date | date: "%B %-d, %Y" }}</span>
+              {% if post.author %}
+                <span class="post-author">by {{ post.author }}</span>
+              {% endif %}
+            </div>
+            
+            {% if post.excerpt %}
+              <div class="category-post-excerpt">
+                {{ post.excerpt | strip_html | truncate: 150 }}
+              </div>
+            {% endif %}
+            
+            <div class="category-post-tags">
+              {% for tag in post.tags %}
+                <a href="{{ '/tags' | relative_url }}#{{- tag -}}" class="tag-item">{{ tag }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="no-posts">
+      <p>No posts found in this category.</p>
+    </div>
+  {% endif %}
+</div> 
