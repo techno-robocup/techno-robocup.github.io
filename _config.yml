@@ -105,3 +105,4 @@ exclude:
   - screenshot.png
   - docs/
   - setup.md
+  - .github/
