@@ -10,7 +10,9 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
+  # Runs on pull requests
+  pull_request:
+    branches: ["main"]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -42,9 +44,18 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Get commit hash
+        id: commit
+        run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
-        run: bundle exec jekyll build --config _config.yml,_config_github_pages.yml
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            # For PRs, build with baseurl set to /demo/<commit-hash>/
+            bundle exec jekyll build --config _config.yml,_config_github_pages.yml --baseurl "/demo/${{ steps.commit.outputs.hash }}/"
+          else
+            # For main branch, build normally
+            bundle exec jekyll build --config _config.yml,_config_github_pages.yml
+          fi
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
