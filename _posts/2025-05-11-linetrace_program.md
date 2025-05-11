@@ -31,4 +31,71 @@ author: "rotarymars"
 # 実際のプログラム
 かなり長々としたプログラムになってしまったので段階的に貼り付けていきたいと思います。また、とてもきたないので、読みにくいかもしれません(いつかクラスにしたいと思いながら何もしていません)。
 
+なお、今回は特にライントレースに関係しているmodules/settings.pyを見ていきます。
 
+```python
+from libcamera import controls
+from picamera2 import MappedArray
+import cv2
+import time
+import numpy as np
+import threading
+# 途中略
+def Linetrace_Camera_Pre_callback(request):
+  if DEBUG_MODE:
+    print("Linetrace precallback called", str(time.time()))
+
+  global lastblackline, slope
+
+  try:
+    with MappedArray(request, "lores") as m:
+      image = m.array
+
+      camera_x = Linetrace_Camera_lores_width
+      camera_y = Linetrace_Camera_lores_height
+
+      if DEBUG_MODE:
+        cv2.imwrite(f"bin/{str(time.time())}_original.jpg", image)
+
+      gray_image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+
+      _, binary_image = cv2.threshold(gray_image, Black_White_Threshold, 255,
+                                      cv2.THRESH_BINARY_INV)
+
+      if DEBUG_MODE:
+        cv2.imwrite(f"bin/{str(time.time())}_binary.jpg", binary_image)
+
+      kernel = np.ones((3, 3), np.uint8)
+      binary_image = cv2.erode(binary_image, kernel, iterations=2)
+      binary_image = cv2.dilate(binary_image, kernel, iterations=3)
+
+      detect_green_marks(image, binary_image)
+
+      contours, _ = cv2.findContours(binary_image, cv2.RETR_TREE,
+                                     cv2.CHAIN_APPROX_NONE)
+
+      if not contours:
+        return
+
+      best_contour = find_best_contour(contours, camera_x, camera_y,
+                                       lastblackline)
+
+      if best_contour is None:
+        return
+
+      cx, cy = calculate_contour_center(best_contour)
+
+      with LASTBLACKLINE_LOCK:
+        lastblackline = cx
+
+      with SLOPE_LOCK:
+        slope = calculate_slope(best_contour, cx, cy)
+
+      if DEBUG_MODE:
+        debug_image = visualize_tracking(image, best_contour, cx, cy)
+        cv2.imwrite(f"bin/{str(time.time())}_tracking.jpg", debug_image)
+
+  except Exception as e:
+    if DEBUG_MODE:
+      print(f"Error in line tracing: {e}")
+```
