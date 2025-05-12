@@ -99,7 +99,8 @@ def Linetrace_Camera_Pre_callback(request):
     if DEBUG_MODE:
       print(f"Error in line tracing: {e}")
 ```
-
+とりあえず順に見ていきましょう。
+## Line 
 
 
 # 最後に
