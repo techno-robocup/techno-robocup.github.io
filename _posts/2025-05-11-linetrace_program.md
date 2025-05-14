@@ -100,7 +100,14 @@ def Linetrace_Camera_Pre_callback(request):
       print(f"Error in line tracing: {e}")
 ```
 とりあえず順に見ていきましょう。
-## Line 
+## Line 1 ~ 6
+見てのとおりですね。必要なライブラリ（Pythonではモデュールというらしいですが）をインクルード（Pythonではインポートというらしいですが）しています。
+## Line 8 ~
+いよいよ解説らしいものができます。
+
+まずprecallbackとは何なのか、解説したいと思います。
+
+Raspberrypiでは、`rpicam-hello`というコマンドを用いることでカメラ画像のプレビューが可能になっています（コマンド名が違うかもしれません）。
 
 
 # 最後に
