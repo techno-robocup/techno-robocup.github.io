@@ -2,7 +2,7 @@
 layout: post
 title: "機械学習の仕組み  ~ディープラーニング~"
 date: 2024-09-18 11:00:00 +0900
-tag: [robot, machine learning, rotarymars's article]
+tags: [robot, machine learning, rotarymars's article]
 thumbnail-img: "/assets/images/2024-09-18-thumbnail.jpeg"
 author: "rotarymars"
 ---

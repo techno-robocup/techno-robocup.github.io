@@ -2,7 +2,7 @@
 layout: post
 title: "レゴのゴム鉄砲"
 date: 2024-08-22 12:00:00 +0900
-tag: [free-talk, ALPAKA's article]
+tags: [free-talk, ALPAKA's article]
 thumbnail-img: "/assets/images/2024-08-22-4.jpg"
 author: "ALPAKA"
 ---

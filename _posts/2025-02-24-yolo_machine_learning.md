@@ -2,7 +2,7 @@
 layout: post
 title: "YOLOで機械学習~物体検知とロボカップでの応用~"
 date: 2025-2-24 10:00:00 +0900
-tag: [robot, rotarymars's article, machine learning]
+tags: [robot, rotarymars's article, machine learning]
 thumbnail-img: "/assets/images/2025-1-26-thumbnail.jpg"
 author: "rotarymars"
 ---

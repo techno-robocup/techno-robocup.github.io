@@ -2,7 +2,7 @@
 layout: post
 title: "東関東ノードの結果と関東大会に向けて"
 date: 2024-12-12 21:00:00 +0900
-tag: [robot, rotarymars's article]
+tags: [robot, rotarymars's article]
 thumbnail-img: "/assets/images/2024-12-12-thumbnail.png"
 author: "rotarymars"
 ---
