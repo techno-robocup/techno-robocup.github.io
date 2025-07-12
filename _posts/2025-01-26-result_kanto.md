@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "関東大会の結果と来年に向けて"
-date: 2025-1-26 10:00:00 +0900
+date: 2025-01-26 10:00:00 +0900
 tag: [robot, rotarymars's article]
 thumbnail-img: "/assets/images/2025-1-26-thumbnail.jpg"
 author: "rotarymars"
