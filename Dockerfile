@@ -13,6 +13,8 @@ COPY ./Gemfile* /srv/jekyll
 # Install the Ruby gems specified in the Gemfile
 RUN bundle install
 
+# Copy the Jekyll site source files
+COPY . /srv/jekyll
 
 # Expose port 4000 for the Jekyll server
 EXPOSE 4000
