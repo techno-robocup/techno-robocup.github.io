@@ -41,6 +41,7 @@ author: "rotarymars"
 個人的に残念なのは、[kicad](https://www.kicad.org/)だとどこが編集されたのかvisualで確認できないのが不満なところです。
 
 余談ではありますが、機体の作成に使っている[freecad](https://www.freecad.org/index.php)だと[BIM Diff](https://wiki.freecad.org/BIM_Diff/en)と呼ばれるもので視覚的なdiffが見られるようです。
+
 # ソフトウェアの開発体制
 ソフトウェアも同様、二人の間で意思疎通ができるように[github](https://github.com/)を使っています。
 
