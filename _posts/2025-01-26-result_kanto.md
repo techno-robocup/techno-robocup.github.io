@@ -1,30 +1,30 @@
 ---
 layout: post
-title: "関東大会の結果と来年に向けて"
+title: "Results of the Kanto competition and plans for next year"
 date: 2025-01-26 10:00:00 +0900
 tag: [robot, rotarymars's article]
 thumbnail-img: "/assets/images/2025-1-26-thumbnail.jpg"
 author: "rotarymars"
 ---
-あけましておめでとうございます。rotarymarsです。
+Hello. I'm rotarymars.
 
-今回の記事では、は、関東大会での結果について振り返っていこうと思っています。
+This time, I'd like to briefly summarize the results of the Kanto competition and the plans for next year.
 
-# 結果
-今回は、14チーム中、12位、得点は215点でした。
+# Results
+This time, we were 12th out of 14 teams, with a score of 215 points.
 
-昨年では、直前のセンサーの不調や、準備不足によって悲惨な結果になってしまったのですが、今年も思わぬ事態に陥ってしまい、（特に一走目では）結果が振るいませんでした。
+Last year, due to the sensor failure and the lack of preparation, we had a disastrous result, but this year, we were also caught off guard, and the result was not good (especially in the first run).
 
-# 反省点
-今年はセンサーの誤作動を極限まで減らすことができ、さらにレスキューもできる状態にまで機体を仕上げることができたので、かなり期待して本番を迎えたのですが、（おそらく）ロボットの重量とタイヤ、そして本番のタイルとの相性が悪く、機体がまったく回転することができない状態でした。
+# Lessons learned
+This year, we were able to reduce the sensor error to the extreme, and we were able to finish the robot in a state where we could even rescue, so we were looking forward to the competition, but (probably) due to the weight of the robot, the tires, and the compatibility with the tiles of the competition, the robot could not rotate at all.
 
-最終的にはレスキュー機構を捨てることで、機体の重量を減らし、二走目ではなんとか走ることができました。
+Finally, by giving up the rescue mechanism, we were able to reduce the weight of the robot and run in the second run.
 
-# 今後の予定
-今のところ、来年からはレゴ機から卒業し、Raspberry Pi & ESP32 の組み合わせで行こうと思っています。
+# Plans for the future
+Currently, we plan to graduate from Lego and move on to Raspberry Pi & ESP32.
 
-今後もリポジトリはパブリックにしていくつもりなので、ぜひ見続けて欲しいと思います。
+I'll continue to keep the repository public, so please keep an eye on it.
 
-次は一ヶ月後ほどで記事を更新したいと思います。
+I'll update the article in about a month.
 
-それでは。
+Thanks for reading!
