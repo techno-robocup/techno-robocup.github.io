@@ -1,112 +1,109 @@
 ---
 layout: post
-title: "文化祭でロボット展示"
+title: "Robot introduction"
 date: 2024-09-07 12:00:00 +0900
 tag: [robot,EV3, nishikazu's article]
 thumbnail-img: "/assets/images/robot.jpg"
 author: "nishikazu"
 ---
 
-# 記事の概要
+# Overview
 
-このたび、私たちのロボットが学校の文化祭で展示されることになりました。
-そこで、改めて私たちのロボットの機能の紹介などをしていきたいと思います。
+This time, we have been invited to exhibit our robot at the school's cultural festival.
+So, I'd like to introduce the functions of our robot again.
 
-# 改めて自己紹介
-私たちは3人とも、**物理研究会**に所属しています。
-**ロボット班**所属で、普段からロボットを作っています。
-そして、ロボカップという大きなロボット大会にに出るためにライントレースのできるロボットを作っています。
+# Self introduction
+We are all members of **Physics Club**.
+We are in the **Robot Group** and make robots every day.
+We are making a robot that can line trace to participate in the large robot competition called the RoboCup.
 
-[ロボカップレスキュー](https://drive.google.com/file/d/1REmoiyymxDDJaxguL8DYB3JC_gSHJxsU/view)についてはこちらをお読みください。
+Please read about [robocup rescue](https://drive.google.com/file/d/1REmoiyymxDDJaxguL8DYB3JC_gSHJxsU/view) here.
 
-簡単に説明すると、ロボカップとは、RJCロボカップ日本委員会主催の、大規模なロボットの大会です。
+RoboCup is a large robot competition organized by the RJC RoboCup Japan Committee.
 
-私たちが出場予定なのは、レスキュー部門という、ライントレースをしてボール(被災者ということ)を拾い上げるレスキューを行い、ポイントを競う競技です。
+We are participating in the Rescue Line, where we line trace to pick up balls (victims) and compete for points.
 
-# ロボットの仕組みの解説
+# Explanation of the robot's mechanism
 
-## ロボットの移動の仕組み
+## Explanation of the robot's movement
 
-**ロボットのライントレースの、移動の基本中の基本は、「左右のカラーセンサーの反射光の強さの差」です。**
+**The basic of line tracing is the difference in the strength of the reflected light of the left and right color sensors.**
 
-今回のロボットでは、今の時点では[EV3純正のカラーセンサー](https://ev3-help-online.api.education.lego.com/Retail/ja-jp/page.html?Path=editor%2FUsingSensors_Color.html)を使用しています。
-このセンサー、現在は廃版なのでArduinoを使って自作カラーセンサーを組んでいます。（（普通に廃版にしなくていいと思う
+Currently, we are using the [EV3 color sensor](https://ev3-help-online.api.education.lego.com/Retail/ja-jp/page.html?Path=editor%2FUsingSensors_Color.html) that is built in to the EV3.
+We are using an Arduino to make a custom color sensor because the EV3 color sensor is no longer available. (I think it's not necessary to scrap it.)
 
-このセンサーで、センサーの反射光の強さを0(暗い)から100(明るい)の値で知ることができます。
+With this sensor, we can get the strength of the reflected light of the sensor as a value from 0 (dark) to 100 (bright).
 
-例えば、
+For example,
 
-|                   | ① : 直線のとき              | ② : 左に曲がるとき            | ③ : ずれたとき 　　　　|
+|                   | ① : Straight line              | ② : Left turn            | ③ : Off track 　　　　|
 |:-----------------:|:--------------------------:|:------------------------:|:---------------------:|
-| 左のカラーセンサー | 白(100に近い)　              | 黒(0に近い)              | 灰色(50程度)           |
-| 右のカラーセンサー | 白(100に近い)               | 白(100に近い)             | 白(100に近い)          |
-|     進む角度      | 100-100 = 0度               | 0-100 = -100度(左に100度)| 50-100 = -50(左に50度)  |
-|       備考        | 0度なので、まっすぐ進みます。 | 黒がある方向に曲がります。 | 微妙な色だと、曲がり具合が少しになります。 |
+| Left color sensor | White (close to 100)　              | Black (close to 0)              | Gray (about 50)           |
+| Right color sensor | White (close to 100)               | White (close to 100)             | White (close to 100)          |
+|      Angle to move      | 100-100 = 0 degree               | 0-100 = -100 degree (left 100 degree)| 50-100 = -50 (left 50 degree)  |
+|       Note        | 0 degree means straight ahead. | Black means turn to the direction of black. | If the color is subtle, the turn will be slightly less. |
 
-このように、左右の明るさの差に応じて進む角度を決めることで、おおよそ制御をすることができます。
-しかし、これではどうしても精度の面で限界があります。そこで考え出されたのが、
+This way, we can control the robot approximately by determining the angle to move according to the difference in brightness of the left and right sensors.
+However, there is a limit in terms of accuracy. So, we came up with the idea of PID control.
 
-**PID制御**と呼ばれる実際にも産業面などで広く使われている制御手法です。
+**PID control** is a control method that is widely used in industry and other fields.
 ```
-1. PはProportion、「比例制御」のことで、うえで紹介した制御方法のことです。私たちのロボットも基本はこれで動いています。
+1. P is Proportion, which is the control method we introduced above. Our robot also moves basically with this.
 
-2. IはIntegral、「積分制御」のことで、簡単に言うと、この場合できるだけロボットの目標の角度に近づくように制御し続ける制御方法です。過去何回か分のカラーセンサーのデータを保存しておき、それを使って積分をして、P制御の値に足し合わせる値を決めます。
+2. I is Integral, which is a control method that keeps the robot as close as possible to the target angle. We save the data of the color sensor for several times in the past and use it to calculate the integral, and then add the value to the P control value.
 
-3. DはDifferential、「微分制御」のことで、PI制御だと対応できないような変化の具合、例えば直角などのときに、変化の大きさに比例した値を足し合わせて、変化が大きいほどよく曲がるようにするための制御方法です。
+3. D is Differential, which is a control method for changing the amount of change, such as when changing to a right angle. We add a value proportional to the amount of change to make the robot turn more when the change is large.
 ```
 
-これら3つを組み合わせてPID制御と呼びます。
+We call this PID control by combining these three.
 
-（詳しくはこちら）[Wikipedia - PID制御](https://ja.wikipedia.org/wiki/PID%E5%88%B6%E5%BE%A1)
+[Wikipedia - PID control](https://ja.wikipedia.org/wiki/PID%E5%88%B6%E5%BE%A1)
 
-## ロボットの緑色検知の仕組み
+## Explanation of the robot's green detection mechanism
 
-EV3のカラーセンサーは、R, G, B の3つの値のデータを取得できます。これは、光の三原色であるRed,Blue,Greenの3つがどのくらい混ざっているかで色を表す方法です。
+The EV3 color sensor can get data of three values of R, G, and B. This is a method of representing color by how much the three primary colors of light, Red, Blue, and Green, are mixed.
 
-単純にその値をそのまま使ってもよいのですが、より正確に、誤作動なく緑色を検知できるようにするためにHSVから色相、彩度を使って判定していきます。
+We can use the values as they are, but we use hue and saturation from HSV to detect green more accurately and without malfunction.
 
-次の画像のような色相環を見たことはないでしょうか。
+Have you ever seen this color circle?
 
 ![色相環](https://blogger.googleusercontent.com/img/a/AVvXsEho8uFoa3JTvWVkylUZjYvbH8pInyVOV0wp6NDH_glpVeoNJDO5h6UpHXiqacNqDSnk236FYjd5vrHnNRV4CjLPOr7mpvhsI2HXV91647Ww2n9Wdn13aSm_vvdxj84bF8Es9501oyxU0mXtiL1I14nUuOn37B2rx8F0u5lmig4YHCOmaNo_mjA-wJ51=s200)
 
-(出典 : https://hirotama.blogspot.com/ フリー素材【色相環】Hue circle, 2021)
+(Source : https://hirotama.blogspot.com/ フリー素材【色相環】Hue circle, 2021)
 
-そして、この色相のどの位置にいるかの角度と、色の鮮やかさである彩度と、色の明るさである明度で色を指定する方法がHSV、Hue-Saturation-Valueです。
+The method of specifying color by the angle of where it is on the color circle and the saturation, which is the vividness of the color,
 
-色相環の赤色を0度として、緑色は120度、青色は240度の位置になります。これにより、角度の指定だけで緑色かどうか判定することができます。
+The red on the color circle is 0 degrees, the green is 120 degrees, and the blue is 240 degrees. This allows us to determine if it is green just by specifying the angle.
 
-また、黒い線を濃い緑色だと勘違いしてしまわないように、色の明度の判定を加えて、ある程度明るくないと緑と判定されないようにしています。
+Also, to avoid mistaking the black line for a dark green, we add a judgment of the brightness of the color, so that it is not judged as green unless it is somewhat bright.
 
-参考までに、R、G、Bの値からHSVを導き出す式をのせておきます。(今回判定に使ったのは色相と明度です。)
+For reference, I'll leave the formula for deriving HSV from the values of R, G, and B. (This time, we used hue and brightness for the judgment.)
 ```
-R、G、Bのうち、最も大きな値をMAX、最も小さな値をMINとする。
+Let MAX be the largest value among R, G, and B, and MIN be the smallest value.
 
-    RがMAXならば、色相 H = 60 × ((G - B) ÷ (MAX - MIN))
+    If R is MAX, then hue H = 60 × ((G - B) ÷ (MAX - MIN))
 
-    GがMAXならば、色相 H = 60 × ((B - R) ÷ (MAX - MIN)) +120
+    If G is MAX, then hue H = 60 × ((B - R) ÷ (MAX - MIN)) +120
 
-    BがMAXならば、色相 H = 60 × ((R - G) ÷ (MAX - MIN)) +240
+    If B is MAX, then hue H = 60 × ((R - G) ÷ (MAX - MIN)) +240
 
-　　R、G、Bがすべて同じ値ならば、色相 H = 0
+　　If R, G, and B are all the same value, then hue H = 0
 
-色相Hが負の数ならば、色相Hに360を足す。
+If the hue H is a negative number, add 360 to the hue H.
 
 ------
-
-彩度S = (MAX - MIN) ÷ MAX
+Saturation S = (MAX - MIN) ÷ MAX
 
 ------
-
-明度V = MAX
+Brightness V = MAX
 ```
 
-# これからのロボットの展望
-・ 先ほども少し書いたように、自作のカラーセンサーの回路を完成させて、ロボットに搭載する
+# The future of the robot
+・ As I mentioned earlier, we will complete the circuit of the custom color sensor and install it on the robot.
 
-・ ロボカップでは、黒い線の奥に緑色があっても、手前にある時のように曲がってはいけないというルールや、両側が緑色ならばUターンして引き返さなければならないというルールなどがあるため、それらに対応したプログラムを作る。
+・ In the RoboCup, there are rules such as not being able to turn when there is a green line behind the black line, and not being able to turn when both sides are green, so we will make a program that corresponds to those rules.
 
-などなど、11月のロボカップに向けて頑張ります！
+We will work hard for the RoboCup in November!
 
-
-読んでいただきありがとうございました。
+Thank you for reading.
 
