@@ -4,5 +4,86 @@
 
 layout: home
 ---
-<p align="center"><img src="/assets/images/robot-03.jpg" alt="robot" width="250x"><br>
-  現在のロボットの様子</p>
+
+<div class="container">
+  <div class="robot-section">
+    <div class="robot-image">
+      <img src="/assets/images/robot-03.jpg" alt="Current robot status" width="250">
+      <p class="image-caption">現在のロボットの様子</p>
+    </div>
+  </div>
+
+  <div class="notice-section">
+    <h2 class="notice-title">注意</h2>
+    <div class="notice-content">
+      <p>ここに書かれている記事は、7月末頃までに、すべて英語に翻訳されます。</p>
+      <p>qiitaにて日本語の記事を書いていきますので、ぜひそちらをご覧ください。</p>
+    </div>
+  </div>
+
+  <div class="news-section">
+    <h2 class="news-title">Happy news!</h2>
+    <div class="news-content">
+      <p>This blog will be translated into English by the end of July.</p>
+      <p>Japanese articles will be written on Qiita, so please check them out if you are interested.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .robot-section {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .robot-image img {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .image-caption {
+    margin-top: 10px;
+    font-size: 1.1em;
+    color: #666;
+  }
+
+  .notice-section,
+  .news-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .notice-section {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+  }
+
+  .news-section {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+  }
+
+  .notice-title,
+  .news-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .notice-content,
+  .news-content {
+    line-height: 1.6;
+  }
+
+  .notice-content p,
+  .news-content p {
+    margin-bottom: 10px;
+  }
+</style>

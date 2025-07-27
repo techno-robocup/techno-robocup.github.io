@@ -218,15 +218,11 @@
   border-radius: 20px;
 }
 
-.post-read-more:hover {
+.post-preview .post-read-more:focus,
+.post-preview .post-read-more:hover {
   color: white;
   background: var(--primary-color);
   transform: translateX(5px);
-}
-
-.post-preview a:focus,
-.post-preview a:hover {
-  color: white;
 }
 
 .post-read-more i {
