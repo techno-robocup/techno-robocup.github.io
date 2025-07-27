@@ -1,61 +1,61 @@
 ---
 layout: post
-title: "Machine learning with tensorflow"
+title: "tensorflowで簡単に機械学習"
 date: 2024-08-28 10:00:00 +0900
 tag: [machine learning, rotarymars's article]
 thumbnail-img: "https://upload.wikimedia.org/wikipedia/commons/a/ab/TensorFlow_logo.svg"
 author: "rotarymars"
 ---
-# Overview
-In the modern AI era, let's implement machine learning simply by ourselves.
+# 記事の概要
+現代のAIの時代において、自分たちでシンプルに機械学習を実装してみよう。
 
-# Machine learning
-In this machine learning, we will classify images.  
-Let's see an example.
+# 今回の機械学習の内容
+今回の機械学習では、画像のクラス分けをします。  
+例を見てみましょう。
 
 ![2](/assets/images/2024-08-28-digit2.png)
 
-You can probably tell that this number is "2" at a glance.
+皆さんはこの数字を瞬時に"2"と判断できるかと思います。
 
-If a machine can correctly determine that this number is "2" in the same way, wouldn't that be great?
+このように、機械が同じように"2"と正しく判定することができたら、素晴らしいと思いませんか？
 
-~~ALPAKA: I don't think so~~
+~~ALPAKA: 思いません~~
 
-Why can we tell that this number is "2" in the same way?
+どうして、僕たちはこのように数字を判断することができるのでしょうか。
 
-It's because we've always known that "something like this is 2".
+それは、今まで「このような形をしたものが2」と知っているからです。
 
-Similarly, if we teach the computer, it will learn by itself.
+同じように、コンピュータにも教えてあげれば、自分で学んでくれます。
 
-That's machine learning.
+それが機械学習です。
 
-This time, we'll create a program that recognizes the numbers we wrote ourselves.
+今回は、自分たちが手書きした数字を認識してくれるプログラムを作っていきます。
 
-# Before we start
-I'm not very familiar with machine learning, so there may be mistakes in what I'm saying here.
+# 始める前に
+僕自身があまり機械学習について詳しくなく、ここで述べられているものは間違っている場合があります。
 
-If there are mistakes, please let me know via the email address of my github account.
+間違いがあればgithubアカウントのEmailより、教えてくださると助かります。
 
-# Before we start
-This time, we'll use python for machine learning.
+# 始める前の準備
+今回は機械学習にpythonを用います。
 
-Also, this article was implemented on Ubuntu on wsl.
+また、今回の記事はwsl上のUbuntuでの実装をしました。
 
-I also tested it with docker.
+一応、dockerでのテストもしました。
 
-Let's install python.
+それでは、pythonをインストールしましょう。
 
-If you don't use a version management tool,
+特にバージョン管理ツールを使用するのでなければ、
 ```bash
 apt update
 apt -y upgrade
 apt install python3 pip
 ```
-You may need to add `sudo` to the command since usually we do not run commands as root.
+となります。
 
-At least in my environment, when installing python3, I was asked for the region.
+少なくとも僕の環境では、python3を入れるときにリージョンを聞かれました。
 
-Let's check if python3 and pip are installed.
+python3とpipが入ったことを確認しましょう。
 ```bash
 $ python3 --version
 Python 3.12.3
@@ -63,23 +63,23 @@ $ pip --version
 pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
 ```
 
-Let's install the necessary packages.
+それでは、必要なパッケージをインストールしていきます。
 ```bash
 pip install opencv-python tqdm numpy matplotlib tensorflow
 ```
 
-opencv is used for image reading, tqdm is used for progress bar display, numpy is used for array creation, matplotlib is used for image display, and tensorflow is used for machine learning model creation.
+opencvは画像の読み込み、tqdmはプログレスバーの表示、numpyは配列の作成、matplotlibは画像の表示、tensorflowは機械学習のモデル作成に使用します。
 
-This is the environment we need.
+これで必要な環境は揃いました。
 
-# Creating handwritten digit data
-The handwritten digit data is included in the module, but this time we will create the data ourselves without using it.
+# 手書き数字データの作成
+手書き数字のデータは、モジュールに含まれていますが、今回はそれを使わずに自分でデータを作ってみます。
 
-I used the standard app "Paint" on windows to write the number in 28px by 28px.
+僕は、windowsの標準アプリ「ペイント」を用いて、縦横28pxに数字を書き込みました。
 
-In this program, we will assume that there is a directory called data under the same directory as the python file for learning, and that there is a directory for each number under the directory.
+今回のプログラムでは、学習用のpythonファイルと同じ階層にdataという名のディレクトリの下に、数字ごとのディレクトリの下に対応する数字があるということを前提に勧めていきます。
 
-That is,
+つまり、
 ```
 .
 `-- data
@@ -104,14 +104,15 @@ That is,
     `-- 9
         `-- 1.png
 ```
+ということです。
 
-Also, we will proceed with the assumption that the image is black and white this time.
-# Program creation
-Let's create a program using your favorite editor.
+また、今回は画像が黒白であることを前提に進めていこうと思います。
+# プログラムの作成
+好きなエディタを用いてプログラムを作成していきましょう。
 
-I named the program train.py.
+僕はプログラムの名前をtrain.pyにしました。
 
-First, let's import the necessary modules.
+まず、必要なモジュールをインポートします。
 ```python
 import cv2 as cv
 import random
@@ -122,7 +123,7 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 ```
 
-Next, let's create the model.
+次に、モデルの作成をします。
 ```python
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Flatten(input_shape=(28,28)))
@@ -131,11 +132,11 @@ model.add(tf.keras.layers.Dense(units=100, activation=tf.nn.relu))
 model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 ```
-Here, we declare the model in the first line, add layers from the second to the fifth line, and compile it in the last line.
+ここでしているのは、1行目でモデルの宣言、2から5行目で層の追加、最後の行でそれをコンパイルしています。
 
-I'll talk about what layers are in the next article.
+層とはなんぞや、ということについては次回の記事で話そうと思います。
 
-Next, let's read the photos we want to learn from the directory.
+次に、ディレクトリから今回学習対象の写真を読み込みましょう。
 
 ```python
 files = []
@@ -146,18 +147,18 @@ for i in range(0, 10):
     files = files + tmpfiles
 random.shuffle(files)
 ```
-The reason we shuffle randomly at the end is to make the model generated every time different.
+最後にランダムでシャッフルしているのは、学習する順番をランダムにすることで、毎回生成されるモデルが変わるようにするためです。
 
-Let's make the machine learn.
+それでは、実際に学習させましょう。
 
-This time, we won't read all the pictures at once, but we'll read them little by little when we need them.
+今回は、最初に画像を全て読み込むのではなく、少しずつ、必要なときに読み込んでいきます。
 
-It's because we don't want to load all the pictures into memory if we can't.
+それは、仮に全ての写真をメモリ上に乗せられなくても良いようにするためです。
 
 ```python
-MAX_PICTURE = 100000 # How many pictures to load into memory at once
-EPOCH = 100 # How many times to learn the pictures
-nowindex = 0 # What index we've reached
+MAX_PICTURE = 100000 # 何枚の画像を同時にメモリに配置するか
+EPOCH = 100 # 何回画像を学習させるか
+nowindex = 0 # どこのインデックスまで行ったか
 for i in tqdm.tqdm(range(EPOCH)):
     nowindex = 0
     train_x = []
@@ -166,40 +167,40 @@ for i in tqdm.tqdm(range(EPOCH)):
         filepath = files[nowindex]
         img = cv.imread(filepath)[:, :, 0]
         img = np.invert(img)
-        train_x.append(img) # Add the image to the array
-        train_y.append(int(filepath[7])) # Add the number to the array
+        train_x.append(img) # 画像を配列に追加
+        train_y.append(int(filepath[7])) # なんの数字か配列に追加
         nowindex += 1
         if len(train_x) >= MAX_PICTURE or nowindex >= len(files):
-            train_x = np.array(train_x) # Convert to numpy array
-            train_y = np.array(train_y) # Same as above
-            model.train_on_batch(train_x, train_y) # Learn
+            train_x = np.array(train_x) # numpyの配列に変換
+            train_y = np.array(train_y) # 同上
+            model.train_on_batch(train_x, train_y) # 学習させる✏
             train_x = []
             train_y = []
         if nowindex >= len(files):
             break
-model.save("model.h5") # Save the created model
+model.save("model.h5") # 作成したモデルを保存
 ```
 
-It's a bit long, but it's like this.
+長いですが、こんな感じのコードです。
 
-I used tqdm, which displays a progress bar, because if we just loop, we can't see the progress.
+ただループを回すと経過を見ることができないので、tqdmというプログレスバーを表示してくれるものを使いました。
 
-The last line saves the completed model.
+最後の行では、出来上がったモデルを保存しています。
 
-This is train.py.
+ここまでがtrain.pyです。
 
-Let's run it here for now.
+さて、一旦ここで動かして見ましょう。
 
 ```bash
 python3 train.py
 ```
-My environment has a GPU driver, so it took about 30 seconds.
+僕の環境はGPUのドライバが入っているので、30秒前後で終わりました。
 
-Next, let's check how accurate this model is.
+次に、このモデルがどれくらいの精度であるか、確かめてみましょう。
 
-Personally, I think it's good if it exceeds 95%.
+個人的に、95%を超えてこればいいのかなという感じです。
 
-I assume that the test data is arranged as follows.
+テスト用のデータは、以下のように配置されていることを想定しています。
 ```bash
  test
     ├── 0-0.png
@@ -223,9 +224,8 @@ I assume that the test data is arranged as follows.
     ├── 9-0.png
     ├── 9-1.png
 ```
-The number before the hyphen is what is actually written, and the number after is just to avoid name conflicts.
-
-Let's implement it.
+ハイフンの前の数字が実際に何が書かれているか、あとの数字は名前が被らないようにしているだけです。
+それでは実装します。
 ```python
 import cv2 as cv
 import numpy as np
@@ -233,7 +233,7 @@ importatplotlib.pyplot as plt
 import tensorflow as tf
 import os
 
-model = tf.keras.models.load_model('model.h5', custom_objects={'softmax_v2': tf.nn.softmax}) # Load the model
+model = tf.keras.models.load_model('model.h5', custom_objects={'softmax_v2': tf.nn.softmax}) # モデルの読み込み
 
 test_x = []
 test_y = []
@@ -248,9 +248,9 @@ print("loss: ", loss)
 print("accuracy: ". accuracy)
 
 ```
-This is how we can check the accuracy.
+このような感じで精度を判定できます。
 
-Now, let's have the machine predict the number we wrote.
+ここで、今度は自分の書いた数字を予測してもらいましょう。
 ```python
 model = tf.keras.models.load_model('model.h5', custom_objects={'softmax_v2': tf.nn.softmax})
 img = cv.imread(path)[:, :, 0]
@@ -258,21 +258,22 @@ img = np.invert(np.array([img]))
 prediction = model.predict(img)
 print(prediction)
 ```
-This is how we can display the probability of each number.
+これで、どれくらいの確率でどの数字かを表示できます。
 
-If you want to display only the number with the highest probability, execute
+もし、一番確率の大きいもののみを表示したい場合は、
 ```python
 print(np.argmax(prediction))
 ```
+としてください。
 
-# Let's try it
-I also tried it.
+# 実際に動かしてみる
+僕も実際に動かしてみました。
 
-The result was about 92%.
+結果、92%程度です。
 
-I didn't get as much accuracy as I thought, but since the learning data is less this time, I'll leave it at this.
+思ったほど精度は出ませんでしたが、学習用データが今回は少ないので、今回はこれで良しとしようと思います。
 
-Next time, I'll write an article about the neurons.
+それでは、次回はニューロン周りのことについて記事を書こうと思います。
 
-[This time's program](https://github.com/rotarymars/handwritten-digit-recognition)
+[今回のプログラム](https://github.com/rotarymars/handwritten-digit-recognition)
 
