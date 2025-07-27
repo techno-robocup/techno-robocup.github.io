@@ -1,80 +1,83 @@
 ---
 layout: post
-title: "About deep learning"
+title: "機械学習の仕組み  ~ディープラーニング~"
 date: 2024-09-18 11:00:00 +0900
 tag: [robot, machine learning, rotarymars's article]
 thumbnail-img: "/assets/images/2024-09-18-thumbnail.jpeg"
 author: "rotarymars"
 ---
 
-Hello. I'm rotarymars.  
-Last week, we had a cultural festival at our school, and many people came to see our robot exhibition at the Physics Research Club. Thank you for coming in the hot weather.  
+こんにちは。rotarymarsです。  
+先日、僕たちの学校では文化祭があり、僕たちのロボットを展示している物理研究会に、たくさんの人が見に来てくださいました。  
+暑い中足を運んでくださり、ありがとうございます。  
 
-Just during the robot exhibition, I introduced the handwritten digit recognition that I wrote in [the previous article](/2024/08/28/tensorflow-machinelearning.html) to some people.  
+ちょうど、ロボットの展示をしている間、[先日の記事](/2024/08/28/tensorflow-machinelearning.html)で紹介した手書き数字認識を、一部の人に体験してもらいました。  
 
-*I made the test cases myself, and the accuracy is 98%, so it should be fine.*  
+*自分で作成したテストケースも98%精度が出るようになったし、大丈夫だろう。*  
 
-I thought so, and I let many people try it at the cultural festival.  
+そう思って、文化祭で、いろいろな人に触ってみてもらいました。  
 
-However, surprisingly, it didn't recognize the digits correctly at all.  
-I was curious about the reason, so I thought about it.  
+しかし、恐ろしいことに、全く正しく認識してくれません。  
+内心不思議に思いながら、その原因を考えてみました。  
 
-# After the cultural festival
-After the cultural festival, I let my friends try it.  
-In the case of the first friend, he recognized the digits easily.  
-However, when I let the second friend try it, he didn't recognize the digits correctly.  
+# 文化祭が終わった後のお話
+文化祭が終わった後、友達にも実際に使ってみてもらいました。  
+一人目の友達の場合、とくに難なく数字を認識してくれました。  
+しかし、もう一人別の友達に使ってみてもらったところ、なかなか正しく認識してくれませんでした。  
 
-I thought about the reason, and I realized that I was too shallow.  
+そこで、考察の結果と呼ぶには浅はかですが、気づきました。  
 
-The characteristics of the digits are different for each person.  
+人によって字の特徴が異なる。  
 
-So, the friend who was interested in this asked me to create learning images of each digit, about 30 images in total, and test images of each digit, one image in total.  
+そこで、その友達はこれに興味を示してくれたので、各数字3枚ほど、計30枚ほどの学習用画像、各数字1枚のテスト画像を作ってくれました。  
 
-I had about 120 images of my handwritten digits, so I let my friend's images be 40 times more than my images to learn, and I made a model.  
+自分の手書き数字は120枚ほどあったので、友達の画像を僕の画像の40倍多く学習させて、モデルを作ってみました。  
 
-Then, my digits didn't change much, and my friend's digits were recognized with higher accuracy than before.  
+すると、僕の数字は特に変化なく、友達の数字は前よりは高い精度で認識するようになりました。  
 
-# Why does increasing the number of images improve accuracy?
-This is a continuation of the previous article, but I'd like to talk about the overview of the machine learning this time.  
-Before that, there is a possibility that there is a mistake, so please contact me via email if you find any mistakes.  
+# なぜ画像を増やすだけで精度が向上するのだろう
+先週の記事の続きではありますが、今回の機械学習の概要を話したいと思います。  
+その前に、前回と同様、間違っていることがある可能性があります。  
+間違いは、気付き次第修正していくので、Emailで連絡してくださると助かります。  
 
-# Inside the computer
-![Inside the computer](/assets/images/2024-09-18.png)
+# 今回の機械学習のパソコンの中
+![パソコンの中](/assets/images/2024-09-18.png)
 
-As you can see, in the computer, the circles are stacked in multiple layers, and machine learning starts.  
-This time, for the sake of the picture, I set the parameters (information) to 8 and the class to 2.  
+このように、パソコンの中では、丸が何層にもなっている状態で、機械学習が始まります。  
+今回は、絵の都合上、パラメーター(情報)を8個、クラスは2にしました。  
 
-For example, let's consider the following scenario.  
-You are given 8 numbers (price, durability, warranty period, etc.) about a certain product.  
-The quality of the product is judged by these 8 numbers only.  
+例えば、次のようなシナリオを考えます。  
+貴方は、ある商品について、8個の数字(値段、耐久性、保証期間等)が与えられます。  
+商品の良し悪しは、この8個の数字だけで判断します。  
 
-You are given 8 numbers and the quality of the product.  
-Based on that information, please create a program that can judge the quality of the product only by machine.
+8個の数字と、その商品の良し悪しが与えられます。  
+それらの情報を元に、今度は機械だけで商品の良し悪しを判断できるものを作って下さい。
 
-Normally, you would program a program that would branch based on the numbers given in advance, and then judge the quality of the product.
+普通であれば、事前に与えられた数字を元に、人間が数字を見て、条件分岐をして、、、
+というプログラムになると思います。
 
-However, with machine learning, you don't have to do that, and it will learn by itself.
+しかし、機械学習では、そのようなことをしなくても、自分で学習してくれます。
 
-Let's see how it works.
+仕組みを見ていきましょう。
 
-8 numbers are given to the circle on the far left.  
+8個の数字は、それぞれ一番左にある丸に一つの数字が一つずつ与えられます。
 
-Then, the number is passed to the circle connected by the line.
+その後、その丸で、その数字を元に、何らかの数式によって得られた数字を、次の線で繋がれている丸に渡します。
 
-Finally, the last two circles determine the probability of good or bad based on which number is larger.
+最終的に、最後の2つの丸で、どちらが大きい数字かによってどれくらいの確率で良い、あるいは悪いか判定する。
 
-This is how it works.
+このような感じになっています。
 
-In machine learning, the "some number" is passed to the next circle, and the probability of reaching the last circle correctly is determined by randomly operating it.
+機械学習では、この「何らかの数字」を「どれくらい」次の丸に渡すと、最後の丸に正しく行き着くか、というのをランダムに操作し続けることで、正しく判定できるものを作っています。
 
-# Back to handwritten digits
-The handwritten digit data has 784 circles of 28px each on the left, and the last layer on the far right has 10 circles.
+# 手書き数字に戻ろう
+手書き数字データは、縦横28pxの計784個の丸が左側にあり、最終的に一番右側の層が10個になるようになっています。
 
-If my digits have a feature, the machine learning will progress based on that number, and it will not work well with other people's digits.
+僕の数字にもし特徴があれば、その数字を元に機械学習が進んでしまい、他の人の数字ではうまく動かないことになります。
 
-In that sense, not only is it necessary to collect more data to learn, but it is also necessary to collect data with various widths.
+そういう意味でも、単に学習するデータが多いだけではなく、いろいろな幅のあるデータ集めが必要になっていきます。
 
-# How to use it in the robot
-In the rescue we are participating in, there is a zone called the rescue zone, where we pick up balls.
+# ロボットでの今後の活かし方
+僕たちの出場するレスキューでは、レスキューゾーンと呼ばれる、ボールを拾うゾーンがあります。
 
-I would like to recognize the position of the ball by recognizing the ball with the camera through machine learning.
+このゾーン内に存在するボールを、機械学習によって、カメラで認識させてボールの位置を認識できればと思っています。
