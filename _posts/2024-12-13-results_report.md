@@ -1,42 +1,40 @@
 ---
 layout: post
-title: "Results report"
+title: "東関東ノードの結果と関東大会に向けて"
 date: 2024-12-12 21:00:00 +0900
 tag: [robot, rotarymars's article]
 thumbnail-img: "/assets/images/2024-12-12-thumbnail.png"
 author: "rotarymars"
 ---
-Hello. I'm rotarymars.
+こんにちは。rotarymarsです。
 
-I've been busy with the competition and the competition, and it's been a long time since my last post.
+色々と大会までと、大会のあと忙しく、久しぶりの投稿となってしまいました。
 
-This time, I'd like to briefly summarize the results of the East Tokyo Node, the lessons learned, and the plans for the East Tokyo competition.
+今回は、東関東ノードの結果、反省と、関東大会に向けての予定を手短にまとめていきたいと思います。
 
-# ！！Results！！
-This year's East Tokyo Node competition was 7th place.
+# ！！結果！！
+今年の東関東ノード大会は、 7位 でした。
 
-Last year, we were able to achieve a much higher score than last year by having a more stable line tracing machine and program.
+去年より安定してライントレースができる機体やプログラムができて、去年に比べかなり高い得点を取ることができました。
 
-# Lessons learned
-Last year, we were able to achieve a much higher score than last year by having a more stable line tracing machine and program.
-However, the number of false detections of green detection was not significantly reduced, and it was also a cause of time loss and deviation from the line.
+# 反省点
+去年より遥かに安定してライントレースができていましたが、やはり緑検知の誤作動の数はあまり大きく減らせず、
+それによる時間のロスだけでなく、ラインから脱線する原因にもなってしまったなと思っています。
 
-# Plans for the future
-Currently, we plan to replace all sensors except the touch sensor with cameras.
+# 今後の予定
+現段階では、タッチセンサーを除くその他のセンサーはすべてカメラで置き換えていく予定です。
 
-Specifically,
+具体的に、
 
-- Line tracing is done by obtaining an image from the camera and tracing the line based on the brightness, just like the color sensor in the past.
+ライントレースはカメラから画像を取得して、明るさをもとに今までのカラーセンサーのようにライントレースをする。
 
-- In the rescue, we will use the camera and yolo to determine the position of the ball, pick it up, and drop it in the correct zone.
+レスキューではカメラとyolo用いて位置を特定し、ボールを拾う＆正しいゾーンに落とす、
 
-We are aiming for this.
+ということを目指しています。
 
-Currently, we plan to connect two camera modules to a raspberry pi.
+今の時点では、raspberyy pi にカメラモジュールを2つつなげて行う予定です。
 
-# Finally
-I think that line tracing that is not affected by the material (can be used on a surface that is easy to reflect) can be done by using a camera.
+# 最後に
+カメラにすることで材質の影響を受けにくい（つるつるしていて反射しやすい表面にも対応できる）ライントレースができるようになるのではないのかなと思っています。
 
-I'll work hard to achieve good results in the East Tokyo competition.
-
-Thanks for reading!
+関東大会で十分な成果を発揮できるように頑張りたいと思います。

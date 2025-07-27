@@ -1,58 +1,56 @@
 ---
 layout: post
-title: "About the performance time of the cultural festival"
+title: "文化祭の実演時間について"
 date: 2024-09-13 22:00:00 +0900
 tag: [robot, school, ALPAKA's article]
 thumbnail-img: "/assets/images/robot.jpg"
 author: "ALPAKA"
 ---
 
-Hello. I'm ALPAKA.
+こんにちは。ALPAKAです。
 
-Today, I'd like to talk about the performance time of the cultural festival that will be held tomorrow.
+今日は、明日から開催される僕たちの学校の文化祭について、僕たちの活動時間について話したいと思います。
 
 ## 場所
-3rd floor Physics Room
+3階　物理室
 
 ## 時間
 
 ### 9/14(土)
 
-| Time | Person |
+| 時間 | 人 |
 | --- | --- |
-| 8:45~10:05 | rotarymars and ALPAKA
-| 12:30~13:50 | rotarymars and ALPAKA
-| 13:50~15:20 | ALPAKA and nishikazu
+| 8時45分～10時5分 | rotarymarsとALPAKA
+| 12時30分～13時50分 | rotarymarsとALPAKA
+| 13時50分～15時20分 | ALPAKAとnishikazu
 
 ### 9/15(日)
 
-| Time | Person |
+| 時間 | 人 |
 | --- | --- |
-| 8:45~10:05 | nishikazu and rotarymars
-| 10:05~11:35 | ALPAKA and nishikazu
-| 13:50~15:20 | rotarymars and nishikazu
+| 8時45分～10時5分 | nishikazuとrotarymars
+| 10時5分～11時35分 | ALPAKAとnishikazu
+| 13時50分～15時20分 | rotarymarsとnishikazu
 
-The members will be present during the above time slots.
+上記の時間帯でメンバーの人がいる予定です。
 
-## Performance time
+## 実演時間
 
-We will actually move the robot during the following time slots.
+以下の時間帯で、ロボットを実際に動かそうと思います。
 
 ### 9/14(土)
 
-- 9:05~
-- 12:50~
-- 14:20~
+- 9時5分~
+- 12時50分~
+- 14時20分~
 
 ### 9/15(日)
-- 9:05~
-- 10:35~
-- 14:20~
+- 9時5分~
+- 10時35分~
+- 14時20分~
 
-We will perform during these time slots.
+この時間で実演をしたいと思います。
 
-In addition, if the members are present during the time slots, we will move if you call us.
+その他にも、メンバーがいる時間帯であれば、声をかけてくれれば動かそうと思います。
 
-I'm looking forward to tomorrow.
-
-Thanks for reading!
+それでは明日を楽しみにしています。
