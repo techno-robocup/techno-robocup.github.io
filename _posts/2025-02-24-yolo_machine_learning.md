@@ -1,66 +1,66 @@
 ---
 layout: post
-title: "YOLOで機械学習~物体検知とロボカップでの応用~"
+title: "Machine learning using YOLO~Object detection and its application in RoboCup~"
 date: 2025-02-24 10:00:00 +0900
 tag: [robot, rotarymars's article, machine learning]
 thumbnail-img: "/assets/images/2025-1-26-thumbnail.jpg"
 author: "rotarymars"
 ---
-こんにちは。rotarymarsです。
+Hello. I'm rotarymars.
 
-久しぶりにブログを書いている気分です。
+I'm feeling like I'm writing a blog again after a long time.
 
-今回は前回出した機械学習とは少し違う、いわゆる「物体検出」と呼ばれるものの類を書いていこうと思います。
+This time, I'd like to write about something different from the machine learning I wrote last time, which is called "object detection".
 
-# 今回目指すもの
-- 今まで見たことのない画像から、「顔」を検知し、四角で囲む
+# What I want to achieve this time
+- Detecting "faces" from images I've never seen before and surrounding them with a square
 
-これができるようにしていきたいと思います。
+I'd like to make it possible to do this.
 
-# 準備
-今回は以下の条件が揃っている前提で話をしていきます。
-- python (今回は3.11系で作っています。もし心配であればpyenvやasdfなどでバージョンを固定してください。)
-- docker（ラベリングのソフトを立ち上げるために使用します。）
-- direnv（もしくはvirtualenvなどで仮想環境を立ち上げます。）
+# Preparation
+This time, I'll talk about the following conditions.
+- python (I'm using 3.11 this time. If you're worried, please fix the version with pyenv or asdf.)
+- docker (I'll use it to launch the labeling software.)
+- direnv (or virtualenv to launch a virtual environment.)
 
-# 手順
-まず作業ディレクトリを作成しましょう。
+# Procedure
+First, let's create a working directory.
 ```bash
 mkdir ball_detection && cd $_
 ```
-次に、以下の内容の.envrcファイルを作成します。
+Next, create a .envrc file with the following contents.
 ```bash
 layout python
 ```
-これで、必要に応じて以下のコマンドを実行します。
+Now, execute the following command as needed.
 ```bash
 direnv allow
 ```
-ここで仮想環境が出来上がっているはずです。確認しましょう。
+Here, the virtual environment should have been created. Check it.
 ```bash
 which python
 # /home/rotarymars/projects/***/ball_detection/.direnv/python-3.12.6/bin/python
 ```
-次に、必要になるパッケージをインストールします。
-以下のrequirements.txtを作成しましょう。
+Next, install the packages you need.
+Create a requirements.txt with the following contents.
 ```
 ultralytics==8.3.32
 ```
-そして、次のように実行します。
+Then, execute it as follows.
 ```bash
 pip install -r requirements.txt
 ```
-しばらく待つと、インストールが完了するはずです。
+After a while, the installation should be complete.
 
-次に、ラベリングに必要なソフトを立ち上げるための準備をしましょう。
+Next, let's prepare for the software needed for labeling.
 
-label studioというものを使ってラベリングしていきます。
+We'll use label studio to label.
 
-現在のディレクトリの下にlabel_studioというディレクトリを作成します。
+Create a label_studio directory under the current directory.
 ```bash
 mkdir label_studio && pushd $_
 ```
-次のようなdocker-compose.ymlを作成します。
+Create a docker-compose.yml with the following contents.
 ```yaml
 version: "3.9"
 
@@ -75,82 +75,81 @@ services:
 volumes:
   label-studio-data:
 ```
-作成後、そのコンテナを立ち上げます。
+After creating it, launch the container.
 ```bash
 docker compose up -d
 ```
-初回時はコンテナのダウンロードにより起動に時間がかかりますが、2回目以降はより早く起動するはずです。
+The first time it is launched, it will take a while due to the download of the container, but the second time and later should start faster.
 
-もしコンテナを止めたいことがあれば、
+If you want to stop the container,
 ```bash
 docker compose down
 ```
-とします。
+Do it.
 
-それでは、一つ前のディレクトリに進みます。
+Then, go to the previous directory.
 ```bash
 popd
 ```
-次に、[localhost:8080](localhost:8080)にアクセスします。
+Next, access [localhost:8080](localhost:8080).
 
-次のような画面が出るはずです。
+You should see a screen like this.
 ![login](/assets/images/2025-02-24-label_studio_login_screen.png)
 
-ログインして、先に進みます。
+Login and proceed.
 
-次に、プロジェクトを作成しましょう。
+Next, create a project.
 ![create project](/assets/images/2025-02-24-label_studio_create_project.png)
 
-真ん中にあるCreate projectを選択し、プロジェクト名を決めて入力します。
+Select Create project in the middle, decide on a project name, and enter it.
 
-次に、上部のlabeling setupを選択し、"object detection with bounding boxes"を選択します。
+Next, select labeling setup at the top and select "object detection with bounding boxes".
 ![labeling setup](/assets/images/2025-02-24-label_studio_labeling_setup.png)
 
-ラベリングしたい項目を追加します。
+Add the item you want to label.
 ![add label](/assets/images/2025-02-24-label_studio_add_label.png)
 
-既存のラベルをバツボタンで削除し、新たに"face"というラベルを追加します。
+Delete the existing label with the X button and add a new label called "face".
 
-これらの操作が終わったら、右上の"save"ボタンを押して、保存します。
+After these operations are complete, press the "save" button in the upper right and save it.
 
-学習に使用する画像を集めます。
+Collect images to be used for learning.
 
-ぼくは、いらすとやから画像をダウンロードします(合計して顔の数が20個ほどになるようにしてください)。
+I'll download images from [irasutoya](https://www.irasutoya.com/) (please make sure the total number of faces is about 20).
 
-ダウンロードし終えたら、label studioの真ん中にあるgo to importを押して、インポートします。
+After downloading, press the go to import in the middle of label studio and import it.
 
 ![add picture](/assets/images/2025-02-24-label_studio_add_picture.png)
-importボタンを押して、操作を終えます。
+Press the import button and end the operation.
 
-いよいよラベリングの時間です。
+It's finally time for labeling.
 
-画面上部にある"label all tasks"という青いボタンを押します。
+Press the blue button "label all tasks" at the top of the screen.
 
-以下の動画のようにラベリングしましょう。
+Label as shown in the following video.
 
 <video src="/assets/images/2025-02-24-label_studio_labelling.mp4" controls=true width="100%"></video>
 
-submitボタンを押すと、次の画像が出てくるので、終わるまで続けましょう。
+Press the submit button and the next image will appear, so continue until it's done.
 
-終わったら、次はエクスポートします。
+When it's done, next is export.
 
-プロジェクトの最初ん画面に行きExportを押します。
+Go to the first screen of the project and press Export.
 
 ![export](/assets/images/2025-02-24-label_studio_export.png)
 
-YOLO Formatを選択して、Exportを押します。
+Select YOLO Format and press Export.
 
-ダウンロードされたzipファイルを展開します。
+Unzip the downloaded zip file.
 
-作業ディレクトリのルートに戻って、
+Go back to the root of the working directory and execute the following command.
 ```bash
 mkdir data
 ```
-とします。
 
-そして、展開したzipファイルを、data/exported_dataに移動します。
+Then, move the expanded zip file to data/exported_data.
 
-つまり、こうなるべきです。
+It should look like this.
 ```
 data
 └── exported_data
@@ -192,23 +191,23 @@ data
     └── notes.json
 
 ```
-画像等の名前は違って問題ありません。
+The names of the images are not important.
 
-いよいよ学習のための準備が始まります。
+It's finally time to prepare for learning.
 
-data/dataset.ymlを作成します。このとき、今回はラベリングするものの種類が１種類なので、問題ありませんが、複数種類ある場合はdata/exported_data/classes.txtと同じ順番で書くようにしましょう。
+Create a data/dataset.yml. This time, since there is only one type of thing to label, it's not a problem, but if there are multiple types, please write in the same order as data/exported_data/classes.txt.
 
 ```yaml
 train: train/
 val: valid/
 
-# クラスの個数（ラベリングの種類の個数）
+# Number of classes (number of types of labeling)
 nc: 1
 
 names: ["face"]
 ```
 
-data/random_copy.pyを作成します。これは、学習用の画像と学習過程の精度を評価するために使用する画像を分けます。
+Create a data/random_copy.py. This is used to separate the images for learning and the images used to evaluate the accuracy of the learning process.
 ```python
 #!/usr/bin/env python
 import os
@@ -241,35 +240,35 @@ os.system(f"cp {data_dir}/../classes.txt {train_data_dir}/classes.txt")
 os.system(f"cp {data_dir}/../classes.txt {test_data_dir}/classes.txt")
 os.system(f"cp {data_dir}/../classes.txt {test_data_dir}/classes.txt")
 ```
-実行権限を与えます。
+Give it execution permission.
 ```bash
 chmod u+x data/random_copy.py
 ```
 
-必要なディレクトリを作成します。
+Create the necessary directories.
 
-作業ディレクトリのルートに移動して、
+Move to the root of the working directory and execute the following command.
 ```bash
 mkdir -p data/{train,valid}/{images,labels}
 ```
-を実行して、その後data/random_copy.pyを実行します(cwdがdata/で実行します)。
+Execute the following command.
 ```bash
 ./random_copy.py
 ```
-次に、学習に使用するモデルをdata/にダウンロードします。
+Next, download the model to be used for learning to data/.
 
 ```bash
 curl -L -o {model_name}.pt "https://github.com/ultralytics/assets/releases/download/v8.3.0/{model_name}.pt"
 ```
-model_nameの部分は[こちら](https://github.com/ultralytics/ultralytics?tab=readme-ov-file)参照の上で選んでください。
+model_name is [here](https://github.com/ultralytics/ultralytics?tab=readme-ov-file), so please select it after referring to it.
 
-今回は、yolo11nを使用します
+This time, we'll use yolo11n.
 ```bash
 curl -L -o yolo11n.pt https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt
 ```
-実行するディレクトリを指定します。
+Specify the directory to be executed.
 
-プロジェクトのルートディレクトリの下に、setup_dirs.pyを作成します。
+Create a setup_dirs.py under the root directory of the project.
 ```python
 #!/usr/bin/env python
 import os
@@ -281,12 +280,12 @@ runs_dir = os.path.join(dirname, "runs")
 print(f'set up runs_dir to {runs_dir}')
 settings.update({'runs_dir': runs_dir})
 ```
-再び実行権限を付与して実行します。
+Give it execution permission again and execute it.
 ```bash
 chmod u+x setup_dirs.py
 ./setup_dirs.py
 ```
-いよいよ学習させていきます。
+It's finally time to learn.
 ```bash
 cd data
 yolo detect train \
@@ -294,28 +293,30 @@ yolo detect train \
   model=./yolo11n.pt \
   epochs=300 imgsz=640 device="cpu"
 ```
-今回は３００回学習させます。途中で学習の精度が上がらなくなれば、途中で中止されるはずです。
+This time, we'll learn 300 times. If the learning accuracy doesn't go up, it should be stopped in the middle.
 
-気長に待ちましょう。
+Please wait patiently.
 
-さて、終わったら、出力の最後の方に以下のように書かれたものがあると思います。
+By the way, the reason why I am using cpu to learn it is because my NVIDIA cuda driver is broken:)
+
+When it's done, you should see something like this at the end of the output.
 ```
 Results saved to /home/***/ball_detection/runs/detect/train
 ```
-このディレクトリに移動します。
+Go to this directory.
 ```bash
 cd /home/***/ball_detection/runs/detect/train
 cd weights
 ```
 
-今いるディレクトリに学習データが入っています(best.pt)
-これをルートにコピーします。
+There is learning data in the current directory (best.pt).
+Copy it to the root.
 ```bash
 cp best.pt ../../../../best.pt   
 ```
-実際に精度を確かめてみましょう。
+Let's actually check the accuracy.
 
-次のpythonスクリプトを作成します。(predict.py)
+Create a python script (predict.py).
 ```python
 import os
 import sys
@@ -345,20 +346,20 @@ print(results[0].names)
 ```
 ![testpic.png](/assets/images/2025-02-24-label_testpic.png)
 
-この画像で試してみましょう。
+Let's try it with this image.
 
 ```
 python predict.py testpic.png
 ```
-出力された数行の中で、以下の出力がありました。
+You should see the following output in the output.
 ```
 Results saved to /home/***/ball_detection/runs/predict/ball
 ```
-見てみましょう
+Let's see it.
 
 ![result](/assets/images/2025-02-24-label_result.png)
 
-とても正しく表示されています。すごいですね。
+It's displayed very accurately. It's amazing.
 
-# まとめ
-物体検出の中身まで理解しようとするととても大変ですが、触りだけであればすぐにできるのでより身近に感じてもらえればと思います。
+# Conclusion
+It's very difficult to understand the insides of object detection, but if you just touch it, it can be done quickly, so I hope you can feel it more closely.
