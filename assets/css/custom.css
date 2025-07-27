@@ -147,7 +147,7 @@
   left: 0;
   right: 0;
   height: 100px;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
 }
 
 .post-image img {
@@ -222,6 +222,11 @@
   color: white;
   background: var(--primary-color);
   transform: translateX(5px);
+}
+
+.post-preview a:focus,
+.post-preview a:hover {
+  color: white;
 }
 
 .post-read-more i {
@@ -502,16 +507,16 @@
   .category-title {
     font-size: 2rem;
   }
-  
+
   .category-description {
     font-size: 1rem;
   }
-  
+
   .posts-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .category-post-image {
     height: 180px;
   }
-} 
+}
