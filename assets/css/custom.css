@@ -148,6 +148,7 @@
   right: 0;
   height: 100px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  pointer-events: none;
 }
 
 .post-image img {
@@ -223,6 +224,11 @@
   color: white;
   background: var(--primary-color);
   transform: translateX(5px);
+}
+
+.post-preview .post-image,
+.post-preview .post-image:hover {
+  transition: all 0.5s;
 }
 
 .post-read-more i {
