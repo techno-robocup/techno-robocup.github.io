@@ -1,66 +1,75 @@
 ---
 layout: post
-title: "Development system"
+title: "開発体制"
 date: 2025-07-21 10:00:00 +0900
 tag: [robot, rotarymars's article, software]
 thumbnail-img: "/assets/images/2025-07-21-introducing.png"
 author: "rotarymars"
 ---
 
-Hello. I'm rotarymars.
+こんにちは。rotarymarsです。
 
-Recently, I've been writing a lot of articles related to the robot, so this time, I'd like to write about our team's development system.
+最近は機体に関連する記事ばっかりだったので、今回は雰囲気を変えて私達のチームの開発体制について書きたいと思っています。
 
-# Team structure
+# チームの構成
 
-Our team is structured as follows.
+私達のチームは以下のような構成になっています。
 
-| Role | Number (Total) | Who |
+| 役割 | 人数(延べ) | 誰 |
 | --- | --- | -- |
 | 機体 | 1 | ALPAKA |
 | 回路 | 2 | K10-K10, rotarymars |
 | ソフトウェア | 2 | K10-K10, rotarymars |
 | ブログ | 3 | ALPAKA, K10-K10, rotarymars |
 
-It's like this.
+という感じになっています。
 
-This means that on average, each member is responsible for `2.5` roles (we are looking for members).
+これを見ると平均してメンバー一人あたり`2個半`の役割を担っていることになっています(メンバー募集中です)。
 
-# Development system for the robot
-Since there is only one person involved in the development of the robot, we are working in the most convenient system for one person.
+# 機体の開発体制
+機体の開発に携わっている人が一人なため、幸か不幸か、一人で最もやりやすい体制で作業をしているようです。
 
-I'd like to be able to participate more in the future, but it seems difficult to edit the robot at the same time due to various data.
+今後はもう少し自分も関わっていけたら良いなとは思いつつも、機体を同時に編集するというのは色々とデータの都合上難しいのかなというところです。
 
-# Development system for the circuit
-Since we are doing it with two people, we are trying to make it possible to communicate with each other.
+# 回路の開発体制
+回路は二人でやっているので、二人の間で意思疎通できるようにしています。
 
-We use [kicad](https://www.kicad.org/) to design the circuit, so we upload the data to [github](https://github.com/).
+私達は[kicad](https://www.kicad.org/)を使って回路を設計しているため、そのデータを[github](https://github.com/)にアップロードしています。
 
-This way, the data that the two people worked on is reflected when pulled.
+これによってプルするだけで二人が作業したデータが反映されるようになっています。
 
-Personally, I'm not satisfied with the fact that I can't see where the edit was made in [kicad](https://www.kicad.org/) visually.
+個人的に残念なのは、[kicad](https://www.kicad.org/)だとどこが編集されたのかvisualで確認できないのが不満なところです。
 
-# Development system for the software
-The software is also done with [github](https://github.com/), so we can communicate with each other.
+余談ではありますが、機体の作成に使っている[freecad](https://www.freecad.org/index.php)だと[BIM Diff](https://wiki.freecad.org/BIM_Diff/en)と呼ばれるもので視覚的なdiffが見られるようです。
 
-Since the software is written in text, it is easier to see the diff than other development.
+# ソフトウェアの開発体制
+ソフトウェアも同様、二人の間で意思疎通ができるように[github](https://github.com/)を使っています。
 
-# Development system for the blog
-The blog is also managed with [github](https://github.com/).
+ソフトウェアは文字で書いているため、diffも見やすくなっていて他の開発よりもやりやすいです。
 
-We use [jekyll](https://jekyllrb.com/) to create the blog.
+ここでも余談ではありますが、[delta](https://github.com/dandavison/delta)コマンドを用いると、[github](https://github.com/)と同様にキャラクターごとのdiffを見ることができるようになります。
 
 ![delta](/assets/images/2025-07-21-delta.png)
 
-# Development system for the team
+こんな感じのものがローカルで見られると、便利ですよね。
 
-We use [atlassian](https://www.atlassian.com/) for task management.
+# ブログの開発体制
+ブログも、[github](https://github.com/)で内容を管理しています。
 
-This is a task management tool for realizing [agile software development](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%B8%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA), which lists tasks to be done by the team and makes it easier to estimate how much can be done within the deadline.
+私の周りには一から`html`と`CSS`を書いてとてもきれいなサイトを仕上げる人もいますが、私達は[jekyll](https://jekyllrb.com/)という静的サイトジェネレーターでブログを作成しています。
 
+確かにセットアップは面倒ですが、その後の便利さを考えると、考える余地のあるものだと思っています。
 
-# Conclusion
+# チームのタスク管理
+開発体制と言うと、使っているものよりもこれが最も重要なのではないでしょうか？
 
-This time, I've written a short article, but I think the task management for the team is not well known, so I hope you'll try it if you're interested.
+私達は、[atlassian](https://www.atlassian.com/)の[jira](https://www.atlassian.com/software/jira)を使ってタスク管理をしています。
 
-Thank you for reading.
+これは、[アジャイルソフトウェア開発](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%B8%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA)を実現するためのタスク管理ツールで、チームでやるべきタスクをリストアップしつつ期限内にどれだけ終えられるかの見積もりを行いやすくするものになっています。
+
+これによってチーム内で期限を決めてタスクを細分化するところさえすれば、一週間でこなせるタスクの見積もりをしやすくなり、目指すものが期限内に終えられるかどうかの見積もりをしやすくしています。
+
+# まとめ
+今回は手短な記事にはなってしまいましたが、特に最後のチームでのタスク管理はあまり知られていないものだと思うので、ぜひ興味があれば試してほしいと思います。
+
+ありがとうございました。
