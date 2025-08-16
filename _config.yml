@@ -36,7 +36,7 @@ plugins:
 
 gtag: "G-CT437Q24DM"
 
-avatar: "/assets/images/avatar-icon.jpg"
+avatar: "/assets/images/robot-03.jpg"
 
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
 round-avatar: true
