@@ -1,43 +1,45 @@
 ---
 layout: post
-title:  "ブログを始めました"
+title:  "We started our blog"
 date:   2024-07-08 07:00:00 +0900
 tag: [free-talk, rotarymars's article]
 thumbnail-img: "/assets/images/thumb.png"
 author: "rotarymars"
 ---
-こんにちは。TECHNOの rotarymars です。<br>
-今日は、ブログの開設を記念して、グループメンバの紹介と、自己紹介をしていきたいと思います。
+Hello. I'm rotarymars from TECHNO.
+
+Today, I'd like to introduce our team members and myself to celebrate the launch of our blog.
+
+I would like to introduce our team members.
 
 # ROTARYMARS
-### 主な担当
-- センサー周りのプログラム
-- 回路
+### Main responsibilities
+- Sensor-related programming
+- Circuit design
 
-### 軽めな自己紹介
-このチームでプログラムや回路を今後担当していく予定のROTARYMARSです。<br>
-回路についての知識が全く無いので、今勉強に励んでいるところです。<br>
-勉強に良いサイトなどがあれば絶賛募集中です！
+### Brief self-introduction
+I'm ROTARYMARS, who will be responsible for programming and circuit design in this team.
+I'm currently learning about circuits, and I'm looking for good sites to learn from.
 
 # NISHIKAZU
-### 主な担当
-- 本体のプログラム
+### Main responsibilities
+- Main body programming
 
-NISHIKAZU です。主にプログラミングなどのソフトウェア系を担当しています。
+I'm NISHIKAZU, who will be responsible for software-related tasks in this team.
 
-夜型で朝は苦手なので、夜に色々と活動しています。プログラムはとりあえず書いて動かしてみるタイプです。
+I'm a night owl, so I'm active at night. I'm a type of programmer who writes and runs programs first.
 
-数学より理科です。
+I'm better at science than math.
 
 # ALPAKA
 
-### 主な担当
-- ハード作り
+### Main responsibilities
+- Hardware design
 
-ハード担当のALPAKAです。
+I'm ALPAKA, who will be responsible for hardware design in this team.
 
-回路を勉強している最中で、
+I'm currently learning about circuits, and I'm looking for good sites to learn from.
 
-ハード作りや回路の勉強は試行回数が一番大事だと信じています。
+I believe that the number of trials is the most important for hardware design and circuit learning.
 
-あと、音感は天性の才能だと確信しています
+I'm sure that I have a natural talent for music.
