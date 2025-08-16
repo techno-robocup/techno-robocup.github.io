@@ -1,37 +1,38 @@
 ---
 layout: post
-title: "ライントレースのプログラム"
+title: "Line tracing program"
 date: 2025-05-11 10:00:00 +0900
 tag: [robot, rotarymars's article, line-trace, program]
 thumbnail-img: "/assets/images/robot-02.jpg"
 author: "rotarymars"
 ---
-こんにちは。rotarymarsです。
+Hello. I'm rotarymars.
 
-最初は余談になってしまいますが、ブログの更新頻度を改めて決定したのでお伝えしたいと思います。
+First of all, I'd like to announce the update frequency of the blog again.
 
-| ALPAKA | その月を3で割ったあまりが0もしくは1 |
-| K10-K10 | その月を3で割ったあまりが0もしくは2 |
-| rotarymars | その月を3で割ったあまりが1もしくは2 |
+| ALPAKA | The remainder when the month is divided by 3 is 0 or 1 |
+| K10-K10 | The remainder when the month is divided by 3 is 0 or 2 |
+| rotarymars | The remainder when the month is divided by 3 is 1 or 2 |
 
-これらの月に1度は記事を更新するようにしていきたいと思いますので、よろしくおねがいします。
+We will update the article once a month in these months, so please look forward to us.
 
-# 今回の記事の内容について
-今回は、私達が現在検討しているライントレースプログラムについて書いていきたいと思っています。
+# About the content of this article
+This time, I'd like to write about the line tracing program that we are currently considering.
 
-プログラムは、[この時点](https://github.com/techno-robocup/robocup2025_raspberrypi_program/tree/2aa6a78f848aa399d7de8e9522e22457549cda2c)でのものについて解説していきたいと思いますので、よろしくおねがいします。
+The program is about [this point](https://github.com/techno-robocup/robocup2025_raspberrypi_program/tree/2aa6a78f848aa399d7de8e9522e22457549cda2c).
 
-# まず何を使ってライントレースをするのか
-私達は、昨年に引き続き、カメラを用いたライントレースを実行したいと考えています。
+# First, what will we use to do line tracing?
+We want to continue to use the camera for line tracing this year.
 
-具体的には、Raspberrypiに[このような](https://www.marutsu.co.jp/pc/i/2582866/?srsltid=AfmBOopbmXQJaQxBT3iPoE_9YWJHDGGlkC7d1VmHUMrUX68OTDen-XPl)カメラを接続し、画像を取得してライントレースをしていきたいと考えています。
+Specifically, we want to connect a camera like [this](https://www.marutsu.co.jp/pc/i/2582866/?srsltid=AfmBOopbmXQJaQxBT3iPoE_9YWJHDGGlkC7d1VmHUMrUX68OTDen-XPl) to the Raspberrypi and get the image to do line tracing.
 
-まだ機体が出来上がっていないので実際にテスト走行はできていないということだけお伝えしておきたいと思います。
+I just want to let you know that we haven't been able to test the actual run because the robot hasn't been completed yet.
 
-# 実際のプログラム
-かなり長々としたプログラムになってしまったので段階的に貼り付けていきたいと思います。また、とてもきたないので、読みにくいかもしれません(いつかクラスにしたいと思いながら何もしていません)。
+# Actual program
+The program is quite long, so I'll paste it step by step.
+Also, it's very ugly, so it may be difficult to read (I want to make a class someday, but I haven't done anything yet).
 
-なお、今回は特にライントレースに関係しているmodules/settings.pyを見ていきます。
+By the way, this time, we'll look at modules/settings.py, which is particularly related to line tracing.
 
 ```python
 from libcamera import controls
@@ -99,131 +100,131 @@ def Linetrace_Camera_Pre_callback(request):
     if DEBUG_MODE:
       print(f"Error in line tracing: {e}")
 ```
-とりあえず順に見ていきましょう。
+Let's look at it step by step.
 ## Line 1 ~ 6
-見てのとおりですね。必要なライブラリ（Pythonではモデュールというらしいですが）をインクルード（Pythonではインポートというらしいですが）しています。
+As you can see, we're including the necessary libraries (in Python, they're called modules) and importing them.
 ## Line 8 ~
-いよいよ解説らしいものができます。
+It's finally time for the explanation.
 
-まずprecallbackとは何なのか、解説したいと思います。
+First, let's explain what precallback is.
 
-Raspberrypiでは、`rpicam-hello`というコマンドを用いることでカメラ画像のプレビューが可能になっています（コマンド名が違うかもしれません）。
+In Raspberrypi, you can preview the camera image by using the `rpicam-hello` command (the command name may be different).
 
-そのコマンドは、画像の取得リクエストを投げ、その後画像を表示するということをしているプログラムです。
+The command is a program that sends an image acquisition request and then displays the image.
 
-その時に使われている物が、`picamera2`というライブラリ(モジュール)です。
+The thing used at that time is the `picamera2` library (module).
 
-具体的には、カメラオブジェクトを生成する時点で、`precallback function`というものを指定できるようになっています。
+Specifically, you can specify a `precallback function` when generating the camera object.
 
-それは、デフォルトでは`None`になっていて、画像を取得した時のフックが何もない状態になっています。
+It is `None` by default, and there is no hook when the image is acquired.
 
-しかし、ここに関数を登録することによって、その関数の第一引数(この場合は`request`)にオブジェクトが渡されます。
+However, by registering a function here, the object is passed to the first argument of the function (in this case, `request`).
 
-これを`MappedArray(request, "lores").array`とすることによって、`request`に格納されている画像データが`numpy`の配列、`lores`画質で取得できます。
+By doing this, the image data stored in `request` can be obtained as a `numpy` array, `lores` quality.
 
-これによって画像が必要になるたびに`capture`することを回避でき、高速に画像を取得することができます(中身の処理が重いと関数自体の処理速度が下がるので何とも言えませんが、何もしなければ20msec/frameくらいで取得できます)。
+This way, we can avoid capturing the image every time it is needed, and we can get the image faster (the processing inside the function is heavy, so I don't know how to say it, but if we don't do anything, we can get it at about 20msec/frame).
 
-ただし、万が一その関数にCPUリソースを大きく消費する操作などが含まれている場合、使っていないときにカメラを停止しなければ、大きく電力を消費することになります。
+However, if there is an operation that consumes a lot of CPU resources in that function, if the camera is not stopped when it is not in use, it will consume a lot of power.
 
-そのため、使うとき、使わないときで分けてカメラをスタート、ストップするべきです。
+Therefore, the camera should be started and stopped separately when it is in use and not in use.
 
 ### Line 9 ~ 10
-見てのとおりです。DEBUG_MODEが有効な時に関数が呼ばれたUNIX TIMEをprintしています。
+As you can see, when DEBUG_MODE is enabled, the UNIX TIME when the function is called is printed.
 ### Line 12
-グローバル変数を宣言しています。
+Global variables are declared.
 
-ここで使われている変数について話しておきます。
+Let's talk about the variables used here.
 
-| 変数名 | 使用用途 |
+| Variable name | Usage |
 | --- | --- |
-| lastblackline | 前回の黒線の中心座標 |
-| slope | 黒線の傾き |
+| lastblackline | The center coordinate of the previous black line |
+| slope | The slope of the black line |
 
-これらをグローバル変数にすることで、mainプロセスからもアクセスできるようにしています。
+By making these global variables, we can access them from the main process.
 
 ### Line 14 ~ 22
-とりあえずいったんすべての例外を無視します。
+Let's ignore all exceptions for now.
 
-画像を変数`image`にnumpy配列として格納します。
+The image is stored in the variable `image` as a numpy array.
 
-`camera_x`と`camera_y`にカメラの縦横の画素数を格納します。
+`camera_x` and `camera_y` store the vertical and horizontal number of pixels of the camera.
 
-そして、DEBUG_MODEが有効な時には、生画像を保存します。
+And when DEBUG_MODE is enabled, the original image is saved.
 
 ### Line 24 ~ 30
-画像をいったんグレースケールに変換します。これは画像をその後二値化したいためです。
+The image is converted to grayscale. This is because we want to binarize the image later.
 
-26行目で、binary_imageに`Black_White_Threshold`を閾値として二値化した画像を格納します。黒に近いものがが白色、白に近いものが黒色になります。
+In line 26, the image binarized with `Black_White_Threshold` as the threshold is stored in `binary_image`. The ones that are close to black become white, and the ones that are close to white become black.
 
-ここで余談にはなりますが、グレースケールに変換する理由として、カラー画像をそのまま白黒に二値化することができないためです。そのまま関数にかけてしまうと、それぞれの色(r, g, b)がそれぞれの閾値として二値化されてしまい、彩度の高い(?)画像が出来上がってしまいます(言葉で説明することは難しいので実際に見てみることをお勧めします)。
+Here's a side note, but the reason for converting to grayscale is that we can't binarize a color image directly into black and white. If we apply it directly to the function, each color (r, g, b) will be binarized as each threshold, and a highly saturated (?) image will be created (I recommend actually seeing it for explanation).
 
-そして、二値化した画像を`DEBUG_MODE`が有効な時は保存します。
+And when `DEBUG_MODE` is enabled, the binarized image is saved.
 
 ### Line 32 ~ 35
-ここでは、二値化した画像に含まれているノイズを除去します。
+Here, we remove the noise contained in the binarized image.
 
-具体的にそれぞれの関数がどのようなことをしているのか解説します。
+Let's explain how each function is doing.
 
 #### kernel = np.ones((3, 3), np.uint8)
-これは、3x3の`numpy`二次元配列を生成します。要素はすべて`1`です。
+This creates a 3x3 `numpy` two-dimensional array. All elements are `1`.
 
 #### binary_image = cv2.erode(binary_image, kernel, iterations=2)
-先ほど作成した`kernel`を用いて、binary_imageのノイズを除去します。具体的に、`kernel`が画像全体を移動し、もし`kernel`の範囲内に含まれるピクセルのうち一つでも黒色(0)であれば、その中心のピクセルを黒色(0)に変換します。
+Using the `kernel` we just created, we remove the noise from `binary_image`. Specifically, if one of the pixels in the range of `kernel` is black (0), the center pixel is converted to black (0).
 
-これによって、白色の塊が小さくなり、ノイズが除去されます。
+This way, the white blocks become smaller and the noise is removed.
 
-なお、黒、白の判定は`kernel`の各要素の数字を下回るか否かをもって判断されます。
+By the way, the black and white determination is made by whether the number of each element of `kernel` is below or above.
 
-`iterations=2`なので、これを2回実行します。
+Since `iterations=2`, this is executed twice.
 #### binary_image = cv2.dilate(binary_image, kernel, iterations=3)
-これは、`erode`の逆の操作を行います。つまり、黒色の塊が大きくなります。
+This is the opposite of `erode`. That is, the black blocks become larger.
 
-具体的には、一つでも白色(1)が含まれている場合、その中心のピクセルを白色(1)に変換します。
+Specifically, if one of the pixels in the range of `kernel` is white (1), the center pixel is converted to white (1).
 
-`iterations=3`なので、これを3回実行します。
+Since `iterations=3`, this is executed three times.
 
 ### Line 36
-ここでは、緑色のマークを認識、相対的な位置の判定を実行しています。あとで関数を解説します。
+Here, we recognize the green marks, and perform the relative position determination. I'll explain the function later.
 
 ### Line 37 ~ 45
-`contours`にcv2の関数を用いて白と黒の境界線を認識しています。
+`contours` is recognized using the cv2 function.
 
-その後、自分で作成した`find_best_contour`関数を用いて、最も適切な輪郭を取得し、`best_contour`に格納します。
+Then, using the `find_best_contour` function we created ourselves, we get the most appropriate contour and store it in `best_contour`.
 
 ### Line 47 ~ 50
-ここでは、`best_contour`の中心座標を取得しています。
+Here, we get the center coordinates of `best_contour`.
 
-best_contourがない場合はそのまま処理を終えています。
+If `best_contour` is not found, the process is ended as is.
 
 ### Line 53 ~ 56
-ここでは、`lastblackline`と`slope`を更新しています。
+Here, we update `lastblackline` and `slope`.
 
-`lastblackline`とは、`blackline`のx座標を表しており、`best_contour`を探すのに用いています。
+`lastblackline` represents the x-coordinate of `blackline`, and is used to find `best_contour`.
 
-`slope`は黒線の傾きを出しています。
+`slope` is the slope of the black line.
 
-具体的には、画像の最も下の中心から`best_contour`の中心までの傾きを出しています。
+Specifically, the slope from the center of the bottom of the image to the center of `best_contour` is calculated.
 
-ちなみに、`with ..._LOCK:`は、`..._LOCK`というオブジェクトをロックしています。
+By the way, `with ..._LOCK:` is locking the `..._LOCK` object.
 
-ロックとは、あるプロセスがある変数を使用している時、他のプロセスがその変数を使用することを防ぐためのものです。
+Locking is a mechanism to prevent other processes from using a variable when a certain process is using it.
 
-これによって、この変数への書き込みがアトミック（排他的）になります（同時編集されておかしなことにならないことが保証される。読み取り時にも設定する必要がある。）。
+This way, the writing to this variable becomes atomic (exclusive) (it is guaranteed that it will not become strange if it is edited at the same time. It is also necessary to set it when reading).
 
-※あまり詳しくないですが、おそらくOSレベルでの操作になるため、あまり乱用しないほうが高速に処理できると思います。
+※I'm not very familiar with it, but I think it's probably an OS-level operation, so it's better not to use it too much to be able to process faster.
 
 ### Line 57 ~
-`DEBUG_MODE`が有効な時は画像を保存してくれます。
+When `DEBUG_MODE` is enabled, the image is saved.
 
-あとは、例外を処理しています。簡単ですね。
+And then, we're handling exceptions. It's simple, isn't it?
 
-# 最後に
-おおよそプログラムがどのように動いているのか理解していただけたら幸いです。緑マークを検出する関数で引数で渡された画像を直接書き換えてしまっているところだけ早めに治したいと思っています。
+# Finally
+I hope you understand how the program is working. I want to fix the part where the image passed as an argument to the function that detects the green mark is directly overwritten as soon as possible.
 
-今回はすべての関数の解説は（時間があまりなかったので）書けていませんが、おおよそやっていることがわかっていただければ嬉しいです。
+This time, I haven't been able to explain all the functions (because I didn't have much time), but I hope you understand what I'm doing.
 
-チームメンバーにもこのブログを読んでプログラムの内容について理解してほしいなと思っています。
+I want the team members to read this blog and understand the contents of the program.
 
-ありがとうございました。
+Thank you.
 
-↑↑僕もK10-K10に見習い最後につけてみようと思いました。↑↑
+↑↑I also want to follow K10-K10, so I'll add it at the end.↑↑
