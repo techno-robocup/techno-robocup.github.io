@@ -5,10 +5,10 @@
   <div id="nav-search-exit" title="Exit search">✕</div>
   <input type="text" id="nav-search-input" placeholder="Search">
   <ul id="search-results-container"></ul>
-  
+
   <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
   <script>
-    var searchjson = '[ \
+    var searchjson = `[ \
       {% for post in site.posts %} \
         { \
           "title"    : "{% if post.title != "" %}{{ post.title | strip_html | escape | replace: "\", "\\\"  }}{% else %}{{ post.excerpt | strip_html | escape | strip | replace: "\", "\\\" }}{%endif%}", \
@@ -27,7 +27,7 @@
           "date"     : "{{ page.date | date: '%B %e, %Y' | default: "January 1, 1970" }}" \
         }{% unless forloop.last %},{% endunless %} \
       {% endif %}{% endfor %} \
-    ]';
+    ]`;
     searchjson = JSON.parse(searchjson);
 
     var sjs = SimpleJekyllSearch({
