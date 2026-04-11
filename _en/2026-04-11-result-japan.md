@@ -4,7 +4,7 @@ title: "Japan Competition Results and Next Year's Plans"
 date: 2026-04-11 08:00:00 +0000
 
 tag: [robot, k10-k10's article]
-thumbnail-img: "/assets/images/robot-japan.jpg"
+thumbnail-img: "/assets/images/robot_japan.jpg"
 author: "k10-k10"
 ---
 
