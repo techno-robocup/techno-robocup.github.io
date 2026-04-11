@@ -104,7 +104,7 @@ jobs:
           script: |
             const previewBase = "${{ needs.deploy_preview.outputs.page_url }}";
             const prNumber = context.payload.pull_request.number;
-            const previewPath = `${{ env.PR_PREVIEW_PATH_PREFIX }}${prNumber}/`;
+            const previewPath = `${process.env.PR_PREVIEW_PATH_PREFIX}${prNumber}/`;
             let previewUrl;
             try {
               previewUrl = new URL(previewPath, previewBase).toString();
