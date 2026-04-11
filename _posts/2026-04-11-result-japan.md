@@ -21,7 +21,7 @@ We finished in 3rd place.
 We also won the "Best Presentation" award!
 
 Here is the presentation we made for the competition (sorry, it's only available in Japanese):
-![Presentation](/assets/images/poster.pdf)
+[Presentation (PDF)](/assets/images/poster.pdf)
 
 # Robot and Programs
 
