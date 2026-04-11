@@ -100,7 +100,7 @@ jobs:
         with:
           script: |
             const previewBase = "${{ needs.deploy_preview.outputs.page_url }}";
-            const previewUrl = new URL(`pr-preview/pr-${context.issue.number}/`, previewBase).toString();
+            const previewUrl = new URL(`/pr-preview/pr-${context.issue.number}/`, previewBase).toString();
             const body = `<!-- pr-preview-url -->\n🚀 Preview deployed: ${previewUrl}`;
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
