@@ -23,7 +23,7 @@ permissions:
   id-token: write
 
 env:
-  PR_PREVIEW_BASE_PATH: /pr-preview/pr-
+  PR_PREVIEW_PATH_PREFIX: /pr-preview/pr-
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -51,7 +51,7 @@ jobs:
         # Outputs to the './_site' directory by default
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            bundle exec jekyll build --config _config.yml,_config_github_pages.yml --baseurl "${{ env.PR_PREVIEW_BASE_PATH }}${{ github.event.pull_request.number }}"
+            bundle exec jekyll build --config _config.yml,_config_github_pages.yml --baseurl "${{ env.PR_PREVIEW_PATH_PREFIX }}${{ github.event.pull_request.number }}"
           else
             bundle exec jekyll build --config _config.yml,_config_github_pages.yml
           fi
@@ -103,7 +103,8 @@ jobs:
         with:
           script: |
             const previewBase = "${{ needs.deploy_preview.outputs.page_url }}";
-            const previewPath = `${{ env.PR_PREVIEW_BASE_PATH }}${context.issue.number}/`;
+            const prNumber = context.payload.pull_request.number;
+            const previewPath = `${{ env.PR_PREVIEW_PATH_PREFIX }}${prNumber}/`;
             let previewUrl;
             try {
               previewUrl = new URL(previewPath, previewBase).toString();
