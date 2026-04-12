@@ -58,21 +58,21 @@ jobs:
               mkdir -p "_site/assets"
               cp -a "_site$preview_path/assets/." "_site/assets/"
             fi
-            cat <<'EOF' > _site/index.html
-            <!doctype html>
-            <html lang="en">
-            <head>
-              <meta charset="utf-8">
-              <meta http-equiv="refresh" content="0; url=__PREVIEW_PATH__/">
-              <link rel="canonical" href="__PREVIEW_PATH__/">
-              <title>Redirecting…</title>
-            </head>
-            <body>
-              <a href="__PREVIEW_PATH__/">Continue to preview</a>
-            </body>
-            </html>
-            EOF
-            sed -i "s|__PREVIEW_PATH__|${preview_path}|g" _site/index.html
+            {
+              printf '%s\n' '<!doctype html>'
+              printf '%s\n' '<html lang="en">'
+              printf '%s\n' '<head>'
+              printf '%s\n' '  <meta charset="utf-8">'
+              printf '%s\n' "  <meta http-equiv=\"refresh\" content=\"0; url=${preview_path}/\">"
+              printf '%s\n' "  <link rel=\"canonical\" href=\"${preview_path}/\">"
+              printf '%s\n' '  <title>Redirecting…</title>'
+              printf '%s\n' '</head>'
+              printf '%s\n' '<body>'
+              printf '%s\n' '  <p>Redirecting to the PR preview…</p>'
+              printf '%s\n' "  <a href=\"${preview_path}/\">Continue to preview</a>"
+              printf '%s\n' '</body>'
+              printf '%s\n' '</html>'
+            } > _site/index.html
           else
             bundle exec jekyll build --config _config.yml,_config_github_pages.yml
           fi
