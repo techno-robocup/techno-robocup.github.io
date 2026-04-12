@@ -54,7 +54,11 @@ jobs:
             preview_path="${{ env.PR_PREVIEW_PATH_PREFIX }}${{ github.event.pull_request.number }}"
             bundle exec jekyll build --config _config.yml,_config_github_pages.yml --baseurl "$preview_path" --destination "_site$preview_path"
             if [ -d "_site$preview_path/assets" ]; then
-              rm -rf "_site/assets"
+              # Mirror assets to root to keep root-relative media paths working in preview pages.
+              assets_mirror_dir="_site/assets"
+              if [ "$assets_mirror_dir" = "_site/assets" ]; then
+                rm -rf "$assets_mirror_dir"
+              fi
               mkdir -p "_site/assets"
               cp -a "_site$preview_path/assets/." "_site/assets/"
             fi
