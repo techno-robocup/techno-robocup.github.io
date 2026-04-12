@@ -55,28 +55,10 @@ jobs:
             bundle exec jekyll build --config _config.yml,_config_github_pages.yml --baseurl "$preview_path" --destination "_site$preview_path"
             if [ -d "_site$preview_path/assets" ]; then
               # Mirror assets to root to keep root-relative media paths working in preview pages.
-              assets_mirror_dir="_site/assets"
-              if [ "$assets_mirror_dir" = "_site/assets" ]; then
-                rm -rf "$assets_mirror_dir"
-              fi
+              rm -rf "_site/assets"
               mkdir -p "_site/assets"
               cp -a "_site$preview_path/assets/." "_site/assets/"
             fi
-            {
-              printf '%s\n' '<!doctype html>'
-              printf '%s\n' '<html lang="en">'
-              printf '%s\n' '<head>'
-              printf '%s\n' '  <meta charset="utf-8">'
-              printf '%s\n' "  <meta http-equiv=\"refresh\" content=\"0; url=${preview_path}/\">"
-              printf '%s\n' "  <link rel=\"canonical\" href=\"${preview_path}/\">"
-              printf '%s\n' '  <title>Redirecting…</title>'
-              printf '%s\n' '</head>'
-              printf '%s\n' '<body>'
-              printf '%s\n' '  <p>Redirecting to the PR preview…</p>'
-              printf '%s\n' "  <a href=\"${preview_path}/\">Continue to preview</a>"
-              printf '%s\n' '</body>'
-              printf '%s\n' '</html>'
-            } > _site/index.html
           else
             bundle exec jekyll build --config _config.yml,_config_github_pages.yml
           fi
