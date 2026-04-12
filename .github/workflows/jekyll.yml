@@ -53,6 +53,24 @@ jobs:
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             preview_path="${{ env.PR_PREVIEW_PATH_PREFIX }}${{ github.event.pull_request.number }}"
             bundle exec jekyll build --config _config.yml,_config_github_pages.yml --baseurl "$preview_path" --destination "_site$preview_path"
+            if [ -d "_site$preview_path/assets" ]; then
+              mkdir -p "_site/assets"
+              cp -a "_site$preview_path/assets/." "_site/assets/"
+            fi
+            cat <<EOF > _site/index.html
+            <!doctype html>
+            <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta http-equiv="refresh" content="0; url=${preview_path}/">
+              <link rel="canonical" href="${preview_path}/">
+              <title>Redirecting…</title>
+            </head>
+            <body>
+              <a href="${preview_path}/">Continue to preview</a>
+            </body>
+            </html>
+            EOF
           else
             bundle exec jekyll build --config _config.yml,_config_github_pages.yml
           fi
