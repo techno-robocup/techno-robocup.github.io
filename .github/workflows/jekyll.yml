@@ -51,7 +51,8 @@ jobs:
         # Outputs to the './_site' directory by default
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            bundle exec jekyll build --config _config.yml,_config_github_pages.yml --baseurl "${{ env.PR_PREVIEW_PATH_PREFIX }}${{ github.event.pull_request.number }}"
+            preview_path="${{ env.PR_PREVIEW_PATH_PREFIX }}${{ github.event.pull_request.number }}"
+            bundle exec jekyll build --config _config.yml,_config_github_pages.yml --baseurl "$preview_path" --destination "_site$preview_path"
           else
             bundle exec jekyll build --config _config.yml,_config_github_pages.yml
           fi
