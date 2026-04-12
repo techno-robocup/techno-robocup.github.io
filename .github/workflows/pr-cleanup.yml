@@ -1,0 +1,88 @@
+name: PR Preview Cleanup
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Delete preview directory for closed PR
+        run: |
+          PR_DIR="pr-previews/PR_${{ github.event.pull_request.number }}"
+          if [ -d "$PR_DIR" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git rm -rf "$PR_DIR"
+            git commit -m "chore: remove preview for PR #${{ github.event.pull_request.number }}"
+            git fetch origin gh-pages
+            git push --force-with-lease
+          else
+            echo "No preview directory found for PR #${{ github.event.pull_request.number }}, skipping."
+          fi
+
+      - name: Remove orphaned preview directories
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const core = require('@actions/core');
+            const fs = require('fs');
+            const { execSync } = require('child_process');
+
+            if (!fs.existsSync('pr-previews')) {
+              console.log('No pr-previews directory, skipping orphan cleanup.');
+              return;
+            }
+
+            const entries = fs.readdirSync('pr-previews');
+            const toRemove = [];
+
+            for (const entry of entries) {
+              const match = entry.match(/^PR_(\d+)$/);
+              if (!match) continue;
+              const prNumber = parseInt(match[1], 10);
+
+              try {
+                const { data: pr } = await github.rest.pulls.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                });
+                if (pr.state === 'closed') {
+                  toRemove.push(entry);
+                }
+              } catch (err) {
+                if (err.status === 404) {
+                  toRemove.push(entry);
+                } else {
+                  core.warning(`Could not fetch state for PR #${prNumber}: ${err.message}`);
+                }
+              }
+            }
+
+            if (toRemove.length === 0) {
+              console.log('No orphaned previews found.');
+              return;
+            }
+
+            execSync('git config user.name "github-actions[bot]"');
+            execSync('git config user.email "github-actions[bot]@users.noreply.github.com"');
+
+            for (const dir of toRemove) {
+              console.log(`Removing orphaned preview: pr-previews/${dir}`);
+              execSync(`git rm -rf "pr-previews/${dir}"`);
+            }
+
+            execSync(`git commit -m "chore: remove ${toRemove.length} orphaned PR preview(s)"`);
+            execSync('git fetch origin gh-pages');
+            execSync('git push --force-with-lease');
