@@ -5,6 +5,7 @@ date: 2026-03-14 10:00:00 +0900
 tag: [robot, rotarymars's article, visit]
 thumbnail-img: "/assets/images/20260314/PXL_20260216_102525311.jpg"
 author: "rotarymars"
+lang: en
 ---
 
 Hi!

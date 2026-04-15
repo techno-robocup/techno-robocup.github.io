@@ -5,6 +5,7 @@ date: 2024-09-07 12:00:00 +0900
 tag: [robot,EV3, nishikazu's article]
 thumbnail-img: "/assets/images/robot.jpg"
 author: "nishikazu"
+lang: en
 ---
 
 # Overview

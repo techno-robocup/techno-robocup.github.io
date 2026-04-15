@@ -5,6 +5,7 @@ date: 2025-07-21 10:00:00 +0900
 tag: [robot, rotarymars's article, software]
 thumbnail-img: "/assets/images/2025-07-21-introducing.png"
 author: "rotarymars"
+lang: en
 ---
 
 Hello. I'm rotarymars.
