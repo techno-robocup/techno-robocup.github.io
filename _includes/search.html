@@ -6,10 +6,13 @@
   <input type="text" id="nav-search-input" placeholder="Search">
   <ul id="search-results-container"></ul>
 
+  {% assign current_lang = page.lang | default: "en" %}
+
   <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
   <script>
     var searchjson = `[ \
-      {% for post in site.posts %} \
+      \
+      {% for post in site[current_lang] %} \
         { \
           "title"    : "{% if post.title != "" %}{{ post.title | strip_html | escape | replace: "\", "\\\"  }}{% else %}{{ post.excerpt | strip_html | escape | strip | replace: "\", "\\\" }}{%endif%}", \
           "desc"     : "{% if post.title != "" %}{{ post.title | strip_html | escape | replace: "\", "\\\" }}{% else %}{{ post.excerpt | strip_html | escape | strip | replace: "\", "\\\" }}{%endif%}", \
@@ -18,16 +21,20 @@
           "date"     : "{{ post.date | date: "%B %e, %Y" | default: "January 1, 1970" }}" \
         }, \
       {% endfor %} \
-      {% for page in site.html_pages %}{% if page.title != "{title}" and page.title != "404 - Page not found" %} \
+      \
+      {% for page in site.html_pages %}{% if page.title != "{title}" and page.title != "404 - Page not found" and page.lang == current_lang %} \
         { \
           "title"    : "{% if page.title != "" %}{{ page.title | strip_html | escape }}{% else %}{{ page.excerpt | strip_html | escape | strip }}{% endif %}", \
           "desc"     : "{% if page.title != "" %}{{ page.title | strip_html | escape }}{% else %}{{ page.excerpt | strip_html | escape | strip }}{% endif %}", \
           "category" : "{% if page.tags %}{{ page.tags | join: \', \' }}{% else %}page{% endif %}", \
-          "url"      : "{{ site.baseurl | regex_replace: '^/$', '' }}{ page.url }}", \
+          "url"      : "{{ site.baseurl | regex_replace: '^/$', '' }}{{ page.url }}", \
           "date"     : "{{ page.date | date: '%B %e, %Y' | default: "January 1, 1970" }}" \
-        }{% unless forloop.last %},{% endunless %} \
+        }, \
       {% endif %}{% endfor %} \
     ]`;
+    
+    // 4. Jekyllのループで最後に残ってしまう余分なカンマを削除してJSONエラーを防ぐ
+    searchjson = searchjson.replace(/,\s*\]$/, ']');
     searchjson = JSON.parse(searchjson);
 
     var sjs = SimpleJekyllSearch({

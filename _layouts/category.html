@@ -4,6 +4,11 @@ layout: page
 
 {{ content }}
 
+{% assign current_lang = page.lang | default: "en" %}
+{% assign category = page.category | default: page.title %}
+
+{% assign posts = site[current_lang] | where_exp: "item", "item.categories contains category or item.category == category" %}
+
 <div class="category-header">
   <h1 class="category-title">{{ page.title }}</h1>
   {% if page.description %}
@@ -12,9 +17,6 @@ layout: page
 </div>
 
 <div class="category-posts">
-  {% assign category = page.category | default: page.title %}
-  {% assign posts = site.categories[category] %}
-  
   {% if posts.size > 0 %}
     <div class="posts-grid">
       {% for post in posts %}
@@ -47,7 +49,8 @@ layout: page
             
             <div class="category-post-tags">
               {% for tag in post.tags %}
-                <a href="{{ '/tags' | relative_url }}#{{- tag -}}" class="tag-item">{{ tag }}</a>
+                {% assign tag_base_url = '/' | append: current_lang | append: '/tags' %}
+                <a href="{{ tag_base_url | relative_url }}#{{- tag -}}" class="tag-item">{{ tag }}</a>
               {% endfor %}
             </div>
           </div>
@@ -59,4 +62,4 @@ layout: page
       <p>No posts found in this category.</p>
     </div>
   {% endif %}
-</div> 
+</div>
