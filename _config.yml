@@ -80,6 +80,15 @@ paginate: 5
 kramdown:
   input: GFM
 
+# Collections for multi-language support
+collections:
+  en:
+    output: true
+    permalink: /en/:name/
+  ja:
+    output: true
+    permalink: /ja/:name/
+
 # Default YAML values (more information on Jekyll's site)
 defaults:
   - scope:
@@ -89,6 +98,22 @@ defaults:
       layout: "post"
       comments: true # add comments to all blog posts
       social-share: true # add social media sharing buttons to all blog posts
+  - scope:
+      path: "en"
+      type: "en"
+    values:
+      layout: "post"
+      comments: true
+      social-share: true
+      lang: "en"
+  - scope:
+      path: "ja"
+      type: "ja"
+    values:
+      layout: "post"
+      comments: true
+      social-share: true
+      lang: "ja"
   - scope:
       path: "" # any file that's not a post will be a "page" layout by default
     values:
@@ -106,3 +131,25 @@ exclude:
   - docs/
   - setup.md
   - .github/
+
+collections:
+  en:
+    output: true
+    permalink: /en/:path/
+  ja:
+    output: true
+    permalink: /ja/:path/
+include:
+  - en
+  - ja
+
+defaults:
+  - scope:
+      path: "en"
+    values:
+      layout: "post"
+
+  - scope:
+      path: "ja"
+    values:
+      layout: "post"
