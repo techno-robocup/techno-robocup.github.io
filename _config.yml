@@ -50,11 +50,12 @@ social-network-links:
   github: techno-robocup
 
 navbar-links:
-  # Resources:
-  #   - Beautiful Jekyll: "https://beautifuljekyll.com"
-  #   - Learn markdown: "https://www.markdowntutorial.com/"
-  Tags: /tags
-  About us: "aboutus"
+  ja:
+    Tags: /ja/tags/
+    About Us: /ja/aboutus/
+  en:
+    Tags: /en/tags/
+    About Us: /en/aboutus/
 
 # Except character length
 excerpt_length: 150
