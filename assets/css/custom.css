@@ -522,3 +522,13 @@
     height: 180px;
   }
 }
+
+.robot-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.robot-image img {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
