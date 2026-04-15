@@ -24,9 +24,9 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git rm -rf "$PR_DIR"
-            git commit -m "chore: remove preview for PR #${{ github.event.pull_request.number }}"
-            git fetch origin gh-pages
-            git push --force-with-lease
+            git diff --cached --quiet || git commit -m "chore: remove preview..."
+            git pull --rebase origin gh-pages
+            git push origin gh-pages
           else
             echo "No preview directory found for PR #${{ github.event.pull_request.number }}, skipping."
           fi
@@ -83,6 +83,10 @@ jobs:
               execSync(`git rm -rf "pr-previews/${dir}"`);
             }
 
-            execSync(`git commit -m "chore: remove ${toRemove.length} orphaned PR preview(s)"`);
+            try {
+              execSync(`git diff --cached --quiet || git commit -m "chore: remove ${toRemove.length} orphaned PR preview(s)"`);
+            } catch (e) {
+              console.log("Nothing to commit");
+            }
             execSync('git fetch origin gh-pages');
-            execSync('git push --force-with-lease');
+            execSync('git push origin gh-pages');
