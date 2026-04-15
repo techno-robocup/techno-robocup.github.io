@@ -72,23 +72,23 @@ layout: base
 
         <div class="post-navigation">
           <ul class="pagination blog-pager">
-            {% if page.previous.url %}
-            <li class="page-item previous">
-              <a class="page-link" href="{{ page.previous.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title | strip_html | xml_escape}}">
-                <i class="fas fa-arrow-left"></i> Previous Post
-              </a>
-            </li>
-            {% endif %}
             {% if page.next.url %}
             <li class="page-item next">
               <a class="page-link" href="{{ page.next.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title | strip_html | xml_escape}}">
-                Next Post <i class="fas fa-arrow-right"></i>
+                <i class="fas fa-arrow-left"></i>Next Post
               </a>
             </li>
             {% endif %}
+            {% if page.previous.url %}
+            <li class="page-item previous">
+              <a class="page-link" href="{{ page.previous.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title | strip_html | xml_escape}}">
+                <i class="fas fa-arrow-right"></i> Previous Post
+              </a>
+            </li>
+            {% endif %}
+            
           </ul>
         </div>
-
         <div class="comments-section">
           {% include comments.html %}
         </div>

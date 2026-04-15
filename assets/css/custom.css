@@ -320,11 +320,11 @@
   flex: 1;
 }
 
-.page-item.previous {
+.page-item.next {
   margin-right: 1rem;
 }
 
-.page-item.next {
+.page-item.previous {
   margin-left: 1rem;
 }
 
