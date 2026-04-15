@@ -31,7 +31,7 @@ github_username: techno-robocup
 theme: beautiful-jekyll-theme
 plugins:
   - jekyll-feed
-  - jekyll-paginate
+  - jekyll-paginate-v2
   - jekyll-sitemap
 
 gtag: "G-CT437Q24DM"
@@ -75,7 +75,7 @@ timezone: "Asia/Tokyo"
 markdown: kramdown
 highlighter: rouge
 # permalink: /:year-:month-:day-:title/
-paginate: 5
+# paginate: 5
 
 kramdown:
   input: GFM
@@ -153,3 +153,7 @@ defaults:
       path: "ja"
     values:
       layout: "post"
+
+pagination:
+  enabled: true
+  per_page: 5
