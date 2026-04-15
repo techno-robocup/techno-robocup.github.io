@@ -5,6 +5,7 @@ date: 2024-09-18 11:00:00 +0900
 tag: [robot, machine learning, rotarymars's article]
 thumbnail-img: "/assets/images/2024-09-18-thumbnail.jpeg"
 author: "rotarymars"
+lang: en
 ---
 
 Hello. I'm rotarymars.  

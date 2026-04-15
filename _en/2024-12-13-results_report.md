@@ -5,6 +5,7 @@ date: 2024-12-12 21:00:00 +0900
 tag: [robot, rotarymars's article]
 thumbnail-img: "/assets/images/2024-12-12-thumbnail.png"
 author: "rotarymars"
+lang: en
 ---
 Hello. I'm rotarymars.
 

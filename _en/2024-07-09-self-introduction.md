@@ -5,6 +5,7 @@ date:   2024-07-08 07:00:00 +0900
 tag: [free-talk, rotarymars's article]
 thumbnail-img: "/assets/images/thumb.png"
 author: "rotarymars"
+lang: en
 ---
 Hello. I'm rotarymars from TECHNO.
 

@@ -5,6 +5,7 @@ date: 2024-08-28 10:00:00 +0900
 tag: [machine learning, rotarymars's article]
 thumbnail-img: "https://upload.wikimedia.org/wikipedia/commons/a/ab/TensorFlow_logo.svg"
 author: "rotarymars"
+lang: en
 ---
 # Overview
 In the modern AI era, let's implement machine learning simply by ourselves.
