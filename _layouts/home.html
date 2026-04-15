@@ -4,7 +4,20 @@ layout: page
 
 {{ content }}
 
-{% assign posts = paginator.posts | default: site.posts %}
+{% assign current_lang = page.lang | default: "en" %}
+
+{% if current_lang == "en" %}
+  {% assign posts = site.en %}
+{% else %}
+  {% assign posts = site.ja %}
+{% endif %}
+
+<div class="robot-section">
+  <div class="robot-image">
+    <img src="/assets/images/robot-03.jpg" alt="Current robot status" width="250">
+    <p class="image-caption">Our current robot</p>
+  </div>
+</div>
 
 <div class="posts-container">
   <ul class="posts-list list-unstyled" role="list">
