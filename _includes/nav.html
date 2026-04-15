@@ -43,6 +43,22 @@
           </a>
         </li>
       {%- endif -%}
+
+      <div class="d-flex d-xl-none align-items-center mr-auto ml-3">
+    {% if lang == 'ja' %}
+      <div class="btn-group btn-group-dark" role="group">
+        <span class="btn btn-dark font-weight-bold" style="cursor: default;">Ja</span>
+        <a href="{{ page.url | replace_first: '/ja/', '/en/' | relative_url }}" class="btn btn-outline-dark">En</a>
+      </div>
+    {% else %}
+      <div class="btn-group btn-group-dark" role="group">
+        <span class="btn btn-dark font-weight-bold" style="cursor: default;">En</span>
+        <a href="{{ page.url | replace_first: '/en/', '/ja/' | relative_url }}" class="btn btn-outline-dark">Ja</a>
+      </div>
+    {% endif %}
+  </div>
+
+
     </ul>
   </div>
 
