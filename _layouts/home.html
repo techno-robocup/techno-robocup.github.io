@@ -6,14 +6,6 @@ layout: page
 
 {% assign current_lang = page.lang | default: "en" %}
 
-{% if current_lang == "en" %}
-  {% assign posts = site.en | where_exp: "item", "item.layout == 'post'" %}
-  {% assign posts = posts | sort: "date" | reverse %}
-{% else %}
-  {% assign posts = site.ja | where_exp: "item", "item.layout == 'post'" %}
-  {% assign posts = posts | sort: "date" | reverse %}
-{% endif %}
-
 <div class="robot-section">
   <div class="robot-image">
     <img src="/assets/images/robot-03.jpg" alt="Current robot status" width="250">
@@ -23,7 +15,7 @@ layout: page
 
 <div class="posts-container">
   <ul class="posts-list list-unstyled" role="list">
-    {% for post in posts %}
+    {% for post in paginator.posts %}
     <li class="post-preview">
       <article class="post-card">
         {%- capture thumbnail -%}
@@ -117,21 +109,32 @@ layout: page
 
 {% if paginator.total_pages > 1 %}
 <div class="pagination-container">
-  <ul class="pagination main-pager">
+  <ul class="pagination">
+    
     {% if paginator.previous_page %}
-    <li class="page-item previous">
-      <a class="page-link" href="{{ paginator.previous_page_path | absolute_url }}">
+    <li class="page-item">
+      <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">
         <i class="fas fa-arrow-left"></i> Newer Posts
       </a>
     </li>
     {% endif %}
+
+    {% for trail in paginator.page_trail %}
+    <li class="page-item {% if page.url == trail.path %}active{% endif %}">
+      <a class="page-link" href="{{ trail.path | relative_url }}">
+        {{ trail.num }}
+      </a>
+    </li>
+    {% endfor %}
+
     {% if paginator.next_page %}
-    <li class="page-item next">
-      <a class="page-link" href="{{ paginator.next_page_path | absolute_url }}">
-        Older Posts <i class="fas fa-arrow-right"></i>
+    <li class="page-item">
+      <a class="page-link" href="{{ paginator.next_page_path | relative_url }}">
+        <i class="fas fa-arrow-right"></i> Older Posts 
       </a>
     </li>
     {% endif %}
+
   </ul>
 </div>
 {% endif %}
