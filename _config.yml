@@ -84,10 +84,13 @@ kramdown:
 collections:
   en:
     output: true
-    permalink: /en/:name/
+    permalink: /en/:path/
   ja:
     output: true
-    permalink: /ja/:name/
+    permalink: /ja/:path/
+include:
+  - en
+  - ja
 
 # Default YAML values (more information on Jekyll's site)
 defaults:
@@ -132,16 +135,6 @@ exclude:
   - setup.md
   - .github/
 
-collections:
-  en:
-    output: true
-    permalink: /en/:path/
-  ja:
-    output: true
-    permalink: /ja/:path/
-include:
-  - en
-  - ja
 
 defaults:
   - scope:
