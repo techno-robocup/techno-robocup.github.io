@@ -100,10 +100,10 @@ layout: page
             <ul class="d-inline list-inline" role="list">
               {% for tag in post.tags %}
               <li class="list-inline-item">
-                {% current_lang == "en" %}
+                {% if current_lang == "en" %}
                   <a href="{{ '/en/tags' | absolute_url }}#{{- tag -}}" class="tag-item">{{- tag -}}</a>
-                {% current_lang == "ja" %}
-                  <a href="{{ '/en/tags' | absolute_url }}#{{- tag -}}" class="tag-item">{{- tag -}}</a>
+                {% elsif current_lang == "ja" %}
+                  <a href="{{ '/ja/tags' | absolute_url }}#{{- tag -}}" class="tag-item">{{- tag -}}</a>
                 {% endif %}
               </li>
               {% endfor %}
