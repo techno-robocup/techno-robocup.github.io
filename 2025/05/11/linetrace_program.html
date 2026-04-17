@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Beautiful Jekyll 6.0.1 | Copyright Dean Attali 2023 -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6935558663648820"
+     crossorigin="anonymous"></script>
+  
+
+  
+
+  
+
+  <title>Line tracing program</title>
+
+  
+  
+  <meta name="author" content="rotarymars">
+  
+
+  <meta name="description" content="Hello. I’m rotarymars. First of all, I’d like to announce the update frequency of the blog again. ALPAKA The remainder when the month is divided by 3 is 0 or 1 K10-K10 The remainder when the month is divided by 3 is 0 or 2 rotarymars The remainder when the month is divided by 3 is 1 or 2 We will update the article once a month in these months, so please look forward to us. About the content of this article This time, I’d like to write about the line tracing program that we are currently considering. The program is about this point. First, what will we use to do line tracing? We want to continue to use the camera for line tracing this year. Specifically, we want to connect a camera like this to the Raspberrypi and get the image to do line tracing. I just want to...">
+
+  
+
+  
+  <meta name="keywords" content="robocup junior,robot,line trace,rescue line,rcjj,ロボカップ,ロボット,ライントレース,レスキューライン">
+  
+
+  
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CT437Q24DM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CT437Q24DM');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+      
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    
+      
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/bootstrap-social.css">
+    
+      <link rel="stylesheet" href="/assets/css/beautifuljekyll.css">
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/custom-styles.css">
+    
+  
+
+  
+  
+  
+
+  
+
+  
+  <meta property="og:site_name" content="techno-robocup">
+  <meta property="og:title" content="Line tracing program">
+  <meta property="og:description" content="Hello. I’m rotarymars. First of all, I’d like to announce the update frequency of the blog again. ALPAKA The remainder when the month is divided by 3 is 0 or 1 K10-K10 The remainder when the month is divided by 3 is 0 or 2 rotarymars The remainder when the month is divided by 3 is 1 or 2 We will update the article once a month in these months, so please look forward to us. About the content of this article This time, I’d like to write about the line tracing program that we are currently considering. The program is about this point. First, what will we use to do line tracing? We want to continue to use the camera for line tracing this year. Specifically, we want to connect a camera like this to the Raspberrypi and get the image to do line tracing. I just want to...">
+
+  
+  <meta property="og:image" content="https://techno-robocup.github.io/assets/images/robot-02.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  
+  <meta property="og:article:author" content="rotarymars">
+  
+  <meta property="og:article:published_time" content="2025-05-11T10:00:00+09:00">
+  <meta property="og:url" content="https://techno-robocup.github.io/2025/05/11/linetrace_program.html">
+  <link rel="canonical" href="https://techno-robocup.github.io/2025/05/11/linetrace_program.html">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+
+  <meta property="twitter:title" content="Line tracing program">
+  <meta property="twitter:description" content="Hello. I’m rotarymars. First of all, I’d like to announce the update frequency of the blog again. ALPAKA The remainder when the month is divided by 3 is 0 or 1 K10-K10 The remainder when the month is divided by 3 is 0 or 2 rotarymars The remainder when the month is divided by 3 is 1 or 2 We will update the article once a month in these months, so please look forward to us. About the content of this article This time, I’d like to write about the line tracing program that we are currently considering. The program is about this point. First, what will we use to do line tracing? We want to continue to use the camera for line tracing this year. Specifically, we want to connect a camera like this to the Raspberrypi and get the image to do line tracing. I just want to...">
+
+  
+  <meta name="twitter:image" content="https://techno-robocup.github.io/assets/images/robot-02.jpg">
+  
+
+  
+
+
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/custom.css">
+  <script src="/assets/js/colorAnimation.js"></script>
+
+</head>
+
+
+<body>
+
+  
+
+
+  <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="https://techno-robocup.github.io/">techno-robocup</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/tags">Tags</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/aboutus">About us</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-search-link" href="#" title="Search">
+            <span id="nav-search-icon" class="fa fa-search"></span>
+            <span id="nav-search-text">Search</span>
+          </a>
+        </li></ul>
+  </div>
+
+  
+
+  
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        <a href="https://techno-robocup.github.io/">
+          <img alt="Navigation bar avatar" class="avatar-img" src="/assets/images/robot-03.jpg" />
+        </a>
+      </div>
+    </div>
+  
+
+</nav>
+
+
+
+<div id="beautifuljekyll-search-overlay">
+
+  <div id="nav-search-exit" title="Exit search">✕</div>
+  <input type="text" id="nav-search-input" placeholder="Search">
+  <ul id="search-results-container"></ul>
+
+  <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+  <script>
+    var searchjson = `[ \
+       \
+        { \
+          "title"    : "Visit to Hamano Products (浜野製作所)", \
+          "desc"     : "Visit to Hamano Products (浜野製作所)", \
+          "category" : "robotrotarymars's articlevisit", \
+          "url"      : "/2026/03/14/hamano-products-visit.html", \
+          "date"     : "March 14, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress since our last article", \
+          "desc"     : "Recent progress since our last article", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/2026/01/21/progress.html", \
+          "date"     : "January 21, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress", \
+          "desc"     : "Recent progress", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/2025/09/21/progress2.html", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Development system", \
+          "desc"     : "Development system", \
+          "category" : "robotrotarymars's articlesoftware", \
+          "url"      : "/2025/07/21/introducing.html", \
+          "date"     : "July 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Robot introduction", \
+          "desc"     : "Robot introduction", \
+          "category" : "robotALPAKA's articlehardware", \
+          "url"      : "/2025/07/09/robot.hardware.html", \
+          "date"     : "July  9, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Red detection and 7-segment LED", \
+          "desc"     : "Red detection and 7-segment LED", \
+          "category" : "robotK10-K10's articleline-traceprogram", \
+          "url"      : "/2025/06/20/RedMask.html", \
+          "date"     : "June 20, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Parts used in the robot", \
+          "desc"     : "Parts used in the robot", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/2025/05/31/parts.html", \
+          "date"     : "May 31, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Line tracing program", \
+          "desc"     : "Line tracing program", \
+          "category" : "robotrotarymars's articleline-traceprogram", \
+          "url"      : "/2025/05/11/linetrace_program.html", \
+          "date"     : "May 11, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress", \
+          "desc"     : "Recent progress", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/2025/04/18/progress.html", \
+          "date"     : "April 18, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
+          "desc"     : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
+          "category" : "robotrotarymars's articlemachine learning", \
+          "url"      : "/2025/02/24/yolo_machine_learning.html", \
+          "date"     : "February 24, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Results of the Kanto competition and plans for next year", \
+          "desc"     : "Results of the Kanto competition and plans for next year", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/2025/01/26/result_kanto.html", \
+          "date"     : "January 26, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Results report", \
+          "desc"     : "Results report", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/2024/12/12/results_report.html", \
+          "date"     : "December 12, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "About deep learning", \
+          "desc"     : "About deep learning", \
+          "category" : "robotmachine learningrotarymars's article", \
+          "url"      : "/2024/09/18/about_deep_learning.html", \
+          "date"     : "September 18, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "About the performance time of the cultural festival", \
+          "desc"     : "About the performance time of the cultural festival", \
+          "category" : "robotschoolALPAKA's article", \
+          "url"      : "/2024/09/13/culture_festival_time_table.html", \
+          "date"     : "September 13, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Robot introduction", \
+          "desc"     : "Robot introduction", \
+          "category" : "robotEV3nishikazu's article", \
+          "url"      : "/2024/09/07/robot_introduction.html", \
+          "date"     : "September  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Machine learning with tensorflow", \
+          "desc"     : "Machine learning with tensorflow", \
+          "category" : "machine learningrotarymars's article", \
+          "url"      : "/2024/08/28/tensorflow-machinelearning.html", \
+          "date"     : "August 28, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "A rubber band gun using LEGO", \
+          "desc"     : "A rubber band gun using LEGO", \
+          "category" : "free-talkALPAKA's article", \
+          "url"      : "/2024/08/22/rubber_band_gun.html", \
+          "date"     : "August 22, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Python Command Line", \
+          "desc"     : "Python Command Line", \
+          "category" : "pythonfree-talknishikazu's article", \
+          "url"      : "/2024/08/07/python-OS.html", \
+          "date"     : "August  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "SSH to EV3", \
+          "desc"     : "SSH to EV3", \
+          "category" : "robotEV3rotarymars's article", \
+          "url"      : "/2024/07/23/ev3_ssh.html", \
+          "date"     : "July 23, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "We started our blog", \
+          "desc"     : "We started our blog", \
+          "category" : "free-talkrotarymars's article", \
+          "url"      : "/2024/07/08/self-introduction.html", \
+          "date"     : "July  8, 2024" \
+        }, \
+       \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "About us", \
+          "desc"     : "About us", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "Tag Index", \
+          "desc"     : "Tag Index", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        } \
+       \
+    ]`;
+    searchjson = JSON.parse(searchjson);
+
+    var sjs = SimpleJekyllSearch({
+      searchInput: document.getElementById('nav-search-input'),
+      resultsContainer: document.getElementById('search-results-container'),
+      json: searchjson
+    });
+  </script>
+</div>
+
+
+
+
+
+  
+
+
+
+<header class="header-section ">
+<div class="intro-header ">
+  
+  <div class="container-md">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        <div class="post-heading">
+          <h1>Line tracing program</h1>
+          
+          
+           
+            
+              By <strong>rotarymars</strong><br>
+            
+            <span class="post-meta">Posted on May 11, 2025</span>
+            
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+
+
+
+</header>
+
+
+<div class=" container-md ">
+  <div class="row">
+    <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
+      <div class="post-content-wrapper">
+        
+
+        
+          <div class="blog-tags">
+            <span class="tags-label">Tags:</span>
+            <div class="tags-list">
+              
+                <a href="/tags#robot" class="tag-item">robot</a>
+              
+                <a href="/tags#rotarymars's article" class="tag-item">rotarymars's article</a>
+              
+                <a href="/tags#line-trace" class="tag-item">line-trace</a>
+              
+                <a href="/tags#program" class="tag-item">program</a>
+              
+            </div>
+          </div>
+        
+
+        
+
+        <article role="main" class="blog-post">
+          <div class="post-content">
+            <p>Hello. I’m rotarymars.</p>
+
+<p>First of all, I’d like to announce the update frequency of the blog again.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>ALPAKA</td>
+      <td>The remainder when the month is divided by 3 is 0 or 1</td>
+    </tr>
+    <tr>
+      <td>K10-K10</td>
+      <td>The remainder when the month is divided by 3 is 0 or 2</td>
+    </tr>
+    <tr>
+      <td>rotarymars</td>
+      <td>The remainder when the month is divided by 3 is 1 or 2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We will update the article once a month in these months, so please look forward to us.</p>
+
+<h1 id="about-the-content-of-this-article">About the content of this article</h1>
+<p>This time, I’d like to write about the line tracing program that we are currently considering.</p>
+
+<p>The program is about <a href="https://github.com/techno-robocup/robocup2025_raspberrypi_program/tree/2aa6a78f848aa399d7de8e9522e22457549cda2c">this point</a>.</p>
+
+<h1 id="first-what-will-we-use-to-do-line-tracing">First, what will we use to do line tracing?</h1>
+<p>We want to continue to use the camera for line tracing this year.</p>
+
+<p>Specifically, we want to connect a camera like <a href="https://www.marutsu.co.jp/pc/i/2582866/?srsltid=AfmBOopbmXQJaQxBT3iPoE_9YWJHDGGlkC7d1VmHUMrUX68OTDen-XPl">this</a> to the Raspberrypi and get the image to do line tracing.</p>
+
+<p>I just want to let you know that we haven’t been able to test the actual run because the robot hasn’t been completed yet.</p>
+
+<h1 id="actual-program">Actual program</h1>
+<p>The program is quite long, so I’ll paste it step by step.
+Also, it’s very ugly, so it may be difficult to read (I want to make a class someday, but I haven’t done anything yet).</p>
+
+<p>By the way, this time, we’ll look at modules/settings.py, which is particularly related to line tracing.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">libcamera</span> <span class="kn">import</span> <span class="n">controls</span>
+<span class="kn">from</span> <span class="n">picamera2</span> <span class="kn">import</span> <span class="n">MappedArray</span>
+<span class="kn">import</span> <span class="n">cv2</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">threading</span>
+<span class="c1"># 途中略
+</span><span class="k">def</span> <span class="nf">Linetrace_Camera_Pre_callback</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Linetrace precallback called</span><span class="sh">"</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()))</span>
+
+  <span class="k">global</span> <span class="n">lastblackline</span><span class="p">,</span> <span class="n">slope</span>
+
+  <span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nc">MappedArray</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="sh">"</span><span class="s">lores</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">m</span><span class="p">:</span>
+      <span class="n">image</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">array</span>
+
+      <span class="n">camera_x</span> <span class="o">=</span> <span class="n">Linetrace_Camera_lores_width</span>
+      <span class="n">camera_y</span> <span class="o">=</span> <span class="n">Linetrace_Camera_lores_height</span>
+
+      <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">())</span><span class="si">}</span><span class="s">_original.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+
+      <span class="n">gray_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">COLOR_RGB2GRAY</span><span class="p">)</span>
+
+      <span class="n">_</span><span class="p">,</span> <span class="n">binary_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">threshold</span><span class="p">(</span><span class="n">gray_image</span><span class="p">,</span> <span class="n">Black_White_Threshold</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>
+                                      <span class="n">cv2</span><span class="p">.</span><span class="n">THRESH_BINARY_INV</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">())</span><span class="si">}</span><span class="s">_binary.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">binary_image</span><span class="p">)</span>
+
+      <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span>
+      <span class="n">binary_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">erode</span><span class="p">(</span><span class="n">binary_image</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+      <span class="n">binary_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">dilate</span><span class="p">(</span><span class="n">binary_image</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+      <span class="nf">detect_green_marks</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">binary_image</span><span class="p">)</span>
+
+      <span class="n">contours</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">findContours</span><span class="p">(</span><span class="n">binary_image</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">RETR_TREE</span><span class="p">,</span>
+                                     <span class="n">cv2</span><span class="p">.</span><span class="n">CHAIN_APPROX_NONE</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">contours</span><span class="p">:</span>
+        <span class="k">return</span>
+
+      <span class="n">best_contour</span> <span class="o">=</span> <span class="nf">find_best_contour</span><span class="p">(</span><span class="n">contours</span><span class="p">,</span> <span class="n">camera_x</span><span class="p">,</span> <span class="n">camera_y</span><span class="p">,</span>
+                                       <span class="n">lastblackline</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">best_contour</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+      <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span> <span class="o">=</span> <span class="nf">calculate_contour_center</span><span class="p">(</span><span class="n">best_contour</span><span class="p">)</span>
+
+      <span class="k">with</span> <span class="n">LASTBLACKLINE_LOCK</span><span class="p">:</span>
+        <span class="n">lastblackline</span> <span class="o">=</span> <span class="n">cx</span>
+
+      <span class="k">with</span> <span class="n">SLOPE_LOCK</span><span class="p">:</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="nf">calculate_slope</span><span class="p">(</span><span class="n">best_contour</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+        <span class="n">debug_image</span> <span class="o">=</span> <span class="nf">visualize_tracking</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">best_contour</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">())</span><span class="si">}</span><span class="s">_tracking.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">debug_image</span><span class="p">)</span>
+
+  <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+      <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Error in line tracing: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Let’s look at it step by step.</p>
+<h2 id="line-1--6">Line 1 ~ 6</h2>
+<p>As you can see, we’re including the necessary libraries (in Python, they’re called modules) and importing them.</p>
+<h2 id="line-8-">Line 8 ~</h2>
+<p>It’s finally time for the explanation.</p>
+
+<p>First, let’s explain what precallback is.</p>
+
+<p>In Raspberrypi, you can preview the camera image by using the <code class="language-plaintext highlighter-rouge">rpicam-hello</code> command (the command name may be different).</p>
+
+<p>The command is a program that sends an image acquisition request and then displays the image.</p>
+
+<p>The thing used at that time is the <code class="language-plaintext highlighter-rouge">picamera2</code> library (module).</p>
+
+<p>Specifically, you can specify a <code class="language-plaintext highlighter-rouge">precallback function</code> when generating the camera object.</p>
+
+<p>It is <code class="language-plaintext highlighter-rouge">None</code> by default, and there is no hook when the image is acquired.</p>
+
+<p>However, by registering a function here, the object is passed to the first argument of the function (in this case, <code class="language-plaintext highlighter-rouge">request</code>).</p>
+
+<p>By doing this, the image data stored in <code class="language-plaintext highlighter-rouge">request</code> can be obtained as a <code class="language-plaintext highlighter-rouge">numpy</code> array, <code class="language-plaintext highlighter-rouge">lores</code> quality.</p>
+
+<p>This way, we can avoid capturing the image every time it is needed, and we can get the image faster (the processing inside the function is heavy, so I don’t know how to say it, but if we don’t do anything, we can get it at about 20msec/frame).</p>
+
+<p>However, if there is an operation that consumes a lot of CPU resources in that function, if the camera is not stopped when it is not in use, it will consume a lot of power.</p>
+
+<p>Therefore, the camera should be started and stopped separately when it is in use and not in use.</p>
+
+<h3 id="line-9--10">Line 9 ~ 10</h3>
+<p>As you can see, when DEBUG_MODE is enabled, the UNIX TIME when the function is called is printed.</p>
+<h3 id="line-12">Line 12</h3>
+<p>Global variables are declared.</p>
+
+<p>Let’s talk about the variables used here.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable name</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>lastblackline</td>
+      <td>The center coordinate of the previous black line</td>
+    </tr>
+    <tr>
+      <td>slope</td>
+      <td>The slope of the black line</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>By making these global variables, we can access them from the main process.</p>
+
+<h3 id="line-14--22">Line 14 ~ 22</h3>
+<p>Let’s ignore all exceptions for now.</p>
+
+<p>The image is stored in the variable <code class="language-plaintext highlighter-rouge">image</code> as a numpy array.</p>
+
+<p><code class="language-plaintext highlighter-rouge">camera_x</code> and <code class="language-plaintext highlighter-rouge">camera_y</code> store the vertical and horizontal number of pixels of the camera.</p>
+
+<p>And when DEBUG_MODE is enabled, the original image is saved.</p>
+
+<h3 id="line-24--30">Line 24 ~ 30</h3>
+<p>The image is converted to grayscale. This is because we want to binarize the image later.</p>
+
+<p>In line 26, the image binarized with <code class="language-plaintext highlighter-rouge">Black_White_Threshold</code> as the threshold is stored in <code class="language-plaintext highlighter-rouge">binary_image</code>. The ones that are close to black become white, and the ones that are close to white become black.</p>
+
+<p>Here’s a side note, but the reason for converting to grayscale is that we can’t binarize a color image directly into black and white. If we apply it directly to the function, each color (r, g, b) will be binarized as each threshold, and a highly saturated (?) image will be created (I recommend actually seeing it for explanation).</p>
+
+<p>And when <code class="language-plaintext highlighter-rouge">DEBUG_MODE</code> is enabled, the binarized image is saved.</p>
+
+<h3 id="line-32--35">Line 32 ~ 35</h3>
+<p>Here, we remove the noise contained in the binarized image.</p>
+
+<p>Let’s explain how each function is doing.</p>
+
+<h4 id="kernel--npones3-3-npuint8">kernel = np.ones((3, 3), np.uint8)</h4>
+<p>This creates a 3x3 <code class="language-plaintext highlighter-rouge">numpy</code> two-dimensional array. All elements are <code class="language-plaintext highlighter-rouge">1</code>.</p>
+
+<h4 id="binary_image--cv2erodebinary_image-kernel-iterations2">binary_image = cv2.erode(binary_image, kernel, iterations=2)</h4>
+<p>Using the <code class="language-plaintext highlighter-rouge">kernel</code> we just created, we remove the noise from <code class="language-plaintext highlighter-rouge">binary_image</code>. Specifically, if one of the pixels in the range of <code class="language-plaintext highlighter-rouge">kernel</code> is black (0), the center pixel is converted to black (0).</p>
+
+<p>This way, the white blocks become smaller and the noise is removed.</p>
+
+<p>By the way, the black and white determination is made by whether the number of each element of <code class="language-plaintext highlighter-rouge">kernel</code> is below or above.</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">iterations=2</code>, this is executed twice.</p>
+<h4 id="binary_image--cv2dilatebinary_image-kernel-iterations3">binary_image = cv2.dilate(binary_image, kernel, iterations=3)</h4>
+<p>This is the opposite of <code class="language-plaintext highlighter-rouge">erode</code>. That is, the black blocks become larger.</p>
+
+<p>Specifically, if one of the pixels in the range of <code class="language-plaintext highlighter-rouge">kernel</code> is white (1), the center pixel is converted to white (1).</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">iterations=3</code>, this is executed three times.</p>
+
+<h3 id="line-36">Line 36</h3>
+<p>Here, we recognize the green marks, and perform the relative position determination. I’ll explain the function later.</p>
+
+<h3 id="line-37--45">Line 37 ~ 45</h3>
+<p><code class="language-plaintext highlighter-rouge">contours</code> is recognized using the cv2 function.</p>
+
+<p>Then, using the <code class="language-plaintext highlighter-rouge">find_best_contour</code> function we created ourselves, we get the most appropriate contour and store it in <code class="language-plaintext highlighter-rouge">best_contour</code>.</p>
+
+<h3 id="line-47--50">Line 47 ~ 50</h3>
+<p>Here, we get the center coordinates of <code class="language-plaintext highlighter-rouge">best_contour</code>.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">best_contour</code> is not found, the process is ended as is.</p>
+
+<h3 id="line-53--56">Line 53 ~ 56</h3>
+<p>Here, we update <code class="language-plaintext highlighter-rouge">lastblackline</code> and <code class="language-plaintext highlighter-rouge">slope</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">lastblackline</code> represents the x-coordinate of <code class="language-plaintext highlighter-rouge">blackline</code>, and is used to find <code class="language-plaintext highlighter-rouge">best_contour</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">slope</code> is the slope of the black line.</p>
+
+<p>Specifically, the slope from the center of the bottom of the image to the center of <code class="language-plaintext highlighter-rouge">best_contour</code> is calculated.</p>
+
+<p>By the way, <code class="language-plaintext highlighter-rouge">with ..._LOCK:</code> is locking the <code class="language-plaintext highlighter-rouge">..._LOCK</code> object.</p>
+
+<p>Locking is a mechanism to prevent other processes from using a variable when a certain process is using it.</p>
+
+<p>This way, the writing to this variable becomes atomic (exclusive) (it is guaranteed that it will not become strange if it is edited at the same time. It is also necessary to set it when reading).</p>
+
+<p>※I’m not very familiar with it, but I think it’s probably an OS-level operation, so it’s better not to use it too much to be able to process faster.</p>
+
+<h3 id="line-57-">Line 57 ~</h3>
+<p>When <code class="language-plaintext highlighter-rouge">DEBUG_MODE</code> is enabled, the image is saved.</p>
+
+<p>And then, we’re handling exceptions. It’s simple, isn’t it?</p>
+
+<h1 id="finally">Finally</h1>
+<p>I hope you understand how the program is working. I want to fix the part where the image passed as an argument to the function that detects the green mark is directly overwritten as soon as possible.</p>
+
+<p>This time, I haven’t been able to explain all the functions (because I didn’t have much time), but I hope you understand what I’m doing.</p>
+
+<p>I want the team members to read this blog and understand the contents of the program.</p>
+
+<p>Thank you.</p>
+
+<p>↑↑I also want to follow K10-K10, so I’ll add it at the end.↑↑</p>
+
+          </div>
+        </article>
+
+        
+
+        
+          <div class="author-section">
+            <div class="author">
+  📝 <span class="author-text">author: rotarymars</span>
+</div>
+
+          </div>
+        
+
+        <div class="post-navigation">
+          <ul class="pagination blog-pager">
+            
+            <li class="page-item previous">
+              <a class="page-link" href="/2025/04/18/progress.html" data-toggle="tooltip" data-placement="top" title="Recent progress">
+                <i class="fas fa-arrow-left"></i> Previous Post
+              </a>
+            </li>
+            
+            
+            <li class="page-item next">
+              <a class="page-link" href="/2025/05/31/parts.html" data-toggle="tooltip" data-placement="top" title="Parts used in the robot">
+                Next Post <i class="fas fa-arrow-right"></i>
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+
+        <div class="comments-section">
+          
+  
+  
+  
+
+  
+
+
+  
+
+  
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <footer>
+  <div class="container-md beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      
+<ul class="list-inline text-center footer-links"><li class="list-inline-item">
+    <a href="https://github.com/techno-robocup" title="GitHub">
+      <span class="fa-stack fa-lg" aria-hidden="true">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="sr-only">GitHub</span>
+   </a>
+  </li></ul>
+
+
+      
+      <p class="copyright text-muted">
+      
+      2026
+
+      
+
+      
+
+      
+
+      </p>
+      <p class="theme-by text-muted">
+        Powered by
+        <a href="https://beautifuljekyll.com">Beautiful Jekyll</a>
+      </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  
+  
+    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script src="/assets/js/beautifuljekyll.js"></script>
+    
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

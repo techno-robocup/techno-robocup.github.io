@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Beautiful Jekyll 6.0.1 | Copyright Dean Attali 2023 -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6935558663648820"
+     crossorigin="anonymous"></script>
+  
+
+  
+
+  
+
+  <title>Machine learning with tensorflow</title>
+
+  
+  
+  <meta name="author" content="rotarymars">
+  
+
+  <meta name="description" content="Overview In the modern AI era, let’s implement machine learning simply by ourselves. Machine learning In this machine learning, we will classify images. Let’s see an example. You can probably tell that this number is “2” at a glance. If a machine can correctly determine that this number is “2” in the same way, wouldn’t that be great? ALPAKA: I don’t think so Why can we tell that this number is “2” in the same way? It’s because we’ve always known that “something like this is 2”. Similarly, if we teach the computer, it will learn by itself. That’s machine learning. This time, we’ll create a program that recognizes the numbers we wrote ourselves. Before we start I’m not very familiar with machine learning, so there may be mistakes in what I’m saying here. If there are mistakes, please let me know via the email address of my github account....">
+
+  
+
+  
+  <meta name="keywords" content="robocup junior,robot,line trace,rescue line,rcjj,ロボカップ,ロボット,ライントレース,レスキューライン">
+  
+
+  
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CT437Q24DM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CT437Q24DM');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+      
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    
+      
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/bootstrap-social.css">
+    
+      <link rel="stylesheet" href="/assets/css/beautifuljekyll.css">
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/custom-styles.css">
+    
+  
+
+  
+  
+  
+
+  
+
+  
+  <meta property="og:site_name" content="techno-robocup">
+  <meta property="og:title" content="Machine learning with tensorflow">
+  <meta property="og:description" content="Overview In the modern AI era, let’s implement machine learning simply by ourselves. Machine learning In this machine learning, we will classify images. Let’s see an example. You can probably tell that this number is “2” at a glance. If a machine can correctly determine that this number is “2” in the same way, wouldn’t that be great? ALPAKA: I don’t think so Why can we tell that this number is “2” in the same way? It’s because we’ve always known that “something like this is 2”. Similarly, if we teach the computer, it will learn by itself. That’s machine learning. This time, we’ll create a program that recognizes the numbers we wrote ourselves. Before we start I’m not very familiar with machine learning, so there may be mistakes in what I’m saying here. If there are mistakes, please let me know via the email address of my github account....">
+
+  
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/a/ab/TensorFlow_logo.svg">
+  
+
+  
+  <meta property="og:type" content="article">
+  
+  <meta property="og:article:author" content="rotarymars">
+  
+  <meta property="og:article:published_time" content="2024-08-28T10:00:00+09:00">
+  <meta property="og:url" content="https://techno-robocup.github.io/2024/08/28/tensorflow-machinelearning.html">
+  <link rel="canonical" href="https://techno-robocup.github.io/2024/08/28/tensorflow-machinelearning.html">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+
+  <meta property="twitter:title" content="Machine learning with tensorflow">
+  <meta property="twitter:description" content="Overview In the modern AI era, let’s implement machine learning simply by ourselves. Machine learning In this machine learning, we will classify images. Let’s see an example. You can probably tell that this number is “2” at a glance. If a machine can correctly determine that this number is “2” in the same way, wouldn’t that be great? ALPAKA: I don’t think so Why can we tell that this number is “2” in the same way? It’s because we’ve always known that “something like this is 2”. Similarly, if we teach the computer, it will learn by itself. That’s machine learning. This time, we’ll create a program that recognizes the numbers we wrote ourselves. Before we start I’m not very familiar with machine learning, so there may be mistakes in what I’m saying here. If there are mistakes, please let me know via the email address of my github account....">
+
+  
+  <meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/a/ab/TensorFlow_logo.svg">
+  
+
+  
+
+
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/custom.css">
+  <script src="/assets/js/colorAnimation.js"></script>
+
+</head>
+
+
+<body>
+
+  
+
+
+  <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="https://techno-robocup.github.io/">techno-robocup</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/tags">Tags</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/aboutus">About us</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-search-link" href="#" title="Search">
+            <span id="nav-search-icon" class="fa fa-search"></span>
+            <span id="nav-search-text">Search</span>
+          </a>
+        </li></ul>
+  </div>
+
+  
+
+  
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        <a href="https://techno-robocup.github.io/">
+          <img alt="Navigation bar avatar" class="avatar-img" src="/assets/images/robot-03.jpg" />
+        </a>
+      </div>
+    </div>
+  
+
+</nav>
+
+
+
+<div id="beautifuljekyll-search-overlay">
+
+  <div id="nav-search-exit" title="Exit search">✕</div>
+  <input type="text" id="nav-search-input" placeholder="Search">
+  <ul id="search-results-container"></ul>
+
+  <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+  <script>
+    var searchjson = `[ \
+       \
+        { \
+          "title"    : "Visit to Hamano Products (浜野製作所)", \
+          "desc"     : "Visit to Hamano Products (浜野製作所)", \
+          "category" : "robotrotarymars's articlevisit", \
+          "url"      : "/2026/03/14/hamano-products-visit.html", \
+          "date"     : "March 14, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress since our last article", \
+          "desc"     : "Recent progress since our last article", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/2026/01/21/progress.html", \
+          "date"     : "January 21, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress", \
+          "desc"     : "Recent progress", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/2025/09/21/progress2.html", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Development system", \
+          "desc"     : "Development system", \
+          "category" : "robotrotarymars's articlesoftware", \
+          "url"      : "/2025/07/21/introducing.html", \
+          "date"     : "July 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Robot introduction", \
+          "desc"     : "Robot introduction", \
+          "category" : "robotALPAKA's articlehardware", \
+          "url"      : "/2025/07/09/robot.hardware.html", \
+          "date"     : "July  9, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Red detection and 7-segment LED", \
+          "desc"     : "Red detection and 7-segment LED", \
+          "category" : "robotK10-K10's articleline-traceprogram", \
+          "url"      : "/2025/06/20/RedMask.html", \
+          "date"     : "June 20, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Parts used in the robot", \
+          "desc"     : "Parts used in the robot", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/2025/05/31/parts.html", \
+          "date"     : "May 31, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Line tracing program", \
+          "desc"     : "Line tracing program", \
+          "category" : "robotrotarymars's articleline-traceprogram", \
+          "url"      : "/2025/05/11/linetrace_program.html", \
+          "date"     : "May 11, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress", \
+          "desc"     : "Recent progress", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/2025/04/18/progress.html", \
+          "date"     : "April 18, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
+          "desc"     : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
+          "category" : "robotrotarymars's articlemachine learning", \
+          "url"      : "/2025/02/24/yolo_machine_learning.html", \
+          "date"     : "February 24, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Results of the Kanto competition and plans for next year", \
+          "desc"     : "Results of the Kanto competition and plans for next year", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/2025/01/26/result_kanto.html", \
+          "date"     : "January 26, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Results report", \
+          "desc"     : "Results report", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/2024/12/12/results_report.html", \
+          "date"     : "December 12, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "About deep learning", \
+          "desc"     : "About deep learning", \
+          "category" : "robotmachine learningrotarymars's article", \
+          "url"      : "/2024/09/18/about_deep_learning.html", \
+          "date"     : "September 18, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "About the performance time of the cultural festival", \
+          "desc"     : "About the performance time of the cultural festival", \
+          "category" : "robotschoolALPAKA's article", \
+          "url"      : "/2024/09/13/culture_festival_time_table.html", \
+          "date"     : "September 13, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Robot introduction", \
+          "desc"     : "Robot introduction", \
+          "category" : "robotEV3nishikazu's article", \
+          "url"      : "/2024/09/07/robot_introduction.html", \
+          "date"     : "September  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Machine learning with tensorflow", \
+          "desc"     : "Machine learning with tensorflow", \
+          "category" : "machine learningrotarymars's article", \
+          "url"      : "/2024/08/28/tensorflow-machinelearning.html", \
+          "date"     : "August 28, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "A rubber band gun using LEGO", \
+          "desc"     : "A rubber band gun using LEGO", \
+          "category" : "free-talkALPAKA's article", \
+          "url"      : "/2024/08/22/rubber_band_gun.html", \
+          "date"     : "August 22, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Python Command Line", \
+          "desc"     : "Python Command Line", \
+          "category" : "pythonfree-talknishikazu's article", \
+          "url"      : "/2024/08/07/python-OS.html", \
+          "date"     : "August  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "SSH to EV3", \
+          "desc"     : "SSH to EV3", \
+          "category" : "robotEV3rotarymars's article", \
+          "url"      : "/2024/07/23/ev3_ssh.html", \
+          "date"     : "July 23, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "We started our blog", \
+          "desc"     : "We started our blog", \
+          "category" : "free-talkrotarymars's article", \
+          "url"      : "/2024/07/08/self-introduction.html", \
+          "date"     : "July  8, 2024" \
+        }, \
+       \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "About us", \
+          "desc"     : "About us", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "Tag Index", \
+          "desc"     : "Tag Index", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
+        } \
+       \
+    ]`;
+    searchjson = JSON.parse(searchjson);
+
+    var sjs = SimpleJekyllSearch({
+      searchInput: document.getElementById('nav-search-input'),
+      resultsContainer: document.getElementById('search-results-container'),
+      json: searchjson
+    });
+  </script>
+</div>
+
+
+
+
+
+  
+
+
+
+<header class="header-section ">
+<div class="intro-header ">
+  
+  <div class="container-md">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        <div class="post-heading">
+          <h1>Machine learning with tensorflow</h1>
+          
+          
+           
+            
+              By <strong>rotarymars</strong><br>
+            
+            <span class="post-meta">Posted on August 28, 2024</span>
+            
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+
+
+
+</header>
+
+
+<div class=" container-md ">
+  <div class="row">
+    <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
+      <div class="post-content-wrapper">
+        
+
+        
+          <div class="blog-tags">
+            <span class="tags-label">Tags:</span>
+            <div class="tags-list">
+              
+                <a href="/tags#machine learning" class="tag-item">machine learning</a>
+              
+                <a href="/tags#rotarymars's article" class="tag-item">rotarymars's article</a>
+              
+            </div>
+          </div>
+        
+
+        
+
+        <article role="main" class="blog-post">
+          <div class="post-content">
+            <h1 id="overview">Overview</h1>
+<p>In the modern AI era, let’s implement machine learning simply by ourselves.</p>
+
+<h1 id="machine-learning">Machine learning</h1>
+<p>In this machine learning, we will classify images.<br />
+Let’s see an example.</p>
+
+<p><img src="/assets/images/2024-08-28-digit2.png" alt="2" /></p>
+
+<p>You can probably tell that this number is “2” at a glance.</p>
+
+<p>If a machine can correctly determine that this number is “2” in the same way, wouldn’t that be great?</p>
+
+<p><del>ALPAKA: I don’t think so</del></p>
+
+<p>Why can we tell that this number is “2” in the same way?</p>
+
+<p>It’s because we’ve always known that “something like this is 2”.</p>
+
+<p>Similarly, if we teach the computer, it will learn by itself.</p>
+
+<p>That’s machine learning.</p>
+
+<p>This time, we’ll create a program that recognizes the numbers we wrote ourselves.</p>
+
+<h1 id="before-we-start">Before we start</h1>
+<p>I’m not very familiar with machine learning, so there may be mistakes in what I’m saying here.</p>
+
+<p>If there are mistakes, please let me know via the email address of my github account.</p>
+
+<h1 id="before-we-start-1">Before we start</h1>
+<p>This time, we’ll use python for machine learning.</p>
+
+<p>Also, this article was implemented on Ubuntu on wsl.</p>
+
+<p>I also tested it with docker.</p>
+
+<p>Let’s install python.</p>
+
+<p>If you don’t use a version management tool,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update
+apt <span class="nt">-y</span> upgrade
+apt <span class="nb">install </span>python3 pip
+</code></pre></div></div>
+<p>You may need to add <code class="language-plaintext highlighter-rouge">sudo</code> to the command since usually we do not run commands as root.</p>
+
+<p>At least in my environment, when installing python3, I was asked for the region.</p>
+
+<p>Let’s check if python3 and pip are installed.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python3 <span class="nt">--version</span>
+Python 3.12.3
+<span class="nv">$ </span>pip <span class="nt">--version</span>
+pip 24.0 from /usr/lib/python3/dist-packages/pip <span class="o">(</span>python 3.12<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Let’s install the necessary packages.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>opencv-python tqdm numpy matplotlib tensorflow
+</code></pre></div></div>
+
+<p>opencv is used for image reading, tqdm is used for progress bar display, numpy is used for array creation, matplotlib is used for image display, and tensorflow is used for machine learning model creation.</p>
+
+<p>This is the environment we need.</p>
+
+<h1 id="creating-handwritten-digit-data">Creating handwritten digit data</h1>
+<p>The handwritten digit data is included in the module, but this time we will create the data ourselves without using it.</p>
+
+<p>I used the standard app “Paint” on windows to write the number in 28px by 28px.</p>
+
+<p>In this program, we will assume that there is a directory called data under the same directory as the python file for learning, and that there is a directory for each number under the directory.</p>
+
+<p>That is,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+`-- data
+    |-- 0
+    |   `-- 1.png
+    |-- 1
+    |   `-- 1.png
+    |-- 2
+    |   `-- 1.png
+    |-- 3
+    |   `-- 1.png
+    |-- 4
+    |   `-- 1.png
+    |-- 5
+    |   `-- 1.png
+    |-- 6
+    |   `-- 1.png
+    |-- 7
+    |   `-- 1.png
+    |-- 8
+    |   `-- 1.png
+    `-- 9
+        `-- 1.png
+</code></pre></div></div>
+
+<p>Also, we will proceed with the assumption that the image is black and white this time.</p>
+<h1 id="program-creation">Program creation</h1>
+<p>Let’s create a program using your favorite editor.</p>
+
+<p>I named the program train.py.</p>
+
+<p>First, let’s import the necessary modules.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">cv2</span> <span class="k">as</span> <span class="n">cv</span>
+<span class="kn">import</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+</code></pre></div></div>
+
+<p>Next, let’s create the model.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">)))</span>
+<span class="n">model</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">relu</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">relu</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nc">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">softmax</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="sh">'</span><span class="s">adam</span><span class="sh">'</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="sh">'</span><span class="s">sparse_categorical_crossentropy</span><span class="sh">'</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">accuracy</span><span class="sh">'</span><span class="p">])</span>
+</code></pre></div></div>
+<p>Here, we declare the model in the first line, add layers from the second to the fifth line, and compile it in the last line.</p>
+
+<p>I’ll talk about what layers are in the next article.</p>
+
+<p>Next, let’s read the photos we want to learn from the directory.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">files</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">./data/</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s">/</span><span class="sh">"</span>
+    <span class="n">tmpfiles</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">tmpfiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">path</span> <span class="o">+</span> <span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">tmpfiles</span><span class="p">]</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">files</span> <span class="o">+</span> <span class="n">tmpfiles</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+</code></pre></div></div>
+<p>The reason we shuffle randomly at the end is to make the model generated every time different.</p>
+
+<p>Let’s make the machine learn.</p>
+
+<p>This time, we won’t read all the pictures at once, but we’ll read them little by little when we need them.</p>
+
+<p>It’s because we don’t want to load all the pictures into memory if we can’t.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MAX_PICTURE</span> <span class="o">=</span> <span class="mi">100000</span> <span class="c1"># How many pictures to load into memory at once
+</span><span class="n">EPOCH</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># How many times to learn the pictures
+</span><span class="n">nowindex</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># What index we've reached
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">.</span><span class="nf">tqdm</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">EPOCH</span><span class="p">)):</span>
+    <span class="n">nowindex</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">train_x</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">train_y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="n">nowindex</span><span class="p">]</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="p">.</span><span class="nf">imread</span><span class="p">(</span><span class="n">filepath</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">invert</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">train_x</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="c1"># Add the image to the array
+</span>        <span class="n">train_y</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">filepath</span><span class="p">[</span><span class="mi">7</span><span class="p">]))</span> <span class="c1"># Add the number to the array
+</span>        <span class="n">nowindex</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">train_x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">MAX_PICTURE</span> <span class="ow">or</span> <span class="n">nowindex</span> <span class="o">&gt;=</span> <span class="nf">len</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+            <span class="n">train_x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">train_x</span><span class="p">)</span> <span class="c1"># Convert to numpy array
+</span>            <span class="n">train_y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">train_y</span><span class="p">)</span> <span class="c1"># Same as above
+</span>            <span class="n">model</span><span class="p">.</span><span class="nf">train_on_batch</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span> <span class="c1"># Learn
+</span>            <span class="n">train_x</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">train_y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">nowindex</span> <span class="o">&gt;=</span> <span class="nf">len</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+            <span class="k">break</span>
+<span class="n">model</span><span class="p">.</span><span class="nf">save</span><span class="p">(</span><span class="sh">"</span><span class="s">model.h5</span><span class="sh">"</span><span class="p">)</span> <span class="c1"># Save the created model
+</span></code></pre></div></div>
+
+<p>It’s a bit long, but it’s like this.</p>
+
+<p>I used tqdm, which displays a progress bar, because if we just loop, we can’t see the progress.</p>
+
+<p>The last line saves the completed model.</p>
+
+<p>This is train.py.</p>
+
+<p>Let’s run it here for now.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 train.py
+</code></pre></div></div>
+<p>My environment has a GPU driver, so it took about 30 seconds.</p>
+
+<p>Next, let’s check how accurate this model is.</p>
+
+<p>Personally, I think it’s good if it exceeds 95%.</p>
+
+<p>I assume that the test data is arranged as follows.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">test</span>
+    ├── 0-0.png
+    ├── 0-1.png
+    ├── 1-0.png
+    ├── 1-1.png
+    ├── 2-0.png
+    ├── 2-1.png
+    ├── 3-0.png
+    ├── 3-1.png
+    ├── 4-0.png
+    ├── 4-1.png
+    ├── 5-0.png
+    ├── 5-1.png
+    ├── 6-0.png
+    ├── 6-1.png
+    ├── 7-0.png
+    ├── 7-1.png
+    ├── 8-0.png
+    ├── 8-1.png
+    ├── 9-0.png
+    ├── 9-1.png
+</code></pre></div></div>
+<p>The number before the hyphen is what is actually written, and the number after is just to avoid name conflicts.</p>
+
+<p>Let’s implement it.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">cv2</span> <span class="k">as</span> <span class="n">cv</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">importatplotlib</span><span class="p">.</span><span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="kn">import</span> <span class="n">os</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="nf">load_model</span><span class="p">(</span><span class="sh">'</span><span class="s">model.h5</span><span class="sh">'</span><span class="p">,</span> <span class="n">custom_objects</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">softmax_v2</span><span class="sh">'</span><span class="p">:</span> <span class="n">tf</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">softmax</span><span class="p">})</span> <span class="c1"># Load the model
+</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="nf">listdir</span><span class="p">(</span><span class="sh">"</span><span class="s">./test/</span><span class="sh">"</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="p">.</span><span class="nf">imread</span><span class="p">(</span><span class="sh">"</span><span class="s">./test/</span><span class="sh">"</span> <span class="o">+</span> <span class="n">i</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">invert</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">test_x</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">test_y</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="n">loss</span><span class="p">,</span> <span class="n">accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">loss: </span><span class="sh">"</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">accuracy: </span><span class="sh">"</span><span class="p">.</span> <span class="n">accuracy</span><span class="p">)</span>
+
+</code></pre></div></div>
+<p>This is how we can check the accuracy.</p>
+
+<p>Now, let’s have the machine predict the number we wrote.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="nf">load_model</span><span class="p">(</span><span class="sh">'</span><span class="s">model.h5</span><span class="sh">'</span><span class="p">,</span> <span class="n">custom_objects</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">softmax_v2</span><span class="sh">'</span><span class="p">:</span> <span class="n">tf</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">softmax</span><span class="p">})</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv</span><span class="p">.</span><span class="nf">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">invert</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">img</span><span class="p">]))</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+</code></pre></div></div>
+<p>This is how we can display the probability of each number.</p>
+
+<p>If you want to display only the number with the highest probability, execute</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">argmax</span><span class="p">(</span><span class="n">prediction</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h1 id="lets-try-it">Let’s try it</h1>
+<p>I also tried it.</p>
+
+<p>The result was about 92%.</p>
+
+<p>I didn’t get as much accuracy as I thought, but since the learning data is less this time, I’ll leave it at this.</p>
+
+<p>Next time, I’ll write an article about the neurons.</p>
+
+<p><a href="https://github.com/rotarymars/handwritten-digit-recognition">This time’s program</a></p>
+
+
+          </div>
+        </article>
+
+        
+
+        
+          <div class="author-section">
+            <div class="author">
+  📝 <span class="author-text">author: rotarymars</span>
+</div>
+
+          </div>
+        
+
+        <div class="post-navigation">
+          <ul class="pagination blog-pager">
+            
+            <li class="page-item previous">
+              <a class="page-link" href="/2024/08/22/rubber_band_gun.html" data-toggle="tooltip" data-placement="top" title="A rubber band gun using LEGO">
+                <i class="fas fa-arrow-left"></i> Previous Post
+              </a>
+            </li>
+            
+            
+            <li class="page-item next">
+              <a class="page-link" href="/2024/09/07/robot_introduction.html" data-toggle="tooltip" data-placement="top" title="Robot introduction">
+                Next Post <i class="fas fa-arrow-right"></i>
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+
+        <div class="comments-section">
+          
+  
+  
+  
+
+  
+
+
+  
+
+  
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <footer>
+  <div class="container-md beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      
+<ul class="list-inline text-center footer-links"><li class="list-inline-item">
+    <a href="https://github.com/techno-robocup" title="GitHub">
+      <span class="fa-stack fa-lg" aria-hidden="true">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="sr-only">GitHub</span>
+   </a>
+  </li></ul>
+
+
+      
+      <p class="copyright text-muted">
+      
+      2026
+
+      
+
+      
+
+      
+
+      </p>
+      <p class="theme-by text-muted">
+        Powered by
+        <a href="https://beautifuljekyll.com">Beautiful Jekyll</a>
+      </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  
+  
+    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script src="/assets/js/beautifuljekyll.js"></script>
+    
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>
