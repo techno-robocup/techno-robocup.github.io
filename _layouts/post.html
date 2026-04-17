@@ -56,6 +56,21 @@ layout: base
           </div>
         </article>
 
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.pathname.includes('/pr-previews/')) {
+              var baseUrl = '{{ site.baseurl }}';
+              var images = document.querySelectorAll('.post-content img');
+              
+              images.forEach(function(img) {
+                var src = img.getAttribute('src');
+                if (src && src.startsWith('/assets/')) {
+                  img.src = baseUrl + src;
+                }
+              });
+            }
+          });
+        </script>
         {% if page.after-content %}
           <div class="after-content">
             {% for file in page.after-content %}
