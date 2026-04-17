@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://techno-robocup.github.io/pr-previews/PR_52/feed.xml" rel="self" type="application/atom+xml" /><link href="https://techno-robocup.github.io/pr-previews/PR_52/" rel="alternate" type="text/html" /><updated>2026-04-17T17:09:52+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/feed.xml</id><title type="html">techno-robocup</title><subtitle>チーム techno のホームページです。情報発信をしていきます。</subtitle><entry><title type="html">Japan Competition Results and Next Year’s Plans</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2026/04/11/result-japan.html" rel="alternate" type="text/html" title="Japan Competition Results and Next Year’s Plans" /><published>2026-04-11T17:00:00+09:00</published><updated>2026-04-11T17:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2026/04/11/result-japan</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2026/04/11/result-japan.html"><![CDATA[<p>Hi, I’m K10-K10!</p>
+
+<p>We participated in RoboCupJunior Japan Open 2026 Aichi from 27th to 29th March, and I’d like to share our results and our plans for next year.</p>
+
+<h1 id="results">Results</h1>
+
+<p>We finished in 3rd place.</p>
+
+<p><img src="/assets/images/standings.png" alt="Japan competition results" /></p>
+
+<p>We also won the “Best Presentation” award!</p>
+
+<p>Here is the presentation we made for the competition (sorry, it’s only available in Japanese):
+<a href="/assets/images/poster.pdf">Presentation (PDF)</a></p>
+
+<h1 id="robot-and-programs">Robot and Programs</h1>
+
+<p>We made several improvements from the Kanto competition, and this is our robot for the Japan competition:</p>
+
+<p><img src="/assets/images/robot_japan.jpg" alt="Robot" /></p>
+
+<p>We changed the tyres to silicone ones to improve grip, and we also added a structure to avoid getting stuck on toothpicks.</p>
+
+<p>The programs are available on GitHub:</p>
+<ul>
+  <li><a href="https://github.com/techno-robocup/robocup2026-raspberrypi-program">Raspberry Pi code</a></li>
+  <li><a href="https://github.com/techno-robocup/robocup2026-esp32-program">ESP32 code</a></li>
+</ul>
+
+<h1 id="results-of-each-run">Results of Each Run</h1>
+
+<p>We had 3 runs in the final. Here are the results.<br />
+More details are available <a href="https://rescue.rcjj.online/line/698da3849af715cb046f9855/Line">here</a>.</p>
+
+<h2 id="run-1">Run 1</h2>
+
+<ul>
+  <li>Score: 273</li>
+  <li>Time: 8 min 0 sec</li>
+</ul>
+
+<p><img src="/assets/images/run_1.png" alt="Run_1" /></p>
+
+<p>We had added gap handling, but it did not work well due to some issues.<br />
+Additionally, the robot got stuck before the rescue zone, so we spent a lot of time reaching the first checkpoint.</p>
+
+<p>In the rescue zone, we rescued 2 silver balls.</p>
+
+<h2 id="run-2">Run 2</h2>
+
+<ul>
+  <li>Score: 469</li>
+  <li>Time: 7 min 58 sec</li>
+</ul>
+
+<p><img src="/assets/images/run_2.png" alt="Run_2" /></p>
+
+<p>We removed the gap handling, and the run went much better.<br />
+The structure to avoid toothpicks also worked well, and we were able to exit successfully.</p>
+
+<p>In the rescue zone, we rescued 2 silver balls.</p>
+
+<h2 id="run-3">Run 3</h2>
+
+<ul>
+  <li>Score: 595</li>
+  <li>Time: 7 min 16 sec</li>
+</ul>
+
+<p><img src="/assets/images/run_3.png" alt="Run_3" /></p>
+
+<p>The fifth tile was not secured.<br />
+Otherwise, the run went well, and we rescued 2 silver balls in the rescue zone.</p>
+
+<h2 id="overall-results-and-reflection">Overall Results and Reflection</h2>
+
+<p>We had problems in the first run, but we were able to fix them and improve our performance in the second and third runs.</p>
+
+<p>We finished in third place by a narrow margin, which was disappointing for us. However, this was our first time participating in the Japan competition, and we learned a lot from the experience.</p>
+
+<p>We still have many issues to address. For example, we were not able to consistently exit the rescue zone, and our line tracing was not stable enough.</p>
+
+<p><del>If the first run had gone well, we might have placed second</del></p>
+
+<h1 id="next-years-plans">Next Year’s Plans</h1>
+
+<p>We will have some changes in team members next year.</p>
+
+<p>This year, our electronics were not very reliable, and we broke several motors, so we want to build a more robust robot next year.</p>
+
+<p>We also aim to improve our line tracing and rescue zone handling, and develop a more stable system overall.</p>
+
+<p>We plan to continue participating in this competition, and we look forward to next year!</p>
+
+<p>Thank you for reading!</p>]]></content><author><name>K10-K10</name></author><category term="robot" /><category term="K10-K10&apos;s article" /><summary type="html"><![CDATA[Hi, I’m K10-K10!]]></summary></entry><entry><title type="html">Visit to Hamano Products (浜野製作所)</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2026/03/14/hamano-products-visit.html" rel="alternate" type="text/html" title="Visit to Hamano Products (浜野製作所)" /><published>2026-03-14T10:00:00+09:00</published><updated>2026-03-14T10:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2026/03/14/hamano-products-visit</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2026/03/14/hamano-products-visit.html"><![CDATA[<p>Hi!</p>
+
+<p>On February 16th, we visited Hamano Products (浜野製作所).</p>
+
+<p>This was one of the most meaningful learning opportunities for our team this season.
+We learned many things that we had never considered before, especially how to think about a robot not only as a collection of parts, but as a balanced system where each decision affects the whole machine.</p>
+
+<h1 id="what-we-learned-at-hamano-products">What we learned at Hamano Products</h1>
+
+<p>The most valuable topic was weight distribution.
+We discussed where the robot’s weight should be concentrated and why it should not be biased too much to one side.</p>
+
+<p>Before this visit, we tended to focus mainly on “Can this part fit?” or “Can this mechanism move?”
+At Hamano Products, we learned to ask better questions:</p>
+
+<ul>
+  <li>Where is the center of gravity during acceleration and deceleration?</li>
+  <li>Does the current layout increase the risk of tipping when the robot turns?</li>
+  <li>Are heavy components placed to support stable line tracing and obstacle handling?</li>
+</ul>
+
+<p>These discussions gave us a new perspective on stability, movement, and control during runs.
+Even if two robots have similar software, mechanical balance can produce very different performance.</p>
+
+<h1 id="why-this-matters-for-our-robot">Why this matters for our robot</h1>
+
+<p>Our robot contains many components in a compact frame: motors, battery, controller board, camera, and custom mechanisms.
+Because of this, small placement differences can have a big impact.</p>
+
+<p>For example, if too much mass is concentrated toward one corner, the robot may drift more during turns.
+If the center of gravity is too high, vibrations can increase and sensor readings can become less stable.</p>
+
+<p>After the visit, we reviewed our current design and identified several improvements:</p>
+
+<ul>
+  <li>Reposition heavy parts to reduce left-right imbalance.</li>
+  <li>Keep weight lower in the chassis where possible.</li>
+  <li>Recheck frame rigidity to reduce flex during fast motion.</li>
+  <li>Test each mechanical change with repeatable driving logs.</li>
+</ul>
+
+<p>This visit reminded us that good performance is not only about “better code” but also about robust mechanical fundamentals.</p>
+
+<h1 id="photos-from-the-visit">Photos from the visit</h1>
+
+<p>The following photos show our robot and related setups that we discussed during the visit.
+Seeing the real machine from multiple angles helped us notice details we had missed before.</p>
+
+<p><img src="/assets/images/20260314/PXL_20260216_102525311.jpg" alt="Robot photo 1 at Hamano Products" /></p>
+
+<p><img src="/assets/images/20260314/PXL_20260216_102550125.jpg" alt="Robot photo 2 at Hamano Products" /></p>
+
+<p><img src="/assets/images/20260314/PXL_20260216_102557783.jpg" alt="Robot photo 3 at Hamano Products" /></p>
+
+<p><img src="/assets/images/20260314/PXL_20260216_102604497.jpg" alt="Robot photo 4 at Hamano Products" /></p>
+
+<h1 id="next-steps">Next steps</h1>
+
+<p>We are now turning what we learned into concrete experiments.
+In our next development cycle, we will compare performance before and after each hardware adjustment and document the results.</p>
+
+<p>We are very grateful for this opportunity at Hamano Products (浜野製作所).
+The visit gave us technical insights, but also motivation to keep improving as a team.</p>
+
+<p>Thanks for reading!</p>]]></content><author><name>rotarymars</name></author><category term="robot" /><category term="rotarymars&apos;s article" /><category term="visit" /><summary type="html"><![CDATA[Hi!]]></summary></entry><entry><title type="html">Recent progress since our last article</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2026/01/21/progress.html" rel="alternate" type="text/html" title="Recent progress since our last article" /><published>2026-01-21T10:00:00+09:00</published><updated>2026-01-21T10:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2026/01/21/progress</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2026/01/21/progress.html"><![CDATA[<p>Hi!</p>
+
+<p>It’s been a long time since we last updated our site.</p>
+
+<p>Over the past few months we’ve made great progress. Here’s an update.</p>
+
+<h1 id="in-recent-months">In recent months</h1>
+<h2 id="our-first-tournament">Our first tournament</h2>
+
+<p>We prepared for and entered our first competition, the <a href="https://rcjj-kanto.org/tokyo/">East Tokyo tournament</a>.</p>
+
+<p><img src="/assets/images/2026-01-21-robot1.jpg" alt="Our robot at the East Tokyo tournament" /></p>
+
+<p>We placed 10th out of 17 teams with a score of 308 points.</p>
+
+<p>We couldn’t perform our best because the Raspberry Pi on our robot shut down during the second run.</p>
+
+<p>Fortunately, because it shut down just before we were about to start, we were able to restart it and resume the run from the middle.</p>
+
+<h2 id="our-second-tournament">Our second tournament</h2>
+
+<p>Despite the troubles at the East Tokyo tournament, we were able to compete in the <a href="https://rcjj-kanto.org/">Kanto tournament</a>.</p>
+
+<p><a href="/assets/2026-kanto-poster.pdf">Our team’s poster submitted to the Kanto tournament(Japanese)</a></p>
+
+<p>Despite unexpected issues, we placed 1st out of 14 teams with a score of 408 points.</p>
+
+<p>This was a great achievement for us, and we’re very happy.</p>
+
+<p>We also received the “Robocuper Award”, which is given to the team with the best poster.</p>
+
+<h1 id="finally">Finally</h1>
+<p>Thanks for reading!</p>
+
+<p>We’ll keep improving our robot and will post updates in the future.</p>]]></content><author><name>rotarymars</name></author><category term="robot" /><category term="rotarymars&apos;s article" /><summary type="html"><![CDATA[Hi!]]></summary></entry><entry><title type="html">Recent progress</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2025/09/21/progress2.html" rel="alternate" type="text/html" title="Recent progress" /><published>2025-09-21T10:00:00+09:00</published><updated>2025-09-21T10:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2025/09/21/progress2</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2025/09/21/progress2.html"><![CDATA[<p>Hello, I’m K10-K10.</p>
+
+<p>I’d like to share our recently progress (Aug–Sep).</p>
+
+<h1 id="progress">Progress</h1>
+
+<h2 id="line-trace">Line-trace</h2>
+
+<p>We have created a line-tracing program, and it’s almost done.
+We use proportional control.
+And rotarymars created a program to make a video from the line-tracing pictures taken by the robot.</p>
+
+<h2 id="detecting-red-line">Detecting red line</h2>
+
+<p>I improved the red line detection program.</p>
+
+<p>Past → Now</p>
+
+<ul>
+  <li>Previously: checked the minimal area</li>
+  <li>Now: check the number of red points</li>
+</ul>
+
+<p>But I still can’t find good HSV values for the red line.</p>
+
+<h2 id="electronic-circuit">Electronic circuit</h2>
+
+<p>We built the electronic circuit ourselves, but it doesn’t look good.
+The voltmeter and motor broke.</p>
+
+<p>Because the motor often breaks down, we checked the circuit and fixed it.
+A new one will arrive on Monday.</p>
+
+<h2 id="rescue">Rescue</h2>
+
+<p>We took pictures and labeled black and silver balls.</p>
+
+<h2 id="others">Others</h2>
+
+<p>Someone forgot to turn off the LiPo battery, and it got damaged.
+So we started writing daily reports.
+Each report includes reflections of the day and some checkpoints.</p>
+
+<h1 id="future-plans">Future plans</h1>
+
+<p>The line-tracing program is almost complete.
+So, we will start working on the rescue program (with deep learning).
+Right now, I’m struggling with detecting silver, and I want to solve this problem.</p>
+
+<p>Also, we need to create obstacle detection using the ultrasonic sensor.
+But the sensor doesn’t work as I hoped. ;;</p>
+
+<p>Thank you for reading~</p>]]></content><author><name>K10-K10</name></author><category term="robot" /><category term="K10-K10&apos;s article" /><category term="free-talk" /><summary type="html"><![CDATA[Hello, I’m K10-K10.]]></summary></entry><entry><title type="html">Development system</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2025/07/21/introducing.html" rel="alternate" type="text/html" title="Development system" /><published>2025-07-21T10:00:00+09:00</published><updated>2025-07-21T10:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2025/07/21/introducing</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2025/07/21/introducing.html"><![CDATA[<p>Hello. I’m rotarymars.</p>
+
+<p>Recently, I’ve been writing a lot of articles related to the robot, so this time, I’d like to write about our team’s development system.</p>
+
+<h1 id="team-structure">Team structure</h1>
+
+<p>Our team is structured as follows.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Number (Total)</th>
+      <th>Who</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>機体</td>
+      <td>1</td>
+      <td>ALPAKA</td>
+    </tr>
+    <tr>
+      <td>回路</td>
+      <td>2</td>
+      <td>K10-K10, rotarymars</td>
+    </tr>
+    <tr>
+      <td>ソフトウェア</td>
+      <td>2</td>
+      <td>K10-K10, rotarymars</td>
+    </tr>
+    <tr>
+      <td>ブログ</td>
+      <td>3</td>
+      <td>ALPAKA, K10-K10, rotarymars</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It’s like this.</p>
+
+<p>This means that on average, each member is responsible for <code class="language-plaintext highlighter-rouge">2.5</code> roles (we are looking for members).</p>
+
+<h1 id="development-system-for-the-robot">Development system for the robot</h1>
+<p>Since there is only one person involved in the development of the robot, we are working in the most convenient system for one person.</p>
+
+<p>I’d like to be able to participate more in the future, but it seems difficult to edit the robot at the same time due to various data.</p>
+
+<h1 id="development-system-for-the-circuit">Development system for the circuit</h1>
+<p>Since we are doing it with two people, we are trying to make it possible to communicate with each other.</p>
+
+<p>We use <a href="https://www.kicad.org/">kicad</a> to design the circuit, so we upload the data to <a href="https://github.com/">github</a>.</p>
+
+<p>This way, the data that the two people worked on is reflected when pulled.</p>
+
+<p>Personally, I’m not satisfied with the fact that I can’t see where the edit was made in <a href="https://www.kicad.org/">kicad</a> visually.</p>
+
+<h1 id="development-system-for-the-software">Development system for the software</h1>
+<p>The software is also done with <a href="https://github.com/">github</a>, so we can communicate with each other.</p>
+
+<p>Since the software is written in text, it is easier to see the diff than other development.</p>
+
+<h1 id="development-system-for-the-blog">Development system for the blog</h1>
+<p>The blog is also managed with <a href="https://github.com/">github</a>.</p>
+
+<p>We use <a href="https://jekyllrb.com/">jekyll</a> to create the blog.</p>
+
+<p><img src="/assets/images/2025-07-21-delta.png" alt="delta" /></p>
+
+<h1 id="development-system-for-the-team">Development system for the team</h1>
+
+<p>We use <a href="https://www.atlassian.com/">atlassian</a> for task management.</p>
+
+<p>This is a task management tool for realizing <a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%B8%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA">agile software development</a>, which lists tasks to be done by the team and makes it easier to estimate how much can be done within the deadline.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This time, I’ve written a short article, but I think the task management for the team is not well known, so I hope you’ll try it if you’re interested.</p>
+
+<p>Thank you for reading.</p>]]></content><author><name>rotarymars</name></author><category term="robot" /><category term="rotarymars&apos;s article" /><category term="software" /><summary type="html"><![CDATA[Hello. I’m rotarymars.]]></summary></entry><entry><title type="html">Robot introduction</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2025/07/09/robot.hardware.html" rel="alternate" type="text/html" title="Robot introduction" /><published>2025-07-09T10:00:00+09:00</published><updated>2025-07-09T10:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2025/07/09/robot.hardware</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2025/07/09/robot.hardware.html"><![CDATA[<p>Hello. I’m ALPAKA.
+I’ve made the robot, so I’d like to introduce it in the trial stage.</p>
+
+<hr />
+
+<h3 id="robot-name--pochi">Robot name : Pochi</h3>
+
+<hr />
+
+<h1 id="appearance">Appearance</h1>
+
+<p><img src="/assets/images/2025-07-10-flont.png" alt="front" /></p>
+
+<p><img src="/assets/images/2025-07-10-onrobot.png" alt="side-up" /></p>
+
+<hr />
+
+<h1 id="first-step">First step</h1>
+
+<p><img src="/assets/images/2025-07-10-1step.png" alt="1th-step" /></p>
+
+<p>The first step is to place the tires, the mobile battery, two cameras, and the ultrasonic sensor for seeing forward on the 5mm board.
+Since this robot uses raspberry pi, we decided to place both the circuit and raspberry pi in the second step in order to make the maintenance easy and to keep them close to each other.
+Also, since we are aiming for low center of gravity, we made the first step as compact as possible.</p>
+
+<hr />
+
+<h1 id="second-step">Second step</h1>
+
+<p><img src="/assets/images/2025-07-10-2step.png" alt="2nd-step" /></p>
+
+<p>The second step is to place the raspberry pi, the circuit, the mobile battery, the rescue arm, and the ultrasonic sensors on the left and right.
+Since the raspberry pi has a screw hole in the heat sink, we fixed it using that.
+The ultrasonic sensor is friction-fixed at a slightly higher position so as not to interfere with the tire.
+The second step is also made as compact as possible.</p>
+
+<hr />
+
+<h1 id="features">Features</h1>
+
+<p>This time, the robot is a self-made machine, not made with LEGO. We made this robot with stability in mind. And, there are three main features:</p>
+
+<p><strong>「Low center of gravity」「AI-based driving」「Latest rescue</strong></p>
+
+<p> </p>
+
+<h3 id="low-center-of-gravity">Low center of gravity</h3>
+
+<p>The rescue line has a height limit of 25cm, but this robot has almost all of its upper half used, and the lower half is almost all used. And, since we put a rather heavy mobile battery in the first step, the center of gravity could be placed at a place 5~6cm from the floor.</p>
+
+<h3 id="ai-based-driving">AI-based driving</h3>
+
+<p>Since the rescue, the cage detection, and the line tracing in this robot are done with AI, we use a raspberry pi and a dedicated camera. Therefore, we have set up a place for two cameras (one for line tracing and one for rescue).
+However, since the camera for line tracing is placed at a place 2~3cm from the floor, the field of view is too narrow, so it seems that it needs to be placed at a place 6cm from the floor.</p>
+
+<h3 id="latest-rescue">Latest rescue</h3>
+
+<p>In addition to using AI for rescue, we also made a rescue arm.</p>
+
+<p><img src="/assets/images/2025-07-10-arm.png" alt="rescue-arm" /></p>
+
+<p>This is based on the mechanism of <a href="https://www.youtube.com/@evbrobocup">EvB Robocup</a>.</p>
+
+<p>This arm has a string attached to it, and when the string is loosened, the ball can be placed, and when pulled, the string is stretched and the ball does not come out.</p>
+
+<p>While we cannot carry multiple balls at the same time, we can pick up balls near the wall, so we will aim for a full score of rescue using this.</p>
+
+<hr />
+
+<h1 id="finally">Finally</h1>
+
+<p>Until now, we were doing it with LEGO, but now we are making a self-made robot, so there is a little worry about not being able to change the robot quickly and not knowing if it will move. I want to work hard to be able to run.</p>
+
+<p><em>thank you for reading</em></p>]]></content><author><name>ALPAKA</name></author><category term="robot" /><category term="ALPAKA&apos;s article" /><category term="hardware" /><summary type="html"><![CDATA[Hello. I’m ALPAKA. I’ve made the robot, so I’d like to introduce it in the trial stage.]]></summary></entry><entry><title type="html">Red detection and 7-segment LED</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2025/06/20/RedMask.html" rel="alternate" type="text/html" title="Red detection and 7-segment LED" /><published>2025-06-20T10:00:00+09:00</published><updated>2025-06-20T10:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2025/06/20/RedMask</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2025/06/20/RedMask.html"><![CDATA[<p>Hello. I’m K10-K10.
+This time, I’d like to summarize the program for detecting red and the 7-segment LED for judging the status of the robot.</p>
+
+<h1 id="program">Program</h1>
+
+<p>The function for detecting red.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">detect_red_marks</span><span class="p">(</span><span class="n">orig_image</span><span class="p">,</span> <span class="n">blackline_image</span><span class="p">):</span>
+  <span class="n">image</span> <span class="o">=</span> <span class="n">orig_image</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+  <span class="k">global</span> <span class="n">red_marks</span><span class="p">,</span> <span class="n">red_black_detected</span>
+
+  <span class="n">hsv</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">COLOR_RGB2HSV</span><span class="p">)</span>
+
+  <span class="n">lower_red1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+  <span class="n">upper_red1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+
+  <span class="n">lower_red2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+  <span class="n">upper_red2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+
+  <span class="n">red_mask1</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">inRange</span><span class="p">(</span><span class="n">hsv</span><span class="p">,</span> <span class="n">lower_red1</span><span class="p">,</span> <span class="n">upper_red1</span><span class="p">)</span>
+  <span class="n">red_mask2</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">inRange</span><span class="p">(</span><span class="n">hsv</span><span class="p">,</span> <span class="n">lower_red2</span><span class="p">,</span> <span class="n">upper_red2</span><span class="p">)</span>
+
+  <span class="n">red_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">bitwise_or</span><span class="p">(</span><span class="n">red_mask1</span><span class="p">,</span> <span class="n">red_mask2</span><span class="p">)</span>
+
+  <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span>
+  <span class="n">red_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">erode</span><span class="p">(</span><span class="n">red_mask</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">red_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">dilate</span><span class="p">(</span><span class="n">red_mask</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+    <span class="n">time_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">())</span>
+    <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="n">time_str</span><span class="si">}</span><span class="s">_red_mask1.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">red_mask1</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="n">time_str</span><span class="si">}</span><span class="s">_red_mask2.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">red_mask2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="n">time_str</span><span class="si">}</span><span class="s">_red_mask.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">red_mask</span><span class="p">)</span>
+
+  <span class="n">contours</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">findContours</span><span class="p">(</span><span class="n">red_mask</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">RETR_EXTERNAL</span><span class="p">,</span>
+                                 <span class="n">cv2</span><span class="p">.</span><span class="n">CHAIN_APPROX_SIMPLE</span><span class="p">)</span>
+
+  <span class="n">red_marks</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">red_black_detected</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">for</span> <span class="n">contour</span> <span class="ow">in</span> <span class="n">contours</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">contourArea</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">min_red_area</span><span class="p">:</span>
+      <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">boundingRect</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+
+      <span class="n">center_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">w</span> <span class="o">//</span> <span class="mi">2</span>
+      <span class="n">center_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">//</span> <span class="mi">2</span>
+      <span class="n">red_marks</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+
+      <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+                 <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">circle</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The noise removal and the mark on the image are the same as the green in <a href="/2025/05/11/linetrace_program.html" target="_blank">the previous article</a>.</p>
+
+<h2 id="explanation">Explanation</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">lower_red1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+  <span class="n">upper_red1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+
+  <span class="n">lower_red2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+  <span class="n">upper_red2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>The red HSV (hue) is divided into 0-60 degrees and 300-360 degrees.
+When converted to OpenCV (0~180), it becomes 0-30 150-180 degrees.
+The values are different, but we will adjust them from now on.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">red_mask1</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">inRange</span><span class="p">(</span><span class="n">hsv</span><span class="p">,</span> <span class="n">lower_red1</span><span class="p">,</span> <span class="n">upper_red1</span><span class="p">)</span>
+  <span class="n">red_mask2</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">inRange</span><span class="p">(</span><span class="n">hsv</span><span class="p">,</span> <span class="n">lower_red2</span><span class="p">,</span> <span class="n">upper_red2</span><span class="p">)</span>
+
+  <span class="n">red_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">bitwise_or</span><span class="p">(</span><span class="n">red_mask1</span><span class="p">,</span> <span class="n">red_mask2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We filter with the color value range we just mentioned.
+<code class="language-plaintext highlighter-rouge">red_mask1</code> is the one with the lower color value
+<code class="language-plaintext highlighter-rouge">red_mask2</code> is the one with the higher color value.
+This way, the red is white, and the others are black.
+We apply <code class="language-plaintext highlighter-rouge">bitwise_or</code> to the two images, and get the final <code class="language-plaintext highlighter-rouge">red_mask</code>.
+<code class="language-plaintext highlighter-rouge">bitwise_or</code> returns the same result as the logical operator <code class="language-plaintext highlighter-rouge">or</code> to the image.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">画像1</th>
+      <th style="text-align: center">画像2</th>
+      <th style="text-align: center">出力</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">黒</td>
+      <td style="text-align: center">黒</td>
+      <td style="text-align: center">黒</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">黒</td>
+      <td style="text-align: center">白</td>
+      <td style="text-align: center">白</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">白</td>
+      <td style="text-align: center">黒</td>
+      <td style="text-align: center">白</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">白</td>
+      <td style="text-align: center">白</td>
+      <td style="text-align: center">白</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This way, the red is white, and the others are black.
+This way, we can perform mask processing even with red with two color values.</p>
+
+<h1 id="7-segment-led">7-segment LED</h1>
+
+<p>I want to be able to judge the operation of the robot with the LED lamp, so I introduced it.
+I didn’t know which pin corresponds to which (the one that comes up in the search was different from the one I was using), so I left a note here.</p>
+
+<h3 id="pin">Pin</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1——</td>
+      <td>——5</td>
+    </tr>
+    <tr>
+      <td>2——</td>
+      <td>——6</td>
+    </tr>
+    <tr>
+      <td>GND-</td>
+      <td>-GND</td>
+    </tr>
+    <tr>
+      <td>3——</td>
+      <td>——7</td>
+    </tr>
+    <tr>
+      <td>4——</td>
+      <td>——8</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="led">LED</h3>
+
+<pre>
+ ---5---
+|       |
+2       6
+|       |
+ ---1---
+|       |
+3       7
+|       |
+ ---4---   8 (dot)
+</pre>
+
+<h1 id="finally">Finally</h1>
+
+<p>I wanted to show the image that could be detected, but I forgot to take it.
+Also, the camera’s field of view for line tracing is too narrow in the current robot, so we need to fix it.
+The base error was also found, so I’m worried about whether it will be fixed in time.</p>
+
+<p>Also, when connecting the stabilized power supply, please make sure to check the decimal point position.
+<strong>Please don’t flow 33v thinking it’s 3.3v.</strong></p>
+
+<p>Thank you for reading~</p>]]></content><author><name>K10-K10</name></author><category term="robot" /><category term="K10-K10&apos;s article" /><category term="line-trace" /><category term="program" /><summary type="html"><![CDATA[Hello. I’m K10-K10. This time, I’d like to summarize the program for detecting red and the 7-segment LED for judging the status of the robot.]]></summary></entry><entry><title type="html">Parts used in the robot</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2025/05/31/parts.html" rel="alternate" type="text/html" title="Parts used in the robot" /><published>2025-05-31T10:00:00+09:00</published><updated>2025-05-31T10:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2025/05/31/parts</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2025/05/31/parts.html"><![CDATA[<p>Hello. I’m K10-K10.
+This time, I’d like to summarize the parts used in the robot.</p>
+
+<h1 id="progress-from-last-time">Progress from last time</h1>
+
+<p>The 3D data of the robot is complete, and the order and arrival have been completed.
+The gear that will be sandwiched between the motor and the tire will be handled by 3D printing, and the one that was tested and printed fits perfectly.</p>
+
+<h1 id="一覧">一覧</h1>
+
+<h2 id="microcontroller">Microcontroller</h2>
+
+<h3 id="raspberry-pi-5"><a href="https://www.marutsu.co.jp/pc/i/2782704/?srsltid=AfmBOoqydk9tS5XraCsqQw-dVpBfnG6gvRwokrS1R8Ei0NoOtyqtM-ZE">Raspberry Pi 5</a></h3>
+<p>Used for image processing.</p>
+
+<h3 id="ラズパイ用ヒートシンク"><a href="https://www.marutsu.co.jp/GoodsDetail.jsp?q=%E3%82%BF%E3%82%AB%E3%83%81%E9%9B%BB%E6%A9%9F%E5%B7%A5%E6%A5%AD%205%E7%94%A8%E3%83%95%E3%82%A1%E3%83%B3%E4%BB%98%20%E3%83%92%E3%83%BC%E3%83%88%E3%82%B7%E3%83%B3%E3%82%AF%E3%82%B1%E3%83%BC%E3%82%B9&amp;salesGoodsCode=2839645&amp;shopNo=3">ラズパイ用ヒートシンク</a></h3>
+<p>Used for heat dissipation of Raspberry Pi.</p>
+
+<h3 id="esp32-devkitc-32e"><a href="https://akizukidenshi.com/catalog/g/g117073/">ESP32-DevKitC-32E</a></h3>
+<p>It communicates with the Raspberry Pi to control the motor and process the sensor.<br />
+There may be a shortage of pins;)</p>
+
+<h2 id="motor">Motor</h2>
+
+<h3 id="feetech-サーボ-fb5311m-360"><a href="https://akizukidenshi.com/catalog/g/g116309/">FEETECH サーボ FB5311M-360</a></h3>
+<p>Used to move the robot body. Four are planned to be installed.<br />
+The gear will be sandwiched between the tire and the motor.<br />
+One more will be installed on the top of the robot for the arm up and down.</p>
+
+<h3 id="マイクロサーボ-9g-sg-90"><a href="https://akizukidenshi.com/catalog/g/g108761/">マイクロサーボ 9g SG-90</a></h3>
+<p>Used to pull the string in the arm.<br />
+The string is held by pulling the string while the string is loosened, and the ball is grabbed.<br />
+We will test whether it works well later.</p>
+
+<h2 id="camera">Camera</h2>
+
+<h3 id="raspberry-pi-camera-module-3広角"><a href="https://www.marutsu.co.jp/pc/i/2582864/">Raspberry Pi Camera Module 3（広角）</a></h3>
+<p>Used for line tracing.</p>
+
+<h3 id="raspberry-pi-camera-module-3標準画角"><a href="https://www.marutsu.co.jp/pc/i/2582866/">Raspberry Pi Camera Module 3（標準画角）</a></h3>
+<p>Used for rescue.</p>
+
+<h2 id="power-supply">Power supply</h2>
+
+<h3 id="kypom-k6-74v-1300mah-30c60c-リポバッテリー"><a href="https://www.amazon.co.jp/Kypom-7-4V-1300mAh-30C60C-%E3%83%90%E3%83%83%E3%83%86%E3%83%AA%E3%83%BC/dp/B017VOKS4U">Kypom K6 7.4V 1300mAh 30C60C リポバッテリー</a></h3>
+<p>Used for the motor.</p>
+
+<h3 id="anker製モバイルバッテリー型番不明">Anker製モバイルバッテリー（型番不明）</h3>
+<p>Used for Raspberry Pi.<br />
+By separating the motor power, we can avoid the influence of noise.</p>
+
+<h2 id="others">Others</h2>
+
+<h3 id="超音波距離センサー-hc-sr04"><a href="https://akizukidenshi.com/catalog/g/g111009/">超音波距離センサー HC-SR04</a></h3>
+<p>Used to measure the distance to the wall.</p>
+
+<h3 id="赤色7セグメントled表示器-カソードコモン-osl10391-lra"><a href="https://akizukidenshi.com/catalog/g/g130319/">赤色7セグメントLED表示器 カソードコモン OSL10391-LRA</a></h3>
+<p>Used for the robot’s status display.<br />
+There may be a shortage of pins on the ESP32 side.</p>
+
+<h3 id="波動スイッチ-ds-850k-s-on"><a href="https://akizukidenshi.com/catalog/g/g115740/">波動スイッチ DS-850K-S-ON</a></h3>
+<p>Used for the start and stop switch.</p>
+
+<h1 id="future-plans">Future plans</h1>
+
+<p>The 3D printed robot parts have arrived, so we will start assembly.<br />
+Next, we will continue to advance the red detection program and the efficiency of the control system.</p>
+
+<p>Addition: I think it’s better not to use the insert nut.</p>
+
+<p>Thank you for reading~</p>]]></content><author><name>K10-K10</name></author><category term="robot" /><category term="K10-K10&apos;s article" /><summary type="html"><![CDATA[Hello. I’m K10-K10. This time, I’d like to summarize the parts used in the robot.]]></summary></entry><entry><title type="html">Line tracing program</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2025/05/11/linetrace_program.html" rel="alternate" type="text/html" title="Line tracing program" /><published>2025-05-11T10:00:00+09:00</published><updated>2025-05-11T10:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2025/05/11/linetrace_program</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2025/05/11/linetrace_program.html"><![CDATA[<p>Hello. I’m rotarymars.</p>
+
+<p>First of all, I’d like to announce the update frequency of the blog again.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>ALPAKA</td>
+      <td>The remainder when the month is divided by 3 is 0 or 1</td>
+    </tr>
+    <tr>
+      <td>K10-K10</td>
+      <td>The remainder when the month is divided by 3 is 0 or 2</td>
+    </tr>
+    <tr>
+      <td>rotarymars</td>
+      <td>The remainder when the month is divided by 3 is 1 or 2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We will update the article once a month in these months, so please look forward to us.</p>
+
+<h1 id="about-the-content-of-this-article">About the content of this article</h1>
+<p>This time, I’d like to write about the line tracing program that we are currently considering.</p>
+
+<p>The program is about <a href="https://github.com/techno-robocup/robocup2025_raspberrypi_program/tree/2aa6a78f848aa399d7de8e9522e22457549cda2c">this point</a>.</p>
+
+<h1 id="first-what-will-we-use-to-do-line-tracing">First, what will we use to do line tracing?</h1>
+<p>We want to continue to use the camera for line tracing this year.</p>
+
+<p>Specifically, we want to connect a camera like <a href="https://www.marutsu.co.jp/pc/i/2582866/?srsltid=AfmBOopbmXQJaQxBT3iPoE_9YWJHDGGlkC7d1VmHUMrUX68OTDen-XPl">this</a> to the Raspberrypi and get the image to do line tracing.</p>
+
+<p>I just want to let you know that we haven’t been able to test the actual run because the robot hasn’t been completed yet.</p>
+
+<h1 id="actual-program">Actual program</h1>
+<p>The program is quite long, so I’ll paste it step by step.
+Also, it’s very ugly, so it may be difficult to read (I want to make a class someday, but I haven’t done anything yet).</p>
+
+<p>By the way, this time, we’ll look at modules/settings.py, which is particularly related to line tracing.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">libcamera</span> <span class="kn">import</span> <span class="n">controls</span>
+<span class="kn">from</span> <span class="n">picamera2</span> <span class="kn">import</span> <span class="n">MappedArray</span>
+<span class="kn">import</span> <span class="n">cv2</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">threading</span>
+<span class="c1"># 途中略
+</span><span class="k">def</span> <span class="nf">Linetrace_Camera_Pre_callback</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Linetrace precallback called</span><span class="sh">"</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()))</span>
+
+  <span class="k">global</span> <span class="n">lastblackline</span><span class="p">,</span> <span class="n">slope</span>
+
+  <span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nc">MappedArray</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="sh">"</span><span class="s">lores</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">m</span><span class="p">:</span>
+      <span class="n">image</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">array</span>
+
+      <span class="n">camera_x</span> <span class="o">=</span> <span class="n">Linetrace_Camera_lores_width</span>
+      <span class="n">camera_y</span> <span class="o">=</span> <span class="n">Linetrace_Camera_lores_height</span>
+
+      <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">())</span><span class="si">}</span><span class="s">_original.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+
+      <span class="n">gray_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">COLOR_RGB2GRAY</span><span class="p">)</span>
+
+      <span class="n">_</span><span class="p">,</span> <span class="n">binary_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">threshold</span><span class="p">(</span><span class="n">gray_image</span><span class="p">,</span> <span class="n">Black_White_Threshold</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>
+                                      <span class="n">cv2</span><span class="p">.</span><span class="n">THRESH_BINARY_INV</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">())</span><span class="si">}</span><span class="s">_binary.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">binary_image</span><span class="p">)</span>
+
+      <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span>
+      <span class="n">binary_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">erode</span><span class="p">(</span><span class="n">binary_image</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+      <span class="n">binary_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">dilate</span><span class="p">(</span><span class="n">binary_image</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+      <span class="nf">detect_green_marks</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">binary_image</span><span class="p">)</span>
+
+      <span class="n">contours</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">findContours</span><span class="p">(</span><span class="n">binary_image</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">RETR_TREE</span><span class="p">,</span>
+                                     <span class="n">cv2</span><span class="p">.</span><span class="n">CHAIN_APPROX_NONE</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">contours</span><span class="p">:</span>
+        <span class="k">return</span>
+
+      <span class="n">best_contour</span> <span class="o">=</span> <span class="nf">find_best_contour</span><span class="p">(</span><span class="n">contours</span><span class="p">,</span> <span class="n">camera_x</span><span class="p">,</span> <span class="n">camera_y</span><span class="p">,</span>
+                                       <span class="n">lastblackline</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">best_contour</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+      <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span> <span class="o">=</span> <span class="nf">calculate_contour_center</span><span class="p">(</span><span class="n">best_contour</span><span class="p">)</span>
+
+      <span class="k">with</span> <span class="n">LASTBLACKLINE_LOCK</span><span class="p">:</span>
+        <span class="n">lastblackline</span> <span class="o">=</span> <span class="n">cx</span>
+
+      <span class="k">with</span> <span class="n">SLOPE_LOCK</span><span class="p">:</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="nf">calculate_slope</span><span class="p">(</span><span class="n">best_contour</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+        <span class="n">debug_image</span> <span class="o">=</span> <span class="nf">visualize_tracking</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">best_contour</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">())</span><span class="si">}</span><span class="s">_tracking.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">debug_image</span><span class="p">)</span>
+
+  <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+      <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Error in line tracing: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Let’s look at it step by step.</p>
+<h2 id="line-1--6">Line 1 ~ 6</h2>
+<p>As you can see, we’re including the necessary libraries (in Python, they’re called modules) and importing them.</p>
+<h2 id="line-8-">Line 8 ~</h2>
+<p>It’s finally time for the explanation.</p>
+
+<p>First, let’s explain what precallback is.</p>
+
+<p>In Raspberrypi, you can preview the camera image by using the <code class="language-plaintext highlighter-rouge">rpicam-hello</code> command (the command name may be different).</p>
+
+<p>The command is a program that sends an image acquisition request and then displays the image.</p>
+
+<p>The thing used at that time is the <code class="language-plaintext highlighter-rouge">picamera2</code> library (module).</p>
+
+<p>Specifically, you can specify a <code class="language-plaintext highlighter-rouge">precallback function</code> when generating the camera object.</p>
+
+<p>It is <code class="language-plaintext highlighter-rouge">None</code> by default, and there is no hook when the image is acquired.</p>
+
+<p>However, by registering a function here, the object is passed to the first argument of the function (in this case, <code class="language-plaintext highlighter-rouge">request</code>).</p>
+
+<p>By doing this, the image data stored in <code class="language-plaintext highlighter-rouge">request</code> can be obtained as a <code class="language-plaintext highlighter-rouge">numpy</code> array, <code class="language-plaintext highlighter-rouge">lores</code> quality.</p>
+
+<p>This way, we can avoid capturing the image every time it is needed, and we can get the image faster (the processing inside the function is heavy, so I don’t know how to say it, but if we don’t do anything, we can get it at about 20msec/frame).</p>
+
+<p>However, if there is an operation that consumes a lot of CPU resources in that function, if the camera is not stopped when it is not in use, it will consume a lot of power.</p>
+
+<p>Therefore, the camera should be started and stopped separately when it is in use and not in use.</p>
+
+<h3 id="line-9--10">Line 9 ~ 10</h3>
+<p>As you can see, when DEBUG_MODE is enabled, the UNIX TIME when the function is called is printed.</p>
+<h3 id="line-12">Line 12</h3>
+<p>Global variables are declared.</p>
+
+<p>Let’s talk about the variables used here.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable name</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>lastblackline</td>
+      <td>The center coordinate of the previous black line</td>
+    </tr>
+    <tr>
+      <td>slope</td>
+      <td>The slope of the black line</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>By making these global variables, we can access them from the main process.</p>
+
+<h3 id="line-14--22">Line 14 ~ 22</h3>
+<p>Let’s ignore all exceptions for now.</p>
+
+<p>The image is stored in the variable <code class="language-plaintext highlighter-rouge">image</code> as a numpy array.</p>
+
+<p><code class="language-plaintext highlighter-rouge">camera_x</code> and <code class="language-plaintext highlighter-rouge">camera_y</code> store the vertical and horizontal number of pixels of the camera.</p>
+
+<p>And when DEBUG_MODE is enabled, the original image is saved.</p>
+
+<h3 id="line-24--30">Line 24 ~ 30</h3>
+<p>The image is converted to grayscale. This is because we want to binarize the image later.</p>
+
+<p>In line 26, the image binarized with <code class="language-plaintext highlighter-rouge">Black_White_Threshold</code> as the threshold is stored in <code class="language-plaintext highlighter-rouge">binary_image</code>. The ones that are close to black become white, and the ones that are close to white become black.</p>
+
+<p>Here’s a side note, but the reason for converting to grayscale is that we can’t binarize a color image directly into black and white. If we apply it directly to the function, each color (r, g, b) will be binarized as each threshold, and a highly saturated (?) image will be created (I recommend actually seeing it for explanation).</p>
+
+<p>And when <code class="language-plaintext highlighter-rouge">DEBUG_MODE</code> is enabled, the binarized image is saved.</p>
+
+<h3 id="line-32--35">Line 32 ~ 35</h3>
+<p>Here, we remove the noise contained in the binarized image.</p>
+
+<p>Let’s explain how each function is doing.</p>
+
+<h4 id="kernel--npones3-3-npuint8">kernel = np.ones((3, 3), np.uint8)</h4>
+<p>This creates a 3x3 <code class="language-plaintext highlighter-rouge">numpy</code> two-dimensional array. All elements are <code class="language-plaintext highlighter-rouge">1</code>.</p>
+
+<h4 id="binary_image--cv2erodebinary_image-kernel-iterations2">binary_image = cv2.erode(binary_image, kernel, iterations=2)</h4>
+<p>Using the <code class="language-plaintext highlighter-rouge">kernel</code> we just created, we remove the noise from <code class="language-plaintext highlighter-rouge">binary_image</code>. Specifically, if one of the pixels in the range of <code class="language-plaintext highlighter-rouge">kernel</code> is black (0), the center pixel is converted to black (0).</p>
+
+<p>This way, the white blocks become smaller and the noise is removed.</p>
+
+<p>By the way, the black and white determination is made by whether the number of each element of <code class="language-plaintext highlighter-rouge">kernel</code> is below or above.</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">iterations=2</code>, this is executed twice.</p>
+<h4 id="binary_image--cv2dilatebinary_image-kernel-iterations3">binary_image = cv2.dilate(binary_image, kernel, iterations=3)</h4>
+<p>This is the opposite of <code class="language-plaintext highlighter-rouge">erode</code>. That is, the black blocks become larger.</p>
+
+<p>Specifically, if one of the pixels in the range of <code class="language-plaintext highlighter-rouge">kernel</code> is white (1), the center pixel is converted to white (1).</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">iterations=3</code>, this is executed three times.</p>
+
+<h3 id="line-36">Line 36</h3>
+<p>Here, we recognize the green marks, and perform the relative position determination. I’ll explain the function later.</p>
+
+<h3 id="line-37--45">Line 37 ~ 45</h3>
+<p><code class="language-plaintext highlighter-rouge">contours</code> is recognized using the cv2 function.</p>
+
+<p>Then, using the <code class="language-plaintext highlighter-rouge">find_best_contour</code> function we created ourselves, we get the most appropriate contour and store it in <code class="language-plaintext highlighter-rouge">best_contour</code>.</p>
+
+<h3 id="line-47--50">Line 47 ~ 50</h3>
+<p>Here, we get the center coordinates of <code class="language-plaintext highlighter-rouge">best_contour</code>.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">best_contour</code> is not found, the process is ended as is.</p>
+
+<h3 id="line-53--56">Line 53 ~ 56</h3>
+<p>Here, we update <code class="language-plaintext highlighter-rouge">lastblackline</code> and <code class="language-plaintext highlighter-rouge">slope</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">lastblackline</code> represents the x-coordinate of <code class="language-plaintext highlighter-rouge">blackline</code>, and is used to find <code class="language-plaintext highlighter-rouge">best_contour</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">slope</code> is the slope of the black line.</p>
+
+<p>Specifically, the slope from the center of the bottom of the image to the center of <code class="language-plaintext highlighter-rouge">best_contour</code> is calculated.</p>
+
+<p>By the way, <code class="language-plaintext highlighter-rouge">with ..._LOCK:</code> is locking the <code class="language-plaintext highlighter-rouge">..._LOCK</code> object.</p>
+
+<p>Locking is a mechanism to prevent other processes from using a variable when a certain process is using it.</p>
+
+<p>This way, the writing to this variable becomes atomic (exclusive) (it is guaranteed that it will not become strange if it is edited at the same time. It is also necessary to set it when reading).</p>
+
+<p>※I’m not very familiar with it, but I think it’s probably an OS-level operation, so it’s better not to use it too much to be able to process faster.</p>
+
+<h3 id="line-57-">Line 57 ~</h3>
+<p>When <code class="language-plaintext highlighter-rouge">DEBUG_MODE</code> is enabled, the image is saved.</p>
+
+<p>And then, we’re handling exceptions. It’s simple, isn’t it?</p>
+
+<h1 id="finally">Finally</h1>
+<p>I hope you understand how the program is working. I want to fix the part where the image passed as an argument to the function that detects the green mark is directly overwritten as soon as possible.</p>
+
+<p>This time, I haven’t been able to explain all the functions (because I didn’t have much time), but I hope you understand what I’m doing.</p>
+
+<p>I want the team members to read this blog and understand the contents of the program.</p>
+
+<p>Thank you.</p>
+
+<p>↑↑I also want to follow K10-K10, so I’ll add it at the end.↑↑</p>]]></content><author><name>rotarymars</name></author><category term="robot" /><category term="rotarymars&apos;s article" /><category term="line-trace" /><category term="program" /><summary type="html"><![CDATA[Hello. I’m rotarymars.]]></summary></entry><entry><title type="html">Recent progress</title><link href="https://techno-robocup.github.io/pr-previews/PR_52/2025/04/18/progress.html" rel="alternate" type="text/html" title="Recent progress" /><published>2025-04-18T10:00:00+09:00</published><updated>2025-04-18T10:00:00+09:00</updated><id>https://techno-robocup.github.io/pr-previews/PR_52/2025/04/18/progress</id><content type="html" xml:base="https://techno-robocup.github.io/pr-previews/PR_52/2025/04/18/progress.html"><![CDATA[<p>Hello. I’m K10-K10.</p>
+
+<p>This time, I’d like to summarize the progress and future plans from the Kanto competition.</p>
+
+<h1 id="progress--future-plans">Progress &amp; future plans</h1>
+
+<h3 id="robot">Robot</h3>
+
+<p>From now on, the robot will be made not with LEGO but with a 3D printer.
+For that, ALPAKA is creating 3D data (about 50% is done).</p>
+
+<h3 id="motor">Motor</h3>
+
+<p>For the self-made robot, we will use “FEETECH servo FB5311M-360”.
+We will also use it for the rescue arm.
+However, the gear for the output shaft of the motor and the gear for the tire have not been found yet.</p>
+
+<h3 id="sensor">Sensor</h3>
+
+<p>We will change the method of confirming the contact with the wall from the touch sensor to the ultrasonic sensor.
+The sensor itself is in my hand, but I haven’t touched it yet.</p>
+
+<p>For line tracing and rescue, we will continue to use the camera.
+Machine learning will also continue to use “YOLO”, but since there is also the height of the camera, we need to do that too…
+For YOLO, please see <a href="/2025/02/24/yolo_machine_learning.html" target="_blank">here</a>.</p>
+
+<h3 id="other">Other</h3>
+<p>Since the robot is no longer made with EV3, we will use Raspberry Pi &amp; ESP32 as the microcontroller.
+We will use i2c communication to exchange data between the two microcontrollers (the basic format is already done, so we just need to make the format).
+We will also be able to change the values of the ultrasonic sensor and the motor.</p>
+
+<h1 id="future-plans">Future plans</h1>
+
+<p>Creating a robot cannot be started without a physical robot.
+I want to quickly complete the 3D data and solve the problem of the gear.
+I will work hard this year to be able to go to the Japan competition, so please look forward to us.</p>
+
+<p>Thank you for reading~</p>]]></content><author><name>K10-K10</name></author><category term="robot" /><category term="K10-K10&apos;s article" /><category term="free-talk" /><summary type="html"><![CDATA[Hello. I’m K10-K10.]]></summary></entry></feed>
