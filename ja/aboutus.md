@@ -2,6 +2,7 @@
 layout: page
 title: About us
 lang: ja
+permalink: /ja/aboutus/
 ---
 
 ロボカップのためのロボットを作っているチーム「TECHNO」のブログです。

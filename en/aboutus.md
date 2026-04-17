@@ -2,35 +2,37 @@
 layout: page
 title: About us
 lang: en
+permalink: /en/aboutus/
 ---
 
-ロボカップのためのロボットを作っているチーム「TECHNO」のブログです。
+We are a team "TECHNO" that makes robots for RoboCup Junior. This is our blog.
 
-メンバーを紹介します。
+Members introduce themselves.
 
 # ROTARYMARS
 
-### 主な担当
+### Main responsibility
 
-- センサー周りのプログラム
-- 回路
+- Sensor-related programs
+- Circuit design
 
-### 軽めな自己紹介
+### Light self-introduction
 
-このチームでプログラムや回路を今後担当していく予定の ROTARYMARS です。<br>
-回路についての知識が全く無いので、今勉強に励んでいるところです。<br>
-勉強に良いサイトなどがあれば絶賛募集中です！
+This is ROTARYMARS, who plans to take on programming and circuit design in the future.<br>
+Since I have no knowledge of circuits, I am currently studying.<br>
+If you know any good study sites, please let me know!
 
 # K10-K10
 
-###  主な担当
+###  Main responsibility
 
-- 通信
+- Communication
+- Rescue program
 
-K10-K10です。のんびりやってます。
+I am K10-K10. I am taking it easy.
 
-C++とPerlの勉強をしています。回路も少し。
+I am studying C++ and Perl. I am also learning about circuits.
 
-そろそろ新しいPCがほしいです。
+I would like a new PC soon.
 
-[個人サイトです](https://k10-k10.github.io){:target="_blank"}
+[Personal website](https://k10-k10.github.io){:target="_blank"}
