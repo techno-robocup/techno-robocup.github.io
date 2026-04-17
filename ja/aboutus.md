@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About us
+lang: ja
 ---
 
 ロボカップのためのロボットを作っているチーム「TECHNO」のブログです。
