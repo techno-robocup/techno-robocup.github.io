@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Beautiful Jekyll 6.0.1 | Copyright Dean Attali 2023 -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6935558663648820"
+     crossorigin="anonymous"></script>
+  
+
+  
+
+  
+
+  <title>Parts used in the robot</title>
+
+  
+  
+  <meta name="author" content="K10-K10">
+  
+
+  <meta name="description" content="Hello. I’m K10-K10. This time, I’d like to summarize the parts used in the robot. Progress from last time The 3D data of the robot is complete, and the order and arrival have been completed. The gear that will be sandwiched between the motor and the tire will be handled by 3D printing, and the one that was tested and printed fits perfectly. 一覧 Microcontroller Raspberry Pi 5 Used for image processing. ラズパイ用ヒートシンク Used for heat dissipation of Raspberry Pi. ESP32-DevKitC-32E It communicates with the Raspberry Pi to control the motor and process the sensor. There may be a shortage of pins;) Motor FEETECH サーボ FB5311M-360 Used to move the robot body. Four are planned to be installed. The gear will be sandwiched between the tire and the motor. One more will be installed on the top of the robot for the arm up and down. マイクロサーボ 9g SG-90 Used...">
+
+  
+
+  
+  <meta name="keywords" content="robocup junior,robot,line trace,rescue line,rcjj,ロボカップ,ロボット,ライントレース,レスキューライン">
+  
+
+  
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CT437Q24DM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CT437Q24DM');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+      
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    
+      
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/pr-previews/PR_60/assets/css/bootstrap-social.css">
+    
+      <link rel="stylesheet" href="/pr-previews/PR_60/assets/css/beautifuljekyll.css">
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/pr-previews/PR_60/assets/css/custom-styles.css">
+    
+  
+
+  
+  
+  
+
+  
+
+  
+  <meta property="og:site_name" content="techno-robocup">
+  <meta property="og:title" content="Parts used in the robot">
+  <meta property="og:description" content="Hello. I’m K10-K10. This time, I’d like to summarize the parts used in the robot. Progress from last time The 3D data of the robot is complete, and the order and arrival have been completed. The gear that will be sandwiched between the motor and the tire will be handled by 3D printing, and the one that was tested and printed fits perfectly. 一覧 Microcontroller Raspberry Pi 5 Used for image processing. ラズパイ用ヒートシンク Used for heat dissipation of Raspberry Pi. ESP32-DevKitC-32E It communicates with the Raspberry Pi to control the motor and process the sensor. There may be a shortage of pins;) Motor FEETECH サーボ FB5311M-360 Used to move the robot body. Four are planned to be installed. The gear will be sandwiched between the tire and the motor. One more will be installed on the top of the robot for the arm up and down. マイクロサーボ 9g SG-90 Used...">
+
+  
+  <meta property="og:image" content="https://techno-robocup.github.io/pr-previews/PR_60/assets/images/techno-robocup-icon.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  
+  <meta property="og:article:author" content="K10-K10">
+  
+  <meta property="og:article:published_time" content="2025-05-31T10:00:00+09:00">
+  <meta property="og:url" content="https://techno-robocup.github.io/pr-previews/PR_60/en/2025-05-31-parts/">
+  <link rel="canonical" href="https://techno-robocup.github.io/pr-previews/PR_60/en/2025-05-31-parts/">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+
+  <meta property="twitter:title" content="Parts used in the robot">
+  <meta property="twitter:description" content="Hello. I’m K10-K10. This time, I’d like to summarize the parts used in the robot. Progress from last time The 3D data of the robot is complete, and the order and arrival have been completed. The gear that will be sandwiched between the motor and the tire will be handled by 3D printing, and the one that was tested and printed fits perfectly. 一覧 Microcontroller Raspberry Pi 5 Used for image processing. ラズパイ用ヒートシンク Used for heat dissipation of Raspberry Pi. ESP32-DevKitC-32E It communicates with the Raspberry Pi to control the motor and process the sensor. There may be a shortage of pins;) Motor FEETECH サーボ FB5311M-360 Used to move the robot body. Four are planned to be installed. The gear will be sandwiched between the tire and the motor. One more will be installed on the top of the robot for the arm up and down. マイクロサーボ 9g SG-90 Used...">
+
+  
+  <meta name="twitter:image" content="https://techno-robocup.github.io/pr-previews/PR_60/assets/images/techno-robocup-icon.jpg">
+  
+
+  
+
+
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/pr-previews/PR_60/assets/css/custom.css">
+  <script src="/pr-previews/PR_60/assets/js/colorAnimation.js"></script>
+
+</head>
+
+
+<body>
+
+  
+
+
+  
+
+
+<nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="/pr-previews/PR_60/en/">techno-robocup</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/pr-previews/PR_60/en/tags/">Tags</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pr-previews/PR_60/en/aboutus/">About Us</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-search-link" href="#" title="Search">
+            <span id="nav-search-icon" class="fa fa-search"></span>
+            <span id="nav-search-text">Search</span>
+          </a>
+        </li><li class="nav-item d-flex align-items-center ml-xl-3 mt-2 mt-xl-0 mb-2 mb-xl-0">
+        
+          <div class="btn-group btn-group-sm" role="group">
+            <span class="btn btn-dark font-weight-bold" style="cursor: default;">En</span>
+            <a href="/pr-previews/PR_60/ja/2025-05-31-parts/" class="btn btn-outline-dark">Ja</a>
+          </div>
+        
+      </li>
+
+    </ul>
+  </div>
+
+  
+
+  
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        <a href="/pr-previews/PR_60/en/">
+          <img alt="Navigation bar avatar" class="avatar-img" src="/pr-previews/PR_60/assets/images/robot-03.jpg" />
+        </a>
+      </div>
+    </div>
+  
+
+</nav>
+
+
+
+<div id="beautifuljekyll-search-overlay">
+
+  <div id="nav-search-exit" title="Exit search">✕</div>
+  <input type="text" id="nav-search-input" placeholder="Search">
+  <ul id="search-results-container"></ul>
+
+  
+
+  <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+  <script>
+    var searchjson = `[ \
+      \
+       \
+        { \
+          "title"    : "We started our blog", \
+          "desc"     : "We started our blog", \
+          "category" : "free-talkrotarymars's article", \
+          "url"      : "/pr-previews/PR_60/en/2024-07-09-self-introduction/", \
+          "date"     : "July  8, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "SSH to EV3", \
+          "desc"     : "SSH to EV3", \
+          "category" : "robotEV3rotarymars's article", \
+          "url"      : "/pr-previews/PR_60/en/2024-07-23-ev3_ssh/", \
+          "date"     : "July 23, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Python Command Line", \
+          "desc"     : "Python Command Line", \
+          "category" : "pythonfree-talknishikazu's article", \
+          "url"      : "/pr-previews/PR_60/en/2024-08-07-python-OS/", \
+          "date"     : "August  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "A rubber band gun using LEGO", \
+          "desc"     : "A rubber band gun using LEGO", \
+          "category" : "free-talkALPAKA's article", \
+          "url"      : "/pr-previews/PR_60/en/2024-08-22-rubber_band_gun/", \
+          "date"     : "August 22, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Machine learning with tensorflow", \
+          "desc"     : "Machine learning with tensorflow", \
+          "category" : "machine learningrotarymars's article", \
+          "url"      : "/pr-previews/PR_60/en/2024-08-28-tensorflow-machinelearning/", \
+          "date"     : "August 28, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Robot introduction", \
+          "desc"     : "Robot introduction", \
+          "category" : "robotEV3nishikazu's article", \
+          "url"      : "/pr-previews/PR_60/en/2024-09-07-robot_introduction/", \
+          "date"     : "September  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "About the performance time of the cultural festival", \
+          "desc"     : "About the performance time of the cultural festival", \
+          "category" : "robotschoolALPAKA's article", \
+          "url"      : "/pr-previews/PR_60/en/2024-09-13-culture_festival_time_table/", \
+          "date"     : "September 13, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "About deep learning", \
+          "desc"     : "About deep learning", \
+          "category" : "robotmachine learningrotarymars's article", \
+          "url"      : "/pr-previews/PR_60/en/2024-09-18-about_deep_learning/", \
+          "date"     : "September 18, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Results report", \
+          "desc"     : "Results report", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_60/en/2024-12-13-results_report/", \
+          "date"     : "December 12, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Results of the Kanto competition and plans for next year", \
+          "desc"     : "Results of the Kanto competition and plans for next year", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_60/en/2025-01-26-result_kanto/", \
+          "date"     : "January 26, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
+          "desc"     : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
+          "category" : "robotrotarymars's articlemachine learning", \
+          "url"      : "/pr-previews/PR_60/en/2025-02-24-yolo_machine_learning/", \
+          "date"     : "February 24, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress", \
+          "desc"     : "Recent progress", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/pr-previews/PR_60/en/2025-04-18-progress/", \
+          "date"     : "April 18, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Line tracing program", \
+          "desc"     : "Line tracing program", \
+          "category" : "robotrotarymars's articleline-traceprogram", \
+          "url"      : "/pr-previews/PR_60/en/2025-05-11-linetrace_program/", \
+          "date"     : "May 11, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Parts used in the robot", \
+          "desc"     : "Parts used in the robot", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/pr-previews/PR_60/en/2025-05-31-parts/", \
+          "date"     : "May 31, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Red detection and 7-segment LED", \
+          "desc"     : "Red detection and 7-segment LED", \
+          "category" : "robotK10-K10's articleline-traceprogram", \
+          "url"      : "/pr-previews/PR_60/en/2025-06-19-RedMask/", \
+          "date"     : "June 20, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Robot introduction", \
+          "desc"     : "Robot introduction", \
+          "category" : "robotALPAKA's articlehardware", \
+          "url"      : "/pr-previews/PR_60/en/2025-07-09-robot.hardware/", \
+          "date"     : "July  9, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Development system", \
+          "desc"     : "Development system", \
+          "category" : "robotrotarymars's articlesoftware", \
+          "url"      : "/pr-previews/PR_60/en/2025-07-21-introducing/", \
+          "date"     : "July 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress", \
+          "desc"     : "Recent progress", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/pr-previews/PR_60/en/2025-09-21-progress2/", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress since our last article", \
+          "desc"     : "Recent progress since our last article", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_60/en/2026-01-21-progress/", \
+          "date"     : "January 21, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "Visit to Hamano Products (浜野製作所)", \
+          "desc"     : "Visit to Hamano Products (浜野製作所)", \
+          "category" : "robotrotarymars's articlevisit", \
+          "url"      : "/pr-previews/PR_60/en/2026-03-14-hamano-products-visit/", \
+          "date"     : "March 14, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "Japan Competition Results and Next Year&#39;s Plans", \
+          "desc"     : "Japan Competition Results and Next Year&#39;s Plans", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/pr-previews/PR_60/en/2026-04-11-result-japan/", \
+          "date"     : "April 11, 2026" \
+        }, \
+       \
+      \
+       \
+        { \
+          "title"    : "About us", \
+          "desc"     : "About us", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_60/en/aboutus/", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "Tag Index", \
+          "desc"     : "Tag Index", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_60/en/tags/", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_60/en/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 2", \
+          "desc"     : " - page 2", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_60/en/page2/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 3", \
+          "desc"     : " - page 3", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_60/en/page3/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 4", \
+          "desc"     : " - page 4", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_60/en/page4/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 5", \
+          "desc"     : " - page 5", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_60/en/page5/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+    ]`;
+    
+    // 4. Jekyllのループで最後に残ってしまう余分なカンマを削除してJSONエラーを防ぐ
+    searchjson = searchjson.replace(/,\s*\]$/, ']');
+    searchjson = JSON.parse(searchjson);
+
+    var sjs = SimpleJekyllSearch({
+      searchInput: document.getElementById('nav-search-input'),
+      resultsContainer: document.getElementById('search-results-container'),
+      json: searchjson
+    });
+  </script>
+</div>
+
+
+
+
+
+  
+
+
+
+<header class="header-section ">
+<div class="intro-header ">
+  
+  <div class="container-md">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        <div class="post-heading">
+          <h1>
+            Parts used in the robot
+          </h1>
+          
+          
+           
+            
+              By <strong>K10-K10</strong><br>
+            
+            <span class="post-meta">Posted on May 31, 2025</span>
+            
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+
+
+
+</header>
+
+
+<div class=" container-md ">
+  <div class="row">
+    <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
+      <div class="post-content-wrapper">
+        
+
+        
+          <div class="blog-tags">
+            <span class="tags-label">Tags:</span>
+            <div class="tags-list">
+              
+                <a href="/pr-previews/PR_60/tags#robot" class="tag-item">robot</a>
+              
+                <a href="/pr-previews/PR_60/tags#K10-K10's article" class="tag-item">K10-K10's article</a>
+              
+            </div>
+          </div>
+        
+
+        
+
+        <article role="main" class="blog-post">
+          <div class="post-content">
+            <p>Hello. I’m K10-K10.
+This time, I’d like to summarize the parts used in the robot.</p>
+
+<h1 id="progress-from-last-time">Progress from last time</h1>
+
+<p>The 3D data of the robot is complete, and the order and arrival have been completed.
+The gear that will be sandwiched between the motor and the tire will be handled by 3D printing, and the one that was tested and printed fits perfectly.</p>
+
+<h1 id="一覧">一覧</h1>
+
+<h2 id="microcontroller">Microcontroller</h2>
+
+<h3 id="raspberry-pi-5"><a href="https://www.marutsu.co.jp/pc/i/2782704/?srsltid=AfmBOoqydk9tS5XraCsqQw-dVpBfnG6gvRwokrS1R8Ei0NoOtyqtM-ZE">Raspberry Pi 5</a></h3>
+<p>Used for image processing.</p>
+
+<h3 id="ラズパイ用ヒートシンク"><a href="https://www.marutsu.co.jp/GoodsDetail.jsp?q=%E3%82%BF%E3%82%AB%E3%83%81%E9%9B%BB%E6%A9%9F%E5%B7%A5%E6%A5%AD%205%E7%94%A8%E3%83%95%E3%82%A1%E3%83%B3%E4%BB%98%20%E3%83%92%E3%83%BC%E3%83%88%E3%82%B7%E3%83%B3%E3%82%AF%E3%82%B1%E3%83%BC%E3%82%B9&amp;salesGoodsCode=2839645&amp;shopNo=3">ラズパイ用ヒートシンク</a></h3>
+<p>Used for heat dissipation of Raspberry Pi.</p>
+
+<h3 id="esp32-devkitc-32e"><a href="https://akizukidenshi.com/catalog/g/g117073/">ESP32-DevKitC-32E</a></h3>
+<p>It communicates with the Raspberry Pi to control the motor and process the sensor.<br />
+There may be a shortage of pins;)</p>
+
+<h2 id="motor">Motor</h2>
+
+<h3 id="feetech-サーボ-fb5311m-360"><a href="https://akizukidenshi.com/catalog/g/g116309/">FEETECH サーボ FB5311M-360</a></h3>
+<p>Used to move the robot body. Four are planned to be installed.<br />
+The gear will be sandwiched between the tire and the motor.<br />
+One more will be installed on the top of the robot for the arm up and down.</p>
+
+<h3 id="マイクロサーボ-9g-sg-90"><a href="https://akizukidenshi.com/catalog/g/g108761/">マイクロサーボ 9g SG-90</a></h3>
+<p>Used to pull the string in the arm.<br />
+The string is held by pulling the string while the string is loosened, and the ball is grabbed.<br />
+We will test whether it works well later.</p>
+
+<h2 id="camera">Camera</h2>
+
+<h3 id="raspberry-pi-camera-module-3広角"><a href="https://www.marutsu.co.jp/pc/i/2582864/">Raspberry Pi Camera Module 3（広角）</a></h3>
+<p>Used for line tracing.</p>
+
+<h3 id="raspberry-pi-camera-module-3標準画角"><a href="https://www.marutsu.co.jp/pc/i/2582866/">Raspberry Pi Camera Module 3（標準画角）</a></h3>
+<p>Used for rescue.</p>
+
+<h2 id="power-supply">Power supply</h2>
+
+<h3 id="kypom-k6-74v-1300mah-30c60c-リポバッテリー"><a href="https://www.amazon.co.jp/Kypom-7-4V-1300mAh-30C60C-%E3%83%90%E3%83%83%E3%83%86%E3%83%AA%E3%83%BC/dp/B017VOKS4U">Kypom K6 7.4V 1300mAh 30C60C リポバッテリー</a></h3>
+<p>Used for the motor.</p>
+
+<h3 id="anker製モバイルバッテリー型番不明">Anker製モバイルバッテリー（型番不明）</h3>
+<p>Used for Raspberry Pi.<br />
+By separating the motor power, we can avoid the influence of noise.</p>
+
+<h2 id="others">Others</h2>
+
+<h3 id="超音波距離センサー-hc-sr04"><a href="https://akizukidenshi.com/catalog/g/g111009/">超音波距離センサー HC-SR04</a></h3>
+<p>Used to measure the distance to the wall.</p>
+
+<h3 id="赤色7セグメントled表示器-カソードコモン-osl10391-lra"><a href="https://akizukidenshi.com/catalog/g/g130319/">赤色7セグメントLED表示器 カソードコモン OSL10391-LRA</a></h3>
+<p>Used for the robot’s status display.<br />
+There may be a shortage of pins on the ESP32 side.</p>
+
+<h3 id="波動スイッチ-ds-850k-s-on"><a href="https://akizukidenshi.com/catalog/g/g115740/">波動スイッチ DS-850K-S-ON</a></h3>
+<p>Used for the start and stop switch.</p>
+
+<h1 id="future-plans">Future plans</h1>
+
+<p>The 3D printed robot parts have arrived, so we will start assembly.<br />
+Next, we will continue to advance the red detection program and the efficiency of the control system.</p>
+
+<p>Addition: I think it’s better not to use the insert nut.</p>
+
+<p>Thank you for reading~</p>
+
+          </div>
+        </article>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.pathname.includes('/pr-previews/')) {
+              var baseUrl = '/pr-previews/PR_60';
+              var images = document.querySelectorAll('.post-content img');
+              
+              images.forEach(function(img) {
+                var src = img.getAttribute('src');
+                if (src && src.startsWith('/assets/')) {
+                  img.src = baseUrl + src;
+                }
+              });
+            }
+          });
+        </script>
+        
+
+        
+          <div class="author-section">
+            <div class="author">
+  📝 <span class="author-text">author: K10-K10</span>
+</div>
+
+          </div>
+        
+
+        <div class="post-navigation">
+          <ul class="pagination blog-pager">
+            
+            <li class="page-item next">
+              <a class="page-link" href="/pr-previews/PR_60/en/2025-06-19-RedMask/" data-toggle="tooltip" data-placement="top" title="Red detection and 7-segment LED">
+                <i class="fas fa-arrow-left"></i>Next Post
+              </a>
+            </li>
+            
+            
+            <li class="page-item previous">
+              <a class="page-link" href="/pr-previews/PR_60/en/2025-05-11-linetrace_program/" data-toggle="tooltip" data-placement="top" title="Line tracing program">
+                <i class="fas fa-arrow-right"></i> Previous Post
+              </a>
+            </li>
+            
+            
+          </ul>
+        </div>
+        <div class="comments-section">
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <footer>
+  <div class="container-md beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      
+<ul class="list-inline text-center footer-links"><li class="list-inline-item">
+    <a href="https://github.com/techno-robocup" title="GitHub">
+      <span class="fa-stack fa-lg" aria-hidden="true">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="sr-only">GitHub</span>
+   </a>
+  </li></ul>
+
+
+      
+      <p class="copyright text-muted">
+      
+      2026
+
+      
+
+      
+
+      
+
+      </p>
+      <p class="theme-by text-muted">
+        Powered by
+        <a href="https://beautifuljekyll.com">Beautiful Jekyll</a>
+      </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  
+  
+    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script src="/pr-previews/PR_60/assets/js/beautifuljekyll.js"></script>
+    
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>
