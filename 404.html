@@ -151,24 +151,36 @@
   
 
 
-  <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="https://techno-robocup.github.io/">techno-robocup</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+  
+
+
+<nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="/ja/">techno-robocup</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="main-navbar">
     <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/tags">Tags</a>
+            <a class="nav-link" href="/ja/tags/">Tags</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/aboutus">About us</a>
+            <a class="nav-link" href="/ja/aboutus/">About Us</a>
           </li>
         <li class="nav-item">
           <a class="nav-link" id="nav-search-link" href="#" title="Search">
             <span id="nav-search-icon" class="fa fa-search"></span>
             <span id="nav-search-text">Search</span>
           </a>
-        </li></ul>
+        </li><li class="nav-item d-flex align-items-center ml-xl-3 mt-2 mt-xl-0 mb-2 mb-xl-0">
+        
+          <div class="btn-group btn-group-sm" role="group">
+            <a href="/404.html" class="btn btn-outline-dark">En</a>
+            <span class="btn btn-dark font-weight-bold" style="cursor: default;">Ja</span>
+          </div>
+        
+      </li>
+
+    </ul>
   </div>
 
   
@@ -176,7 +188,7 @@
   
     <div class="avatar-container">
       <div class="avatar-img-border">
-        <a href="https://techno-robocup.github.io/">
+        <a href="/ja/">
           <img alt="Navigation bar avatar" class="avatar-img" src="/assets/images/robot-03.jpg" />
         </a>
       </div>
@@ -193,200 +205,188 @@
   <input type="text" id="nav-search-input" placeholder="Search">
   <ul id="search-results-container"></ul>
 
+  
+
   <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
   <script>
     var searchjson = `[ \
+      \
        \
         { \
-          "title"    : "Japan Competition Results and Next Year&#39;s Plans", \
-          "desc"     : "Japan Competition Results and Next Year&#39;s Plans", \
-          "category" : "robotK10-K10's article", \
-          "url"      : "/2026/04/11/result-japan.html", \
-          "date"     : "April 11, 2026" \
-        }, \
-       \
-        { \
-          "title"    : "Visit to Hamano Products (浜野製作所)", \
-          "desc"     : "Visit to Hamano Products (浜野製作所)", \
-          "category" : "robotrotarymars's articlevisit", \
-          "url"      : "/2026/03/14/hamano-products-visit.html", \
-          "date"     : "March 14, 2026" \
-        }, \
-       \
-        { \
-          "title"    : "Recent progress since our last article", \
-          "desc"     : "Recent progress since our last article", \
-          "category" : "robotrotarymars's article", \
-          "url"      : "/2026/01/21/progress.html", \
-          "date"     : "January 21, 2026" \
-        }, \
-       \
-        { \
-          "title"    : "Recent progress", \
-          "desc"     : "Recent progress", \
-          "category" : "robotK10-K10's articlefree-talk", \
-          "url"      : "/2025/09/21/progress2.html", \
-          "date"     : "September 21, 2025" \
-        }, \
-       \
-        { \
-          "title"    : "Development system", \
-          "desc"     : "Development system", \
-          "category" : "robotrotarymars's articlesoftware", \
-          "url"      : "/2025/07/21/introducing.html", \
-          "date"     : "July 21, 2025" \
-        }, \
-       \
-        { \
-          "title"    : "Robot introduction", \
-          "desc"     : "Robot introduction", \
-          "category" : "robotALPAKA's articlehardware", \
-          "url"      : "/2025/07/09/robot.hardware.html", \
-          "date"     : "July  9, 2025" \
-        }, \
-       \
-        { \
-          "title"    : "Red detection and 7-segment LED", \
-          "desc"     : "Red detection and 7-segment LED", \
-          "category" : "robotK10-K10's articleline-traceprogram", \
-          "url"      : "/2025/06/20/RedMask.html", \
-          "date"     : "June 20, 2025" \
-        }, \
-       \
-        { \
-          "title"    : "Parts used in the robot", \
-          "desc"     : "Parts used in the robot", \
-          "category" : "robotK10-K10's article", \
-          "url"      : "/2025/05/31/parts.html", \
-          "date"     : "May 31, 2025" \
-        }, \
-       \
-        { \
-          "title"    : "Line tracing program", \
-          "desc"     : "Line tracing program", \
-          "category" : "robotrotarymars's articleline-traceprogram", \
-          "url"      : "/2025/05/11/linetrace_program.html", \
-          "date"     : "May 11, 2025" \
-        }, \
-       \
-        { \
-          "title"    : "Recent progress", \
-          "desc"     : "Recent progress", \
-          "category" : "robotK10-K10's articlefree-talk", \
-          "url"      : "/2025/04/18/progress.html", \
-          "date"     : "April 18, 2025" \
-        }, \
-       \
-        { \
-          "title"    : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
-          "desc"     : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
-          "category" : "robotrotarymars's articlemachine learning", \
-          "url"      : "/2025/02/24/yolo_machine_learning.html", \
-          "date"     : "February 24, 2025" \
-        }, \
-       \
-        { \
-          "title"    : "Results of the Kanto competition and plans for next year", \
-          "desc"     : "Results of the Kanto competition and plans for next year", \
-          "category" : "robotrotarymars's article", \
-          "url"      : "/2025/01/26/result_kanto.html", \
-          "date"     : "January 26, 2025" \
-        }, \
-       \
-        { \
-          "title"    : "Results report", \
-          "desc"     : "Results report", \
-          "category" : "robotrotarymars's article", \
-          "url"      : "/2024/12/12/results_report.html", \
-          "date"     : "December 12, 2024" \
-        }, \
-       \
-        { \
-          "title"    : "About deep learning", \
-          "desc"     : "About deep learning", \
-          "category" : "robotmachine learningrotarymars's article", \
-          "url"      : "/2024/09/18/about_deep_learning.html", \
-          "date"     : "September 18, 2024" \
-        }, \
-       \
-        { \
-          "title"    : "About the performance time of the cultural festival", \
-          "desc"     : "About the performance time of the cultural festival", \
-          "category" : "robotschoolALPAKA's article", \
-          "url"      : "/2024/09/13/culture_festival_time_table.html", \
-          "date"     : "September 13, 2024" \
-        }, \
-       \
-        { \
-          "title"    : "Robot introduction", \
-          "desc"     : "Robot introduction", \
-          "category" : "robotEV3nishikazu's article", \
-          "url"      : "/2024/09/07/robot_introduction.html", \
-          "date"     : "September  7, 2024" \
-        }, \
-       \
-        { \
-          "title"    : "Machine learning with tensorflow", \
-          "desc"     : "Machine learning with tensorflow", \
-          "category" : "machine learningrotarymars's article", \
-          "url"      : "/2024/08/28/tensorflow-machinelearning.html", \
-          "date"     : "August 28, 2024" \
-        }, \
-       \
-        { \
-          "title"    : "A rubber band gun using LEGO", \
-          "desc"     : "A rubber band gun using LEGO", \
-          "category" : "free-talkALPAKA's article", \
-          "url"      : "/2024/08/22/rubber_band_gun.html", \
-          "date"     : "August 22, 2024" \
-        }, \
-       \
-        { \
-          "title"    : "Python Command Line", \
-          "desc"     : "Python Command Line", \
-          "category" : "pythonfree-talknishikazu's article", \
-          "url"      : "/2024/08/07/python-OS.html", \
-          "date"     : "August  7, 2024" \
+          "title"    : "We started our blog", \
+          "desc"     : "We started our blog", \
+          "category" : "free-talkrotarymars's article", \
+          "url"      : "/en/2024-07-09-self-introduction/", \
+          "date"     : "July  8, 2024" \
         }, \
        \
         { \
           "title"    : "SSH to EV3", \
           "desc"     : "SSH to EV3", \
           "category" : "robotEV3rotarymars's article", \
-          "url"      : "/2024/07/23/ev3_ssh.html", \
+          "url"      : "/en/2024-07-23-ev3_ssh/", \
           "date"     : "July 23, 2024" \
         }, \
        \
         { \
-          "title"    : "We started our blog", \
-          "desc"     : "We started our blog", \
-          "category" : "free-talkrotarymars's article", \
-          "url"      : "/2024/07/08/self-introduction.html", \
-          "date"     : "July  8, 2024" \
+          "title"    : "Python Command Line", \
+          "desc"     : "Python Command Line", \
+          "category" : "pythonfree-talknishikazu's article", \
+          "url"      : "/en/2024-08-07-python-OS/", \
+          "date"     : "August  7, 2024" \
         }, \
-       \
        \
         { \
-          "title"    : "", \
-          "desc"     : "", \
-          "category" : "page", \
-          "url"      : "{ page.url }}", \
-          "date"     : "January 1, 1970" \
+          "title"    : "A rubber band gun using LEGO", \
+          "desc"     : "A rubber band gun using LEGO", \
+          "category" : "free-talkALPAKA's article", \
+          "url"      : "/en/2024-08-22-rubber_band_gun/", \
+          "date"     : "August 22, 2024" \
         }, \
+       \
+        { \
+          "title"    : "Machine learning with tensorflow", \
+          "desc"     : "Machine learning with tensorflow", \
+          "category" : "machine learningrotarymars's article", \
+          "url"      : "/en/2024-08-28-tensorflow-machinelearning/", \
+          "date"     : "August 28, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Robot introduction", \
+          "desc"     : "Robot introduction", \
+          "category" : "robotEV3nishikazu's article", \
+          "url"      : "/en/2024-09-07-robot_introduction/", \
+          "date"     : "September  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "About the performance time of the cultural festival", \
+          "desc"     : "About the performance time of the cultural festival", \
+          "category" : "robotschoolALPAKA's article", \
+          "url"      : "/en/2024-09-13-culture_festival_time_table/", \
+          "date"     : "September 13, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "About deep learning", \
+          "desc"     : "About deep learning", \
+          "category" : "robotmachine learningrotarymars's article", \
+          "url"      : "/en/2024-09-18-about_deep_learning/", \
+          "date"     : "September 18, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Results report", \
+          "desc"     : "Results report", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/en/2024-12-13-results_report/", \
+          "date"     : "December 12, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Results of the Kanto competition and plans for next year", \
+          "desc"     : "Results of the Kanto competition and plans for next year", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/en/2025-01-26-result_kanto/", \
+          "date"     : "January 26, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
+          "desc"     : "Machine learning using YOLO~Object detection and its application in RoboCup~", \
+          "category" : "robotrotarymars's articlemachine learning", \
+          "url"      : "/en/2025-02-24-yolo_machine_learning/", \
+          "date"     : "February 24, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress", \
+          "desc"     : "Recent progress", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/en/2025-04-18-progress/", \
+          "date"     : "April 18, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Line tracing program", \
+          "desc"     : "Line tracing program", \
+          "category" : "robotrotarymars's articleline-traceprogram", \
+          "url"      : "/en/2025-05-11-linetrace_program/", \
+          "date"     : "May 11, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Parts used in the robot", \
+          "desc"     : "Parts used in the robot", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/en/2025-05-31-parts/", \
+          "date"     : "May 31, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Red detection and 7-segment LED", \
+          "desc"     : "Red detection and 7-segment LED", \
+          "category" : "robotK10-K10's articleline-traceprogram", \
+          "url"      : "/en/2025-06-19-RedMask/", \
+          "date"     : "June 20, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Robot introduction", \
+          "desc"     : "Robot introduction", \
+          "category" : "robotALPAKA's articlehardware", \
+          "url"      : "/en/2025-07-09-robot.hardware/", \
+          "date"     : "July  9, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Development system", \
+          "desc"     : "Development system", \
+          "category" : "robotrotarymars's articlesoftware", \
+          "url"      : "/en/2025-07-21-introducing/", \
+          "date"     : "July 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress", \
+          "desc"     : "Recent progress", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/en/2025-09-21-progress2/", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "Recent progress since our last article", \
+          "desc"     : "Recent progress since our last article", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/en/2026-01-21-progress/", \
+          "date"     : "January 21, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "Visit to Hamano Products (浜野製作所)", \
+          "desc"     : "Visit to Hamano Products (浜野製作所)", \
+          "category" : "robotrotarymars's articlevisit", \
+          "url"      : "/en/2026-03-14-hamano-products-visit/", \
+          "date"     : "March 14, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "Japan Competition Results and Next Year&#39;s Plans", \
+          "desc"     : "Japan Competition Results and Next Year&#39;s Plans", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/en/2026-04-11-result-japan/", \
+          "date"     : "April 11, 2026" \
+        }, \
+       \
+      \
        \
         { \
           "title"    : "About us", \
           "desc"     : "About us", \
           "category" : "page", \
-          "url"      : "{ page.url }}", \
-          "date"     : "January 1, 1970" \
-        }, \
-       \
-        { \
-          "title"    : "", \
-          "desc"     : "", \
-          "category" : "page", \
-          "url"      : "{ page.url }}", \
+          "url"      : "/en/aboutus/", \
           "date"     : "January 1, 1970" \
         }, \
        \
@@ -394,7 +394,7 @@
           "title"    : "Tag Index", \
           "desc"     : "Tag Index", \
           "category" : "page", \
-          "url"      : "{ page.url }}", \
+          "url"      : "/en/tags/", \
           "date"     : "January 1, 1970" \
         }, \
        \
@@ -402,35 +402,46 @@
           "title"    : "", \
           "desc"     : "", \
           "category" : "page", \
-          "url"      : "{ page.url }}", \
+          "url"      : "/en/index.html", \
           "date"     : "January 1, 1970" \
         }, \
        \
         { \
-          "title"    : "", \
-          "desc"     : "", \
+          "title"    : " - page 2", \
+          "desc"     : " - page 2", \
           "category" : "page", \
-          "url"      : "{ page.url }}", \
+          "url"      : "/en/page2/index.html", \
           "date"     : "January 1, 1970" \
         }, \
        \
         { \
-          "title"    : "", \
-          "desc"     : "", \
+          "title"    : " - page 3", \
+          "desc"     : " - page 3", \
           "category" : "page", \
-          "url"      : "{ page.url }}", \
+          "url"      : "/en/page3/index.html", \
           "date"     : "January 1, 1970" \
         }, \
        \
         { \
-          "title"    : "", \
-          "desc"     : "", \
+          "title"    : " - page 4", \
+          "desc"     : " - page 4", \
           "category" : "page", \
-          "url"      : "{ page.url }}", \
+          "url"      : "/en/page4/index.html", \
           "date"     : "January 1, 1970" \
-        } \
+        }, \
+       \
+        { \
+          "title"    : " - page 5", \
+          "desc"     : " - page 5", \
+          "category" : "page", \
+          "url"      : "/en/page5/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
        \
     ]`;
+    
+    // 4. Jekyllのループで最後に残ってしまう余分なカンマを削除してJSONエラーを防ぐ
+    searchjson = searchjson.replace(/,\s*\]$/, ']');
     searchjson = JSON.parse(searchjson);
 
     var sjs = SimpleJekyllSearch({
