@@ -1,4 +1,98 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://techno-robocup.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://techno-robocup.github.io/" rel="alternate" type="text/html" /><updated>2026-04-17T17:37:58+09:00</updated><id>https://techno-robocup.github.io/feed.xml</id><title type="html">techno-robocup</title><subtitle>チーム techno のホームページです。情報発信をしていきます。</subtitle><entry><title type="html">Visit to Hamano Products (浜野製作所)</title><link href="https://techno-robocup.github.io/2026/03/14/hamano-products-visit.html" rel="alternate" type="text/html" title="Visit to Hamano Products (浜野製作所)" /><published>2026-03-14T10:00:00+09:00</published><updated>2026-03-14T10:00:00+09:00</updated><id>https://techno-robocup.github.io/2026/03/14/hamano-products-visit</id><content type="html" xml:base="https://techno-robocup.github.io/2026/03/14/hamano-products-visit.html"><![CDATA[<p>Hi!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://techno-robocup.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://techno-robocup.github.io/" rel="alternate" type="text/html" /><updated>2026-04-18T11:23:18+09:00</updated><id>https://techno-robocup.github.io/feed.xml</id><title type="html">techno-robocup</title><subtitle>チーム techno のホームページです。情報発信をしていきます。</subtitle><entry><title type="html">Japan Competition Results and Next Year’s Plans</title><link href="https://techno-robocup.github.io/2026/04/11/result-japan.html" rel="alternate" type="text/html" title="Japan Competition Results and Next Year’s Plans" /><published>2026-04-11T17:00:00+09:00</published><updated>2026-04-11T17:00:00+09:00</updated><id>https://techno-robocup.github.io/2026/04/11/result-japan</id><content type="html" xml:base="https://techno-robocup.github.io/2026/04/11/result-japan.html"><![CDATA[<p>Hi, I’m K10-K10!</p>
+
+<p>We participated in RoboCupJunior Japan Open 2026 Aichi from 27th to 29th March, and I’d like to share our results and our plans for next year.</p>
+
+<h1 id="results">Results</h1>
+
+<p>We finished in 3rd place.</p>
+
+<p><img src="/assets/images/standings.png" alt="Japan competition results" /></p>
+
+<p>We also won the “Best Presentation” award!</p>
+
+<p>Here is the presentation we made for the competition (sorry, it’s only available in Japanese):
+<a href="/assets/images/poster.pdf">Presentation (PDF)</a></p>
+
+<h1 id="robot-and-programs">Robot and Programs</h1>
+
+<p>We made several improvements from the Kanto competition, and this is our robot for the Japan competition:</p>
+
+<p><img src="/assets/images/robot_japan.jpg" alt="Robot" /></p>
+
+<p>We changed the tyres to silicone ones to improve grip, and we also added a structure to avoid getting stuck on toothpicks.</p>
+
+<p>The programs are available on GitHub:</p>
+<ul>
+  <li><a href="https://github.com/techno-robocup/robocup2026-raspberrypi-program">Raspberry Pi code</a></li>
+  <li><a href="https://github.com/techno-robocup/robocup2026-esp32-program">ESP32 code</a></li>
+</ul>
+
+<h1 id="results-of-each-run">Results of Each Run</h1>
+
+<p>We had 3 runs in the final. Here are the results.<br />
+More details are available <a href="https://rescue.rcjj.online/line/698da3849af715cb046f9855/Line">here</a>.</p>
+
+<h2 id="run-1">Run 1</h2>
+
+<ul>
+  <li>Score: 273</li>
+  <li>Time: 8 min 0 sec</li>
+</ul>
+
+<p><img src="/assets/images/run_1.png" alt="Run_1" /></p>
+
+<p>We had added gap handling, but it did not work well due to some issues.<br />
+Additionally, the robot got stuck before the rescue zone, so we spent a lot of time reaching the first checkpoint.</p>
+
+<p>In the rescue zone, we rescued 2 silver balls.</p>
+
+<h2 id="run-2">Run 2</h2>
+
+<ul>
+  <li>Score: 469</li>
+  <li>Time: 7 min 58 sec</li>
+</ul>
+
+<p><img src="/assets/images/run_2.png" alt="Run_2" /></p>
+
+<p>We removed the gap handling, and the run went much better.<br />
+The structure to avoid toothpicks also worked well, and we were able to exit successfully.</p>
+
+<p>In the rescue zone, we rescued 2 silver balls.</p>
+
+<h2 id="run-3">Run 3</h2>
+
+<ul>
+  <li>Score: 595</li>
+  <li>Time: 7 min 16 sec</li>
+</ul>
+
+<p><img src="/assets/images/run_3.png" alt="Run_3" /></p>
+
+<p>The fifth tile was not secured.<br />
+Otherwise, the run went well, and we rescued 2 silver balls in the rescue zone.</p>
+
+<h2 id="overall-results-and-reflection">Overall Results and Reflection</h2>
+
+<p>We had problems in the first run, but we were able to fix them and improve our performance in the second and third runs.</p>
+
+<p>We finished in third place by a narrow margin, which was disappointing for us. However, this was our first time participating in the Japan competition, and we learned a lot from the experience.</p>
+
+<p>We still have many issues to address. For example, we were not able to consistently exit the rescue zone, and our line tracing was not stable enough.</p>
+
+<p><del>If the first run had gone well, we might have placed second</del></p>
+
+<h1 id="next-years-plans">Next Year’s Plans</h1>
+
+<p>We will have some changes in team members next year.</p>
+
+<p>This year, our electronics were not very reliable, and we broke several motors, so we want to build a more robust robot next year.</p>
+
+<p>We also aim to improve our line tracing and rescue zone handling, and develop a more stable system overall.</p>
+
+<p>We plan to continue participating in this competition, and we look forward to next year!</p>
+
+<p>Thank you for reading!</p>]]></content><author><name>K10-K10</name></author><category term="robot" /><category term="K10-K10&apos;s article" /><summary type="html"><![CDATA[Hi, I’m K10-K10!]]></summary></entry><entry><title type="html">Visit to Hamano Products (浜野製作所)</title><link href="https://techno-robocup.github.io/2026/03/14/hamano-products-visit.html" rel="alternate" type="text/html" title="Visit to Hamano Products (浜野製作所)" /><published>2026-03-14T10:00:00+09:00</published><updated>2026-03-14T10:00:00+09:00</updated><id>https://techno-robocup.github.io/2026/03/14/hamano-products-visit</id><content type="html" xml:base="https://techno-robocup.github.io/2026/03/14/hamano-products-visit.html"><![CDATA[<p>Hi!</p>
 
 <p>On February 16th, we visited Hamano Products (浜野製作所).</p>
 
@@ -828,335 +922,4 @@ We will also be able to change the values of the ultrasonic sensor and the motor
 I want to quickly complete the 3D data and solve the problem of the gear.
 I will work hard this year to be able to go to the Japan competition, so please look forward to us.</p>
 
-<p>Thank you for reading~</p>]]></content><author><name>K10-K10</name></author><category term="robot" /><category term="K10-K10&apos;s article" /><category term="free-talk" /><summary type="html"><![CDATA[Hello. I’m K10-K10.]]></summary></entry><entry><title type="html">Machine learning using YOLO~Object detection and its application in RoboCup~</title><link href="https://techno-robocup.github.io/2025/02/24/yolo_machine_learning.html" rel="alternate" type="text/html" title="Machine learning using YOLO~Object detection and its application in RoboCup~" /><published>2025-02-24T10:00:00+09:00</published><updated>2025-02-24T10:00:00+09:00</updated><id>https://techno-robocup.github.io/2025/02/24/yolo_machine_learning</id><content type="html" xml:base="https://techno-robocup.github.io/2025/02/24/yolo_machine_learning.html"><![CDATA[<p>Hello. I’m rotarymars.</p>
-
-<p>I’m feeling like I’m writing a blog again after a long time.</p>
-
-<p>This time, I’d like to write about something different from the machine learning I wrote last time, which is called “object detection”.</p>
-
-<h1 id="what-i-want-to-achieve-this-time">What I want to achieve this time</h1>
-<ul>
-  <li>Detecting “faces” from images I’ve never seen before and surrounding them with a square</li>
-</ul>
-
-<p>I’d like to make it possible to do this.</p>
-
-<h1 id="preparation">Preparation</h1>
-<p>This time, I’ll talk about the following conditions.</p>
-<ul>
-  <li>python (I’m using 3.11 this time. If you’re worried, please fix the version with pyenv or asdf.)</li>
-  <li>docker (I’ll use it to launch the labeling software.)</li>
-  <li>direnv (or virtualenv to launch a virtual environment.)</li>
-</ul>
-
-<h1 id="procedure">Procedure</h1>
-<p>First, let’s create a working directory.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>ball_detection <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="nv">$_</span>
-</code></pre></div></div>
-<p>Next, create a .envrc file with the following contents.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>layout python
-</code></pre></div></div>
-<p>Now, execute the following command as needed.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>direnv allow
-</code></pre></div></div>
-<p>Here, the virtual environment should have been created. Check it.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>which python
-<span class="c"># /home/rotarymars/projects/***/ball_detection/.direnv/python-3.12.6/bin/python</span>
-</code></pre></div></div>
-<p>Next, install the packages you need.
-Create a requirements.txt with the following contents.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ultralytics==8.3.32
-</code></pre></div></div>
-<p>Then, execute it as follows.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
-</code></pre></div></div>
-<p>After a while, the installation should be complete.</p>
-
-<p>Next, let’s prepare for the software needed for labeling.</p>
-
-<p>We’ll use label studio to label.</p>
-
-<p>Create a label_studio directory under the current directory.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>label_studio <span class="o">&amp;&amp;</span> <span class="nb">pushd</span> <span class="nv">$_</span>
-</code></pre></div></div>
-<p>Create a docker-compose.yml with the following contents.</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
-
-<span class="na">services</span><span class="pi">:</span>
-  <span class="na">label_studio</span><span class="pi">:</span>
-    <span class="na">image</span><span class="pi">:</span> <span class="s">heartexlabs/label-studio:latest</span>
-    <span class="na">volumes</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">label-studio-data:/label-studio/data</span>
-    <span class="na">ports</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">8080:8080</span>
-
-<span class="na">volumes</span><span class="pi">:</span>
-  <span class="na">label-studio-data</span><span class="pi">:</span>
-</code></pre></div></div>
-<p>After creating it, launch the container.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker compose up <span class="nt">-d</span>
-</code></pre></div></div>
-<p>The first time it is launched, it will take a while due to the download of the container, but the second time and later should start faster.</p>
-
-<p>If you want to stop the container,</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker compose down
-</code></pre></div></div>
-<p>Do it.</p>
-
-<p>Then, go to the previous directory.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">popd</span>
-</code></pre></div></div>
-<p>Next, access <a href="localhost:8080">localhost:8080</a>.</p>
-
-<p>You should see a screen like this.
-<img src="/assets/images/2025-02-24-label_studio_login_screen.png" alt="login" /></p>
-
-<p>Login and proceed.</p>
-
-<p>Next, create a project.
-<img src="/assets/images/2025-02-24-label_studio_create_project.png" alt="create project" /></p>
-
-<p>Select Create project in the middle, decide on a project name, and enter it.</p>
-
-<p>Next, select labeling setup at the top and select “object detection with bounding boxes”.
-<img src="/assets/images/2025-02-24-label_studio_labeling_setup.png" alt="labeling setup" /></p>
-
-<p>Add the item you want to label.
-<img src="/assets/images/2025-02-24-label_studio_add_label.png" alt="add label" /></p>
-
-<p>Delete the existing label with the X button and add a new label called “face”.</p>
-
-<p>After these operations are complete, press the “save” button in the upper right and save it.</p>
-
-<p>Collect images to be used for learning.</p>
-
-<p>I’ll download images from <a href="https://www.irasutoya.com/">irasutoya</a> (please make sure the total number of faces is about 20).</p>
-
-<p>After downloading, press the go to import in the middle of label studio and import it.</p>
-
-<p><img src="/assets/images/2025-02-24-label_studio_add_picture.png" alt="add picture" />
-Press the import button and end the operation.</p>
-
-<p>It’s finally time for labeling.</p>
-
-<p>Press the blue button “label all tasks” at the top of the screen.</p>
-
-<p>Label as shown in the following video.</p>
-
-<video src="/assets/images/2025-02-24-label_studio_labelling.mp4" controls="true" width="100%"></video>
-
-<p>Press the submit button and the next image will appear, so continue until it’s done.</p>
-
-<p>When it’s done, next is export.</p>
-
-<p>Go to the first screen of the project and press Export.</p>
-
-<p><img src="/assets/images/2025-02-24-label_studio_export.png" alt="export" /></p>
-
-<p>Select YOLO Format and press Export.</p>
-
-<p>Unzip the downloaded zip file.</p>
-
-<p>Go back to the root of the working directory and execute the following command.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>data
-</code></pre></div></div>
-
-<p>Then, move the expanded zip file to data/exported_data.</p>
-
-<p>It should look like this.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data
-└── exported_data
-    ├── classes.txt
-    ├── images
-    │   ├── 0f767c8e-nigaoe_oomura_masujirou.png
-    │   ├── 1518c60c-bubble_houkai.png
-    │   ├── 24440423-sweets_dondurma_turkish_icecream.png
-    │   ├── 2a5e13a9-youchien_bag_girl.png
-    │   ├── 4bd228da-business_baby_ikukyuu.png
-    │   ├── 5167ce88-vaccine_yoyaku_no_oldman.png
-    │   ├── 51fe5d6f-ninja.png
-    │   ├── 62e18297-kabu_chart_smartphone_woman_happy.png
-    │   ├── 7e1120e1-tabearuki.png
-    │   ├── 946ebdcb-microphone5_girl.png
-    │   ├── 99051455-travel_people_seichi_junrei.png
-    │   ├── 9d90e76b-kojinjouhou_businessman.png
-    │   ├── 9e5e9080-vaccine_yoyaku_no_oldwoman.png
-    │   ├── a5976a7b-music_kahon_man.png
-    │   ├── e21e626a-jintesya_papa_dendou_sakamichi.png
-    │   └── eeb1b314-people_rounyakunannyo.png
-    ├── labels
-    │   ├── 0f767c8e-nigaoe_oomura_masujirou.txt
-    │   ├── 1518c60c-bubble_houkai.txt
-    │   ├── 24440423-sweets_dondurma_turkish_icecream.txt
-    │   ├── 2a5e13a9-youchien_bag_girl.txt
-    │   ├── 4bd228da-business_baby_ikukyuu.txt
-    │   ├── 5167ce88-vaccine_yoyaku_no_oldman.txt
-    │   ├── 51fe5d6f-ninja.txt
-    │   ├── 62e18297-kabu_chart_smartphone_woman_happy.txt
-    │   ├── 7e1120e1-tabearuki.txt
-    │   ├── 946ebdcb-microphone5_girl.txt
-    │   ├── 99051455-travel_people_seichi_junrei.txt
-    │   ├── 9d90e76b-kojinjouhou_businessman.txt
-    │   ├── 9e5e9080-vaccine_yoyaku_no_oldwoman.txt
-    │   ├── a5976a7b-music_kahon_man.txt
-    │   ├── e21e626a-jintesya_papa_dendou_sakamichi.txt
-    │   └── eeb1b314-people_rounyakunannyo.txt
-    └── notes.json
-
-</code></pre></div></div>
-<p>The names of the images are not important.</p>
-
-<p>It’s finally time to prepare for learning.</p>
-
-<p>Create a data/dataset.yml. This time, since there is only one type of thing to label, it’s not a problem, but if there are multiple types, please write in the same order as data/exported_data/classes.txt.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">train</span><span class="pi">:</span> <span class="s">train/</span>
-<span class="na">val</span><span class="pi">:</span> <span class="s">valid/</span>
-
-<span class="c1"># Number of classes (number of types of labeling)</span>
-<span class="na">nc</span><span class="pi">:</span> <span class="m">1</span>
-
-<span class="na">names</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">face"</span><span class="pi">]</span>
-</code></pre></div></div>
-
-<p>Create a data/random_copy.py. This is used to separate the images for learning and the images used to evaluate the accuracy of the learning process.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
-</span><span class="kn">import</span> <span class="n">os</span>
-<span class="kn">import</span> <span class="n">random</span>
-<span class="kn">import</span> <span class="n">re</span>
-
-<span class="n">data_dir</span> <span class="o">=</span> <span class="sh">'</span><span class="s">exported_data/images</span><span class="sh">'</span>
-<span class="n">train_data_dir</span> <span class="o">=</span> <span class="sh">'</span><span class="s">train</span><span class="sh">'</span>
-<span class="n">test_data_dir</span> <span class="o">=</span> <span class="sh">'</span><span class="s">valid</span><span class="sh">'</span>
-<span class="n">namelist</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="nf">listdir</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">isfile</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
-<span class="p">]</span>
-
-<span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">namelist</span><span class="p">)</span>
-
-<span class="n">name</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">re</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sa">r</span><span class="sh">"</span><span class="s">(.*).(jpg|png)</span><span class="sh">"</span><span class="p">,</span> <span class="n">f</span><span class="p">).</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">namelist</span>
-<span class="p">]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">namelist</span><span class="p">)</span><span class="o">//</span><span class="mi">5</span><span class="o">*</span><span class="mi">4</span><span class="p">):</span>
-    <span class="n">os</span><span class="p">.</span><span class="nf">system</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">cp </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">namelist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">train_data_dir</span><span class="si">}</span><span class="s">/images/</span><span class="sh">"</span><span class="p">)</span>
-    <span class="n">os</span><span class="p">.</span><span class="nf">system</span><span class="p">(</span>
-        <span class="sa">f</span><span class="sh">"</span><span class="s">cp </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/../labels/</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s">.txt </span><span class="si">{</span><span class="n">train_data_dir</span><span class="si">}</span><span class="s">/labels/</span><span class="sh">"</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">namelist</span><span class="p">)</span><span class="o">//</span><span class="mi">5</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">namelist</span><span class="p">)):</span>
-    <span class="n">os</span><span class="p">.</span><span class="nf">system</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">cp </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">namelist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">test_data_dir</span><span class="si">}</span><span class="s">/images/</span><span class="sh">"</span><span class="p">)</span>
-    <span class="n">os</span><span class="p">.</span><span class="nf">system</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">cp </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/../labels/</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s">.txt </span><span class="si">{</span><span class="n">test_data_dir</span><span class="si">}</span><span class="s">/labels</span><span class="sh">"</span><span class="p">)</span>
-
-<span class="n">os</span><span class="p">.</span><span class="nf">system</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">cp </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/../classes.txt </span><span class="si">{</span><span class="n">train_data_dir</span><span class="si">}</span><span class="s">/classes.txt</span><span class="sh">"</span><span class="p">)</span>
-<span class="n">os</span><span class="p">.</span><span class="nf">system</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">cp </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/../classes.txt </span><span class="si">{</span><span class="n">test_data_dir</span><span class="si">}</span><span class="s">/classes.txt</span><span class="sh">"</span><span class="p">)</span>
-<span class="n">os</span><span class="p">.</span><span class="nf">system</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">cp </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/../classes.txt </span><span class="si">{</span><span class="n">test_data_dir</span><span class="si">}</span><span class="s">/classes.txt</span><span class="sh">"</span><span class="p">)</span>
-</code></pre></div></div>
-<p>Give it execution permission.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>u+x data/random_copy.py
-</code></pre></div></div>
-
-<p>Create the necessary directories.</p>
-
-<p>Move to the root of the working directory and execute the following command.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> data/<span class="o">{</span>train,valid<span class="o">}</span>/<span class="o">{</span>images,labels<span class="o">}</span>
-</code></pre></div></div>
-<p>Execute the following command.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./random_copy.py
-</code></pre></div></div>
-<p>Next, download the model to be used for learning to data/.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-L</span> <span class="nt">-o</span> <span class="o">{</span>model_name<span class="o">}</span>.pt <span class="s2">"https://github.com/ultralytics/assets/releases/download/v8.3.0/{model_name}.pt"</span>
-</code></pre></div></div>
-<p>model_name is <a href="https://github.com/ultralytics/ultralytics?tab=readme-ov-file">here</a>, so please select it after referring to it.</p>
-
-<p>This time, we’ll use yolo11n.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-L</span> <span class="nt">-o</span> yolo11n.pt https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt
-</code></pre></div></div>
-<p>Specify the directory to be executed.</p>
-
-<p>Create a setup_dirs.py under the root directory of the project.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
-</span><span class="kn">import</span> <span class="n">os</span>
-<span class="kn">from</span> <span class="n">ultralytics</span> <span class="kn">import</span> <span class="n">settings</span>
-
-<span class="c1"># Update a setting
-</span><span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
-<span class="n">runs_dir</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="sh">"</span><span class="s">runs</span><span class="sh">"</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">set up runs_dir to </span><span class="si">{</span><span class="n">runs_dir</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
-<span class="n">settings</span><span class="p">.</span><span class="nf">update</span><span class="p">({</span><span class="sh">'</span><span class="s">runs_dir</span><span class="sh">'</span><span class="p">:</span> <span class="n">runs_dir</span><span class="p">})</span>
-</code></pre></div></div>
-<p>Give it execution permission again and execute it.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>u+x setup_dirs.py
-./setup_dirs.py
-</code></pre></div></div>
-<p>It’s finally time to learn.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>data
-yolo detect train <span class="se">\</span>
-  <span class="nv">data</span><span class="o">=</span><span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>/dataset.yml <span class="se">\</span>
-  <span class="nv">model</span><span class="o">=</span>./yolo11n.pt <span class="se">\</span>
-  <span class="nv">epochs</span><span class="o">=</span>300 <span class="nv">imgsz</span><span class="o">=</span>640 <span class="nv">device</span><span class="o">=</span><span class="s2">"cpu"</span>
-</code></pre></div></div>
-<p>This time, we’ll learn 300 times. If the learning accuracy doesn’t go up, it should be stopped in the middle.</p>
-
-<p>Please wait patiently.</p>
-
-<p>By the way, the reason why I am using cpu to learn it is because my NVIDIA cuda driver is broken:)</p>
-
-<p>When it’s done, you should see something like this at the end of the output.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Results saved to /home/***/ball_detection/runs/detect/train
-</code></pre></div></div>
-<p>Go to this directory.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /home/<span class="k">***</span>/ball_detection/runs/detect/train
-<span class="nb">cd </span>weights
-</code></pre></div></div>
-
-<p>There is learning data in the current directory (best.pt).
-Copy it to the root.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>best.pt ../../../../best.pt   
-</code></pre></div></div>
-<p>Let’s actually check the accuracy.</p>
-
-<p>Create a python script (predict.py).</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
-<span class="kn">import</span> <span class="n">sys</span>
-
-<span class="kn">from</span> <span class="n">ultralytics</span> <span class="kn">import</span> <span class="n">YOLO</span>
-
-<span class="c1"># Load a model
-</span><span class="n">model</span> <span class="o">=</span> <span class="nc">YOLO</span><span class="p">(</span><span class="sh">"</span><span class="s">best.pt</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># load a custom model
-</span>
-<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">usage: predict.py test.jpg</span><span class="sh">"</span><span class="p">)</span>
-    <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
-<span class="n">runs_dir</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="sh">"</span><span class="s">runs</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">predict</span><span class="sh">"</span><span class="p">)</span>
-
-<span class="c1"># Predict with the model
-</span><span class="n">results</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                <span class="n">project</span><span class="o">=</span><span class="n">runs_dir</span><span class="p">,</span>
-                <span class="n">name</span><span class="o">=</span><span class="sh">"</span><span class="s">ball</span><span class="sh">"</span><span class="p">,</span>
-                <span class="n">save</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-<span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">boxes</span><span class="p">.</span><span class="n">xyxy</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">boxes</span><span class="p">.</span><span class="n">cls</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">boxes</span><span class="p">.</span><span class="n">conf</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">names</span><span class="p">)</span>
-</code></pre></div></div>
-<p><img src="/assets/images/2025-02-24-label_testpic.png" alt="testpic.png" /></p>
-
-<p>Let’s try it with this image.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python predict.py testpic.png
-</code></pre></div></div>
-<p>You should see the following output in the output.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Results saved to /home/***/ball_detection/runs/predict/ball
-</code></pre></div></div>
-<p>Let’s see it.</p>
-
-<p><img src="/assets/images/2025-02-24-label_result.png" alt="result" /></p>
-
-<p>It’s displayed very accurately. It’s amazing.</p>
-
-<h1 id="conclusion">Conclusion</h1>
-<p>It’s very difficult to understand the insides of object detection, but if you just touch it, it can be done quickly, so I hope you can feel it more closely.</p>]]></content><author><name>rotarymars</name></author><category term="robot" /><category term="rotarymars&apos;s article" /><category term="machine learning" /><summary type="html"><![CDATA[Hello. I’m rotarymars.]]></summary></entry></feed>
+<p>Thank you for reading~</p>]]></content><author><name>K10-K10</name></author><category term="robot" /><category term="K10-K10&apos;s article" /><category term="free-talk" /><summary type="html"><![CDATA[Hello. I’m K10-K10.]]></summary></entry></feed>

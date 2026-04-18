@@ -195,6 +195,14 @@
     var searchjson = `[ \
        \
         { \
+          "title"    : "Japan Competition Results and Next Year&#39;s Plans", \
+          "desc"     : "Japan Competition Results and Next Year&#39;s Plans", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/2026/04/11/result-japan.html", \
+          "date"     : "April 11, 2026" \
+        }, \
+       \
+        { \
           "title"    : "Visit to Hamano Products (浜野製作所)", \
           "desc"     : "Visit to Hamano Products (浜野製作所)", \
           "category" : "robotrotarymars's articlevisit", \
@@ -409,6 +417,14 @@
           "category" : "page", \
           "url"      : "{ page.url }}", \
           "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "{ page.url }}", \
+          "date"     : "January 1, 1970" \
         } \
        \
     ]`;
@@ -555,6 +571,21 @@ The visit gave us technical insights, but also motivation to keep improving as a
           </div>
         </article>
 
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.pathname.includes('/pr-previews/')) {
+              var baseUrl = '/';
+              var images = document.querySelectorAll('.post-content img');
+              
+              images.forEach(function(img) {
+                var src = img.getAttribute('src');
+                if (src && src.startsWith('/assets/')) {
+                  img.src = baseUrl + src;
+                }
+              });
+            }
+          });
+        </script>
         
 
         
@@ -575,6 +606,12 @@ The visit gave us technical insights, but also motivation to keep improving as a
               </a>
             </li>
             
+            
+            <li class="page-item next">
+              <a class="page-link" href="/2026/04/11/result-japan.html" data-toggle="tooltip" data-placement="top" title="Japan Competition Results and Next Year&apos;s Plans">
+                Next Post <i class="fas fa-arrow-right"></i>
+              </a>
+            </li>
             
           </ul>
         </div>
