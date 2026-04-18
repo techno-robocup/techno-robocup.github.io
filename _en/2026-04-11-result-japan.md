@@ -12,7 +12,7 @@ lang: en
 
 Hi, I'm K10-K10!
 
-We participated in RoboCupJunior Japan Open 2026 Aichi from 27th to 29th March, and I’d like to share our results and our plans for next year.
+We participated in RoboCup Junior Japan Open 2026 Aichi from 27th to 29th March, and I’d like to share our results and our plans for next year.
 
 # Results
 
