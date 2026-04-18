@@ -804,6 +804,21 @@ robot@hexagon:~<span class="err">$</span>
           </div>
         </article>
 
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.pathname.includes('/pr-previews/')) {
+              var baseUrl = '/pr-previews/PR_56';
+              var images = document.querySelectorAll('.post-content img');
+              
+              images.forEach(function(img) {
+                var src = img.getAttribute('src');
+                if (src && src.startsWith('/assets/')) {
+                  img.src = baseUrl + src;
+                }
+              });
+            }
+          });
+        </script>
         
 
         

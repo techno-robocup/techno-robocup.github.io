@@ -369,6 +369,14 @@
           "date"     : "March 14, 2026" \
         }, \
        \
+        { \
+          "title"    : "Japan Competition Results and Next Year&#39;s Plans", \
+          "desc"     : "Japan Competition Results and Next Year&#39;s Plans", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/pr-previews/PR_56/en/2026-04-11-result-japan/", \
+          "date"     : "April 11, 2026" \
+        }, \
+       \
       \
        \
         { \
@@ -416,6 +424,14 @@
           "desc"     : " - page 4", \
           "category" : "page", \
           "url"      : "/pr-previews/PR_56/en/page4/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 5", \
+          "desc"     : " - page 5", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_56/en/page5/index.html", \
           "date"     : "January 1, 1970" \
         }, \
        \
@@ -758,6 +774,21 @@ pip 24.0 from /usr/lib/python3/dist-packages/pip <span class="o">(</span>python 
           </div>
         </article>
 
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.pathname.includes('/pr-previews/')) {
+              var baseUrl = '/pr-previews/PR_56';
+              var images = document.querySelectorAll('.post-content img');
+              
+              images.forEach(function(img) {
+                var src = img.getAttribute('src');
+                if (src && src.startsWith('/assets/')) {
+                  img.src = baseUrl + src;
+                }
+              });
+            }
+          });
+        </script>
         
 
         
