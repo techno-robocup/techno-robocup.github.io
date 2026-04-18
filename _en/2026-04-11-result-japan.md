@@ -6,6 +6,8 @@ date: 2026-04-11 08:00:00 +0000
 tag: [robot, K10-K10's article]
 thumbnail-img: "/assets/images/robot_japan.jpg"
 author: "K10-K10"
+lang: en
+---
 ---
 
 Hi, I'm K10-K10!
