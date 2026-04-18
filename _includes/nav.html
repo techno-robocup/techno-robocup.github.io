@@ -1,9 +1,12 @@
+{% assign lang = page.lang | default: "ja" %}
+{% assign home_url = '/' | append: lang | append: '/' %}
+
 <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom {% if page.nav-short %}top-nav-short-permanent{% else %}top-nav-regular{% endif %}">
 
   {%- if site.title-img -%}
-    <a class="navbar-brand navbar-brand-logo" href="{{ '/' | absolute_url }}"><img alt="{{ site.title }} Logo" src="{{ site.title-img | relative_url}}"/></a>
+    <a class="navbar-brand navbar-brand-logo" href="{{ home_url | relative_url }}"><img alt="{{ site.title }} Logo" src="{{ site.title-img | relative_url}}"/></a>
   {%- elsif site.title -%}
-    <a class="navbar-brand" href="{{ '/' | absolute_url }}">{{ site.title }}</a>
+    <a class="navbar-brand" href="{{ home_url | relative_url }}">{{ site.title }}</a>
   {%- endif -%}
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +15,8 @@
 
   <div class="collapse navbar-collapse" id="main-navbar">
     <ul class="navbar-nav ml-auto">
-      {%- for link in site.navbar-links -%}
+      
+      {%- for link in site.navbar-links[lang] -%}
         {%- if link[1].first %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ link[0] }}</a>
@@ -30,6 +34,7 @@
           </li>
         {%- endif -%}
       {%- endfor -%}
+
       {% if site.post_search %}
         <li class="nav-item">
           <a class="nav-link" id="nav-search-link" href="#" title="Search">
@@ -38,6 +43,21 @@
           </a>
         </li>
       {%- endif -%}
+
+      <li class="nav-item d-flex align-items-center ml-xl-3 mt-2 mt-xl-0 mb-2 mb-xl-0">
+        {% if lang == 'ja' %}
+          <div class="btn-group btn-group-sm" role="group">
+            <a href="{{ page.url | replace_first: '/ja/', '/en/' | relative_url }}" class="btn btn-outline-dark">En</a>
+            <span class="btn btn-dark font-weight-bold" style="cursor: default;">Ja</span>
+          </div>
+        {% else %}
+          <div class="btn-group btn-group-sm" role="group">
+            <span class="btn btn-dark font-weight-bold" style="cursor: default;">En</span>
+            <a href="{{ page.url | replace_first: '/en/', '/ja/' | relative_url }}" class="btn btn-outline-dark">Ja</a>
+          </div>
+        {% endif %}
+      </li>
+
     </ul>
   </div>
 
@@ -50,7 +70,7 @@
   {% if site.avatar and page.show-avatar != false %}
     <div class="avatar-container">
       <div class="avatar-img-border">
-        <a href="{{ '/' | absolute_url }}">
+        <a href="{{ home_url | relative_url }}">
           <img alt="Navigation bar avatar" class="avatar-img" src="{{ site.avatar | relative_url }}" />
         </a>
       </div>

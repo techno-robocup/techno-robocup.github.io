@@ -31,7 +31,7 @@ github_username: techno-robocup
 theme: beautiful-jekyll-theme
 plugins:
   - jekyll-feed
-  - jekyll-paginate
+  - jekyll-paginate-v2
   - jekyll-sitemap
 
 gtag: "G-CT437Q24DM"
@@ -50,11 +50,12 @@ social-network-links:
   github: techno-robocup
 
 navbar-links:
-  # Resources:
-  #   - Beautiful Jekyll: "https://beautifuljekyll.com"
-  #   - Learn markdown: "https://www.markdowntutorial.com/"
-  Tags: /tags
-  About us: "aboutus"
+  ja:
+    Tags: /ja/tags/
+    About Us: /ja/aboutus/
+  en:
+    Tags: /en/tags/
+    About Us: /en/aboutus/
 
 # Except character length
 excerpt_length: 150
@@ -75,10 +76,22 @@ timezone: "Asia/Tokyo"
 markdown: kramdown
 highlighter: rouge
 # permalink: /:year-:month-:day-:title/
-paginate: 5
+# paginate: 5
 
 kramdown:
   input: GFM
+
+# Collections for multi-language support
+collections:
+  en:
+    output: true
+    permalink: /en/:path/
+  ja:
+    output: true
+    permalink: /ja/:path/
+include:
+  - en
+  - ja
 
 # Default YAML values (more information on Jekyll's site)
 defaults:
@@ -89,6 +102,22 @@ defaults:
       layout: "post"
       comments: true # add comments to all blog posts
       social-share: true # add social media sharing buttons to all blog posts
+  - scope:
+      path: "en"
+      type: "en"
+    values:
+      layout: "post"
+      comments: true
+      social-share: true
+      lang: "en"
+  - scope:
+      path: "ja"
+      type: "ja"
+    values:
+      layout: "post"
+      comments: true
+      social-share: true
+      lang: "ja"
   - scope:
       path: "" # any file that's not a post will be a "page" layout by default
     values:
@@ -106,3 +135,19 @@ exclude:
   - docs/
   - setup.md
   - .github/
+
+
+defaults:
+  - scope:
+      path: "en"
+    values:
+      layout: "post"
+
+  - scope:
+      path: "ja"
+    values:
+      layout: "post"
+
+pagination:
+  enabled: true
+  per_page: 5
