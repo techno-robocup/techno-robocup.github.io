@@ -50,7 +50,7 @@ jobs:
         with:
           script: |
             const pr = context.payload.pull_request;
-            const previewUrl = `https://techno-robocup.github.io/pr-previews/PR_${pr.number}/`;
+            const previewUrl = `https://techno-robocup.github.io/pr-previews/PR_${pr.number}/en/`;
             const marker = `<!-- pr-preview-comment -->`;
             const body = `${marker}\n🔍 **PR Preview deployed!**\n\nYour preview is available at: ${previewUrl}\n\n*This preview is automatically updated on every push to this PR.*`;
 
