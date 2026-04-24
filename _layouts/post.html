@@ -4,6 +4,8 @@ layout: base
 
 {% include header.html type="post" %}
 
+{% assign current_lang = page.lang | default: "en" %}
+
 <div class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
   <div class="row">
     <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
@@ -36,7 +38,11 @@ layout: base
             <span class="tags-label">Tags:</span>
             <div class="tags-list">
               {% for tag in page.tags %}
-                <a href="{{ '/tags' | relative_url }}#{{- tag -}}" class="tag-item">{{- tag -}}</a>
+                {% if current_lang == "en" %}
+                  <a href="{{ '/en/tags' | absolute_url }}#{{- tag -}}" class="tag-item">{{- tag -}}</a>
+                {% elsif current_lang == "ja" %}
+                  <a href="{{ '/ja/tags' | absolute_url }}#{{- tag -}}" class="tag-item">{{- tag -}}</a>
+                {% endif %}
               {% endfor %}
             </div>
           </div>
