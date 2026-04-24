@@ -5,7 +5,7 @@ lang: en
 permalink: /en/aboutus/
 ---
 
-We are a team "TECHNO" that makes robots for RoboCup Junior. This is our blog.
+We are a team "Techno-Torques" that makes robots for RoboCup Junior. This is our blog.
 
 Members introduce themselves.
 
