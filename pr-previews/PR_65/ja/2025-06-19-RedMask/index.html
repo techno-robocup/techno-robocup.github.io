@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Beautiful Jekyll 6.0.1 | Copyright Dean Attali 2023 -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6935558663648820"
+     crossorigin="anonymous"></script>
+  
+
+  
+
+  
+
+  <title>赤色検知と7セグ</title>
+
+  
+  
+  <meta name="author" content="K10-K10">
+  
+
+  <meta name="description" content="こんにちはK10-K10です。 今回は赤色を検知するプログラムができたということで、その解説と、 機体の状況判断用の7セグLEDの使い方をまとめたいと思います。 プログラム 赤色検知をする関数です。 def detect_red_marks(orig_image, blackline_image): image = orig_image.copy() global red_marks, red_black_detected hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV) lower_red1 = np.array([0, 40, 0]) upper_red1 = np.array([30, 255, 255]) lower_red2 = np.array([100, 40, 0]) upper_red2 = np.array([180, 255, 255]) red_mask1 = cv2.inRange(hsv, lower_red1, upper_red1) red_mask2 = cv2.inRange(hsv, lower_red2, upper_red2) red_mask = cv2.bitwise_or(red_mask1, red_mask2) kernel = np.ones((3, 3), np.uint8) red_mask = cv2.erode(red_mask, kernel, iterations=2) red_mask = cv2.dilate(red_mask, kernel, iterations=2) if DEBUG_MODE: time_str = str(time.time()) cv2.imwrite(f&quot;bin/{time_str}_red_mask1.jpg&quot;, red_mask1) cv2.imwrite(f&quot;bin/{time_str}_red_mask2.jpg&quot;, red_mask2) cv2.imwrite(f&quot;bin/{time_str}_red_mask.jpg&quot;, red_mask) contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) red_marks = [] red_black_detected = [] for contour in contours: if cv2.contourArea(contour) &amp;gt; min_red_area: x, y, w, h = cv2.boundingRect(contour) center_x = x + w // 2 center_y = y + h // 2 red_marks.append((center_x, center_y, w, h)) if DEBUG_MODE: cv2.line(image, (x, y), (x + w, y + h), (0, 0, 255), 2) cv2.line(image, (x + w, y), (x, y + h), (0, 0, 255), 2)...">
+
+  
+
+  
+  <meta name="keywords" content="robocup junior,robot,line trace,rescue line,rcjj,ロボカップ,ロボット,ライントレース,レスキューライン">
+  
+
+  
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CT437Q24DM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CT437Q24DM');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+      
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    
+      
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/pr-previews/PR_65/assets/css/bootstrap-social.css">
+    
+      <link rel="stylesheet" href="/pr-previews/PR_65/assets/css/beautifuljekyll.css">
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/pr-previews/PR_65/assets/css/custom-styles.css">
+    
+  
+
+  
+  
+  
+
+  
+
+  
+  <meta property="og:site_name" content="techno-robocup">
+  <meta property="og:title" content="赤色検知と7セグ">
+  <meta property="og:description" content="こんにちはK10-K10です。 今回は赤色を検知するプログラムができたということで、その解説と、 機体の状況判断用の7セグLEDの使い方をまとめたいと思います。 プログラム 赤色検知をする関数です。 def detect_red_marks(orig_image, blackline_image): image = orig_image.copy() global red_marks, red_black_detected hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV) lower_red1 = np.array([0, 40, 0]) upper_red1 = np.array([30, 255, 255]) lower_red2 = np.array([100, 40, 0]) upper_red2 = np.array([180, 255, 255]) red_mask1 = cv2.inRange(hsv, lower_red1, upper_red1) red_mask2 = cv2.inRange(hsv, lower_red2, upper_red2) red_mask = cv2.bitwise_or(red_mask1, red_mask2) kernel = np.ones((3, 3), np.uint8) red_mask = cv2.erode(red_mask, kernel, iterations=2) red_mask = cv2.dilate(red_mask, kernel, iterations=2) if DEBUG_MODE: time_str = str(time.time()) cv2.imwrite(f&quot;bin/{time_str}_red_mask1.jpg&quot;, red_mask1) cv2.imwrite(f&quot;bin/{time_str}_red_mask2.jpg&quot;, red_mask2) cv2.imwrite(f&quot;bin/{time_str}_red_mask.jpg&quot;, red_mask) contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) red_marks = [] red_black_detected = [] for contour in contours: if cv2.contourArea(contour) &amp;gt; min_red_area: x, y, w, h = cv2.boundingRect(contour) center_x = x + w // 2 center_y = y + h // 2 red_marks.append((center_x, center_y, w, h)) if DEBUG_MODE: cv2.line(image, (x, y), (x + w, y + h), (0, 0, 255), 2) cv2.line(image, (x + w, y), (x, y + h), (0, 0, 255), 2)...">
+
+  
+  <meta property="og:image" content="https://techno-robocup.github.io/pr-previews/PR_65/assets/images/techno-robocup-icon.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  
+  <meta property="og:article:author" content="K10-K10">
+  
+  <meta property="og:article:published_time" content="2025-06-20T10:00:00+09:00">
+  <meta property="og:url" content="https://techno-robocup.github.io/pr-previews/PR_65/ja/2025-06-19-RedMask/">
+  <link rel="canonical" href="https://techno-robocup.github.io/pr-previews/PR_65/ja/2025-06-19-RedMask/">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+
+  <meta property="twitter:title" content="赤色検知と7セグ">
+  <meta property="twitter:description" content="こんにちはK10-K10です。 今回は赤色を検知するプログラムができたということで、その解説と、 機体の状況判断用の7セグLEDの使い方をまとめたいと思います。 プログラム 赤色検知をする関数です。 def detect_red_marks(orig_image, blackline_image): image = orig_image.copy() global red_marks, red_black_detected hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV) lower_red1 = np.array([0, 40, 0]) upper_red1 = np.array([30, 255, 255]) lower_red2 = np.array([100, 40, 0]) upper_red2 = np.array([180, 255, 255]) red_mask1 = cv2.inRange(hsv, lower_red1, upper_red1) red_mask2 = cv2.inRange(hsv, lower_red2, upper_red2) red_mask = cv2.bitwise_or(red_mask1, red_mask2) kernel = np.ones((3, 3), np.uint8) red_mask = cv2.erode(red_mask, kernel, iterations=2) red_mask = cv2.dilate(red_mask, kernel, iterations=2) if DEBUG_MODE: time_str = str(time.time()) cv2.imwrite(f&quot;bin/{time_str}_red_mask1.jpg&quot;, red_mask1) cv2.imwrite(f&quot;bin/{time_str}_red_mask2.jpg&quot;, red_mask2) cv2.imwrite(f&quot;bin/{time_str}_red_mask.jpg&quot;, red_mask) contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) red_marks = [] red_black_detected = [] for contour in contours: if cv2.contourArea(contour) &amp;gt; min_red_area: x, y, w, h = cv2.boundingRect(contour) center_x = x + w // 2 center_y = y + h // 2 red_marks.append((center_x, center_y, w, h)) if DEBUG_MODE: cv2.line(image, (x, y), (x + w, y + h), (0, 0, 255), 2) cv2.line(image, (x + w, y), (x, y + h), (0, 0, 255), 2)...">
+
+  
+  <meta name="twitter:image" content="https://techno-robocup.github.io/pr-previews/PR_65/assets/images/techno-robocup-icon.jpg">
+  
+
+  
+
+
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/pr-previews/PR_65/assets/css/custom.css">
+  <script src="/pr-previews/PR_65/assets/js/colorAnimation.js"></script>
+
+</head>
+
+
+<body>
+
+  
+
+
+  
+
+
+<nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="/pr-previews/PR_65/ja/">techno-robocup</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/pr-previews/PR_65/ja/tags/">Tags</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pr-previews/PR_65/ja/aboutus/">About Us</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-search-link" href="#" title="Search">
+            <span id="nav-search-icon" class="fa fa-search"></span>
+            <span id="nav-search-text">Search</span>
+          </a>
+        </li><li class="nav-item d-flex align-items-center ml-xl-3 mt-2 mt-xl-0 mb-2 mb-xl-0">
+        
+          <div class="btn-group btn-group-sm" role="group">
+            <a href="/pr-previews/PR_65/en/2025-06-19-RedMask/" class="btn btn-outline-dark">En</a>
+            <span class="btn btn-dark font-weight-bold" style="cursor: default;">Ja</span>
+          </div>
+        
+      </li>
+
+    </ul>
+  </div>
+
+  
+
+  
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        <a href="/pr-previews/PR_65/ja/">
+          <img alt="Navigation bar avatar" class="avatar-img" src="/pr-previews/PR_65/assets/images/robot-03.jpg" />
+        </a>
+      </div>
+    </div>
+  
+
+</nav>
+
+
+
+<div id="beautifuljekyll-search-overlay">
+
+  <div id="nav-search-exit" title="Exit search">✕</div>
+  <input type="text" id="nav-search-input" placeholder="Search">
+  <ul id="search-results-container"></ul>
+
+  
+
+  <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+  <script>
+    var searchjson = `[ \
+      \
+       \
+        { \
+          "title"    : "ブログを始めました", \
+          "desc"     : "ブログを始めました", \
+          "category" : "free-talkrotarymars's article", \
+          "url"      : "/pr-previews/PR_65/ja/2024-07-09-self-introduction/", \
+          "date"     : "July  8, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "SSHでEV3", \
+          "desc"     : "SSHでEV3", \
+          "category" : "robotEV3rotarymars's article", \
+          "url"      : "/pr-previews/PR_65/ja/2024-07-23-ev3_ssh/", \
+          "date"     : "July 23, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Pythonでコマンドライン", \
+          "desc"     : "Pythonでコマンドライン", \
+          "category" : "pythonfree-talknishikazu's article", \
+          "url"      : "/pr-previews/PR_65/ja/2024-08-07-python-OS/", \
+          "date"     : "August  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "レゴのゴム鉄砲", \
+          "desc"     : "レゴのゴム鉄砲", \
+          "category" : "free-talkALPAKA's article", \
+          "url"      : "/pr-previews/PR_65/ja/2024-08-22-rubber_band_gun/", \
+          "date"     : "August 22, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "tensorflowで簡単に機械学習", \
+          "desc"     : "tensorflowで簡単に機械学習", \
+          "category" : "machine learningrotarymars's article", \
+          "url"      : "/pr-previews/PR_65/ja/2024-08-28-tensorflow-machinelearning/", \
+          "date"     : "August 28, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "文化祭でロボット展示", \
+          "desc"     : "文化祭でロボット展示", \
+          "category" : "robotEV3nishikazu's article", \
+          "url"      : "/pr-previews/PR_65/ja/2024-09-07-robot_introduction/", \
+          "date"     : "September  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "文化祭の実演時間について", \
+          "desc"     : "文化祭の実演時間について", \
+          "category" : "robotschoolALPAKA's article", \
+          "url"      : "/pr-previews/PR_65/ja/2024-09-13-culture_festival_time_table/", \
+          "date"     : "September 13, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "機械学習の仕組み  ~ディープラーニング~", \
+          "desc"     : "機械学習の仕組み  ~ディープラーニング~", \
+          "category" : "robotmachine learningrotarymars's article", \
+          "url"      : "/pr-previews/PR_65/ja/2024-09-18-about_deep_learning/", \
+          "date"     : "September 18, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "東関東ノードの結果と関東大会に向けて", \
+          "desc"     : "東関東ノードの結果と関東大会に向けて", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_65/ja/2024-12-13-results_report/", \
+          "date"     : "December 12, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "関東大会の結果と来年に向けて", \
+          "desc"     : "関東大会の結果と来年に向けて", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_65/ja/2025-01-26-result_kanto/", \
+          "date"     : "January 26, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "YOLOで機械学習~物体検知とロボカップでの応用~", \
+          "desc"     : "YOLOで機械学習~物体検知とロボカップでの応用~", \
+          "category" : "robotrotarymars's articlemachine learning", \
+          "url"      : "/pr-previews/PR_65/ja/2025-02-24-yolo_machine_learning/", \
+          "date"     : "February 24, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "最近の進捗", \
+          "desc"     : "最近の進捗", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/pr-previews/PR_65/ja/2025-04-18-progress/", \
+          "date"     : "April 18, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "ライントレースのプログラム", \
+          "desc"     : "ライントレースのプログラム", \
+          "category" : "robotrotarymars's articleline-traceprogram", \
+          "url"      : "/pr-previews/PR_65/ja/2025-05-11-linetrace_program/", \
+          "date"     : "May 11, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "機体部品について", \
+          "desc"     : "機体部品について", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/pr-previews/PR_65/ja/2025-05-31-parts/", \
+          "date"     : "May 31, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "赤色検知と7セグ", \
+          "desc"     : "赤色検知と7セグ", \
+          "category" : "robotK10-K10's articleline-traceprogram", \
+          "url"      : "/pr-previews/PR_65/ja/2025-06-19-RedMask/", \
+          "date"     : "June 20, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "ポチ 機体紹介", \
+          "desc"     : "ポチ 機体紹介", \
+          "category" : "robotALPAKA's articlehardware", \
+          "url"      : "/pr-previews/PR_65/ja/2025-07-09-robot.hardware/", \
+          "date"     : "July  9, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "開発体制", \
+          "desc"     : "開発体制", \
+          "category" : "robotrotarymars's articlesoftware", \
+          "url"      : "/pr-previews/PR_65/ja/2025-07-21-introducing/", \
+          "date"     : "July 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "最近の進捗2", \
+          "desc"     : "最近の進捗2", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/pr-previews/PR_65/ja/2025-09-21-progress2/", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "最近の進捗", \
+          "desc"     : "最近の進捗", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_65/ja/2026-01-21-progress/", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "浜野製作所（Hamano Products）訪問", \
+          "desc"     : "浜野製作所（Hamano Products）訪問", \
+          "category" : "robotrotarymars's articlevisit", \
+          "url"      : "/pr-previews/PR_65/ja/2026-03-14-hamano-products-visit/", \
+          "date"     : "March 14, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "日本大会の結果と今後の予定", \
+          "desc"     : "日本大会の結果と今後の予定", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/pr-previews/PR_65/ja/2026-04-11-result-japan/", \
+          "date"     : "April 11, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "3走目の振り返り", \
+          "desc"     : "3走目の振り返り", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_65/ja/2026-04-21-reflection/", \
+          "date"     : "April 21, 2026" \
+        }, \
+       \
+      \
+       \
+        { \
+          "title"    : "About us", \
+          "desc"     : "About us", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_65/ja/aboutus/", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "タグ一覧", \
+          "desc"     : "タグ一覧", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_65/ja/tags/", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_65/ja/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 2", \
+          "desc"     : " - page 2", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_65/ja/page2/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 3", \
+          "desc"     : " - page 3", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_65/ja/page3/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 4", \
+          "desc"     : " - page 4", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_65/ja/page4/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 5", \
+          "desc"     : " - page 5", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_65/ja/page5/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+    ]`;
+    
+    // 4. Jekyllのループで最後に残ってしまう余分なカンマを削除してJSONエラーを防ぐ
+    searchjson = searchjson.replace(/,\s*\]$/, ']');
+    searchjson = JSON.parse(searchjson);
+
+    var sjs = SimpleJekyllSearch({
+      searchInput: document.getElementById('nav-search-input'),
+      resultsContainer: document.getElementById('search-results-container'),
+      json: searchjson
+    });
+  </script>
+</div>
+
+
+
+
+
+  
+
+
+
+<header class="header-section ">
+<div class="intro-header ">
+  
+  <div class="container-md">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        <div class="post-heading">
+          <h1>
+            赤色検知と7セグ
+          </h1>
+          
+          
+           
+            
+              By <strong>K10-K10</strong><br>
+            
+            <span class="post-meta">Posted on June 20, 2025</span>
+            
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+
+
+
+</header>
+
+
+<div class=" container-md ">
+  <div class="row">
+    <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
+      <div class="post-content-wrapper">
+        
+
+        
+          <div class="blog-tags">
+            <span class="tags-label">Tags:</span>
+            <div class="tags-list">
+              
+                <a href="/pr-previews/PR_65/tags#robot" class="tag-item">robot</a>
+              
+                <a href="/pr-previews/PR_65/tags#K10-K10's article" class="tag-item">K10-K10's article</a>
+              
+                <a href="/pr-previews/PR_65/tags#line-trace" class="tag-item">line-trace</a>
+              
+                <a href="/pr-previews/PR_65/tags#program" class="tag-item">program</a>
+              
+            </div>
+          </div>
+        
+
+        
+
+        <article role="main" class="blog-post">
+          <div class="post-content">
+            <p>こんにちはK10-K10です。<br />
+今回は赤色を検知するプログラムができたということで、その解説と、<br />
+機体の状況判断用の7セグLEDの使い方をまとめたいと思います。</p>
+
+<h1 id="プログラム">プログラム</h1>
+
+<p>赤色検知をする関数です。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">detect_red_marks</span><span class="p">(</span><span class="n">orig_image</span><span class="p">,</span> <span class="n">blackline_image</span><span class="p">):</span>
+  <span class="n">image</span> <span class="o">=</span> <span class="n">orig_image</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+  <span class="k">global</span> <span class="n">red_marks</span><span class="p">,</span> <span class="n">red_black_detected</span>
+
+  <span class="n">hsv</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">COLOR_RGB2HSV</span><span class="p">)</span>
+
+  <span class="n">lower_red1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+  <span class="n">upper_red1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+
+  <span class="n">lower_red2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+  <span class="n">upper_red2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+
+  <span class="n">red_mask1</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">inRange</span><span class="p">(</span><span class="n">hsv</span><span class="p">,</span> <span class="n">lower_red1</span><span class="p">,</span> <span class="n">upper_red1</span><span class="p">)</span>
+  <span class="n">red_mask2</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">inRange</span><span class="p">(</span><span class="n">hsv</span><span class="p">,</span> <span class="n">lower_red2</span><span class="p">,</span> <span class="n">upper_red2</span><span class="p">)</span>
+
+  <span class="n">red_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">bitwise_or</span><span class="p">(</span><span class="n">red_mask1</span><span class="p">,</span> <span class="n">red_mask2</span><span class="p">)</span>
+
+  <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span>
+  <span class="n">red_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">erode</span><span class="p">(</span><span class="n">red_mask</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">red_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">dilate</span><span class="p">(</span><span class="n">red_mask</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+    <span class="n">time_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">())</span>
+    <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="n">time_str</span><span class="si">}</span><span class="s">_red_mask1.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">red_mask1</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="n">time_str</span><span class="si">}</span><span class="s">_red_mask2.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">red_mask2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">bin/</span><span class="si">{</span><span class="n">time_str</span><span class="si">}</span><span class="s">_red_mask.jpg</span><span class="sh">"</span><span class="p">,</span> <span class="n">red_mask</span><span class="p">)</span>
+
+  <span class="n">contours</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">findContours</span><span class="p">(</span><span class="n">red_mask</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">RETR_EXTERNAL</span><span class="p">,</span>
+                                 <span class="n">cv2</span><span class="p">.</span><span class="n">CHAIN_APPROX_SIMPLE</span><span class="p">)</span>
+
+  <span class="n">red_marks</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">red_black_detected</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">for</span> <span class="n">contour</span> <span class="ow">in</span> <span class="n">contours</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">contourArea</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">min_red_area</span><span class="p">:</span>
+      <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">boundingRect</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+
+      <span class="n">center_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">w</span> <span class="o">//</span> <span class="mi">2</span>
+      <span class="n">center_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">//</span> <span class="mi">2</span>
+      <span class="n">red_marks</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+
+      <span class="k">if</span> <span class="n">DEBUG_MODE</span><span class="p">:</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+                 <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="p">.</span><span class="nf">circle</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>後半のノイズ除去と、画像へのマークは <a href="/2025/05/11/linetrace_program.html" target="_blank">前回</a>の緑色と同じです。</p>
+
+<h2 id="解説">解説</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">lower_red1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+  <span class="n">upper_red1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+
+  <span class="n">lower_red2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+  <span class="n">upper_red2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>赤のHSV（色相）は0～60度、300～360度に分かれています。<br />
+この値をOpenCV(0~180)に直すと、0～30 150～180度 となります。<br />
+数値は違いますが、これから調整していきます。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">red_mask1</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">inRange</span><span class="p">(</span><span class="n">hsv</span><span class="p">,</span> <span class="n">lower_red1</span><span class="p">,</span> <span class="n">upper_red1</span><span class="p">)</span>
+  <span class="n">red_mask2</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">inRange</span><span class="p">(</span><span class="n">hsv</span><span class="p">,</span> <span class="n">lower_red2</span><span class="p">,</span> <span class="n">upper_red2</span><span class="p">)</span>
+
+  <span class="n">red_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">bitwise_or</span><span class="p">(</span><span class="n">red_mask1</span><span class="p">,</span> <span class="n">red_mask2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>先程の色値の範囲でフィルターをかけます。<br />
+<code class="language-plaintext highlighter-rouge">red_mask1</code>が色値が下のもの<br />
+<code class="language-plaintext highlighter-rouge">red_mask2</code>が色値が上のものです。<br />
+これで赤色は白、その他は黒の画像が出来上がります。<br />
+この2つの画像を<code class="language-plaintext highlighter-rouge">bitwise_or</code>にかけ、最終的な<code class="language-plaintext highlighter-rouge">red_mask</code>を得ます。<br />
+<code class="language-plaintext highlighter-rouge">bitwise_or</code>は論理演算子<code class="language-plaintext highlighter-rouge">or</code>と同じ結果を画像に返します。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">画像1</th>
+      <th style="text-align: center">画像2</th>
+      <th style="text-align: center">出力</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">黒</td>
+      <td style="text-align: center">黒</td>
+      <td style="text-align: center">黒</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">黒</td>
+      <td style="text-align: center">白</td>
+      <td style="text-align: center">白</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">白</td>
+      <td style="text-align: center">黒</td>
+      <td style="text-align: center">白</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">白</td>
+      <td style="text-align: center">白</td>
+      <td style="text-align: center">白</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>これで赤色は白、その他は黒の画像が出来上がります。<br />
+これで色値が2箇所ある赤色でも、マスク処理を行うことができます。</p>
+
+<h1 id="7セグled">7セグLED</h1>
+
+<p>機体が行っている動作をLEDのランプで判断できるようにしたいと思い、導入しました。<br />
+どのピンがどこと対応しているかわからなかった(検索で出てくるものとは違っていた)ので、ここにメモを残しておきます</p>
+
+<h3 id="ピン">ピン</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1——</td>
+      <td>——5</td>
+    </tr>
+    <tr>
+      <td>2——</td>
+      <td>——6</td>
+    </tr>
+    <tr>
+      <td>GND-</td>
+      <td>-GND</td>
+    </tr>
+    <tr>
+      <td>3——</td>
+      <td>——7</td>
+    </tr>
+    <tr>
+      <td>4——</td>
+      <td>——8</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="led">LED</h3>
+
+<pre>
+ ---5---
+|       |
+2       6
+|       |
+ ---1---
+|       |
+3       7
+|       |
+ ---4---   8 (ドット)
+</pre>
+
+<h1 id="終わりに">終わりに</h1>
+
+<p>検知できている画像を載せようと思ったのですが、取り忘れました。<br />
+また、今の機体では、ライントレース用のカメラの視野が狭すぎるので、修正しないといけません。<br />
+基盤のミスも見つかったので、間に合うか心配です。</p>
+
+<p>あと、安定化電源をつなぐときは、小数点の位置を必ず確認しましょう<br />
+<strong>3.3v だと思って33vを流さないようにしましょう。</strong></p>
+
+<p>Thank you for reading~</p>
+
+          </div>
+        </article>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.pathname.includes('/pr-previews/')) {
+              var baseUrl = '/pr-previews/PR_65';
+              var images = document.querySelectorAll('.post-content img');
+              
+              images.forEach(function(img) {
+                var src = img.getAttribute('src');
+                if (src && src.startsWith('/assets/')) {
+                  img.src = baseUrl + src;
+                }
+              });
+            }
+          });
+        </script>
+        
+
+        
+          <div class="author-section">
+            <div class="author">
+  📝 <span class="author-text">author: K10-K10</span>
+</div>
+
+          </div>
+        
+
+        <div class="post-navigation">
+          <ul class="pagination blog-pager">
+            
+            <li class="page-item next">
+              <a class="page-link" href="/pr-previews/PR_65/ja/2025-07-09-robot.hardware/" data-toggle="tooltip" data-placement="top" title="ポチ 機体紹介">
+                <i class="fas fa-arrow-left"></i>Next Post
+              </a>
+            </li>
+            
+            
+            <li class="page-item previous">
+              <a class="page-link" href="/pr-previews/PR_65/ja/2025-05-31-parts/" data-toggle="tooltip" data-placement="top" title="機体部品について">
+                <i class="fas fa-arrow-right"></i> Previous Post
+              </a>
+            </li>
+            
+            
+          </ul>
+        </div>
+        <div class="comments-section">
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <footer>
+  <div class="container-md beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      
+<ul class="list-inline text-center footer-links"><li class="list-inline-item">
+    <a href="https://github.com/techno-robocup" title="GitHub">
+      <span class="fa-stack fa-lg" aria-hidden="true">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="sr-only">GitHub</span>
+   </a>
+  </li></ul>
+
+
+      
+      <p class="copyright text-muted">
+      
+      2026
+
+      
+
+      
+
+      
+
+      </p>
+      <p class="theme-by text-muted">
+        Powered by
+        <a href="https://beautifuljekyll.com">Beautiful Jekyll</a>
+      </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  
+  
+    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script src="/pr-previews/PR_65/assets/js/beautifuljekyll.js"></script>
+    
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>
