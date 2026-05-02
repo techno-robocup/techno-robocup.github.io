@@ -44,7 +44,7 @@ I would like a new PC soon.
 We are supported by the following companies and organizations.
 
 ## [Hamano Products Co., Ltd.](https://hamano-products.co.jp/)
-![Hamano Products Co., Ltd.](/assets/images/浜野ロゴ（透明）600px.png)
+![Hamano Products Co., Ltd.](/assets/images/hamano-products.png)
 
 We are currently receiving support from Hamano Products Co., Ltd., which helps us with the development of our robots. We are very grateful for their support.
 

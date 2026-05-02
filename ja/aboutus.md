@@ -44,7 +44,7 @@ C++とPerlの勉強をしています。回路も少し。
 私達は以下の企業や団体からサポートを受けています。
 
 ## [株式会社浜野製作所](https://hamano-products.co.jp/)
-![Hamano Products Co., Ltd.](/assets/images/浜野ロゴ（透明）600px.png)
+![Hamano Products Co., Ltd.](/assets/images/hamano-products.png)
 
 私達は株式会社浜野製作所からサポートを受けています。ロボットの制作にあたって様々なアドバイスを頂いております。
 
