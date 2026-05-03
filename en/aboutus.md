@@ -36,3 +36,13 @@ I am studying C++ and Perl. I am also learning about circuits.
 I would like a new PC soon.
 
 [Personal website](https://k10-k10.github.io){:target="_blank"}
+
+# utsukushiioto
+
+### Main responsibility
+
+- Hardware design
+
+This is utsukushiioto. I joined the team last season. <br>
+I only started seriously using a computer around last winter, so there’s a lot I don’t know yet, but I’ll do my best. <br>
+I’m in charge of hardware design, and now I’m really struggling with FreeCAD.
