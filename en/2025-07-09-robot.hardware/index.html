@@ -609,21 +609,6 @@ However, since the camera for line tracing is placed at a place 2~3cm from the f
           </div>
         </article>
 
-        <script>
-          document.addEventListener("DOMContentLoaded", function() {
-            if (window.location.pathname.includes('/pr-previews/')) {
-              var baseUrl = '/';
-              var images = document.querySelectorAll('.post-content img');
-              
-              images.forEach(function(img) {
-                var src = img.getAttribute('src');
-                if (src && src.startsWith('/assets/')) {
-                  img.src = baseUrl + src;
-                }
-              });
-            }
-          });
-        </script>
         
 
         
@@ -735,6 +720,39 @@ However, since the camera for line tracing is placed at a place 2~3cm from the f
 
 
 
+
+<!-- PR Preview /assets/ path fix -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.location.pathname.includes('/pr-previews/')) {
+      var baseUrl = '/';
+      
+      // Fix all img src attributes
+      document.querySelectorAll('img').forEach(function(img) {
+        var src = img.getAttribute('src');
+        if (src && src.startsWith('/assets/')) {
+          img.src = baseUrl + src;
+        }
+      });
+      
+      // Fix all video src attributes
+      document.querySelectorAll('video').forEach(function(video) {
+        var src = video.getAttribute('src');
+        if (src && src.startsWith('/assets/')) {
+          video.src = baseUrl + src;
+        }
+      });
+      
+      // Fix all a href attributes
+      document.querySelectorAll('a').forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('/assets/')) {
+          link.href = baseUrl + href;
+        }
+      });
+    }
+  });
+</script>
 
 
 </body>
