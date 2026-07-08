@@ -20,7 +20,7 @@
   <meta name="author" content="K10-K10">
   
 
-  <meta name="description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos To keep the board dimensions as compact as possible, the buzzer and the...">
+  <meta name="description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos Since our robot design relies on a camera for line tracing, I needed...">
 
   
 
@@ -97,7 +97,7 @@
   
   <meta property="og:site_name" content="techno-robocup">
   <meta property="og:title" content="2027 Robot Main PCB Overview &amp; Parts List">
-  <meta property="og:description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos To keep the board dimensions as compact as possible, the buzzer and the...">
+  <meta property="og:description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos Since our robot design relies on a camera for line tracing, I needed...">
 
   
   <meta property="og:image" content="https://techno-robocup.github.io/pr-previews/PR_76/assets/images/2026-07-06-schematic.jpg">
@@ -120,7 +120,7 @@
   <meta name="twitter:creator" content="@">
 
   <meta property="twitter:title" content="2027 Robot Main PCB Overview &amp; Parts List">
-  <meta property="twitter:description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos To keep the board dimensions as compact as possible, the buzzer and the...">
+  <meta property="twitter:description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos Since our robot design relies on a camera for line tracing, I needed...">
 
   
   <meta name="twitter:image" content="https://techno-robocup.github.io/pr-previews/PR_76/assets/images/2026-07-06-schematic.jpg">
@@ -571,7 +571,7 @@ The main PCB for the 2027 season (Kanto region spec) is finally complete!</p>
 <p><img src="/assets/images/2026-07-06-f.jpg" alt="pcb surface" />
 <img src="/assets/images/2026-07-06-b.jpg" alt="pcb back" /></p>
 
-<p>To keep the board dimensions as compact as possible, the buzzer and the UART interface board for the motors are mounted on the back side.</p>
+<p>Since our robot design relies on a camera for line tracing, I needed to reserve a large open space in the center of the robot chassis. This required minimizing the PCB footprint as much as possible. To achieve this compact form factor, the buzzer and the motor UART interface board are strategically mounted on the back side of the PCB.</p>
 
 <h1 id="key-improvements-from-last-year">Key Improvements from Last Year</h1>
 
@@ -665,11 +665,19 @@ Even when unplugging the programming cable from the ESP32, power leaks through t
     <p><strong>Faulty Photoreflector Circuit</strong>
 Due to a potential design oversight in the schematic, the photoreflectors (NJL7502L) intended for victim detection are not functioning correctly. To bypass this, I plan to offload the victim detection logic to the camera on the Raspberry Pi 5. Handling this via software should completely cover the required functionality.</p>
   </li>
+  <li>
+    <p><strong>Physical Interference Between Switch and Cable</strong>
+The ESP32 communication cable physically interferes with the power switch when plugged in. Frustratingly, I made the exact same layout mistake in the previous iteration. Improving the orientation and placement of connectors and switches is definitely a top priority for my next hardware spin.</p>
+  </li>
 </ol>
 
 <p>Fortunately, all other core sensors are working perfectly, which is a huge relief.</p>
 
 <h1 id="conclusion">Conclusion</h1>
+
+<p>The design files for this PCB (schematics, layouts, etc.) are open-source and available on GitHub. Feel free to check it out!</p>
+
+<p><a href="https://github.com/techno-robocup/robocup2027-pcb-data">techno-robocup/robocup2027-pcb-data</a></p>
 
 <p>With far more sensors and features than last year, this is shaping up to be a highly capable robot.
 Once the physical chassis is fully assembled, I’ll dive straight into software development.</p>
