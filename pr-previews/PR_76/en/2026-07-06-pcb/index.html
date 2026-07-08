@@ -13,14 +13,14 @@
 
   
 
-  <title>Reflection on the 3rd Run</title>
+  <title>2027 Robot Main PCB Overview &amp; Parts List</title>
 
   
   
-  <meta name="author" content="rotarymars">
+  <meta name="author" content="K10-K10">
   
 
-  <meta name="description" content="Hello. I’m rotarymars. In this article, I would like to write a reflection on the 3rd run, which K10-K10 briefly mentioned in the previous article. What happened During the 3rd run on the 3rd day, one of the course tiles came off after the robot had started the scoring run. Therefore, we had to declare a Lack of Progress and restart from the previous checkpoint. However, since the robot could not follow the line while the course was broken, we had to temporarily fix it. I thought that, as a participant in the competition, I should not touch the course, so I asked the referee, “A tile has come off the course. What should I do?” As a result, the referee took the measure of temporarily holding the course in place by hand. In this article, I would like to summarize what would have been the correct response in that...">
+  <meta name="description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos To keep the board dimensions as compact as possible, the buzzer and the...">
 
   
 
@@ -96,21 +96,21 @@
 
   
   <meta property="og:site_name" content="techno-robocup">
-  <meta property="og:title" content="Reflection on the 3rd Run">
-  <meta property="og:description" content="Hello. I’m rotarymars. In this article, I would like to write a reflection on the 3rd run, which K10-K10 briefly mentioned in the previous article. What happened During the 3rd run on the 3rd day, one of the course tiles came off after the robot had started the scoring run. Therefore, we had to declare a Lack of Progress and restart from the previous checkpoint. However, since the robot could not follow the line while the course was broken, we had to temporarily fix it. I thought that, as a participant in the competition, I should not touch the course, so I asked the referee, “A tile has come off the course. What should I do?” As a result, the referee took the measure of temporarily holding the course in place by hand. In this article, I would like to summarize what would have been the correct response in that...">
+  <meta property="og:title" content="2027 Robot Main PCB Overview &amp; Parts List">
+  <meta property="og:description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos To keep the board dimensions as compact as possible, the buzzer and the...">
 
   
-  <meta property="og:image" content="https://techno-robocup.github.io/pr-previews/PR_76/assets/images/robot_japan.jpg">
+  <meta property="og:image" content="https://techno-robocup.github.io/pr-previews/PR_76/assets/images/2026-07-06-schematic.jpg">
   
 
   
   <meta property="og:type" content="article">
   
-  <meta property="og:article:author" content="rotarymars">
+  <meta property="og:article:author" content="K10-K10">
   
-  <meta property="og:article:published_time" content="2026-04-21T11:00:00+09:00">
-  <meta property="og:url" content="https://techno-robocup.github.io/pr-previews/PR_76/en/2026-04-21-reflection/">
-  <link rel="canonical" href="https://techno-robocup.github.io/pr-previews/PR_76/en/2026-04-21-reflection/">
+  <meta property="og:article:published_time" content="2026-07-06T23:00:00+09:00">
+  <meta property="og:url" content="https://techno-robocup.github.io/pr-previews/PR_76/en/2026-07-06-pcb/">
+  <link rel="canonical" href="https://techno-robocup.github.io/pr-previews/PR_76/en/2026-07-06-pcb/">
   
 
   
@@ -119,11 +119,11 @@
   <meta name="twitter:site" content="@">
   <meta name="twitter:creator" content="@">
 
-  <meta property="twitter:title" content="Reflection on the 3rd Run">
-  <meta property="twitter:description" content="Hello. I’m rotarymars. In this article, I would like to write a reflection on the 3rd run, which K10-K10 briefly mentioned in the previous article. What happened During the 3rd run on the 3rd day, one of the course tiles came off after the robot had started the scoring run. Therefore, we had to declare a Lack of Progress and restart from the previous checkpoint. However, since the robot could not follow the line while the course was broken, we had to temporarily fix it. I thought that, as a participant in the competition, I should not touch the course, so I asked the referee, “A tile has come off the course. What should I do?” As a result, the referee took the measure of temporarily holding the course in place by hand. In this article, I would like to summarize what would have been the correct response in that...">
+  <meta property="twitter:title" content="2027 Robot Main PCB Overview &amp; Parts List">
+  <meta property="twitter:description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos To keep the board dimensions as compact as possible, the buzzer and the...">
 
   
-  <meta name="twitter:image" content="https://techno-robocup.github.io/pr-previews/PR_76/assets/images/robot_japan.jpg">
+  <meta name="twitter:image" content="https://techno-robocup.github.io/pr-previews/PR_76/assets/images/2026-07-06-schematic.jpg">
   
 
   
@@ -172,7 +172,7 @@
         
           <div class="btn-group btn-group-sm" role="group">
             <span class="btn btn-dark font-weight-bold" style="cursor: default;">En</span>
-            <a href="/pr-previews/PR_76/ja/2026-04-21-reflection/" class="btn btn-outline-dark">Ja</a>
+            <a href="/pr-previews/PR_76/ja/2026-07-06-pcb/" class="btn btn-outline-dark">Ja</a>
           </div>
         
       </li>
@@ -489,15 +489,15 @@
       <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
         <div class="post-heading">
           <h1>
-            Reflection on the 3rd Run
+            2027 Robot Main PCB Overview & Parts List
           </h1>
           
           
            
             
-              By <strong>rotarymars</strong><br>
+              By <strong>K10-K10</strong><br>
             
-            <span class="post-meta">Posted on April 21, 2026</span>
+            <span class="post-meta">Posted on July 6, 2026</span>
             
             
           
@@ -532,7 +532,11 @@
                 
               
                 
-                  <a href="https://techno-robocup.github.io/pr-previews/PR_76/en/tags#rotarymars's article" class="tag-item">rotarymars's article</a>
+                  <a href="https://techno-robocup.github.io/pr-previews/PR_76/en/tags#pcb" class="tag-item">pcb</a>
+                
+              
+                
+                  <a href="https://techno-robocup.github.io/pr-previews/PR_76/en/tags#K10-K10's article" class="tag-item">K10-K10's article</a>
                 
               
             </div>
@@ -543,76 +547,134 @@
 
         <article role="main" class="blog-post">
           <div class="post-content">
-            <p>Hello. I’m rotarymars.</p>
+            <p>Hello, this is K10-K10.<br />
+The main PCB for the 2027 season (Kanto region spec) is finally complete!</p>
 
-<p>In this article, I would like to write a reflection on the 3rd run, which K10-K10 briefly mentioned in the <a href="../2026-04-11-result-japan/">previous article</a>.</p>
+<p>Once again, I manufacturing this board through JLCPCB.</p>
 
-<h1 id="what-happened">What happened</h1>
-<p>During the 3rd run on the 3rd day, one of the course tiles came off after the robot had started the scoring run.</p>
+<h1 id="schematic--layout">Schematic &amp; Layout</h1>
 
-<p>Therefore, we had to declare a Lack of Progress and restart from the previous checkpoint.</p>
+<p><img src="/assets/images/2026-07-06-schematic.jpg" alt="schematic image" /></p>
 
-<p>However, since the robot could not follow the line while the course was broken, we had to temporarily fix it.</p>
+<p><img src="/assets/images/2026-07-06-footprint.jpg" alt="footprint image" /></p>
 
-<p>I thought that, as a participant in the competition, I should not touch the course, so I asked the referee, “A tile has come off the course. What should I do?”</p>
+<p>The entire system is consolidated into a single main board.</p>
 
-<p>As a result, the referee took the measure of temporarily holding the course in place by hand.</p>
+<p>For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes.</p>
 
-<p>In this article, I would like to summarize what would have been the correct response in that situation, as well as the ambiguous points in the rules, by referring to the official rules for future reference.</p>
+<p>In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated <strong>dedicated 3.3V and 6V DC-DC converters</strong> to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability.</p>
 
-<p>The rules I’ll refer to are here: <a href="https://junior.robocup.org/wp-content/uploads/2025/02/RCJRescueLine2025-final-1.pdf">RCJRescueLine2025-final-1.pdf</a></p>
+<p>Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close.</p>
 
-<h1 id="when-the-course-is-broken">When the course is broken</h1>
-<p>First, let’s check the rules for when the course is broken by the robot.</p>
+<h1 id="pcb-photos">PCB Photos</h1>
 
-<h2 id="424">§4.2.4</h2>
-<p><em>Robots must not damage any part of the field in any way.</em></p>
+<p><img src="/assets/images/2026-07-06-f.jpg" alt="pcb surface" />
+<img src="/assets/images/2026-07-06-b.jpg" alt="pcb back" /></p>
 
-<p>According to this regulation, the robot is not allowed to damage any part of the field under any circumstances (which is kind of obvious).</p>
+<p>To keep the board dimensions as compact as possible, the buzzer and the UART interface board for the motors are mounted on the back side.</p>
 
-<p>However, in this case, although the damage was caused by the robot’s movement, the same result would likely have occurred with any robot.</p>
+<h1 id="key-improvements-from-last-year">Key Improvements from Last Year</h1>
 
-<p>Also, §2.2.1 states that a robot that repeatedly breaks the course will be disqualified. But in cases like this, where the damage seems to have been caused by a problem with the course setup by the tournament organizers, would the robot still be disqualified?</p>
+<p>Previously, I used ultrasonic sensors (one on the front-left and one on the front-right) for distance measurement. This year, I have upgraded to <strong>ToF (Time-of-Flight) sensors</strong>.</p>
 
-<p>Furthermore, the rules do not clearly state what measures should be taken when a player suffers a disadvantage due to the organizers’ negligence. I felt that there is ambiguity in the rules on this point.</p>
+<p>By placing two ToF sensors on each front corner (four in total for the front-sides), the robot can now handle the “Rescue Zone evacuation,” which was a major hurdle last year.</p>
 
-<h1 id="progress-of-the-competition-after-the-course-is-broken">Progress of the competition after the course is broken</h1>
-<p>I think the situation where the course is broken should not happen in the first place, but if it does happen, how should the competition proceed?</p>
+<p>Additionally, I’ve designed a bumper utilizing load cells, which should make obstacle avoidance much smoother.</p>
 
-<p>In this case, we had the referee fix the course by hand, but the rules do not clearly state how such a situation should be handled.</p>
+<p>I also added an onboard buzzer for debugging, which is going to drastically boost development efficiency.</p>
 
-<p>For example, if the course is broken, the competition should be temporarily stopped and time should be given to repair the course. Also, before restarting the robot after the repair, there should be a procedure to confirm that the course has been properly repaired.</p>
+<h1 id="parts-list">Parts List</h1>
 
-<p>In any case, I felt that the response flow for course damage that is not due to the robot’s fault should be clearly stated in the rules.</p>
+<p>The primary computing unit is a <code class="language-plaintext highlighter-rouge">Raspberry Pi 5</code>, while an <code class="language-plaintext highlighter-rouge">ESP32-DevKitC-32E</code> is onboard to handle low-level control for the motors and sensor array.</p>
 
-<h1 id="afterwards">Afterwards</h1>
-<p>After the scoring run, we consulted with the referee about how to proceed.</p>
+<p>For the drivetrain, I am using four <strong>Feetech STS3032</strong> serial servos, as mentioned in <a href="../2026-06-01-FEETECH/">my previous post</a>. Huge thanks to Feetech for their support!</p>
 
-<p>As the team captain, I — together with the co-captain — spoke with the referee, and we were able to have our Lack of Progress count reduced by one.</p>
+<p>The rescue arm mechanism is planned to use either an <code class="language-plaintext highlighter-rouge">SG90</code> or an <code class="language-plaintext highlighter-rouge">STS3032</code>.</p>
 
-<p>I am very grateful for such a flexible response and appreciate the referee’s handling of the situation.</p>
+<p>Here are the main sensors and components populated on or connected to the board:</p>
 
-<p>However, after that, when we talked with the other team members, one opinion that came up was: “Of course we’re grateful that the Lack of Progress count was reduced by one, but we also lost competition time, so our total competition time — and the time available for the rescue portion — would have been different.” So we decided to consult the referee again about whether the competition time should also be adjusted, not just the Lack of Progress count.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Component / Sensor</th>
+      <th style="text-align: center">Qty</th>
+      <th>Description / Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LTC3111</strong></td>
+      <td style="text-align: center">1</td>
+      <td>Buck-boost DC-DC converter for the 6V rail.</td>
+    </tr>
+    <tr>
+      <td><strong>M78AR033-0.5</strong></td>
+      <td style="text-align: center">1</td>
+      <td>3.3V switching regulator (DC-DC converter).</td>
+    </tr>
+    <tr>
+      <td><strong>BNO055</strong></td>
+      <td style="text-align: center">1</td>
+      <td>9-axis IMU. Used for slope detection and attitude control.</td>
+    </tr>
+    <tr>
+      <td><strong>ToF VL53L0X</strong></td>
+      <td style="text-align: center">6</td>
+      <td>Measures distance to walls (2 units each for front-left/right sides).</td>
+    </tr>
+    <tr>
+      <td><strong>Load Cell SC616C (1kg)</strong></td>
+      <td style="text-align: center">2</td>
+      <td>Used for contact detection on the front bumper.</td>
+    </tr>
+    <tr>
+      <td><strong>HX711 AD Converter</strong></td>
+      <td style="text-align: center">2</td>
+      <td>Amplifier module to read load cell values via ESP32.</td>
+    </tr>
+    <tr>
+      <td><strong>NJL7502L</strong></td>
+      <td style="text-align: center">2</td>
+      <td>Phototransistor to detect successful victim rescue.</td>
+    </tr>
+    <tr>
+      <td><strong>FE-URT-1</strong></td>
+      <td style="text-align: center">1</td>
+      <td>Interface board to control the STS3032 servos.</td>
+    </tr>
+    <tr>
+      <td><strong>PKM22EPPH4001-B0</strong></td>
+      <td style="text-align: center">1</td>
+      <td>Onboard buzzer for debugging and status alerts.</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Since I had already signed the score sheet after the competition, I had no intention of requesting a correction of the score. Still, I personally found myself wondering what the best course of action in such a case would have been.</p>
+<p><em>Note: Resistors, decoupling capacitors, and connectors are placed appropriately throughout the circuit.</em></p>
 
-<p>In the end, after talking with the referee, it was decided that no adjustment of the score would be made.</p>
+<h1 id="known-issues--workarounds">Known Issues &amp; Workarounds</h1>
 
-<h2 id="813">§8.1.3</h2>
-<p><em>After gameplay, the referee will ask the captain to sign the score sheet. Captains will be given a maximum of 1 minute to review the score sheet and sign it. By signing the score sheet, the captain accepts the final score on behalf of the entire team. In case of further clarification, the team captain should write their comments on the score sheet and sign it.</em></p>
+<p>While testing the board, I discovered a couple of gremlins:</p>
 
-<p>According to this regulation, the captain has only one minute to review and sign the score sheet after being informed of the score.</p>
+<ol>
+  <li>
+    <p><strong>Power Leakage via Switch</strong>
+Even when unplugging the programming cable from the ESP32, power leaks through the switch circuit, keeping it turned on. However, since I don’t unplug the cable often during operation, and turning off the program requires hitting the switch anyway, this shouldn’t be a major issue in practice.</p>
+  </li>
+  <li>
+    <p><strong>Faulty Photoreflector Circuit</strong>
+Due to a potential design oversight in the schematic, the photoreflectors (NJL7502L) intended for victim detection are not functioning correctly. To bypass this, I plan to offload the victim detection logic to the camera on the Raspberry Pi 5. Handling this via software should completely cover the required functionality.</p>
+  </li>
+</ol>
 
-<p>This is obviously not enough time to reflect on the situation that just happened and to decide whether to request a correction of the score, and I felt that this point should be reconsidered in the future.</p>
-
-<p>Of course, it is important to prevent teams from taking too much time to review the score sheet. But I think one minute is too short for a team to discuss and decide whether to request a correction — especially in cases like this, where an unexpected situation caused by the tournament organizers affected the competition.</p>
+<p>Fortunately, all other core sensors are working perfectly, which is a huge relief.</p>
 
 <h1 id="conclusion">Conclusion</h1>
-<p>In this article, I wrote a reflection on the 3rd run of the 3rd day, where a tile of the course came off after the robot had started the scoring run, along with the things we discussed with our referee. We found that there are some ambiguous points in the rules regarding the situation where the course is broken by the robot and how to respond to it.</p>
 
-<p>I hope that these points will be clarified in the future for the betterment of the competition.</p>
+<p>With far more sensors and features than last year, this is shaping up to be a highly capable robot.
+Once the physical chassis is fully assembled, I’ll dive straight into software development.</p>
 
-<p>As for our 3rd run, it was a really important run for us. We hope that future participating teams will not have to experience such a situation, and if they do, that they will be able to handle it in the best way possible with clear rules in place.</p>
+<p>~Thank you for reading~</p>
 
           </div>
         </article>
@@ -622,7 +684,7 @@
         
           <div class="author-section">
             <div class="author">
-  📝 <span class="author-text">author: rotarymars</span>
+  📝 <span class="author-text">author: K10-K10</span>
 </div>
 
           </div>
@@ -631,15 +693,9 @@
         <div class="post-navigation">
           <ul class="pagination blog-pager">
             
-            <li class="page-item next">
-              <a class="page-link" href="/pr-previews/PR_76/en/2026-06-01-FEETECH/" data-toggle="tooltip" data-placement="top" title="We received motors from FEETECH!">
-                <i class="fas fa-arrow-left"></i>Next Post
-              </a>
-            </li>
-            
             
             <li class="page-item previous">
-              <a class="page-link" href="/pr-previews/PR_76/en/2026-04-11-result-japan/" data-toggle="tooltip" data-placement="top" title="Japan Competition Results and Next Year&apos;s Plans">
+              <a class="page-link" href="/pr-previews/PR_76/en/2026-06-01-FEETECH/" data-toggle="tooltip" data-placement="top" title="We received motors from FEETECH!">
                 <i class="fas fa-arrow-right"></i> Previous Post
               </a>
             </li>
