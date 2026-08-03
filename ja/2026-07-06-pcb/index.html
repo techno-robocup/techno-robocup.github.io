@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Beautiful Jekyll 6.0.1 | Copyright Dean Attali 2023 -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6935558663648820"
+     crossorigin="anonymous"></script>
+  
+
+  
+
+  
+
+  <title>2027年度基板の解説とパーツリスト</title>
+
+  
+  
+  <meta name="author" content="K10-K10">
+  
+
+  <meta name="description" content="こんにちは、K10-K10です。
+2027年度（関東用）のロボット用メイン基板が完成しました。
+
+今回もJLCPCBに発注を行いました。
+
+回路図
+
+
+
+
+
+今回はメイン基板1枚の構成です。
+
+今回の基板は4層構造を採用し、GND、3.3V、6Vはそれぞれプレーンで配置しています。
+
+前年度はモーターの電源のみリポバッテリーを使用し、その他の回路はESP32のピンから電力を供給していました。しかし、今回の設計では3.3V用と6V用のDC-DCコンバータを搭載し、センサーとモーターの両方をリポバッテリーから安定して供給できるように電源系統を大幅に改善しました。
+
+また、前回よりも部品数が多くなったため、ESP32のGPIOピンの数はギリギリの設計となりました。
+
+基板写真
+
+
+
+
+今年度もライントレースをカメラで行う設計にしています。そのため、機体中央に大きな空間を残す必要があり、基板面積をなるべく削らなければなりませんでした。
+この省スペース化を実現するため、基板の裏側にブザーとモーター用のURT基板を配置しています。
+
+前回からの改善点
+
+前回は超音波センサーを前左右に1つずつ配置して距離を取得していましたが、今年度はToFセンサーを採用しました。
+
+さらに、ToFセンサーを前左右それぞれ2つずつ配置することで、前年度の課題であった、救助ゾーンからの脱出を確実に行えるようにしています。
+
+また、新たに追加したロードセルを用いたバンパーにより、障害物回避がより容易に行えるようになる見込みです。
+
+さらにデバッグ用のブザーも配置したため、今後の開発効率がぐっと上がると思います。
+
+パーツリスト
+
+メインマイコンには Raspberry Pi 5 を採用し、モーターやセンサーの足回り・制御用に ESP32-DevKitC-32E を基板上に配置しています。
+
+駆動用のモーターは、前回の記事でご紹介した通り、Feetech STS3032 を4つ使用しています。Feetech様、サポートありがとうございます！
+
+レスキュー機構のアーム部分には、SG90 または STS3032 を使用する予定です。
+
+基板に搭載・接続する主なセンサーや部品類は以下の通りです。
+
+
+  
+    
+      部品名 / センサー名
+      個数
+      用途・説明
+    
+  
+  
+    
+      LTC3111
+      1
+      6V用のDCDCコンバーター（昇降圧）です。
+    
+    
+      M78AR033-0.5
+      1
+      3.3V用のDCDCコンバーターです。
+    
+    
+      BNO055
+      1
+      9軸ジャイロセンサー。坂道の傾き検知や姿勢制御に使用します。
+    
+    
+      ToF VL53L0X
+      6
+      前方・左右の壁との距離を測定します（前左右に各2個配置）。
+    
+    
+      ロードセル SC616C (1kg)
+      2
+      前方バンパーの接触検知に使用します。
+    
+    
+      HX711搭載 ADコンバーター
+      2
+      ロードセルの値をESP32で読み取るためのモジュールです。
+    
+    
+      NJL7502L
+      2
+      被災者の救助が成功したかを判定する光センサーです。
+    
+    
+      FE-URT-1
+      1
+      STS3032制御用のインターフェースボードです。
+    
+    
+      PKM22EPPH4001-B0
+      1
+      デバッグや状態通知用のブザーです。
+    
+  
+
+
+※その他、各種抵抗やコネクタ類は回路に合わせて適宜配置しています。
+
+既存の問題点とリカバリー策
+
+現状、いくつかの問題も見つかっています。
+
+
+  
+    スイッチからの回り込み（漏電）
+ESP32へのケーブルを抜いても、スイッチ側から回り込んで起動し続けてしまう現象が発生しています。ただ、ケーブルを抜く頻度が少ないことや、プログラムを停止する際はどのみちスイッチを押す必要があるため、運用上は大きな問題にはならないと踏んでいます。
+  
+  
+    フォトリフレクタの不調
+回路設計の影響か、被災者救助を検知するフォトリフレクタ（NJL7502L）がうまく機能していません。しかし、こちらについては被災者救助の判定を「カメラ（Raspberry Pi 5）」側で行うようにソフトを組めば、当初やりたかった機能はカバーできるため、十分に対処可能です。
+  
+  
+    スイッチとケーブルの物理的干渉
+ESP32の通信用ケーブルを挿すと、電源スイッチと物理的に干渉してしまいます。実は前回もまったく同様の配置ミスをしてしまっており、コネクタやスイッチの向き・配置については、次回の設計時に必ず改善しなければならない猛省ポイントです。
+  
+
+
+幸い、その他の主要なセンサーはすべて正常に動作しているため一安心です。
+
+終わりに
+
+今回の基板設計データ（回路図やレイアウトなど）は、GitHubにて公開しています。興味のある方はぜひご覧ください。
+
+techno-robocup/robocup2027-pcb-data
+
+前年度よりもセンサー類が大幅に充実し、かなり多機能なロボットになりそうです。
+機体のハードウェアが完成したら、いよいよ本格的なソフト開発に取り組もうと思います。
+
+~Thank you for reading~">
+
+  
+
+  
+  <meta name="keywords" content="robocup junior,robot,line trace,rescue line,rcjj,ロボカップ,ロボット,ライントレース,レスキューライン">
+  
+
+  
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CT437Q24DM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CT437Q24DM');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+      
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    
+      
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/bootstrap-social.css">
+    
+      <link rel="stylesheet" href="/assets/css/beautifuljekyll.css">
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/custom-styles.css">
+    
+  
+
+  
+  
+  
+
+  
+
+  
+  <meta property="og:site_name" content="techno-robocup">
+  <meta property="og:title" content="2027年度基板の解説とパーツリスト">
+  <meta property="og:description" content="こんにちは、K10-K10です。
+2027年度（関東用）のロボット用メイン基板が完成しました。
+
+今回もJLCPCBに発注を行いました。
+
+回路図
+
+
+
+
+
+今回はメイン基板1枚の構成です。
+
+今回の基板は4層構造を採用し、GND、3.3V、6Vはそれぞれプレーンで配置しています。
+
+前年度はモーターの電源のみリポバッテリーを使用し、その他の回路はESP32のピンから電力を供給していました。しかし、今回の設計では3.3V用と6V用のDC-DCコンバータを搭載し、センサーとモーターの両方をリポバッテリーから安定して供給できるように電源系統を大幅に改善しました。
+
+また、前回よりも部品数が多くなったため、ESP32のGPIOピンの数はギリギリの設計となりました。
+
+基板写真
+
+
+
+
+今年度もライントレースをカメラで行う設計にしています。そのため、機体中央に大きな空間を残す必要があり、基板面積をなるべく削らなければなりませんでした。
+この省スペース化を実現するため、基板の裏側にブザーとモーター用のURT基板を配置しています。
+
+前回からの改善点
+
+前回は超音波センサーを前左右に1つずつ配置して距離を取得していましたが、今年度はToFセンサーを採用しました。
+
+さらに、ToFセンサーを前左右それぞれ2つずつ配置することで、前年度の課題であった、救助ゾーンからの脱出を確実に行えるようにしています。
+
+また、新たに追加したロードセルを用いたバンパーにより、障害物回避がより容易に行えるようになる見込みです。
+
+さらにデバッグ用のブザーも配置したため、今後の開発効率がぐっと上がると思います。
+
+パーツリスト
+
+メインマイコンには Raspberry Pi 5 を採用し、モーターやセンサーの足回り・制御用に ESP32-DevKitC-32E を基板上に配置しています。
+
+駆動用のモーターは、前回の記事でご紹介した通り、Feetech STS3032 を4つ使用しています。Feetech様、サポートありがとうございます！
+
+レスキュー機構のアーム部分には、SG90 または STS3032 を使用する予定です。
+
+基板に搭載・接続する主なセンサーや部品類は以下の通りです。
+
+
+  
+    
+      部品名 / センサー名
+      個数
+      用途・説明
+    
+  
+  
+    
+      LTC3111
+      1
+      6V用のDCDCコンバーター（昇降圧）です。
+    
+    
+      M78AR033-0.5
+      1
+      3.3V用のDCDCコンバーターです。
+    
+    
+      BNO055
+      1
+      9軸ジャイロセンサー。坂道の傾き検知や姿勢制御に使用します。
+    
+    
+      ToF VL53L0X
+      6
+      前方・左右の壁との距離を測定します（前左右に各2個配置）。
+    
+    
+      ロードセル SC616C (1kg)
+      2
+      前方バンパーの接触検知に使用します。
+    
+    
+      HX711搭載 ADコンバーター
+      2
+      ロードセルの値をESP32で読み取るためのモジュールです。
+    
+    
+      NJL7502L
+      2
+      被災者の救助が成功したかを判定する光センサーです。
+    
+    
+      FE-URT-1
+      1
+      STS3032制御用のインターフェースボードです。
+    
+    
+      PKM22EPPH4001-B0
+      1
+      デバッグや状態通知用のブザーです。
+    
+  
+
+
+※その他、各種抵抗やコネクタ類は回路に合わせて適宜配置しています。
+
+既存の問題点とリカバリー策
+
+現状、いくつかの問題も見つかっています。
+
+
+  
+    スイッチからの回り込み（漏電）
+ESP32へのケーブルを抜いても、スイッチ側から回り込んで起動し続けてしまう現象が発生しています。ただ、ケーブルを抜く頻度が少ないことや、プログラムを停止する際はどのみちスイッチを押す必要があるため、運用上は大きな問題にはならないと踏んでいます。
+  
+  
+    フォトリフレクタの不調
+回路設計の影響か、被災者救助を検知するフォトリフレクタ（NJL7502L）がうまく機能していません。しかし、こちらについては被災者救助の判定を「カメラ（Raspberry Pi 5）」側で行うようにソフトを組めば、当初やりたかった機能はカバーできるため、十分に対処可能です。
+  
+  
+    スイッチとケーブルの物理的干渉
+ESP32の通信用ケーブルを挿すと、電源スイッチと物理的に干渉してしまいます。実は前回もまったく同様の配置ミスをしてしまっており、コネクタやスイッチの向き・配置については、次回の設計時に必ず改善しなければならない猛省ポイントです。
+  
+
+
+幸い、その他の主要なセンサーはすべて正常に動作しているため一安心です。
+
+終わりに
+
+今回の基板設計データ（回路図やレイアウトなど）は、GitHubにて公開しています。興味のある方はぜひご覧ください。
+
+techno-robocup/robocup2027-pcb-data
+
+前年度よりもセンサー類が大幅に充実し、かなり多機能なロボットになりそうです。
+機体のハードウェアが完成したら、いよいよ本格的なソフト開発に取り組もうと思います。
+
+~Thank you for reading~">
+
+  
+  <meta property="og:image" content="https://techno-robocup.github.io/assets/images/2026-07-06-schematic.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  
+  <meta property="og:article:author" content="K10-K10">
+  
+  <meta property="og:article:published_time" content="2026-07-06T23:00:00+09:00">
+  <meta property="og:url" content="https://techno-robocup.github.io/ja/2026-07-06-pcb/">
+  <link rel="canonical" href="https://techno-robocup.github.io/ja/2026-07-06-pcb/">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+
+  <meta property="twitter:title" content="2027年度基板の解説とパーツリスト">
+  <meta property="twitter:description" content="こんにちは、K10-K10です。
+2027年度（関東用）のロボット用メイン基板が完成しました。
+
+今回もJLCPCBに発注を行いました。
+
+回路図
+
+
+
+
+
+今回はメイン基板1枚の構成です。
+
+今回の基板は4層構造を採用し、GND、3.3V、6Vはそれぞれプレーンで配置しています。
+
+前年度はモーターの電源のみリポバッテリーを使用し、その他の回路はESP32のピンから電力を供給していました。しかし、今回の設計では3.3V用と6V用のDC-DCコンバータを搭載し、センサーとモーターの両方をリポバッテリーから安定して供給できるように電源系統を大幅に改善しました。
+
+また、前回よりも部品数が多くなったため、ESP32のGPIOピンの数はギリギリの設計となりました。
+
+基板写真
+
+
+
+
+今年度もライントレースをカメラで行う設計にしています。そのため、機体中央に大きな空間を残す必要があり、基板面積をなるべく削らなければなりませんでした。
+この省スペース化を実現するため、基板の裏側にブザーとモーター用のURT基板を配置しています。
+
+前回からの改善点
+
+前回は超音波センサーを前左右に1つずつ配置して距離を取得していましたが、今年度はToFセンサーを採用しました。
+
+さらに、ToFセンサーを前左右それぞれ2つずつ配置することで、前年度の課題であった、救助ゾーンからの脱出を確実に行えるようにしています。
+
+また、新たに追加したロードセルを用いたバンパーにより、障害物回避がより容易に行えるようになる見込みです。
+
+さらにデバッグ用のブザーも配置したため、今後の開発効率がぐっと上がると思います。
+
+パーツリスト
+
+メインマイコンには Raspberry Pi 5 を採用し、モーターやセンサーの足回り・制御用に ESP32-DevKitC-32E を基板上に配置しています。
+
+駆動用のモーターは、前回の記事でご紹介した通り、Feetech STS3032 を4つ使用しています。Feetech様、サポートありがとうございます！
+
+レスキュー機構のアーム部分には、SG90 または STS3032 を使用する予定です。
+
+基板に搭載・接続する主なセンサーや部品類は以下の通りです。
+
+
+  
+    
+      部品名 / センサー名
+      個数
+      用途・説明
+    
+  
+  
+    
+      LTC3111
+      1
+      6V用のDCDCコンバーター（昇降圧）です。
+    
+    
+      M78AR033-0.5
+      1
+      3.3V用のDCDCコンバーターです。
+    
+    
+      BNO055
+      1
+      9軸ジャイロセンサー。坂道の傾き検知や姿勢制御に使用します。
+    
+    
+      ToF VL53L0X
+      6
+      前方・左右の壁との距離を測定します（前左右に各2個配置）。
+    
+    
+      ロードセル SC616C (1kg)
+      2
+      前方バンパーの接触検知に使用します。
+    
+    
+      HX711搭載 ADコンバーター
+      2
+      ロードセルの値をESP32で読み取るためのモジュールです。
+    
+    
+      NJL7502L
+      2
+      被災者の救助が成功したかを判定する光センサーです。
+    
+    
+      FE-URT-1
+      1
+      STS3032制御用のインターフェースボードです。
+    
+    
+      PKM22EPPH4001-B0
+      1
+      デバッグや状態通知用のブザーです。
+    
+  
+
+
+※その他、各種抵抗やコネクタ類は回路に合わせて適宜配置しています。
+
+既存の問題点とリカバリー策
+
+現状、いくつかの問題も見つかっています。
+
+
+  
+    スイッチからの回り込み（漏電）
+ESP32へのケーブルを抜いても、スイッチ側から回り込んで起動し続けてしまう現象が発生しています。ただ、ケーブルを抜く頻度が少ないことや、プログラムを停止する際はどのみちスイッチを押す必要があるため、運用上は大きな問題にはならないと踏んでいます。
+  
+  
+    フォトリフレクタの不調
+回路設計の影響か、被災者救助を検知するフォトリフレクタ（NJL7502L）がうまく機能していません。しかし、こちらについては被災者救助の判定を「カメラ（Raspberry Pi 5）」側で行うようにソフトを組めば、当初やりたかった機能はカバーできるため、十分に対処可能です。
+  
+  
+    スイッチとケーブルの物理的干渉
+ESP32の通信用ケーブルを挿すと、電源スイッチと物理的に干渉してしまいます。実は前回もまったく同様の配置ミスをしてしまっており、コネクタやスイッチの向き・配置については、次回の設計時に必ず改善しなければならない猛省ポイントです。
+  
+
+
+幸い、その他の主要なセンサーはすべて正常に動作しているため一安心です。
+
+終わりに
+
+今回の基板設計データ（回路図やレイアウトなど）は、GitHubにて公開しています。興味のある方はぜひご覧ください。
+
+techno-robocup/robocup2027-pcb-data
+
+前年度よりもセンサー類が大幅に充実し、かなり多機能なロボットになりそうです。
+機体のハードウェアが完成したら、いよいよ本格的なソフト開発に取り組もうと思います。
+
+~Thank you for reading~">
+
+  
+  <meta name="twitter:image" content="https://techno-robocup.github.io/assets/images/2026-07-06-schematic.jpg">
+  
+
+  
+
+
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/custom.css">
+  <script src="/assets/js/colorAnimation.js"></script>
+
+</head>
+
+
+<body>
+
+  
+
+
+  
+
+
+<nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="/ja/">techno-robocup</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/ja/tags/">Tags</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/ja/aboutus/">About Us</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-search-link" href="#" title="Search">
+            <span id="nav-search-icon" class="fa fa-search"></span>
+            <span id="nav-search-text">Search</span>
+          </a>
+        </li><li class="nav-item d-flex align-items-center ml-xl-3 mt-2 mt-xl-0 mb-2 mb-xl-0">
+        
+          <div class="btn-group btn-group-sm" role="group">
+            <a href="/en/2026-07-06-pcb/" class="btn btn-outline-dark">En</a>
+            <span class="btn btn-dark font-weight-bold" style="cursor: default;">Ja</span>
+          </div>
+        
+      </li>
+
+    </ul>
+  </div>
+
+  
+
+  
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        <a href="/ja/">
+          <img alt="Navigation bar avatar" class="avatar-img" src="/assets/images/robot-03.jpg" />
+        </a>
+      </div>
+    </div>
+  
+
+</nav>
+
+
+
+<div id="beautifuljekyll-search-overlay">
+
+  <div id="nav-search-exit" title="Exit search">✕</div>
+  <input type="text" id="nav-search-input" placeholder="Search">
+  <ul id="search-results-container"></ul>
+
+  
+
+  <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+  <script>
+    var searchjson = `[ \
+      \
+       \
+        { \
+          "title"    : "ブログを始めました", \
+          "desc"     : "ブログを始めました", \
+          "category" : "free-talkrotarymars's article", \
+          "url"      : "/ja/2024-07-09-self-introduction/", \
+          "date"     : "July  8, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "SSHでEV3", \
+          "desc"     : "SSHでEV3", \
+          "category" : "robotEV3rotarymars's article", \
+          "url"      : "/ja/2024-07-23-ev3_ssh/", \
+          "date"     : "July 23, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Pythonでコマンドライン", \
+          "desc"     : "Pythonでコマンドライン", \
+          "category" : "pythonfree-talknishikazu's article", \
+          "url"      : "/ja/2024-08-07-python-OS/", \
+          "date"     : "August  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "レゴのゴム鉄砲", \
+          "desc"     : "レゴのゴム鉄砲", \
+          "category" : "free-talkALPAKA's article", \
+          "url"      : "/ja/2024-08-22-rubber_band_gun/", \
+          "date"     : "August 22, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "tensorflowで簡単に機械学習", \
+          "desc"     : "tensorflowで簡単に機械学習", \
+          "category" : "machine learningrotarymars's article", \
+          "url"      : "/ja/2024-08-28-tensorflow-machinelearning/", \
+          "date"     : "August 28, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "文化祭でロボット展示", \
+          "desc"     : "文化祭でロボット展示", \
+          "category" : "robotEV3nishikazu's article", \
+          "url"      : "/ja/2024-09-07-robot_introduction/", \
+          "date"     : "September  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "文化祭の実演時間について", \
+          "desc"     : "文化祭の実演時間について", \
+          "category" : "robotschoolALPAKA's article", \
+          "url"      : "/ja/2024-09-13-culture_festival_time_table/", \
+          "date"     : "September 13, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "機械学習の仕組み  ~ディープラーニング~", \
+          "desc"     : "機械学習の仕組み  ~ディープラーニング~", \
+          "category" : "robotmachine learningrotarymars's article", \
+          "url"      : "/ja/2024-09-18-about_deep_learning/", \
+          "date"     : "September 18, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "東関東ノードの結果と関東大会に向けて", \
+          "desc"     : "東関東ノードの結果と関東大会に向けて", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/ja/2024-12-13-results_report/", \
+          "date"     : "December 12, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "関東大会の結果と来年に向けて", \
+          "desc"     : "関東大会の結果と来年に向けて", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/ja/2025-01-26-result_kanto/", \
+          "date"     : "January 26, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "YOLOで機械学習~物体検知とロボカップでの応用~", \
+          "desc"     : "YOLOで機械学習~物体検知とロボカップでの応用~", \
+          "category" : "robotrotarymars's articlemachine learning", \
+          "url"      : "/ja/2025-02-24-yolo_machine_learning/", \
+          "date"     : "February 24, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "最近の進捗", \
+          "desc"     : "最近の進捗", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/ja/2025-04-18-progress/", \
+          "date"     : "April 18, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "ライントレースのプログラム", \
+          "desc"     : "ライントレースのプログラム", \
+          "category" : "robotrotarymars's articleline-traceprogram", \
+          "url"      : "/ja/2025-05-11-linetrace_program/", \
+          "date"     : "May 11, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "機体部品について", \
+          "desc"     : "機体部品について", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/ja/2025-05-31-parts/", \
+          "date"     : "May 31, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "赤色検知と7セグ", \
+          "desc"     : "赤色検知と7セグ", \
+          "category" : "robotK10-K10's articleline-traceprogram", \
+          "url"      : "/ja/2025-06-19-RedMask/", \
+          "date"     : "June 20, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "ポチ 機体紹介", \
+          "desc"     : "ポチ 機体紹介", \
+          "category" : "robotALPAKA's articlehardware", \
+          "url"      : "/ja/2025-07-09-robot.hardware/", \
+          "date"     : "July  9, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "開発体制", \
+          "desc"     : "開発体制", \
+          "category" : "robotrotarymars's articlesoftware", \
+          "url"      : "/ja/2025-07-21-introducing/", \
+          "date"     : "July 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "最近の進捗2", \
+          "desc"     : "最近の進捗2", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/ja/2025-09-21-progress2/", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "最近の進捗", \
+          "desc"     : "最近の進捗", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/ja/2026-01-21-progress/", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "浜野製作所（Hamano Products）訪問", \
+          "desc"     : "浜野製作所（Hamano Products）訪問", \
+          "category" : "robotrotarymars's articlevisit", \
+          "url"      : "/ja/2026-03-14-hamano-products-visit/", \
+          "date"     : "March 14, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "日本大会の結果と今後の予定", \
+          "desc"     : "日本大会の結果と今後の予定", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/ja/2026-04-11-result-japan/", \
+          "date"     : "April 11, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "3走目の振り返り", \
+          "desc"     : "3走目の振り返り", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/ja/2026-04-21-reflection/", \
+          "date"     : "April 21, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "FEETECH様にモーターをいただきました！", \
+          "desc"     : "FEETECH様にモーターをいただきました！", \
+          "category" : "robotutsukushiioto's article", \
+          "url"      : "/ja/2026-06-01-FEETECH/", \
+          "date"     : "June  1, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "2027年度基板の解説とパーツリスト", \
+          "desc"     : "2027年度基板の解説とパーツリスト", \
+          "category" : "robotpcbK10-K10's article", \
+          "url"      : "/ja/2026-07-06-pcb/", \
+          "date"     : "July  6, 2026" \
+        }, \
+       \
+      \
+       \
+        { \
+          "title"    : "About us", \
+          "desc"     : "About us", \
+          "category" : "page", \
+          "url"      : "/ja/aboutus/", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "タグ一覧", \
+          "desc"     : "タグ一覧", \
+          "category" : "page", \
+          "url"      : "/ja/tags/", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "/ja/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 2", \
+          "desc"     : " - page 2", \
+          "category" : "page", \
+          "url"      : "/ja/page2/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 3", \
+          "desc"     : " - page 3", \
+          "category" : "page", \
+          "url"      : "/ja/page3/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 4", \
+          "desc"     : " - page 4", \
+          "category" : "page", \
+          "url"      : "/ja/page4/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 5", \
+          "desc"     : " - page 5", \
+          "category" : "page", \
+          "url"      : "/ja/page5/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+    ]`;
+    
+    // 4. Jekyllのループで最後に残ってしまう余分なカンマを削除してJSONエラーを防ぐ
+    searchjson = searchjson.replace(/,\s*\]$/, ']');
+    searchjson = JSON.parse(searchjson);
+
+    var sjs = SimpleJekyllSearch({
+      searchInput: document.getElementById('nav-search-input'),
+      resultsContainer: document.getElementById('search-results-container'),
+      json: searchjson
+    });
+  </script>
+</div>
+
+
+
+
+
+  
+
+
+
+<header class="header-section ">
+<div class="intro-header ">
+  
+  <div class="container-md">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        <div class="post-heading">
+          <h1>
+            2027年度基板の解説とパーツリスト
+          </h1>
+          
+          
+           
+            
+              By <strong>K10-K10</strong><br>
+            
+            <span class="post-meta">Posted on July 6, 2026</span>
+            
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+
+
+
+</header>
+
+
+
+
+<div class=" container-md ">
+  <div class="row">
+    <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
+      <div class="post-content-wrapper">
+        
+
+        
+          <div class="blog-tags">
+            <span class="tags-label">Tags:</span>
+            <div class="tags-list">
+              
+                
+                  <a href="https://techno-robocup.github.io/ja/tags#robot" class="tag-item">robot</a>
+                
+              
+                
+                  <a href="https://techno-robocup.github.io/ja/tags#pcb" class="tag-item">pcb</a>
+                
+              
+                
+                  <a href="https://techno-robocup.github.io/ja/tags#K10-K10's article" class="tag-item">K10-K10's article</a>
+                
+              
+            </div>
+          </div>
+        
+
+        
+
+        <article role="main" class="blog-post">
+          <div class="post-content">
+            <p>こんにちは、K10-K10です。
+2027年度（関東用）のロボット用メイン基板が完成しました。</p>
+
+<p>今回もJLCPCBに発注を行いました。</p>
+
+<h1 id="回路図">回路図</h1>
+
+<p><img src="/assets/images/2026-07-06-schematic.jpg" alt="schematic image" /></p>
+
+<p><img src="/assets/images/2026-07-06-footprint.jpg" alt="footprint image" /></p>
+
+<p>今回はメイン基板1枚の構成です。</p>
+
+<p>今回の基板は4層構造を採用し、GND、3.3V、6Vはそれぞれプレーンで配置しています。</p>
+
+<p>前年度はモーターの電源のみリポバッテリーを使用し、その他の回路はESP32のピンから電力を供給していました。しかし、今回の設計では3.3V用と6V用のDC-DCコンバータを搭載し、センサーとモーターの両方をリポバッテリーから安定して供給できるように電源系統を大幅に改善しました。</p>
+
+<p>また、前回よりも部品数が多くなったため、ESP32のGPIOピンの数はギリギリの設計となりました。</p>
+
+<h1 id="基板写真">基板写真</h1>
+
+<p><img src="/assets/images/2026-07-06-f.jpg" alt="pcb surface" />
+<img src="/assets/images/2026-07-06-b.jpg" alt="pcb back" /></p>
+
+<p>今年度もライントレースをカメラで行う設計にしています。そのため、機体中央に大きな空間を残す必要があり、基板面積をなるべく削らなければなりませんでした。
+この省スペース化を実現するため、基板の裏側にブザーとモーター用のURT基板を配置しています。</p>
+
+<h1 id="前回からの改善点">前回からの改善点</h1>
+
+<p>前回は超音波センサーを前左右に1つずつ配置して距離を取得していましたが、今年度はToFセンサーを採用しました。</p>
+
+<p>さらに、ToFセンサーを前左右それぞれ2つずつ配置することで、前年度の課題であった、救助ゾーンからの脱出を確実に行えるようにしています。</p>
+
+<p>また、新たに追加したロードセルを用いたバンパーにより、障害物回避がより容易に行えるようになる見込みです。</p>
+
+<p>さらにデバッグ用のブザーも配置したため、今後の開発効率がぐっと上がると思います。</p>
+
+<h1 id="パーツリスト">パーツリスト</h1>
+
+<p>メインマイコンには <code class="language-plaintext highlighter-rouge">Raspberry Pi 5</code> を採用し、モーターやセンサーの足回り・制御用に <code class="language-plaintext highlighter-rouge">ESP32-DevKitC-32E</code> を基板上に配置しています。</p>
+
+<p>駆動用のモーターは、<a href="../2026-06-01-FEETECH/">前回の記事</a>でご紹介した通り、<strong>Feetech STS3032</strong> を4つ使用しています。Feetech様、サポートありがとうございます！</p>
+
+<p>レスキュー機構のアーム部分には、<code class="language-plaintext highlighter-rouge">SG90</code> または <code class="language-plaintext highlighter-rouge">STS3032</code> を使用する予定です。</p>
+
+<p>基板に搭載・接続する主なセンサーや部品類は以下の通りです。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>部品名 / センサー名</th>
+      <th style="text-align: center">個数</th>
+      <th>用途・説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LTC3111</strong></td>
+      <td style="text-align: center">1</td>
+      <td>6V用のDCDCコンバーター（昇降圧）です。</td>
+    </tr>
+    <tr>
+      <td><strong>M78AR033-0.5</strong></td>
+      <td style="text-align: center">1</td>
+      <td>3.3V用のDCDCコンバーターです。</td>
+    </tr>
+    <tr>
+      <td><strong>BNO055</strong></td>
+      <td style="text-align: center">1</td>
+      <td>9軸ジャイロセンサー。坂道の傾き検知や姿勢制御に使用します。</td>
+    </tr>
+    <tr>
+      <td><strong>ToF VL53L0X</strong></td>
+      <td style="text-align: center">6</td>
+      <td>前方・左右の壁との距離を測定します（前左右に各2個配置）。</td>
+    </tr>
+    <tr>
+      <td><strong>ロードセル SC616C (1kg)</strong></td>
+      <td style="text-align: center">2</td>
+      <td>前方バンパーの接触検知に使用します。</td>
+    </tr>
+    <tr>
+      <td><strong>HX711搭載 ADコンバーター</strong></td>
+      <td style="text-align: center">2</td>
+      <td>ロードセルの値をESP32で読み取るためのモジュールです。</td>
+    </tr>
+    <tr>
+      <td><strong>NJL7502L</strong></td>
+      <td style="text-align: center">2</td>
+      <td>被災者の救助が成功したかを判定する光センサーです。</td>
+    </tr>
+    <tr>
+      <td><strong>FE-URT-1</strong></td>
+      <td style="text-align: center">1</td>
+      <td>STS3032制御用のインターフェースボードです。</td>
+    </tr>
+    <tr>
+      <td><strong>PKM22EPPH4001-B0</strong></td>
+      <td style="text-align: center">1</td>
+      <td>デバッグや状態通知用のブザーです。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>※その他、各種抵抗やコネクタ類は回路に合わせて適宜配置しています。</p>
+
+<h1 id="既存の問題点とリカバリー策">既存の問題点とリカバリー策</h1>
+
+<p>現状、いくつかの問題も見つかっています。</p>
+
+<ol>
+  <li>
+    <p><strong>スイッチからの回り込み（漏電）</strong>
+ESP32へのケーブルを抜いても、スイッチ側から回り込んで起動し続けてしまう現象が発生しています。ただ、ケーブルを抜く頻度が少ないことや、プログラムを停止する際はどのみちスイッチを押す必要があるため、運用上は大きな問題にはならないと踏んでいます。</p>
+  </li>
+  <li>
+    <p><strong>フォトリフレクタの不調</strong>
+回路設計の影響か、被災者救助を検知するフォトリフレクタ（NJL7502L）がうまく機能していません。しかし、こちらについては被災者救助の判定を「カメラ（Raspberry Pi 5）」側で行うようにソフトを組めば、当初やりたかった機能はカバーできるため、十分に対処可能です。</p>
+  </li>
+  <li>
+    <p><strong>スイッチとケーブルの物理的干渉</strong>
+ESP32の通信用ケーブルを挿すと、電源スイッチと物理的に干渉してしまいます。実は前回もまったく同様の配置ミスをしてしまっており、コネクタやスイッチの向き・配置については、次回の設計時に必ず改善しなければならない猛省ポイントです。</p>
+  </li>
+</ol>
+
+<p>幸い、その他の主要なセンサーはすべて正常に動作しているため一安心です。</p>
+
+<h1 id="終わりに">終わりに</h1>
+
+<p>今回の基板設計データ（回路図やレイアウトなど）は、GitHubにて公開しています。興味のある方はぜひご覧ください。</p>
+
+<p><a href="https://github.com/techno-robocup/robocup2027-pcb-data">techno-robocup/robocup2027-pcb-data</a></p>
+
+<p>前年度よりもセンサー類が大幅に充実し、かなり多機能なロボットになりそうです。
+機体のハードウェアが完成したら、いよいよ本格的なソフト開発に取り組もうと思います。</p>
+
+<p>~Thank you for reading~</p>
+
+          </div>
+        </article>
+
+        
+
+        
+          <div class="author-section">
+            <div class="author">
+  📝 <span class="author-text">author: K10-K10</span>
+</div>
+
+          </div>
+        
+
+        <div class="post-navigation">
+          <ul class="pagination blog-pager">
+            
+            
+            <li class="page-item previous">
+              <a class="page-link" href="/ja/2026-06-01-FEETECH/" data-toggle="tooltip" data-placement="top" title="FEETECH様にモーターをいただきました！">
+                <i class="fas fa-arrow-right"></i> Previous Post
+              </a>
+            </li>
+            
+            
+          </ul>
+        </div>
+        <div class="comments-section">
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <footer>
+  <div class="container-md beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      
+<ul class="list-inline text-center footer-links"><li class="list-inline-item">
+    <a href="https://github.com/techno-robocup" title="GitHub">
+      <span class="fa-stack fa-lg" aria-hidden="true">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="sr-only">GitHub</span>
+   </a>
+  </li></ul>
+
+
+      
+      <p class="copyright text-muted">
+      
+      2026
+
+      
+
+      
+
+      
+
+      </p>
+      <p class="theme-by text-muted">
+        Powered by
+        <a href="https://beautifuljekyll.com">Beautiful Jekyll</a>
+      </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  
+  
+    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script src="/assets/js/beautifuljekyll.js"></script>
+    
+  
+
+
+
+
+
+
+
+
+<!-- PR Preview /assets/ path fix -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.location.pathname.includes('/pr-previews/')) {
+      var baseUrl = '/';
+      
+      // Fix all img src attributes
+      document.querySelectorAll('img').forEach(function(img) {
+        var src = img.getAttribute('src');
+        if (src && src.startsWith('/assets/')) {
+          img.src = baseUrl + src;
+        }
+      });
+      
+      // Fix all video src attributes
+      document.querySelectorAll('video').forEach(function(video) {
+        var src = video.getAttribute('src');
+        if (src && src.startsWith('/assets/')) {
+          video.src = baseUrl + src;
+        }
+      });
+      
+      // Fix all a href attributes
+      document.querySelectorAll('a').forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('/assets/')) {
+          link.href = baseUrl + href;
+        }
+      });
+    }
+  });
+</script>
+
+
+</body>
+</html>

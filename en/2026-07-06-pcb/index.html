@@ -13,14 +13,14 @@
 
   
 
-  <title>We started our blog</title>
+  <title>2027 Robot Main PCB Overview &amp; Parts List</title>
 
   
   
-  <meta name="author" content="rotarymars">
+  <meta name="author" content="K10-K10">
   
 
-  <meta name="description" content="Hello. I’m rotarymars from TECHNO. Today, I’d like to introduce our team members and myself to celebrate the launch of our blog. I would like to introduce our team members. ROTARYMARS Main responsibilities Sensor-related programming Circuit design Brief self-introduction I’m ROTARYMARS, who will be responsible for programming and circuit design in this team. I’m currently learning about circuits, and I’m looking for good sites to learn from. NISHIKAZU Main responsibilities Main body programming I’m NISHIKAZU, who will be responsible for software-related tasks in this team. I’m a night owl, so I’m active at night. I’m a type of programmer who writes and runs programs first. I’m better at science than math. ALPAKA Main responsibilities Hardware design I’m ALPAKA, who will be responsible for hardware design in this team. I’m currently learning about circuits, and I’m looking for good sites to learn from. I believe that the number of trials is...">
+  <meta name="description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos Since our robot design relies on a camera for line tracing, I needed...">
 
   
 
@@ -96,21 +96,21 @@
 
   
   <meta property="og:site_name" content="techno-robocup">
-  <meta property="og:title" content="We started our blog">
-  <meta property="og:description" content="Hello. I’m rotarymars from TECHNO. Today, I’d like to introduce our team members and myself to celebrate the launch of our blog. I would like to introduce our team members. ROTARYMARS Main responsibilities Sensor-related programming Circuit design Brief self-introduction I’m ROTARYMARS, who will be responsible for programming and circuit design in this team. I’m currently learning about circuits, and I’m looking for good sites to learn from. NISHIKAZU Main responsibilities Main body programming I’m NISHIKAZU, who will be responsible for software-related tasks in this team. I’m a night owl, so I’m active at night. I’m a type of programmer who writes and runs programs first. I’m better at science than math. ALPAKA Main responsibilities Hardware design I’m ALPAKA, who will be responsible for hardware design in this team. I’m currently learning about circuits, and I’m looking for good sites to learn from. I believe that the number of trials is...">
+  <meta property="og:title" content="2027 Robot Main PCB Overview &amp; Parts List">
+  <meta property="og:description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos Since our robot design relies on a camera for line tracing, I needed...">
 
   
-  <meta property="og:image" content="https://techno-robocup.github.io/assets/images/thumb.png">
+  <meta property="og:image" content="https://techno-robocup.github.io/assets/images/2026-07-06-schematic.jpg">
   
 
   
   <meta property="og:type" content="article">
   
-  <meta property="og:article:author" content="rotarymars">
+  <meta property="og:article:author" content="K10-K10">
   
-  <meta property="og:article:published_time" content="2024-07-08T07:00:00+09:00">
-  <meta property="og:url" content="https://techno-robocup.github.io/en/2024-07-09-self-introduction/">
-  <link rel="canonical" href="https://techno-robocup.github.io/en/2024-07-09-self-introduction/">
+  <meta property="og:article:published_time" content="2026-07-06T23:00:00+09:00">
+  <meta property="og:url" content="https://techno-robocup.github.io/en/2026-07-06-pcb/">
+  <link rel="canonical" href="https://techno-robocup.github.io/en/2026-07-06-pcb/">
   
 
   
@@ -119,11 +119,11 @@
   <meta name="twitter:site" content="@">
   <meta name="twitter:creator" content="@">
 
-  <meta property="twitter:title" content="We started our blog">
-  <meta property="twitter:description" content="Hello. I’m rotarymars from TECHNO. Today, I’d like to introduce our team members and myself to celebrate the launch of our blog. I would like to introduce our team members. ROTARYMARS Main responsibilities Sensor-related programming Circuit design Brief self-introduction I’m ROTARYMARS, who will be responsible for programming and circuit design in this team. I’m currently learning about circuits, and I’m looking for good sites to learn from. NISHIKAZU Main responsibilities Main body programming I’m NISHIKAZU, who will be responsible for software-related tasks in this team. I’m a night owl, so I’m active at night. I’m a type of programmer who writes and runs programs first. I’m better at science than math. ALPAKA Main responsibilities Hardware design I’m ALPAKA, who will be responsible for hardware design in this team. I’m currently learning about circuits, and I’m looking for good sites to learn from. I believe that the number of trials is...">
+  <meta property="twitter:title" content="2027 Robot Main PCB Overview &amp; Parts List">
+  <meta property="twitter:description" content="Hello, this is K10-K10. The main PCB for the 2027 season (Kanto region spec) is finally complete! Once again, I manufacturing this board through JLCPCB. Schematic &amp;amp; Layout The entire system is consolidated into a single main board. For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes. In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated dedicated 3.3V and 6V DC-DC converters to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability. Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close. PCB Photos Since our robot design relies on a camera for line tracing, I needed...">
 
   
-  <meta name="twitter:image" content="https://techno-robocup.github.io/assets/images/thumb.png">
+  <meta name="twitter:image" content="https://techno-robocup.github.io/assets/images/2026-07-06-schematic.jpg">
   
 
   
@@ -172,7 +172,7 @@
         
           <div class="btn-group btn-group-sm" role="group">
             <span class="btn btn-dark font-weight-bold" style="cursor: default;">En</span>
-            <a href="/ja/2024-07-09-self-introduction/" class="btn btn-outline-dark">Ja</a>
+            <a href="/ja/2026-07-06-pcb/" class="btn btn-outline-dark">Ja</a>
           </div>
         
       </li>
@@ -489,15 +489,15 @@
       <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
         <div class="post-heading">
           <h1>
-            We started our blog
+            2027 Robot Main PCB Overview & Parts List
           </h1>
           
           
            
             
-              By <strong>rotarymars</strong><br>
+              By <strong>K10-K10</strong><br>
             
-            <span class="post-meta">Posted on July 8, 2024</span>
+            <span class="post-meta">Posted on July 6, 2026</span>
             
             
           
@@ -528,11 +528,15 @@
             <div class="tags-list">
               
                 
-                  <a href="https://techno-robocup.github.io/en/tags#free-talk" class="tag-item">free-talk</a>
+                  <a href="https://techno-robocup.github.io/en/tags#robot" class="tag-item">robot</a>
                 
               
                 
-                  <a href="https://techno-robocup.github.io/en/tags#rotarymars's article" class="tag-item">rotarymars's article</a>
+                  <a href="https://techno-robocup.github.io/en/tags#pcb" class="tag-item">pcb</a>
+                
+              
+                
+                  <a href="https://techno-robocup.github.io/en/tags#K10-K10's article" class="tag-item">K10-K10's article</a>
                 
               
             </div>
@@ -543,49 +547,142 @@
 
         <article role="main" class="blog-post">
           <div class="post-content">
-            <p>Hello. I’m rotarymars from TECHNO.</p>
+            <p>Hello, this is K10-K10.<br />
+The main PCB for the 2027 season (Kanto region spec) is finally complete!</p>
 
-<p>Today, I’d like to introduce our team members and myself to celebrate the launch of our blog.</p>
+<p>Once again, I manufacturing this board through JLCPCB.</p>
 
-<p>I would like to introduce our team members.</p>
+<h1 id="schematic--layout">Schematic &amp; Layout</h1>
 
-<h1 id="rotarymars">ROTARYMARS</h1>
-<h3 id="main-responsibilities">Main responsibilities</h3>
-<ul>
-  <li>Sensor-related programming</li>
-  <li>Circuit design</li>
-</ul>
+<p><img src="/assets/images/2026-07-06-schematic.jpg" alt="schematic image" /></p>
 
-<h3 id="brief-self-introduction">Brief self-introduction</h3>
-<p>I’m ROTARYMARS, who will be responsible for programming and circuit design in this team.
-I’m currently learning about circuits, and I’m looking for good sites to learn from.</p>
+<p><img src="/assets/images/2026-07-06-footprint.jpg" alt="footprint image" /></p>
 
-<h1 id="nishikazu">NISHIKAZU</h1>
-<h3 id="main-responsibilities-1">Main responsibilities</h3>
-<ul>
-  <li>Main body programming</li>
-</ul>
+<p>The entire system is consolidated into a single main board.</p>
 
-<p>I’m NISHIKAZU, who will be responsible for software-related tasks in this team.</p>
+<p>For this iteration, I adopted a 4-layer structure, dedicating specific internal layers as full GND, 3.3V, and 6V planes.</p>
 
-<p>I’m a night owl, so I’m active at night. I’m a type of programmer who writes and runs programs first.</p>
+<p>In the previous year’s model, only the motors were powered directly by the LiPo battery, while the rest of the circuits drew power from the ESP32 pins. In this new design, I integrated <strong>dedicated 3.3V and 6V DC-DC converters</strong> to supply stable power to both the sensors and motors directly from the LiPo battery, significantly improving power stability.</p>
 
-<p>I’m better at science than math.</p>
+<p>Due to the increased number of components compared to last year, the ESP32 GPIO pin assignment was cut extremely close.</p>
 
-<h1 id="alpaka">ALPAKA</h1>
+<h1 id="pcb-photos">PCB Photos</h1>
 
-<h3 id="main-responsibilities-2">Main responsibilities</h3>
-<ul>
-  <li>Hardware design</li>
-</ul>
+<p><img src="/assets/images/2026-07-06-f.jpg" alt="pcb surface" />
+<img src="/assets/images/2026-07-06-b.jpg" alt="pcb back" /></p>
 
-<p>I’m ALPAKA, who will be responsible for hardware design in this team.</p>
+<p>Since our robot design relies on a camera for line tracing, I needed to reserve a large open space in the center of the robot chassis. This required minimizing the PCB footprint as much as possible. To achieve this compact form factor, the buzzer and the motor URT interface board are strategically mounted on the back side of the PCB.</p>
 
-<p>I’m currently learning about circuits, and I’m looking for good sites to learn from.</p>
+<h1 id="key-improvements-from-last-year">Key Improvements from Last Year</h1>
 
-<p>I believe that the number of trials is the most important for hardware design and circuit learning.</p>
+<p>Previously, I used ultrasonic sensors (one on the front-left and one on the front-right) for distance measurement. This year, I have upgraded to <strong>ToF (Time-of-Flight) sensors</strong>.</p>
 
-<p>I’m sure that I have a natural talent for music.</p>
+<p>By placing two ToF sensors on each front corner (four in total for the front-sides), the robot can now handle the “Rescue Zone evacuation,” which was a major hurdle last year.</p>
+
+<p>Additionally, I’ve designed a bumper utilizing load cells, which should make obstacle avoidance much smoother.</p>
+
+<p>I also added an onboard buzzer for debugging, which is going to drastically boost development efficiency.</p>
+
+<h1 id="parts-list">Parts List</h1>
+
+<p>The primary computing unit is a <code class="language-plaintext highlighter-rouge">Raspberry Pi 5</code>, while an <code class="language-plaintext highlighter-rouge">ESP32-DevKitC-32E</code> is onboard to handle low-level control for the motors and sensor array.</p>
+
+<p>For the drivetrain, I am using four <strong>Feetech STS3032</strong> serial servos, as mentioned in <a href="../2026-06-01-FEETECH/">previous post</a>. Huge thanks to Feetech for their support!</p>
+
+<p>The rescue arm mechanism is planned to use either an <code class="language-plaintext highlighter-rouge">SG90</code> or an <code class="language-plaintext highlighter-rouge">STS3032</code>.</p>
+
+<p>Here are the main sensors and components populated on or connected to the board:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component / Sensor</th>
+      <th style="text-align: center">Qty</th>
+      <th>Description / Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LTC3111</strong></td>
+      <td style="text-align: center">1</td>
+      <td>Buck-boost DC-DC converter for the 6V rail.</td>
+    </tr>
+    <tr>
+      <td><strong>M78AR033-0.5</strong></td>
+      <td style="text-align: center">1</td>
+      <td>3.3V switching regulator (DC-DC converter).</td>
+    </tr>
+    <tr>
+      <td><strong>BNO055</strong></td>
+      <td style="text-align: center">1</td>
+      <td>9-axis IMU. Used for slope detection and attitude control.</td>
+    </tr>
+    <tr>
+      <td><strong>ToF VL53L0X</strong></td>
+      <td style="text-align: center">6</td>
+      <td>Measures distance to walls (2 units each for front-left/right sides).</td>
+    </tr>
+    <tr>
+      <td><strong>Load Cell SC616C (1kg)</strong></td>
+      <td style="text-align: center">2</td>
+      <td>Used for contact detection on the front bumper.</td>
+    </tr>
+    <tr>
+      <td><strong>HX711 AD Converter</strong></td>
+      <td style="text-align: center">2</td>
+      <td>Amplifier module to read load cell values via ESP32.</td>
+    </tr>
+    <tr>
+      <td><strong>NJL7502L</strong></td>
+      <td style="text-align: center">2</td>
+      <td>Phototransistor to detect successful victim rescue.</td>
+    </tr>
+    <tr>
+      <td><strong>FE-URT-1</strong></td>
+      <td style="text-align: center">1</td>
+      <td>Interface board to control the STS3032 servos.</td>
+    </tr>
+    <tr>
+      <td><strong>PKM22EPPH4001-B0</strong></td>
+      <td style="text-align: center">1</td>
+      <td>Onboard buzzer for debugging and status alerts.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>Note: Resistors, decoupling capacitors, and connectors are placed appropriately throughout the circuit.</em></p>
+
+<h1 id="known-issues--workarounds">Known Issues &amp; Workarounds</h1>
+
+<p>While testing the board, I discovered a couple of gremlins:</p>
+
+<ol>
+  <li>
+    <p><strong>Power Leakage via Switch</strong>
+Even when unplugging the programming cable from the ESP32, power leaks through the switch circuit, keeping it turned on. However, since I don’t unplug the cable often during operation, and turning off the program requires hitting the switch anyway, this shouldn’t be a major issue in practice.</p>
+  </li>
+  <li>
+    <p><strong>Faulty Photoreflector Circuit</strong>
+Due to a potential design oversight in the schematic, the photoreflectors (NJL7502L) intended for victim detection are not functioning correctly. To bypass this, I plan to offload the victim detection logic to the camera on the Raspberry Pi 5. Handling this via software should completely cover the required functionality.</p>
+  </li>
+  <li>
+    <p><strong>Physical Interference Between Switch and Cable</strong>
+The ESP32 communication cable physically interferes with the power switch when plugged in. Frustratingly, I made the exact same layout mistake in the previous iteration. Improving the orientation and placement of connectors and switches is definitely a top priority for my next hardware spin.</p>
+  </li>
+</ol>
+
+<p>Fortunately, all other core sensors are working perfectly, which is a huge relief.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>The design files for this PCB (schematics, layouts, etc.) are open-source and available on GitHub. Feel free to check it out!</p>
+
+<p><a href="https://github.com/techno-robocup/robocup2027-pcb-data">techno-robocup/robocup2027-pcb-data</a></p>
+
+<p>With far more sensors and features than last year, this is shaping up to be a highly capable robot.
+Once the physical chassis is fully assembled, I’ll dive straight into software development.</p>
+
+<p>~Thank you for reading~</p>
 
           </div>
         </article>
@@ -595,7 +692,7 @@ I’m currently learning about circuits, and I’m looking for good sites to lea
         
           <div class="author-section">
             <div class="author">
-  📝 <span class="author-text">author: rotarymars</span>
+  📝 <span class="author-text">author: K10-K10</span>
 </div>
 
           </div>
@@ -604,12 +701,12 @@ I’m currently learning about circuits, and I’m looking for good sites to lea
         <div class="post-navigation">
           <ul class="pagination blog-pager">
             
-            <li class="page-item next">
-              <a class="page-link" href="/en/2024-07-23-ev3_ssh/" data-toggle="tooltip" data-placement="top" title="SSH to EV3">
-                <i class="fas fa-arrow-left"></i>Next Post
+            
+            <li class="page-item previous">
+              <a class="page-link" href="/en/2026-06-01-FEETECH/" data-toggle="tooltip" data-placement="top" title="We received motors from FEETECH!">
+                <i class="fas fa-arrow-right"></i> Previous Post
               </a>
             </li>
-            
             
             
           </ul>
