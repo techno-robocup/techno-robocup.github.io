@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Beautiful Jekyll 6.0.1 | Copyright Dean Attali 2023 -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6935558663648820"
+     crossorigin="anonymous"></script>
+  
+
+  
+
+  
+
+  <title>2027年度ロボットのプログラムについて</title>
+
+  
+  
+  <meta name="author" content="rotarymars">
+  
+
+  <meta name="description" content="こんにちは。rotarymarsです。 K10-K10の基板の記事やutsukushiiotoのハードウェア面の記事で、ハードウェアの方はだいぶ紹介されてきたと思います。なので今回は、2027年度のロボットのプログラムが現時点でどうなっているのか、全体をざっくり紹介したいと思います。 全てを書くととても長くなってしまうので今回は概要のみ書いていきたいと思っています。 なお、プログラムはすべて開発途中のものなので、あくまで現時点での状態です。大きな変更などがあればまた記事にしたいと思っています。 全体の構成 まず、ロボットの中には大きく分けて2つのコンピュータが載っています。 コンピュータ 担当 言語 Raspberry Pi カメラの画像処理、モーターなどの指令の送信 C++ ESP32 モーター、センサー、サーボなどハードウェアの操作 C++ (Arduino) Raspberry Piはモーターやセンサーを直接触らず、すべてUSBシリアル(UART)でESP32にコマンドを送信し、モーターなどを制御しています。 リポジトリとしては以下のようになっています。 リポジトリ 中身 robocup2027-raspberrypi-program（非公開） Raspberry Piで動くメインのプログラム robocup2027-esp32-program ESP32のファームウェア robocup2027-pcb-data, [robocup2027-robot-caddata] 基板と機体のデータ（今回は触れません） ちなみに、昨年度まではRaspberry Pi側のプログラムはPythonで書いていましたが、今年度はすべてC++で書き直しています。理由としては、処理速度を上げたかったのと、機械学習のモデルもLibTorch（PyTorchのC++版）で動かせるので、言語を一本化したかったからです。 また、Raspberry Piのプログラムが非公開な理由として、管理の容易さから今年は機械学習に用いる画像などもリポジトリに保管しており、公開しないという判断になりました（意図しないものが画像に写ってしまう可能性などもあるため）。 ESP32側のプログラム 先に、簡単な方のESP32から見ていきます。 ESP32が担当しているのは以下のものです。 部品 用途 STS3032 ×4 車輪（FEETECH様にいただいたサーボです） STS3032 ×1 レスキュー用のアーム PWMのサーボ 坂道（回収したボールを入れておく部分）の開閉 VL53L0X ×4 ToF距離センサー（左×2・前方×2） BNO055 9軸センサー（主に向きを取るのに使っています） ブザー 状態を音で知らせる スイッチ×2 スタート・ストップ 通信の形式 Raspberry Piとは、テキストで1行ずつ命令を送り合うという、かなり素朴な方式でやり取りしています。 送信: 12 MOTOR 3000 3000 返信: 12 ok 送信: 13 TOF f 返信: 13 ok 210 205 送信: 14 SWITCH 返信: 14 ok on 先頭の数字はIDで、Raspberry Pi側が命令ごとに新しい番号を振っています。返ってきた返信のIDが送ったものと一致することを確認してお互いのやり取りに整合性をとっています。 なぜこんなことをしているかというと、ESP32が起動した直後に出すメッセージ（IDは0）や、タイムアウトした命令の返事が遅れて返ってきたときに、それを今の命令の返事だと勘違いしてしまうことがあったからです。これで返信がずれてもおかしなことにならないようになりました。 命令の種類はこんな感じです。 命令 内容 MOTOR &amp;lt;l&amp;gt; &amp;lt;r&amp;gt; 左右の車輪の速度を指定 ARM &amp;lt;angle&amp;gt; アームの角度を指定 (0 ~ 4095) CAGE &amp;lt;O/C&amp;gt; 坂道を開ける・閉める BUZZ &amp;lt;周波数&amp;gt; &amp;lt;時間&amp;gt; ブザーを鳴らす BNO 向き・傾き・加速度を返す TOF &amp;lt;l/f/r&amp;gt; 指定した方向のToFの距離を返す ODOM 向きと、左右の車輪の回転量をまとめて返す SWITCH スイッチの状態を返す 車輪について 今年度は車輪にSTS3032というシリアルバスサーボを使っています。普通のモーターと違って、1本の線に複数のサーボをつないで、IDで区別して命令を送ることができます。 また、STS3032は車輪として回している間も軸の角度（1周で0 ~ 4095）を返してくれるので、それを10msごとに読んで積算することで、どれだけ進んだかを測れるようにしています（これをODOMで返しています）。 ToFセンサーについて VL53L0Xは、電源を入れた時点ではすべて同じI2Cアドレス(0x29)になっています。そのまま4つつなぐとぶつかってしまうので、起動時にいったん全部のXSHUTピンをLOWにして寝かせておき、1つずつ起こしてはアドレスを0x30、0x31、……と書き換えていく、ということをしています。 初期化に失敗したセンサーはもう一度寝かせておき、読み取ろうとしたときには-1を返すようにしています。 Raspberry Pi側のプログラム 内部では「ライントレースモード」と「レスキューモード」の2つを切り替えて動いています。 カメラ カメラは2つ使っています。 カメラ 解像度 用途 ライントレース用 320 × 240 床の黒線と緑マークを見る レスキュー用 2304 × 1796 被災者（ボール）と避難所を探す カメラの制御はlibcameraをC++から直接叩いています。昨年度のPythonのpicamera2のpre_callbackと同じような仕組みも作ってありますが、今は後で説明する理由で使っていません。 ライントレース 機械学習はやめました 実は今年度、最初は機械学習でライントレースをしようとしていました。 具体的には、人間がロボットをラジコンのように操作して「カメラの画像」と「そのときのモーターの値」の組を記録し、それを小さなCNNに学習させて、画像からモーターの値を直接出させるという方法です（behavior cloningと呼ばれるものです）。 ただ、30分程度の走行ではなかなか学習ができず、また機械学習という手法では万が一本番環境などで動かなくなってしまった場合にデバッグができないという問題があると感じました。 そこで、昨年度のPythonのアルゴリズムをベースにして、C++でアルゴリズムベースのライントレースを作り直すことにしました。 制御ループ...">
+
+  
+
+  
+  <meta name="keywords" content="robocup junior,robot,line trace,rescue line,rcjj,ロボカップ,ロボット,ライントレース,レスキューライン">
+  
+
+  
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CT437Q24DM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CT437Q24DM');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+      
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    
+      
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/pr-previews/PR_77/assets/css/bootstrap-social.css">
+    
+      <link rel="stylesheet" href="/pr-previews/PR_77/assets/css/beautifuljekyll.css">
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/pr-previews/PR_77/assets/css/custom-styles.css">
+    
+  
+
+  
+  
+  
+
+  
+
+  
+  <meta property="og:site_name" content="techno-robocup">
+  <meta property="og:title" content="2027年度ロボットのプログラムについて">
+  <meta property="og:description" content="こんにちは。rotarymarsです。 K10-K10の基板の記事やutsukushiiotoのハードウェア面の記事で、ハードウェアの方はだいぶ紹介されてきたと思います。なので今回は、2027年度のロボットのプログラムが現時点でどうなっているのか、全体をざっくり紹介したいと思います。 全てを書くととても長くなってしまうので今回は概要のみ書いていきたいと思っています。 なお、プログラムはすべて開発途中のものなので、あくまで現時点での状態です。大きな変更などがあればまた記事にしたいと思っています。 全体の構成 まず、ロボットの中には大きく分けて2つのコンピュータが載っています。 コンピュータ 担当 言語 Raspberry Pi カメラの画像処理、モーターなどの指令の送信 C++ ESP32 モーター、センサー、サーボなどハードウェアの操作 C++ (Arduino) Raspberry Piはモーターやセンサーを直接触らず、すべてUSBシリアル(UART)でESP32にコマンドを送信し、モーターなどを制御しています。 リポジトリとしては以下のようになっています。 リポジトリ 中身 robocup2027-raspberrypi-program（非公開） Raspberry Piで動くメインのプログラム robocup2027-esp32-program ESP32のファームウェア robocup2027-pcb-data, [robocup2027-robot-caddata] 基板と機体のデータ（今回は触れません） ちなみに、昨年度まではRaspberry Pi側のプログラムはPythonで書いていましたが、今年度はすべてC++で書き直しています。理由としては、処理速度を上げたかったのと、機械学習のモデルもLibTorch（PyTorchのC++版）で動かせるので、言語を一本化したかったからです。 また、Raspberry Piのプログラムが非公開な理由として、管理の容易さから今年は機械学習に用いる画像などもリポジトリに保管しており、公開しないという判断になりました（意図しないものが画像に写ってしまう可能性などもあるため）。 ESP32側のプログラム 先に、簡単な方のESP32から見ていきます。 ESP32が担当しているのは以下のものです。 部品 用途 STS3032 ×4 車輪（FEETECH様にいただいたサーボです） STS3032 ×1 レスキュー用のアーム PWMのサーボ 坂道（回収したボールを入れておく部分）の開閉 VL53L0X ×4 ToF距離センサー（左×2・前方×2） BNO055 9軸センサー（主に向きを取るのに使っています） ブザー 状態を音で知らせる スイッチ×2 スタート・ストップ 通信の形式 Raspberry Piとは、テキストで1行ずつ命令を送り合うという、かなり素朴な方式でやり取りしています。 送信: 12 MOTOR 3000 3000 返信: 12 ok 送信: 13 TOF f 返信: 13 ok 210 205 送信: 14 SWITCH 返信: 14 ok on 先頭の数字はIDで、Raspberry Pi側が命令ごとに新しい番号を振っています。返ってきた返信のIDが送ったものと一致することを確認してお互いのやり取りに整合性をとっています。 なぜこんなことをしているかというと、ESP32が起動した直後に出すメッセージ（IDは0）や、タイムアウトした命令の返事が遅れて返ってきたときに、それを今の命令の返事だと勘違いしてしまうことがあったからです。これで返信がずれてもおかしなことにならないようになりました。 命令の種類はこんな感じです。 命令 内容 MOTOR &amp;lt;l&amp;gt; &amp;lt;r&amp;gt; 左右の車輪の速度を指定 ARM &amp;lt;angle&amp;gt; アームの角度を指定 (0 ~ 4095) CAGE &amp;lt;O/C&amp;gt; 坂道を開ける・閉める BUZZ &amp;lt;周波数&amp;gt; &amp;lt;時間&amp;gt; ブザーを鳴らす BNO 向き・傾き・加速度を返す TOF &amp;lt;l/f/r&amp;gt; 指定した方向のToFの距離を返す ODOM 向きと、左右の車輪の回転量をまとめて返す SWITCH スイッチの状態を返す 車輪について 今年度は車輪にSTS3032というシリアルバスサーボを使っています。普通のモーターと違って、1本の線に複数のサーボをつないで、IDで区別して命令を送ることができます。 また、STS3032は車輪として回している間も軸の角度（1周で0 ~ 4095）を返してくれるので、それを10msごとに読んで積算することで、どれだけ進んだかを測れるようにしています（これをODOMで返しています）。 ToFセンサーについて VL53L0Xは、電源を入れた時点ではすべて同じI2Cアドレス(0x29)になっています。そのまま4つつなぐとぶつかってしまうので、起動時にいったん全部のXSHUTピンをLOWにして寝かせておき、1つずつ起こしてはアドレスを0x30、0x31、……と書き換えていく、ということをしています。 初期化に失敗したセンサーはもう一度寝かせておき、読み取ろうとしたときには-1を返すようにしています。 Raspberry Pi側のプログラム 内部では「ライントレースモード」と「レスキューモード」の2つを切り替えて動いています。 カメラ カメラは2つ使っています。 カメラ 解像度 用途 ライントレース用 320 × 240 床の黒線と緑マークを見る レスキュー用 2304 × 1796 被災者（ボール）と避難所を探す カメラの制御はlibcameraをC++から直接叩いています。昨年度のPythonのpicamera2のpre_callbackと同じような仕組みも作ってありますが、今は後で説明する理由で使っていません。 ライントレース 機械学習はやめました 実は今年度、最初は機械学習でライントレースをしようとしていました。 具体的には、人間がロボットをラジコンのように操作して「カメラの画像」と「そのときのモーターの値」の組を記録し、それを小さなCNNに学習させて、画像からモーターの値を直接出させるという方法です（behavior cloningと呼ばれるものです）。 ただ、30分程度の走行ではなかなか学習ができず、また機械学習という手法では万が一本番環境などで動かなくなってしまった場合にデバッグができないという問題があると感じました。 そこで、昨年度のPythonのアルゴリズムをベースにして、C++でアルゴリズムベースのライントレースを作り直すことにしました。 制御ループ...">
+
+  
+  <meta property="og:image" content="https://techno-robocup.github.io/pr-previews/PR_77/assets/images/techno-robocup-icon.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  
+  <meta property="og:article:author" content="rotarymars">
+  
+  <meta property="og:article:published_time" content="2026-10-25T10:00:00+09:00">
+  <meta property="og:url" content="https://techno-robocup.github.io/pr-previews/PR_77/ja/2026-10-25-program/">
+  <link rel="canonical" href="https://techno-robocup.github.io/pr-previews/PR_77/ja/2026-10-25-program/">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+
+  <meta property="twitter:title" content="2027年度ロボットのプログラムについて">
+  <meta property="twitter:description" content="こんにちは。rotarymarsです。 K10-K10の基板の記事やutsukushiiotoのハードウェア面の記事で、ハードウェアの方はだいぶ紹介されてきたと思います。なので今回は、2027年度のロボットのプログラムが現時点でどうなっているのか、全体をざっくり紹介したいと思います。 全てを書くととても長くなってしまうので今回は概要のみ書いていきたいと思っています。 なお、プログラムはすべて開発途中のものなので、あくまで現時点での状態です。大きな変更などがあればまた記事にしたいと思っています。 全体の構成 まず、ロボットの中には大きく分けて2つのコンピュータが載っています。 コンピュータ 担当 言語 Raspberry Pi カメラの画像処理、モーターなどの指令の送信 C++ ESP32 モーター、センサー、サーボなどハードウェアの操作 C++ (Arduino) Raspberry Piはモーターやセンサーを直接触らず、すべてUSBシリアル(UART)でESP32にコマンドを送信し、モーターなどを制御しています。 リポジトリとしては以下のようになっています。 リポジトリ 中身 robocup2027-raspberrypi-program（非公開） Raspberry Piで動くメインのプログラム robocup2027-esp32-program ESP32のファームウェア robocup2027-pcb-data, [robocup2027-robot-caddata] 基板と機体のデータ（今回は触れません） ちなみに、昨年度まではRaspberry Pi側のプログラムはPythonで書いていましたが、今年度はすべてC++で書き直しています。理由としては、処理速度を上げたかったのと、機械学習のモデルもLibTorch（PyTorchのC++版）で動かせるので、言語を一本化したかったからです。 また、Raspberry Piのプログラムが非公開な理由として、管理の容易さから今年は機械学習に用いる画像などもリポジトリに保管しており、公開しないという判断になりました（意図しないものが画像に写ってしまう可能性などもあるため）。 ESP32側のプログラム 先に、簡単な方のESP32から見ていきます。 ESP32が担当しているのは以下のものです。 部品 用途 STS3032 ×4 車輪（FEETECH様にいただいたサーボです） STS3032 ×1 レスキュー用のアーム PWMのサーボ 坂道（回収したボールを入れておく部分）の開閉 VL53L0X ×4 ToF距離センサー（左×2・前方×2） BNO055 9軸センサー（主に向きを取るのに使っています） ブザー 状態を音で知らせる スイッチ×2 スタート・ストップ 通信の形式 Raspberry Piとは、テキストで1行ずつ命令を送り合うという、かなり素朴な方式でやり取りしています。 送信: 12 MOTOR 3000 3000 返信: 12 ok 送信: 13 TOF f 返信: 13 ok 210 205 送信: 14 SWITCH 返信: 14 ok on 先頭の数字はIDで、Raspberry Pi側が命令ごとに新しい番号を振っています。返ってきた返信のIDが送ったものと一致することを確認してお互いのやり取りに整合性をとっています。 なぜこんなことをしているかというと、ESP32が起動した直後に出すメッセージ（IDは0）や、タイムアウトした命令の返事が遅れて返ってきたときに、それを今の命令の返事だと勘違いしてしまうことがあったからです。これで返信がずれてもおかしなことにならないようになりました。 命令の種類はこんな感じです。 命令 内容 MOTOR &amp;lt;l&amp;gt; &amp;lt;r&amp;gt; 左右の車輪の速度を指定 ARM &amp;lt;angle&amp;gt; アームの角度を指定 (0 ~ 4095) CAGE &amp;lt;O/C&amp;gt; 坂道を開ける・閉める BUZZ &amp;lt;周波数&amp;gt; &amp;lt;時間&amp;gt; ブザーを鳴らす BNO 向き・傾き・加速度を返す TOF &amp;lt;l/f/r&amp;gt; 指定した方向のToFの距離を返す ODOM 向きと、左右の車輪の回転量をまとめて返す SWITCH スイッチの状態を返す 車輪について 今年度は車輪にSTS3032というシリアルバスサーボを使っています。普通のモーターと違って、1本の線に複数のサーボをつないで、IDで区別して命令を送ることができます。 また、STS3032は車輪として回している間も軸の角度（1周で0 ~ 4095）を返してくれるので、それを10msごとに読んで積算することで、どれだけ進んだかを測れるようにしています（これをODOMで返しています）。 ToFセンサーについて VL53L0Xは、電源を入れた時点ではすべて同じI2Cアドレス(0x29)になっています。そのまま4つつなぐとぶつかってしまうので、起動時にいったん全部のXSHUTピンをLOWにして寝かせておき、1つずつ起こしてはアドレスを0x30、0x31、……と書き換えていく、ということをしています。 初期化に失敗したセンサーはもう一度寝かせておき、読み取ろうとしたときには-1を返すようにしています。 Raspberry Pi側のプログラム 内部では「ライントレースモード」と「レスキューモード」の2つを切り替えて動いています。 カメラ カメラは2つ使っています。 カメラ 解像度 用途 ライントレース用 320 × 240 床の黒線と緑マークを見る レスキュー用 2304 × 1796 被災者（ボール）と避難所を探す カメラの制御はlibcameraをC++から直接叩いています。昨年度のPythonのpicamera2のpre_callbackと同じような仕組みも作ってありますが、今は後で説明する理由で使っていません。 ライントレース 機械学習はやめました 実は今年度、最初は機械学習でライントレースをしようとしていました。 具体的には、人間がロボットをラジコンのように操作して「カメラの画像」と「そのときのモーターの値」の組を記録し、それを小さなCNNに学習させて、画像からモーターの値を直接出させるという方法です（behavior cloningと呼ばれるものです）。 ただ、30分程度の走行ではなかなか学習ができず、また機械学習という手法では万が一本番環境などで動かなくなってしまった場合にデバッグができないという問題があると感じました。 そこで、昨年度のPythonのアルゴリズムをベースにして、C++でアルゴリズムベースのライントレースを作り直すことにしました。 制御ループ...">
+
+  
+  <meta name="twitter:image" content="https://techno-robocup.github.io/pr-previews/PR_77/assets/images/techno-robocup-icon.jpg">
+  
+
+  
+
+
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/pr-previews/PR_77/assets/css/custom.css">
+  <script src="/pr-previews/PR_77/assets/js/colorAnimation.js"></script>
+
+</head>
+
+
+<body>
+
+  
+
+
+  
+
+
+<nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="/pr-previews/PR_77/ja/">techno-robocup</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/pr-previews/PR_77/ja/tags/">Tags</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pr-previews/PR_77/ja/aboutus/">About Us</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav-search-link" href="#" title="Search">
+            <span id="nav-search-icon" class="fa fa-search"></span>
+            <span id="nav-search-text">Search</span>
+          </a>
+        </li><li class="nav-item d-flex align-items-center ml-xl-3 mt-2 mt-xl-0 mb-2 mb-xl-0">
+        
+          <div class="btn-group btn-group-sm" role="group">
+            <a href="/pr-previews/PR_77/en/2026-10-25-program/" class="btn btn-outline-dark">En</a>
+            <span class="btn btn-dark font-weight-bold" style="cursor: default;">Ja</span>
+          </div>
+        
+      </li>
+
+    </ul>
+  </div>
+
+  
+
+  
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        <a href="/pr-previews/PR_77/ja/">
+          <img alt="Navigation bar avatar" class="avatar-img" src="/pr-previews/PR_77/assets/images/robot-03.jpg" />
+        </a>
+      </div>
+    </div>
+  
+
+</nav>
+
+
+
+<div id="beautifuljekyll-search-overlay">
+
+  <div id="nav-search-exit" title="Exit search">✕</div>
+  <input type="text" id="nav-search-input" placeholder="Search">
+  <ul id="search-results-container"></ul>
+
+  
+
+  <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+  <script>
+    var searchjson = `[ \
+      \
+       \
+        { \
+          "title"    : "ブログを始めました", \
+          "desc"     : "ブログを始めました", \
+          "category" : "free-talkrotarymars's article", \
+          "url"      : "/pr-previews/PR_77/ja/2024-07-09-self-introduction/", \
+          "date"     : "July  8, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "SSHでEV3", \
+          "desc"     : "SSHでEV3", \
+          "category" : "robotEV3rotarymars's article", \
+          "url"      : "/pr-previews/PR_77/ja/2024-07-23-ev3_ssh/", \
+          "date"     : "July 23, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "Pythonでコマンドライン", \
+          "desc"     : "Pythonでコマンドライン", \
+          "category" : "pythonfree-talknishikazu's article", \
+          "url"      : "/pr-previews/PR_77/ja/2024-08-07-python-OS/", \
+          "date"     : "August  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "レゴのゴム鉄砲", \
+          "desc"     : "レゴのゴム鉄砲", \
+          "category" : "free-talkALPAKA's article", \
+          "url"      : "/pr-previews/PR_77/ja/2024-08-22-rubber_band_gun/", \
+          "date"     : "August 22, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "tensorflowで簡単に機械学習", \
+          "desc"     : "tensorflowで簡単に機械学習", \
+          "category" : "machine learningrotarymars's article", \
+          "url"      : "/pr-previews/PR_77/ja/2024-08-28-tensorflow-machinelearning/", \
+          "date"     : "August 28, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "文化祭でロボット展示", \
+          "desc"     : "文化祭でロボット展示", \
+          "category" : "robotEV3nishikazu's article", \
+          "url"      : "/pr-previews/PR_77/ja/2024-09-07-robot_introduction/", \
+          "date"     : "September  7, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "文化祭の実演時間について", \
+          "desc"     : "文化祭の実演時間について", \
+          "category" : "robotschoolALPAKA's article", \
+          "url"      : "/pr-previews/PR_77/ja/2024-09-13-culture_festival_time_table/", \
+          "date"     : "September 13, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "機械学習の仕組み  ~ディープラーニング~", \
+          "desc"     : "機械学習の仕組み  ~ディープラーニング~", \
+          "category" : "robotmachine learningrotarymars's article", \
+          "url"      : "/pr-previews/PR_77/ja/2024-09-18-about_deep_learning/", \
+          "date"     : "September 18, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "東関東ノードの結果と関東大会に向けて", \
+          "desc"     : "東関東ノードの結果と関東大会に向けて", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_77/ja/2024-12-13-results_report/", \
+          "date"     : "December 12, 2024" \
+        }, \
+       \
+        { \
+          "title"    : "関東大会の結果と来年に向けて", \
+          "desc"     : "関東大会の結果と来年に向けて", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_77/ja/2025-01-26-result_kanto/", \
+          "date"     : "January 26, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "YOLOで機械学習~物体検知とロボカップでの応用~", \
+          "desc"     : "YOLOで機械学習~物体検知とロボカップでの応用~", \
+          "category" : "robotrotarymars's articlemachine learning", \
+          "url"      : "/pr-previews/PR_77/ja/2025-02-24-yolo_machine_learning/", \
+          "date"     : "February 24, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "最近の進捗", \
+          "desc"     : "最近の進捗", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/pr-previews/PR_77/ja/2025-04-18-progress/", \
+          "date"     : "April 18, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "ライントレースのプログラム", \
+          "desc"     : "ライントレースのプログラム", \
+          "category" : "robotrotarymars's articleline-traceprogram", \
+          "url"      : "/pr-previews/PR_77/ja/2025-05-11-linetrace_program/", \
+          "date"     : "May 11, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "機体部品について", \
+          "desc"     : "機体部品について", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/pr-previews/PR_77/ja/2025-05-31-parts/", \
+          "date"     : "May 31, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "赤色検知と7セグ", \
+          "desc"     : "赤色検知と7セグ", \
+          "category" : "robotK10-K10's articleline-traceprogram", \
+          "url"      : "/pr-previews/PR_77/ja/2025-06-19-RedMask/", \
+          "date"     : "June 20, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "ポチ 機体紹介", \
+          "desc"     : "ポチ 機体紹介", \
+          "category" : "robotALPAKA's articlehardware", \
+          "url"      : "/pr-previews/PR_77/ja/2025-07-09-robot.hardware/", \
+          "date"     : "July  9, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "開発体制", \
+          "desc"     : "開発体制", \
+          "category" : "robotrotarymars's articlesoftware", \
+          "url"      : "/pr-previews/PR_77/ja/2025-07-21-introducing/", \
+          "date"     : "July 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "最近の進捗2", \
+          "desc"     : "最近の進捗2", \
+          "category" : "robotK10-K10's articlefree-talk", \
+          "url"      : "/pr-previews/PR_77/ja/2025-09-21-progress2/", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "最近の進捗", \
+          "desc"     : "最近の進捗", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_77/ja/2026-01-21-progress/", \
+          "date"     : "September 21, 2025" \
+        }, \
+       \
+        { \
+          "title"    : "浜野製作所（Hamano Products）訪問", \
+          "desc"     : "浜野製作所（Hamano Products）訪問", \
+          "category" : "robotrotarymars's articlevisit", \
+          "url"      : "/pr-previews/PR_77/ja/2026-03-14-hamano-products-visit/", \
+          "date"     : "March 14, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "日本大会の結果と今後の予定", \
+          "desc"     : "日本大会の結果と今後の予定", \
+          "category" : "robotK10-K10's article", \
+          "url"      : "/pr-previews/PR_77/ja/2026-04-11-result-japan/", \
+          "date"     : "April 11, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "3走目の振り返り", \
+          "desc"     : "3走目の振り返り", \
+          "category" : "robotrotarymars's article", \
+          "url"      : "/pr-previews/PR_77/ja/2026-04-21-reflection/", \
+          "date"     : "April 21, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "FEETECH様にモーターをいただきました！", \
+          "desc"     : "FEETECH様にモーターをいただきました！", \
+          "category" : "robotutsukushiioto's article", \
+          "url"      : "/pr-previews/PR_77/ja/2026-06-01-FEETECH/", \
+          "date"     : "June  1, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "2027年度基板の解説とパーツリスト", \
+          "desc"     : "2027年度基板の解説とパーツリスト", \
+          "category" : "robotpcbK10-K10's article", \
+          "url"      : "/pr-previews/PR_77/ja/2026-07-06-pcb/", \
+          "date"     : "July  6, 2026" \
+        }, \
+       \
+        { \
+          "title"    : "2027年度ロボットのプログラムについて", \
+          "desc"     : "2027年度ロボットのプログラムについて", \
+          "category" : "robotrotarymars's articleprogramline-tracerescue", \
+          "url"      : "/pr-previews/PR_77/ja/2026-10-25-program/", \
+          "date"     : "October 25, 2026" \
+        }, \
+       \
+      \
+       \
+        { \
+          "title"    : "About us", \
+          "desc"     : "About us", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_77/ja/aboutus/", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "タグ一覧", \
+          "desc"     : "タグ一覧", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_77/ja/tags/", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : "", \
+          "desc"     : "", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_77/ja/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 2", \
+          "desc"     : " - page 2", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_77/ja/page2/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 3", \
+          "desc"     : " - page 3", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_77/ja/page3/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 4", \
+          "desc"     : " - page 4", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_77/ja/page4/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+        { \
+          "title"    : " - page 5", \
+          "desc"     : " - page 5", \
+          "category" : "page", \
+          "url"      : "/pr-previews/PR_77/ja/page5/index.html", \
+          "date"     : "January 1, 1970" \
+        }, \
+       \
+    ]`;
+    
+    // 4. Jekyllのループで最後に残ってしまう余分なカンマを削除してJSONエラーを防ぐ
+    searchjson = searchjson.replace(/,\s*\]$/, ']');
+    searchjson = JSON.parse(searchjson);
+
+    var sjs = SimpleJekyllSearch({
+      searchInput: document.getElementById('nav-search-input'),
+      resultsContainer: document.getElementById('search-results-container'),
+      json: searchjson
+    });
+  </script>
+</div>
+
+
+
+
+
+  
+
+
+
+<header class="header-section ">
+<div class="intro-header ">
+  
+  <div class="container-md">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        <div class="post-heading">
+          <h1>
+            2027年度ロボットのプログラムについて
+          </h1>
+          
+          
+           
+            
+              By <strong>rotarymars</strong><br>
+            
+            <span class="post-meta">Posted on October 25, 2026</span>
+            
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+
+
+
+</header>
+
+
+
+
+<div class=" container-md ">
+  <div class="row">
+    <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
+      <div class="post-content-wrapper">
+        
+
+        
+          <div class="blog-tags">
+            <span class="tags-label">Tags:</span>
+            <div class="tags-list">
+              
+                
+                  <a href="https://techno-robocup.github.io/pr-previews/PR_77/ja/tags#robot" class="tag-item">robot</a>
+                
+              
+                
+                  <a href="https://techno-robocup.github.io/pr-previews/PR_77/ja/tags#rotarymars's article" class="tag-item">rotarymars's article</a>
+                
+              
+                
+                  <a href="https://techno-robocup.github.io/pr-previews/PR_77/ja/tags#program" class="tag-item">program</a>
+                
+              
+                
+                  <a href="https://techno-robocup.github.io/pr-previews/PR_77/ja/tags#line-trace" class="tag-item">line-trace</a>
+                
+              
+                
+                  <a href="https://techno-robocup.github.io/pr-previews/PR_77/ja/tags#rescue" class="tag-item">rescue</a>
+                
+              
+            </div>
+          </div>
+        
+
+        
+
+        <article role="main" class="blog-post">
+          <div class="post-content">
+            <p>こんにちは。rotarymarsです。</p>
+
+<p><a href="../2026-07-06-pcb/">K10-K10の基板の記事</a>や<a href="../2026-06-01-FEETECH/">utsukushiiotoのハードウェア面の記事</a>で、ハードウェアの方はだいぶ紹介されてきたと思います。なので今回は、2027年度のロボットのプログラムが現時点でどうなっているのか、全体をざっくり紹介したいと思います。</p>
+
+<p>全てを書くととても長くなってしまうので今回は概要のみ書いていきたいと思っています。</p>
+
+<p>なお、プログラムはすべて開発途中のものなので、あくまで現時点での状態です。大きな変更などがあればまた記事にしたいと思っています。</p>
+
+<h1 id="全体の構成">全体の構成</h1>
+<p>まず、ロボットの中には大きく分けて2つのコンピュータが載っています。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>コンピュータ</th>
+      <th>担当</th>
+      <th>言語</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Raspberry Pi</td>
+      <td>カメラの画像処理、モーターなどの指令の送信</td>
+      <td>C++</td>
+    </tr>
+    <tr>
+      <td>ESP32</td>
+      <td>モーター、センサー、サーボなどハードウェアの操作</td>
+      <td>C++ (Arduino)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Raspberry Piはモーターやセンサーを直接触らず、すべてUSBシリアル(UART)でESP32にコマンドを送信し、モーターなどを制御しています。</p>
+
+<p>リポジトリとしては以下のようになっています。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>リポジトリ</th>
+      <th>中身</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>robocup2027-raspberrypi-program（非公開）</td>
+      <td>Raspberry Piで動くメインのプログラム</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/techno-robocup/robocup2027-esp32-program">robocup2027-esp32-program</a></td>
+      <td>ESP32のファームウェア</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/techno-robocup/robocup2027-pcb-data">robocup2027-pcb-data</a>, [robocup2027-robot-caddata]</td>
+      <td>基板と機体のデータ（今回は触れません）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>ちなみに、昨年度まではRaspberry Pi側のプログラムはPythonで書いていましたが、今年度はすべてC++で書き直しています。理由としては、処理速度を上げたかったのと、機械学習のモデルもLibTorch（PyTorchのC++版）で動かせるので、言語を一本化したかったからです。</p>
+
+<p>また、Raspberry Piのプログラムが非公開な理由として、管理の容易さから今年は機械学習に用いる画像などもリポジトリに保管しており、公開しないという判断になりました（意図しないものが画像に写ってしまう可能性などもあるため）。</p>
+
+<h1 id="esp32側のプログラム">ESP32側のプログラム</h1>
+<p>先に、簡単な方のESP32から見ていきます。</p>
+
+<p>ESP32が担当しているのは以下のものです。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>部品</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>STS3032 ×4</td>
+      <td>車輪（<a href="../2026-06-01-FEETECH/">FEETECH様にいただいたサーボ</a>です）</td>
+    </tr>
+    <tr>
+      <td>STS3032 ×1</td>
+      <td>レスキュー用のアーム</td>
+    </tr>
+    <tr>
+      <td>PWMのサーボ</td>
+      <td>坂道（回収したボールを入れておく部分）の開閉</td>
+    </tr>
+    <tr>
+      <td>VL53L0X ×4</td>
+      <td>ToF距離センサー（左×2・前方×2）</td>
+    </tr>
+    <tr>
+      <td>BNO055</td>
+      <td>9軸センサー（主に向きを取るのに使っています）</td>
+    </tr>
+    <tr>
+      <td>ブザー</td>
+      <td>状態を音で知らせる</td>
+    </tr>
+    <tr>
+      <td>スイッチ×2</td>
+      <td>スタート・ストップ</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="通信の形式">通信の形式</h2>
+<p>Raspberry Piとは、テキストで1行ずつ命令を送り合うという、かなり素朴な方式でやり取りしています。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>送信: 12 MOTOR 3000 3000
+返信: 12 ok
+
+送信: 13 TOF f
+返信: 13 ok 210 205
+
+送信: 14 SWITCH
+返信: 14 ok on
+</code></pre></div></div>
+
+<p>先頭の数字はIDで、Raspberry Pi側が命令ごとに新しい番号を振っています。返ってきた返信のIDが送ったものと一致することを確認してお互いのやり取りに整合性をとっています。</p>
+
+<p>なぜこんなことをしているかというと、ESP32が起動した直後に出すメッセージ（IDは0）や、タイムアウトした命令の返事が遅れて返ってきたときに、それを今の命令の返事だと勘違いしてしまうことがあったからです。これで返信がずれてもおかしなことにならないようになりました。</p>
+
+<p>命令の種類はこんな感じです。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MOTOR &lt;l&gt; &lt;r&gt;</code></td>
+      <td>左右の車輪の速度を指定</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ARM &lt;angle&gt;</code></td>
+      <td>アームの角度を指定 (0 ~ 4095)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CAGE &lt;O/C&gt;</code></td>
+      <td>坂道を開ける・閉める</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">BUZZ &lt;周波数&gt; &lt;時間&gt;</code></td>
+      <td>ブザーを鳴らす</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">BNO</code></td>
+      <td>向き・傾き・加速度を返す</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TOF &lt;l/f/r&gt;</code></td>
+      <td>指定した方向のToFの距離を返す</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ODOM</code></td>
+      <td>向きと、左右の車輪の回転量をまとめて返す</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SWITCH</code></td>
+      <td>スイッチの状態を返す</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="車輪について">車輪について</h2>
+<p>今年度は車輪にSTS3032というシリアルバスサーボを使っています。普通のモーターと違って、1本の線に複数のサーボをつないで、IDで区別して命令を送ることができます。</p>
+
+<p>また、STS3032は車輪として回している間も軸の角度（1周で0 ~ 4095）を返してくれるので、それを10msごとに読んで積算することで、どれだけ進んだかを測れるようにしています（これを<code class="language-plaintext highlighter-rouge">ODOM</code>で返しています）。</p>
+
+<h2 id="tofセンサーについて">ToFセンサーについて</h2>
+<p>VL53L0Xは、電源を入れた時点ではすべて同じI2Cアドレス(0x29)になっています。そのまま4つつなぐとぶつかってしまうので、起動時にいったん全部のXSHUTピンをLOWにして寝かせておき、1つずつ起こしてはアドレスを0x30、0x31、……と書き換えていく、ということをしています。</p>
+
+<p>初期化に失敗したセンサーはもう一度寝かせておき、読み取ろうとしたときには<code class="language-plaintext highlighter-rouge">-1</code>を返すようにしています。</p>
+
+<h1 id="raspberry-pi側のプログラム">Raspberry Pi側のプログラム</h1>
+<p>内部では「ライントレースモード」と「レスキューモード」の2つを切り替えて動いています。</p>
+
+<h2 id="カメラ">カメラ</h2>
+<p>カメラは2つ使っています。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>カメラ</th>
+      <th>解像度</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ライントレース用</td>
+      <td>320 × 240</td>
+      <td>床の黒線と緑マークを見る</td>
+    </tr>
+    <tr>
+      <td>レスキュー用</td>
+      <td>2304 × 1796</td>
+      <td>被災者（ボール）と避難所を探す</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>カメラの制御はlibcameraをC++から直接叩いています。昨年度のPythonの<code class="language-plaintext highlighter-rouge">picamera2</code>の<code class="language-plaintext highlighter-rouge">pre_callback</code>と同じような仕組みも作ってありますが、今は後で説明する理由で使っていません。</p>
+
+<h2 id="ライントレース">ライントレース</h2>
+<h3 id="機械学習はやめました">機械学習はやめました</h3>
+<p>実は今年度、最初は機械学習でライントレースをしようとしていました。</p>
+
+<p>具体的には、人間がロボットをラジコンのように操作して「カメラの画像」と「そのときのモーターの値」の組を記録し、それを小さなCNNに学習させて、画像からモーターの値を直接出させるという方法です（behavior cloningと呼ばれるものです）。</p>
+
+<p>ただ、30分程度の走行ではなかなか学習ができず、また機械学習という手法では万が一本番環境などで動かなくなってしまった場合にデバッグができないという問題があると感じました。</p>
+
+<p>そこで、昨年度のPythonのアルゴリズムをベースにして、C++でアルゴリズムベースのライントレースを作り直すことにしました。</p>
+
+<h3 id="制御ループ">制御ループ</h3>
+<p>ライントレースの処理は、20Hzのループで以下を繰り返しています。</p>
+
+<ol>
+  <li>1秒に1回、スイッチの状態を確認する（OFFなら止まって待つ）</li>
+  <li>カメラから画像を1枚取る</li>
+  <li><code class="language-plaintext highlighter-rouge">ODOM</code>で向きと進んだ距離を読む</li>
+  <li>画像から左右のモーターの値を決める</li>
+  <li><code class="language-plaintext highlighter-rouge">MOTOR</code>を送る</li>
+  <li>銀色のテープの判定に画像を渡す（後述）</li>
+</ol>
+
+<p>最初はカメラのコールバックの中で画像処理をしていたのですが、そうするとカメラのフレームレートで処理が回ってしまい、「何フレーム連続で〜だったら」という判定がループの速さによって変わってしまうという問題がありました。なので、今は普通のループの中で画像を取ってくるようにしています。</p>
+
+<p>また、6のように重い処理は必ずモーターの命令を送った後に置いて、判断してからモーターが動くまでの間に余計な処理が挟まらないようにしています。</p>
+
+<h3 id="画像からどう判断しているか">画像からどう判断しているか</h3>
+<p>ざっくりとした流れはこのようになっています。</p>
+
+<ol>
+  <li>画像を二値化して、黒線のマスクと緑のマスクを作る</li>
+  <li>緑マークを見つけて、それが「どちらに曲がるべきか」を判定する</li>
+  <li>曲がらない方の線を画像から<strong>消す</strong></li>
+  <li>残った線の「先端」に向かって進む</li>
+</ol>
+
+<p>一般的に緑のマークは曲がる処理として例外的に処理をしますが、今回のプログラムでは緑マークで右に曲がると決まったら、左や直進の線を画像から消してしまいます。そうすると、その後のライントレースの処理は曲がる方向のことを何も知らなくても、そもそも見える線が1本しかないので正しい方向に進めます。これは昨年からのプログラムの考えを引き継いでいますが、不要な線の除去の部分を最適化し、本当に必要な線のみが残るように調整しました。</p>
+
+<h4 id="緑マークの判定">緑マークの判定</h4>
+<p>今年のロボットはライントレース用のカメラがかなり低い位置についているので、緑マークが画面の1/5 ~ 1/3くらいを占めてしまい、交差点全体を見ることができません。</p>
+
+<p>そこで、緑マーク自体ではなく、<strong>マークの周りの床</strong>を見て判断しています。黒線によって床はいくつかの領域に区切られるので、マークがある領域が</p>
+
+<ul>
+  <li>画面の下の端の、来た線の片側だけにつながっている → 交差点の手前のマーク。そっちに曲がる</li>
+  <li>画面の下の端につながっていない → 交差点を過ぎた後のマーク。無視する</li>
+  <li>下の端の両側につながっている → どちらとも言えない</li>
+</ul>
+
+<p>という具合です。これならロボットが少し斜めに入ってきても同じように判定できます。</p>
+
+<p>また、1フレームだけで決めずに、何フレームか続けて同じ判定が出たら曲がることにしています。マークはロボットが曲がりきる前に車体の下に隠れてしまうので、一度決めたら1.5秒は曲がり続けるようにもしています。</p>
+
+<p>両側にマークがあったらUターンです。Uターンは「どこで回るのをやめるか」がとても難しくて、交差点の上で回っているので、「前に線が見えたら止まる」だと90度回ったところで止まってしまいます。そこで、画像の中の線の向きの変化から、自分がどれだけ回ったかを数えて、150度以上回ったうえで前に線が見えたら止まる、ということをしています。</p>
+
+<h4 id="どこに向かって進むか">どこに向かって進むか</h4>
+<p>進む方向は、線の「先端」に向かうようにしています。</p>
+
+<p>ここでの「先端」は、画面の上の方という意味ではなく、<strong>線に沿って一番遠いところ</strong>です。直角のカーブだと、画面で一番上にあるのは角の部分ですが、線に沿って一番遠いのは横に伸びている方なので、ちゃんとそっちを向けるようになります。</p>
+
+<p>先端が複数ある（交差点など）ときには、前回の線の向きに一番近いものを選んでいます。</p>
+
+<h4 id="線が見えなくなったとき">線が見えなくなったとき</h4>
+<p>直角に曲がると線はほぼ必ず一度画面から外れるので、線が見えなくなることは普通に起こります。</p>
+
+<p>線が見えなくなっても止まらずに、</p>
+
+<ul>
+  <li>曲がっている途中なら、そのまま曲がり続ける</li>
+  <li>線が途切れている（ギャップ）なら、線が向いていた方向にまっすぐ進む</li>
+</ul>
+
+<p>ようにしています。このとき、ギャップとカーブを見分けるのが難しいのですが、直前まで大きく曲がっていたかどうかで区別しています。</p>
+
+<h3 id="銀色のテープの検出">銀色のテープの検出</h3>
+<p>レスキューエリアの入り口には銀色のテープが貼ってあるので、それを見つけたらレスキューモードに切り替えます。</p>
+
+<p>これは80×60に縮めた画像を入力にした小さなCNNで判定しています。ラベル付けと学習のツールもC++で自作しています。</p>
+
+<p>この判定は別のスレッドで200msに1回だけ動かしているので、ライントレースのループが遅くなることはありません。2回続けて銀色だと判定されたらブザーを鳴らしてレスキューモードに切り替えます。</p>
+
+<h2 id="レスキュー">レスキュー</h2>
+
+<h3 id="ボールなどの検出">ボールなどの検出</h3>
+<p>レスキュー用のカメラの画像からは、YOLOで以下の5種類を検出しています。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>クラス</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Black_ball</td>
+      <td>黒い被災者</td>
+    </tr>
+    <tr>
+      <td>Silver_ball</td>
+      <td>銀色の被災者</td>
+    </tr>
+    <tr>
+      <td>Green_zone</td>
+      <td>緑の避難所</td>
+    </tr>
+    <tr>
+      <td>Red_zone</td>
+      <td>赤の避難所</td>
+    </tr>
+    <tr>
+      <td>Exit</td>
+      <td>出口</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Pythonで学習させたYOLOのモデルをTorchScriptという形式に書き出して、それをC++のLibTorchで読み込んでいます。Raspberry Piで動かすので、入力画像は160×160と小さくしています。こちらも別スレッドで、13fpsくらいで回しています。</p>
+
+<h3 id="状態の管理">状態の管理</h3>
+<p>レスキュー中は、今何をしているのかを状態として持っていて、それに応じて動きを変えています。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>状態</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SEARCH</td>
+      <td>その場で回ってボールを探す</td>
+    </tr>
+    <tr>
+      <td>APPROACH</td>
+      <td>見つけたものに向かって進む</td>
+    </tr>
+    <tr>
+      <td>CATCH</td>
+      <td>ボールをつかむ（未実装）</td>
+    </tr>
+    <tr>
+      <td>RELEASE</td>
+      <td>避難所にボールを置く（未実装）</td>
+    </tr>
+    <tr>
+      <td>EXIT</td>
+      <td>左の壁に沿って進んで出口を探す</td>
+    </tr>
+    <tr>
+      <td>STOP</td>
+      <td>止まる</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>APPROACHでは、検出したものの位置が画面の中央下あたりに来るように、ずれに比例してモーターの値を決めています（比例制御）。</p>
+
+<p>EXITでは、左のToFセンサーとの距離を一定に保ちながら壁に沿って進み、前に壁があれば左に90度回り、左の壁がなくなれば左に曲がって進む、ということをしています。90度回ったかどうかはBNO055の向きで判断しています。</p>
+
+<p>また、3分経ったら強制的にEXITの状態になるようにしています。</p>
+
+<p>CATCHとRELEASEはまだ中身がなく、ボールをつかむ部分はこれから作っていきます。また、ライントレースで銀色のテープを見つけた後、レスキューの処理に入るところもまだつながっていないので、ここも早めに直したいと思っています。</p>
+
+<h2 id="その他のツール">その他のツール</h2>
+<p>ロボット本体のプログラム以外にも、開発用のツールをいくつか作っています。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ツール</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>遠隔操作・記録ツール</td>
+      <td>PCからロボットをラジコンのように操作して、走行を記録する</td>
+    </tr>
+    <tr>
+      <td>走行記録</td>
+      <td>ロボットが自分で走ったときの画像と、そのとき出した命令を記録する</td>
+    </tr>
+    <tr>
+      <td>ビューア</td>
+      <td>記録した走行を、ロボットと全く同じライントレースの処理にかけて、1フレームずつ何を判断したかを見る</td>
+    </tr>
+    <tr>
+      <td>レスキュー用ストリーム</td>
+      <td>レスキュー用カメラの検出結果をリアルタイムでPCに送って見る</td>
+    </tr>
+    <tr>
+      <td>ToFチェッカー</td>
+      <td>ToFセンサーの確認</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>特にビューアは便利で、ロボットが交差点で間違えたときに、そのときの画像を持ってきて「緑マークをどう判定したのか」「どの線を消したのか」を1フレームずつ確認できます。ロボットと同じライントレースの処理をそのまま使っているので、ロボットとビューアで判断がずれることもありません。ライントレースのパラメータの調整は、ほとんどこれを見ながらやっています。</p>
+
+<p>ただし、記録した画像を使っているので、命令を変えてもロボットの動きは変わりません。なので、「その画像に対してより早く・強く反応できているか」はわかりますが、実際にそれで線に復帰できるかどうかは、結局コースで走らせてみないとわかりません。</p>
+
+<p>また、Raspberry Pi上でのビルドがとても遅い（LibTorchを使っているファイルは1つで1GBくらいメモリを使います）ので、PCでRaspberry Pi用にクロスコンパイルできるようにもしました。Raspberry Pi OSのイメージからDockerのイメージを作り、そこからヘッダーやライブラリをコピーしてきて、PCのclangでarm64向けにビルドしています。Raspberry Piの上でビルドするよりずっと速く、数秒で終わるようになりました。</p>
+
+<h1 id="最後に">最後に</h1>
+<p>今回は、2027年度のロボットのプログラムが現時点でどうなっているのかを、ざっくりと紹介しました。</p>
+
+<p>今回は全体の紹介だったので、それぞれの部分については、また別の記事で詳しく書けたらいいなと思っています。</p>
+
+<p>チームメンバーにも、この記事を読んでプログラム全体の雰囲気をつかんでもらえたら嬉しいです。</p>
+
+<p>ありがとうございました。</p>
+
+          </div>
+        </article>
+
+        
+
+        
+          <div class="author-section">
+            <div class="author">
+  📝 <span class="author-text">author: rotarymars</span>
+</div>
+
+          </div>
+        
+
+        <div class="post-navigation">
+          <ul class="pagination blog-pager">
+            
+            
+            <li class="page-item previous">
+              <a class="page-link" href="/pr-previews/PR_77/ja/2026-07-06-pcb/" data-toggle="tooltip" data-placement="top" title="2027年度基板の解説とパーツリスト">
+                <i class="fas fa-arrow-right"></i> Previous Post
+              </a>
+            </li>
+            
+            
+          </ul>
+        </div>
+        <div class="comments-section">
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <footer>
+  <div class="container-md beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      
+<ul class="list-inline text-center footer-links"><li class="list-inline-item">
+    <a href="https://github.com/techno-robocup" title="GitHub">
+      <span class="fa-stack fa-lg" aria-hidden="true">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="sr-only">GitHub</span>
+   </a>
+  </li></ul>
+
+
+      
+      <p class="copyright text-muted">
+      
+      2026
+
+      
+
+      
+
+      
+
+      </p>
+      <p class="theme-by text-muted">
+        Powered by
+        <a href="https://beautifuljekyll.com">Beautiful Jekyll</a>
+      </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  
+  
+    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script src="/pr-previews/PR_77/assets/js/beautifuljekyll.js"></script>
+    
+  
+
+
+
+
+
+
+
+
+<!-- PR Preview /assets/ path fix -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.location.pathname.includes('/pr-previews/')) {
+      var baseUrl = '/pr-previews/PR_77';
+      
+      // Fix all img src attributes
+      document.querySelectorAll('img').forEach(function(img) {
+        var src = img.getAttribute('src');
+        if (src && src.startsWith('/assets/')) {
+          img.src = baseUrl + src;
+        }
+      });
+      
+      // Fix all video src attributes
+      document.querySelectorAll('video').forEach(function(video) {
+        var src = video.getAttribute('src');
+        if (src && src.startsWith('/assets/')) {
+          video.src = baseUrl + src;
+        }
+      });
+      
+      // Fix all a href attributes
+      document.querySelectorAll('a').forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('/assets/')) {
+          link.href = baseUrl + href;
+        }
+      });
+    }
+  });
+</script>
+
+
+</body>
+</html>
