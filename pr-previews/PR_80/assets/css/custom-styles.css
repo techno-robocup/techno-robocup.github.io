@@ -1,0 +1,10 @@
+/* ----> author */
+.author {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.author-text {
+  font-style: italic;
+}
+/* <---- author */
